@@ -5,6 +5,7 @@ import { OutboundLink } from "@/components/common/OutboundLink";
 import { MatchList } from "@/components/home/MatchList";
 import { ExperienceBoxes } from "@/components/home/ExperienceBoxes";
 import { Faq } from "@/components/home/Faq";
+import { DirectorySearch } from "@/components/home/DirectorySearch";
 import { NewsCard } from "@/components/news/NewsCard";
 import { JsonLd } from "@/components/common/JsonLd";
 import { siteJsonLd } from "@/lib/seo";
@@ -99,6 +100,13 @@ export default function HomePage() {
         <Container className="py-12">
           <SectionHeading eyebrow="Help" title="Frequently asked questions" />
           <Faq />
+        </Container>
+      </section>
+
+      {/* 7 — Directory Search */}
+      <section className="border-t border-line bg-paper pb-16 pt-12">
+        <Container>
+          <DirectorySearch />
         </Container>
       </section>
     </>

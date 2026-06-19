@@ -167,7 +167,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           ))}
         </ul>
         <p className="mt-4 rounded-[var(--radius-card)] border border-line bg-paper px-4 py-3 text-sm text-muted">
-          ⚠ Buy tickets only from official FIFA sources. Avoid unofficial resellers.
+          Buy tickets from official FIFA sources. Direct Link!
         </p>
       </CitySection>
 

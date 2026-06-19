@@ -76,6 +76,7 @@ export type NewsItem = {
   summary: string;
   url: string;
   source?: string;
+  image?: string;
 };
 
 export type FaqItem = { q: string; a: string };

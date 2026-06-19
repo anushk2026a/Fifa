@@ -16,8 +16,8 @@ export function CityBanner({ city }: { city: City }) {
           className="-z-10 object-cover"
         />
       )}
-      {/* legibility scrim — flat, no decorative gradient stack */}
-      <div className="absolute inset-0 -z-10 bg-black/55" />
+      {/* legibility scrim — flat, no decorative gradient stack, now with subtle blur */}
+      <div className="absolute inset-0 -z-10 bg-black/50 backdrop-blur-[3px]" />
 
       <Container className="py-10 text-white">
         <p className="text-sm font-medium text-white/85">

@@ -102,7 +102,7 @@
 │                  Getting there ↗ (guide + description)     │
 ├───────────────────────────────────────────────────────────┤
 │  TICKETS         Official FIFA tickets ↗                   │
-│                  ⚠ Buy only from official sources.         │
+│                  Buy only from official sources.         │
 ├───────────────────────────────────────────────────────────┤
 │  MATCH SCREENING ZONE                                      │
 │                  Fan Festival · Public viewing · Events    │
