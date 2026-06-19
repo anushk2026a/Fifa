@@ -7,7 +7,7 @@ const schema = z.object({
   CORS_ORIGIN: z.string().default("*"),
   SMTP_HOST: z.string().optional(),
   SMTP_PORT: z.coerce.number().default(587),
-  SMTP_SECURE: z.coerce.boolean().default(false),
+  SMTP_SECURE: z.string().default("false").transform((val) => val === "true"),
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
   MAIL_FROM: z.string().default("SportsOnePoint <no-reply@sportsonepoint.com>"),

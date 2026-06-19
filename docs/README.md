@@ -7,7 +7,7 @@
 
 ---
 
-## ⚠ Read this first — two phases
+## Read this first — two phases
 
 We are building in two phases. **Phase 1 is what we build now.**
 
