@@ -25,8 +25,7 @@ export default function ContactPage() {
       <Container className="py-12">
         <ContactForm />
         <p className="mt-6 max-w-xl text-xs text-faint">
-          We only use your details to respond to your enquiry. Always buy match tickets from
-          official FIFA sources.
+          We will use your details to respond to your enquiry.
         </p>
       </Container>
     </>
