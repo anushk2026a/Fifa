@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { citiesByCountry, COUNTRY_ORDER } from "@/data/cities";
+import { countryFlagIso } from "@/lib/flags";
+import { Flag } from "@/components/common/Flag";
 import { cn } from "@/lib/utils";
-
-const FLAG: Record<string, string> = { USA: "🇺🇸", Canada: "🇨🇦", Mexico: "🇲🇽" };
 
 export function LocationsDropdown() {
   const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ export function LocationsDropdown() {
               {COUNTRY_ORDER.map((country) => (
                 <div key={country}>
                   <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-faint">
-                    <span aria-hidden>{FLAG[country]}</span> {country}
+                    <Flag iso2={countryFlagIso(country)} label={country} className="h-3.5 w-5" /> {country}
                   </p>
                   <ul className="space-y-1">
                     {grouped[country].map((c) => (

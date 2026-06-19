@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
 import { CityCard } from "@/components/common/CityCard";
+import { Flag } from "@/components/common/Flag";
 import { citiesByCountry, COUNTRY_ORDER } from "@/data/cities";
+import { countryFlagIso } from "@/lib/flags";
 
 export const metadata: Metadata = {
   title: "Host Cities — FIFA World Cup 2026",
   description:
     "All 16 FIFA World Cup 2026 host cities across the USA, Canada and Mexico. Pick a city for restaurants, hotels, transport, tickets and fan zones near the stadium.",
 };
-
-const FLAG: Record<string, string> = { USA: "🇺🇸", Canada: "🇨🇦", Mexico: "🇲🇽" };
 
 export default function LocationsPage() {
   const grouped = citiesByCountry();
@@ -29,7 +29,7 @@ export default function LocationsPage() {
         {COUNTRY_ORDER.map((country) => (
           <div key={country} className="mb-10 last:mb-0">
             <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-faint">
-              <span aria-hidden>{FLAG[country]}</span> {country}
+              <Flag iso2={countryFlagIso(country)} label={country} /> {country}
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {grouped[country].map((city) => (
