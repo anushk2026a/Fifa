@@ -1,10 +1,8 @@
 import { createApp } from "./app";
-import { env, mailerConfigured } from "./config/env";
+import { env } from "./config/env";
 
 const app = createApp();
 
 app.listen(env.PORT, () => {
-  console.log(
-    `[backend] listening on :${env.PORT} — mailer ${mailerConfigured ? "configured" : "NOT configured"}`,
-  );
+  console.log(`[backend] listening on :${env.PORT}`);
 });
