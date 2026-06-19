@@ -99,25 +99,40 @@ The contact form needs **both** running locally: the frontend posts to `NEXT_PUB
 ---
 
 ## Deployment
+## 🚀 Setup & Development
 
-### Frontend → Vercel
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com/yourusername/Fifa.git
+   cd Fifa/frontend
+   npm install
+   ```
 
-> **Important:** the Next.js app is in the **`frontend/`** subfolder, so set Vercel's **Root Directory** to `frontend` (otherwise Vercel scans the repo root, finds no `package.json`, and won't detect Next.js — that's why the framework logo doesn't show).
+2. **Environment Variables**
+   Copy `.env.local.example` to `.env.local` and add your SMTP credentials (e.g. Gmail App Password) for the contact form to work locally.
 
-1. Vercel → **Add New… → Project** → import the `Fifa` repo.
-2. **Root Directory → Edit → select `frontend`.** Framework Preset now auto-detects **Next.js**.
-3. Leave Build/Output as default (`next build`).
-4. **Environment Variables:** add `NEXT_PUBLIC_API_URL` = your backend URL (after the backend is deployed).
-5. **Deploy.** Add the custom domain in Project → Settings → Domains.
+3. **Run Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000).
 
-### Backend → Render (or Railway)
+## 🌍 Deployment
 
-1. New **Web Service** from the same repo, **Root Directory `backend`**.
-2. Build: `npm install && npm run build` · Start: `npm start`.
-3. **Environment Variables:** `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = your Vercel domain(s).
-4. Deploy, then set the frontend's `NEXT_PUBLIC_API_URL` to this service's URL and redeploy the frontend.
+### Vercel (Frontend & Serverless API)
+The entire project is built to deploy on Vercel natively.
+1. Import the `frontend` folder into a new Vercel project.
+2. In Vercel Project Settings → Environment Variables, add:
+   - `SMTP_HOST` (e.g. `smtp.gmail.com`)
+   - `SMTP_PORT` (e.g. `587`)
+   - `SMTP_SECURE` (`false`)
+   - `SMTP_USER` (your email)
+   - `SMTP_PASS` (your app password)
+   - `MAIL_FROM`
+   - `CONTACT_TO`
+3. Deploy!
 
-> **Secrets:** keep SMTP credentials in `backend/.env` (git-ignored) locally and in the host's env settings in production. Never commit them. Gmail uses an **App Password**, not your account password.
+> **Secrets:** keep SMTP credentials in `frontend/.env.local` (git-ignored) locally and in the host's env settings in production. Never commit them. Gmail uses an **App Password**, not your account password.
 
 ---
 
