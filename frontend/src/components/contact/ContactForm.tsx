@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { CITIES } from "@/data/cities";
 
-// Backend API base URL (the Express service that emails submissions via SMTP).
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+// Backend API route (internal Next.js route)
+const API_URL = "/api/contact";
 
 const fieldClass =
   "w-full rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent";
@@ -18,14 +18,9 @@ export function ContactForm() {
     const data = Object.fromEntries(new FormData(form).entries());
     if (data.company) return; // honeypot
 
-    if (!API_URL) {
-      setStatus("error");
-      return;
-    }
-
     setStatus("sending");
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -96,9 +91,7 @@ export function ContactForm() {
 
       {status === "error" && (
         <p className="text-sm text-red-700">
-          {API_URL
-            ? "Something went wrong sending your message. Please try again shortly."
-            : "Contact form isn't configured yet (set NEXT_PUBLIC_API_URL to the backend URL)."}
+          Something went wrong sending your message. Please try again shortly.
         </p>
       )}
     </form>
