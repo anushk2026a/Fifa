@@ -511,8 +511,14 @@ export const CITIES: City[] = [
         place("Los Danzantes Coyoacán", "Mexico City", 4.0, "Plaza Jardín Centenario 12, Coyoacán, CDMX", "Contemporary Mexican · $$$"),
         place("El Jarocho", "Mexico City", 4.2, "Av. México 25-C, Coyoacán, CDMX", "Famous coffee · $"),
       ],
+      "10mi": [place("Mercado de San Ángel", "Mexico City", 6.0, "Av. Revolución, San Ángel, CDMX", "Market dining")],
     },
-    hotels: {},
+    hotels: {
+      "10mi": [
+        place("Fiesta Inn Perisur", "Mexico City", 5.5, "Periférico Sur 4949, Tlalpan, CDMX"),
+        place("Hampton Inn & Suites Mexico City Centro Historico", "Mexico City", 8.0, "Av. Juárez 85, Centro, CDMX"),
+      ],
+    },
     transportation: transport("Estadio Azteca", "Mexico City", {
       title: "Tren Ligero — Estadio Azteca station",
       url: "https://www.metro.cdmx.gob.mx/",
@@ -538,7 +544,8 @@ export const CITIES: City[] = [
       ],
     },
     hotels: {
-      "10mi": [place("Riu Plaza Guadalajara", "Zapopan", 2.5, "Av. de las Rosas 2933, Zapopan, Jal.", "Near Andares")],
+      "5mi": [place("Riu Plaza Guadalajara", "Zapopan", 2.5, "Av. de las Rosas 2933, Zapopan, Jal.", "Near Andares")],
+      "10mi": [place("Fiesta Americana Guadalajara Country Club", "Guadalajara", 8.0, "Av. Mariano Otero 1313, Guadalajara, Jal.")],
     },
     transportation: transport("Estadio Akron", "Zapopan", {
       title: "Mi Macro Periférico & local transit (SITEUR)",
@@ -564,7 +571,10 @@ export const CITIES: City[] = [
         place("La Nacional", "Monterrey", 4.4, "Barrio Antiguo, Monterrey, N.L.", "Mexican · $$"),
       ],
     },
-    hotels: {},
+    hotels: {
+      "5mi": [place("Holiday Inn Express Monterrey Aeropuerto", "Monterrey", 3.5, "Carr. Miguel Alemán, Apodaca, N.L.")],
+      "10mi": [place("Quinta Real Monterrey", "Monterrey", 9.0, "Diego Rivera 500, San Pedro Garza García, N.L.", "Upscale")],
+    },
     transportation: transport("Estadio BBVA", "Monterrey", {
       title: "Metrorrey & local transit",
       url: "https://www.nl.gob.mx/metrorrey",

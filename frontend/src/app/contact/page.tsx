@@ -15,8 +15,9 @@ export default function ContactPage() {
         <Container className="py-12 sm:py-16">
           <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Contact us</h1>
           <p className="mt-3 max-w-2xl text-base text-muted">
-            You may share your details and we will guide you for your location — where to eat,
-            stay, park and watch around your match.
+            Still have questions — which stadium hosts your match, or how to get there? Share
+            your details and we&apos;ll guide you for your location, including where to eat,
+            stay, park and watch.
           </p>
         </Container>
       </section>

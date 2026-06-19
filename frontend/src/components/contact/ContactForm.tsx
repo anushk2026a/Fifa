@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { CITIES } from "@/data/cities";
 
-// Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in .env.local to your Formspree/Web3Forms URL.
-const ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
+// Backend API base URL (the Express service that emails submissions via SMTP).
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 const fieldClass =
   "w-full rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent";
@@ -15,17 +15,20 @@ export function ContactForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    if ((form.elements.namedItem("company") as HTMLInputElement)?.value) return; // honeypot
-    if (!ENDPOINT) {
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (data.company) return; // honeypot
+
+    if (!API_URL) {
       setStatus("error");
       return;
     }
+
     setStatus("sending");
     try {
-      const res = await fetch(ENDPOINT, {
+      const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
       if (res.ok) {
         setStatus("ok");
@@ -40,8 +43,9 @@ export function ContactForm() {
 
   if (status === "ok") {
     return (
-      <div className="rounded-[var(--radius-card)] border border-accent bg-accent-soft px-4 py-6 text-sm text-ink">
-        Thanks — we&apos;ve received your details and will get back to you to help with your location.
+      <div className="max-w-xl rounded-[var(--radius-card)] border border-accent bg-accent-soft px-4 py-6 text-sm text-ink">
+        Thanks — we&apos;ve received your details and will get back to you to help with your
+        match location.
       </div>
     );
   }
@@ -69,8 +73,17 @@ export function ContactForm() {
         </select>
       </div>
       <div>
-        <label htmlFor="message" className="mb-1 block text-sm font-medium text-ink">Message</label>
-        <textarea id="message" name="message" required rows={5} className={fieldClass} />
+        <label htmlFor="message" className="mb-1 block text-sm font-medium text-ink">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          placeholder="e.g. Which stadium hosts the Dallas matches, and how do I get there?"
+          className={fieldClass}
+        />
       </div>
 
       <button
@@ -83,9 +96,9 @@ export function ContactForm() {
 
       {status === "error" && (
         <p className="text-sm text-red-700">
-          {ENDPOINT
-            ? "Something went wrong. Please try again or email us directly."
-            : "Form is not configured yet (set NEXT_PUBLIC_FORMSPREE_ENDPOINT)."}
+          {API_URL
+            ? "Something went wrong sending your message. Please try again shortly."
+            : "Contact form isn't configured yet (set NEXT_PUBLIC_API_URL to the backend URL)."}
         </p>
       )}
     </form>

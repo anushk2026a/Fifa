@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Phase 1 is a fully static site (see docs/05-architecture.md).
-  output: "export",
-  images: {
-    // Static export has no image optimization server.
-    unoptimized: true,
-  },
+  // Vercel handles Next.js natively — no static export needed.
+  // output: "export" has been removed so Vercel can use its built-in
+  // Next.js runtime (SSR, image optimization, etc.).
   trailingSlash: true,
 };
 
