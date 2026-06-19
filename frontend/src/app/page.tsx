@@ -17,29 +17,44 @@ export default function HomePage() {
     <>
       <JsonLd data={siteJsonLd()} />
       {/* 1 — Banner */}
-      <section className="border-b border-line bg-accent-soft">
-        <Container className="py-16 sm:py-20">
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+      <section className="relative isolate border-b border-line overflow-hidden">
+        {/* Desktop Image */}
+        <img
+          src="/banner/fifabanner.jpg"
+          alt="FIFA World Cup 2026"
+          className="absolute inset-0 -z-10 hidden h-full w-full object-cover md:block"
+        />
+        {/* Mobile Image */}
+        <img
+          src="/banner/fifamobile.png"
+          alt="FIFA World Cup 2026"
+          className="absolute inset-0 -z-10 h-full w-full object-cover md:hidden"
+        />
+        {/* Overlay for text legibility */}
+        <div className="absolute inset-0 -z-10 bg-black/60 backdrop-blur-[2px]" />
+
+        <Container className="py-16 sm:py-24 text-white">
+          <p className="text-sm font-semibold uppercase tracking-wide text-white/80">
             FIFA World Cup 2026 · USA · Canada · Mexico
           </p>
-          <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
+          <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
             One point for everything World Cup 2026.
           </h1>
-          <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">
+          <p className="mt-4 max-w-2xl text-base text-white/90 sm:text-lg">
             Find your host city and plan your match day — matches, restaurants, hotels,
             transport, tickets and fan zones near every stadium.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/locations"
-              className="rounded border border-accent bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong"
+              className="rounded-[var(--radius-card)] border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong"
             >
               Browse host cities
             </Link>
             <OutboundLink
               href={SITE.fifaScheduleUrl}
               showIcon={false}
-              className="rounded border border-line bg-surface px-4 py-2 text-sm font-medium text-ink no-underline hover:border-accent hover:text-accent"
+              className="rounded-[var(--radius-card)] border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium text-white no-underline backdrop-blur-md transition-colors hover:bg-white/20 hover:text-white"
             >
               Full schedule ↗
             </OutboundLink>

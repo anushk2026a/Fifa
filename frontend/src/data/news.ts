@@ -9,7 +9,7 @@ export const NEWS: NewsItem[] = [
       "The co-hosts thrilled a packed BC Place, with the crowd and fan festival turning downtown Vancouver into a sea of red.",
     url: "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026",
     source: "FIFA",
-    image: "https://images.unsplash.com/photo-1518605368461-1e1e38ce71ac?auto=format&fit=crop&w=800&q=80",
+    image: "/images/news/canada_stadium.png",
   },
   {
     title: "Switzerland find their rhythm in Los Angeles",
