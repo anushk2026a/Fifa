@@ -1,13 +1,15 @@
-# 13 — Folder Structure (Phase 1: Static Site)
+# 13 — Folder Structure (Phase 1)
 
-Phase 1 is a **single Next.js app** in `frontend/` (no monorepo, no `apps/api`). Matches the root [README](../README.md).
+Phase 1 is the **Next.js app** in `frontend/` plus a **small Express backend** in `backend/` (the Contact feature). Matches the root [README](../README.md) and [CLAUDE.md](../CLAUDE.md).
 
 ## 1. Repo top level
 
 ```
 sportsonepoint/
+├─ CLAUDE.md              # repo working agreement (git rule, architecture)
 ├─ docs/                  # this documentation set
-├─ frontend/              # the Next.js 15 app (the whole Phase 1 site)
+├─ frontend/              # the Next.js 15 app (the public site)
+├─ backend/               # Express modular monolith (Contact via SMTP)
 └─ README.md
 ```
 
@@ -61,11 +63,11 @@ frontend/
 │
 ├─ public/                          # banner images, og images, favicon
 │  └─ images/{cities,banners}/
-├─ next.config.ts                   # output: 'export', images, security headers
+├─ next.config.ts                   # Next config (Vercel-native; trailingSlash)
 ├─ tailwind.config.ts
 ├─ tsconfig.json
 ├─ package.json
-└─ .env.local.example               # form service endpoint/key (public, build-time)
+└─ .env.local.example               # NEXT_PUBLIC_API_URL (backend base URL)
 ```
 
 ## 3. The data shape (the heart of Phase 1)
@@ -119,14 +121,43 @@ export type Match = {
 };
 ```
 
-## 4. Conventions
+## 4. `backend/` — the Express modular monolith
 
-- Files: `kebab-case.ts`; components `PascalCase.tsx`.
-- **All content edits happen in `src/data/`** — never hardcode content inside components.
+The Phase 1 backend is small but built in the modular-monolith shape so Phase 2 just adds modules.
+
+```
+backend/
+├─ src/
+│  ├─ server.ts                     # bootstrap + listen
+│  ├─ app.ts                        # express app: middleware + mount module routers
+│  ├─ config/
+│  │  └─ env.ts                     # Zod-validated env (PORT, CORS, SMTP_*, CONTACT_TO)
+│  ├─ shared/                       # cross-cutting, reusable
+│  │  ├─ mailer.ts                  # Nodemailer SMTP transporter
+│  │  ├─ http/validate.ts           # Zod body-validation middleware
+│  │  └─ middleware/                # error-handler, rate-limit
+│  └─ modules/                      # ── one folder per feature (bounded context) ──
+│     ├─ contact/
+│     │  ├─ contact.schema.ts       # Zod schema + type (incl. honeypot)
+│     │  ├─ contact.service.ts      # sends email via SMTP
+│     │  ├─ contact.router.ts       # POST /api/contact
+│     │  └─ index.ts                # barrel: exports service + types only
+│     └─ health/                    # GET /health
+├─ .env.example                     # SMTP_*, CONTACT_TO, CORS_ORIGIN (copy → .env)
+├─ tsconfig.json
+└─ package.json
+```
+
+**Rule:** a module talks to another only via its `index.ts` (exported service/types). Shared code lives in `src/shared`. Phase 2 adds `modules/city`, `modules/poi`, … beside `contact` — no restructure.
+
+## 5. Conventions
+
+- Files: `kebab-case.ts`; React components `PascalCase.tsx`.
+- **All site content edits happen in `frontend/src/data/`** — never hardcode content inside components.
 - One `CityPage` template renders every city from a `City` object → consistency for free.
-- Interactive bits are the only `'use client'` components: `MatchList` (today/tomorrow), `MobileMenu`, `LocationsDropdown`, `Faq`, `ContactForm`.
+- Interactive bits are the only `'use client'` components: `MatchList`, `MobileMenu`, `LocationsDropdown`, `Faq`, `ContactForm`.
 - `OutboundLink` centralizes external-link behavior (`target="_blank"`, `rel="noopener"`, "opens in new tab").
 
-## 5. Phase 2 note
+## 6. Phase 2 note
 
-When the CMS/API land, this `frontend/` app stays. We add a sibling `api/` (Express) and switch pages from `import { cities } from '@/data'` to a typed fetch — the components and routes are unchanged. That's the payoff of keeping content in typed `data/` files now.
+The `frontend/` app stays as-is; pages swap `import { cities } from '@/data'` for a typed fetch. The `backend/` grows new modules (City, POI, Blog, Auth, CMS) plus MongoDB — the `contact` module already establishes the pattern. That's the payoff of the structure chosen now.

@@ -14,25 +14,41 @@ A FIFA World Cup 2026 **information directory**. A fan arrives and quickly answe
 
 1. **Which match & when?** — today's / tomorrow's matches + full FIFA schedule link
 2. **Where is it?** — the host city and its stadium
-3. **What's around it?** — restaurants (1 / 2 / 5 / 10 mi), hotels, transportation, tickets, and screening zones near each stadium
+3. **What's around it?** — restaurants (1 / 2 / 5 / 10 mi), hotels (5 / 10 mi), transport, tickets, and screening zones near each stadium
 
-Everything is a **curated link or short content block** — no accounts, no live API calls, no database.
+Most of the site is **curated links and content**. The only dynamic piece is **Contact Us**, which emails the team via SMTP so fans can ask which stadium hosts their match or how to get there.
 
 ---
 
-## Build Status — Phase 1 (Static Site)
+## Architecture
+
+A simple two-app setup (see [`/docs`](./docs/README.md)):
+
+| App | Stack | Hosts | Role |
+|-----|-------|-------|------|
+| **`frontend/`** | Next.js 15 (App Router), TypeScript, Tailwind, shadcn/ui | Vercel | The whole public site (prerendered) |
+| **`backend/`** | Express + TypeScript (**modular monolith**), Nodemailer (SMTP) | Render / Railway | The Contact feature (emails submissions) |
+
+- **Frontend** is **feature-wise**: `components/{home,city,news,contact,common}`, content in `src/data`, helpers in `src/lib`.
+- **Backend** is a **modular monolith**: feature modules under `src/modules/<feature>` (currently `contact`, `health`), shared code in `src/shared`.
+- No database, Redis, queues, or Docker. Content lives in `frontend/src/data`.
+
+> See [`CLAUDE.md`](./CLAUDE.md) for the repo working agreement.
+
+---
+
+## Build Status — Phase 1
 
 | Layer | Status | Notes |
 |-------|--------|-------|
-| Menu / Nav | ✅ Done | Sports · Locations (dropdown, 16 cities) · News · Contact + mobile menu + footer |
-| Home Page (Sports) | ✅ Done | Banner, about, today/tomorrow matches, category boxes, news, FAQ |
-| Locations Page | ✅ Done | All 16 cities in cards, grouped by country |
-| City Pages (×16) | ✅ Done | 5 sections; Dallas fully populated, others structural (graceful empty states) |
-| News Page | ✅ Done | Static match items |
-| Contact Page | ✅ Done | Banner + form (wire `NEXT_PUBLIC_FORMSPREE_ENDPOINT`) |
-| Content fill | 🔲 Ongoing | Add real restaurant/hotel listings per city in `src/data/cities.ts` |
-
-**Build order:** Menu → Home → Locations → City Pages → News → Contact
+| Menu / Nav | ✅ | Sports · Locations (dropdown, 16 cities) · News · Contact + mobile menu + footer |
+| Home (Sports) | ✅ | Banner, about, today/tomorrow matches, category boxes, news, FAQ |
+| Locations | ✅ | All 16 cities as photo cards, grouped by country |
+| City Pages (×16) | ✅ | Photo banner + 5 sections, curated restaurants/hotels/transport/tickets/screening |
+| News | ✅ | Static match items |
+| Contact | ✅ | Form → backend → **SMTP email** |
+| Backend (Contact) | ✅ | Express modular monolith, Nodemailer |
+| SEO | ✅ | Per-page metadata + JSON-LD, sitemap.xml, robots.txt, custom 404 |
 
 ---
 
@@ -41,7 +57,7 @@ Everything is a **curated link or short content block** — no accounts, no live
 | Route | Page |
 |-------|------|
 | `/` | Home (Sports) |
-| `/locations` | All 16 cities grid |
+| `/locations` | All 16 cities |
 | `/cities/[slug]` | Individual city page |
 | `/news` | News |
 | `/contact` | Contact Us |
@@ -49,55 +65,59 @@ Everything is a **curated link or short content block** — no accounts, no live
 ### 16 Host Cities
 
 **USA** — Atlanta · Boston · Dallas · Houston · Kansas City · Los Angeles · Miami · New York/New Jersey · Philadelphia · San Francisco Bay Area · Seattle
-
 **Canada** — Toronto · Vancouver
-
 **Mexico** — Mexico City · Guadalajara · Monterrey
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 15 (App Router, static export) |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Components | shadcn/ui |
-| Content | Local `data/` files (hardcoded, Phase 1) |
-| Contact Form | Formspree / Web3Forms (no backend) |
-| Deployment | Vercel |
-
-> **Phase 2+ (future):** Express · MongoDB Atlas · Mongoose · Custom CMS · Google Places API. The page structure is designed so Phase 2 data sources drop in cleanly — no page rewrite needed.
 
 ---
 
 ## Getting Started
 
-### Prerequisites
+Prerequisites: **Node.js 18+** and **npm**.
 
-- Node.js 18+
-- npm
-
-### Install & Run
+### Frontend (the website)
 
 ```bash
-# From repo root
 cd frontend
+cp .env.local.example .env.local      # set NEXT_PUBLIC_API_URL to the backend URL
 npm install
-npm run dev
+npm run dev                           # http://localhost:3000
+npm run build                         # production build (Vercel runs Next.js natively)
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
-
-### Build (static export)
+### Backend (the contact API)
 
 ```bash
-cd frontend
-npm run build
+cd backend
+cp .env.example .env                  # set SMTP_* and CONTACT_TO (Gmail App Password works)
+npm install
+npm run dev                           # http://localhost:4000  (GET /health to check)
+npm run build && npm start            # production
 ```
 
-Output goes to `frontend/out/` — ready for Vercel / GitHub Pages.
+The contact form needs **both** running locally: the frontend posts to `NEXT_PUBLIC_API_URL` → `POST /api/contact` → SMTP email.
+
+---
+
+## Deployment
+
+### Frontend → Vercel
+
+> **Important:** the Next.js app is in the **`frontend/`** subfolder, so set Vercel's **Root Directory** to `frontend` (otherwise Vercel scans the repo root, finds no `package.json`, and won't detect Next.js — that's why the framework logo doesn't show).
+
+1. Vercel → **Add New… → Project** → import the `Fifa` repo.
+2. **Root Directory → Edit → select `frontend`.** Framework Preset now auto-detects **Next.js**.
+3. Leave Build/Output as default (`next build`).
+4. **Environment Variables:** add `NEXT_PUBLIC_API_URL` = your backend URL (after the backend is deployed).
+5. **Deploy.** Add the custom domain in Project → Settings → Domains.
+
+### Backend → Render (or Railway)
+
+1. New **Web Service** from the same repo, **Root Directory `backend`**.
+2. Build: `npm install && npm run build` · Start: `npm start`.
+3. **Environment Variables:** `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = your Vercel domain(s).
+4. Deploy, then set the frontend's `NEXT_PUBLIC_API_URL` to this service's URL and redeploy the frontend.
+
+> **Secrets:** keep SMTP credentials in `backend/.env` (git-ignored) locally and in the host's env settings in production. Never commit them. Gmail uses an **App Password**, not your account password.
 
 ---
 
@@ -105,43 +125,28 @@ Output goes to `frontend/out/` — ready for Vercel / GitHub Pages.
 
 ```
 /
-├── docs/               # All design & architecture docs
-│   ├── README.md       # Docs index — read this first
-│   ├── 01-product-requirements.md
-│   ├── 02-information-architecture.md
-│   ├── 04-ux-design.md
-│   ├── 13-folder-structure.md
-│   └── 14-roadmap.md
-├── frontend/           # Next.js 15 app
-│   ├── src/
-│   │   ├── app/        # App Router pages
-│   │   ├── components/ # Shared UI components
-│   │   └── data/       # Hardcoded city/match content
-│   └── public/
-└── README.md           # ← You are here
+├── CLAUDE.md           # repo working agreement
+├── docs/               # design & architecture docs (read docs/README.md first)
+├── frontend/           # Next.js 15 app (static export)
+│   ├── src/app/        # routes: /, /locations, /cities/[slug], /news, /contact
+│   ├── src/components/  # feature-wise: home, city, news, contact, layout, common
+│   ├── src/data/       # all content (cities, matches, news, faq)
+│   ├── src/lib/        # helpers (schedule, seo, utils)
+│   └── public/images/cities/   # 16 city banner images
+├── backend/            # Express modular monolith (Contact via SMTP)
+│   └── src/
+│       ├── modules/    # contact, health
+│       ├── shared/     # mailer, middleware, validation
+│       └── config/     # env
+└── README.md
 ```
-
----
-
-## Documentation Index
-
-| # | Document | What it covers |
-|---|----------|---------------|
-| 01 | [Product Requirements](./docs/01-product-requirements.md) | Vision, scope, static-first decisions |
-| 02 | [Information Architecture](./docs/02-information-architecture.md) | Menu, sitemap, page structure |
-| 03 | [User Flows](./docs/03-user-flows.md) | How fans move through the site |
-| 04 | [UX & Visual Design](./docs/04-ux-design.md) | Design principles + wireframes |
-| 05 | [Architecture](./docs/05-architecture.md) | Static Next.js architecture |
-| 11 | [SEO Strategy](./docs/11-seo.md) | Metadata, sitemap, structured data |
-| 13 | [Folder Structure](./docs/13-folder-structure.md) | Next.js app + data files |
-| 14 | [Roadmap](./docs/14-roadmap.md) | Phase 1 plan → Phase 2/3 future |
 
 ---
 
 ## Key Principles
 
-1. **Static-first.** Ship a real, fast site with no backend; add dynamic complexity only when needed.
-2. **Links, not APIs.** Curated outbound links; the fan clicks out to official sources.
-3. **One predictable city-page layout** — a fan learns it once and knows every city.
-4. **Content-first design** — clean and legible.
-5. **Build to grow.** Data shapes are designed so the Phase 2 CMS/API drop in cleanly.
+1. **Static-first.** A fast site with almost no backend; add complexity only when needed.
+2. **Links, not heavy APIs.** Curated outbound links; the fan clicks out to official sources.
+3. **One predictable city-page layout** — learn it once, know every city.
+4. **Content-first design** — clean, legible, not "AI-generated"; no decorative shadow soup.
+5. **Modular monolith (backend) + feature-wise (frontend)** so the codebase grows cleanly.

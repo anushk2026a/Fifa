@@ -4,7 +4,7 @@ We build in phases on purpose: ship a real, useful **static site** first, then a
 
 ## Phase 1 — Static site (NOW)
 
-**Goal:** a fast, clean, trustworthy FIFA WC 2026 directory — all 16 city pages, Home, Locations, News, Contact — with hardcoded content and no backend.
+**Goal:** a fast, clean, trustworthy FIFA WC 2026 directory — all 16 city pages, Home, Locations, News, Contact — with hardcoded content and only a small backend for the Contact form (SMTP email).
 
 ### Build order (client's instruction)
 ```
@@ -23,7 +23,7 @@ We build in phases on purpose: ship a real, useful **static site** first, then a
 
 5. NEWS            2–3 static recent-match items.
 
-6. CONTACT         Banner + form (Formspree/Web3Forms) + copy.
+6. CONTACT         Banner + form → Express backend (POST /api/contact) → SMTP email.
 ```
 
 ### Phase 1 scope
@@ -49,14 +49,14 @@ We build in phases on purpose: ship a real, useful **static site** first, then a
 ### Suggested working sequence
 | Step | Output |
 |------|--------|
-| **1. Scaffold** | `frontend/` Next.js app, Tailwind + tokens, `next.config` static export, layout shell |
+| **1. Scaffold** | `frontend/` Next.js app, Tailwind + tokens, layout shell; `backend/` Express skeleton |
 | **2. Menu** | Header (Sports, Locations dropdown w/ 16 cities, News, Contact), Footer, mobile menu |
 | **3. Data + types** | `data/types.ts`, seed `data/cities.ts` (Dallas full), `matches.ts`, `news.ts`, `faq.ts` |
 | **4. Home** | All six home sections wired to data |
 | **5. Locations** | City grid |
 | **6. City template** | One city page rendering Dallas; verify all five sections |
 | **7. Fill cities** | Add the remaining 15 cities' data |
-| **8. News + Contact** | News list; contact form via form service |
+| **8. News + Contact** | News list; contact form → Express backend (SMTP) |
 | **9. SEO + polish** | metadata/JSON-LD/sitemap, a11y pass, responsive pass, deploy |
 
 ---

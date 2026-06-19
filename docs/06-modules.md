@@ -1,7 +1,7 @@
 # 06 — Modular Monolith: Module Catalog (Express / MongoDB)
 
 > ⚠ **PHASE 2+ (FUTURE) — NOT part of the current static build.**
-> The site we build now ([Phase 1](./README.md)) is a static Next.js site with hardcoded content and **no backend**. This document is the target backend design for *later*, when we add a CMS and live data. Keep it as reference; do not build it yet.
+> Phase 1 ([README](./README.md)) ships a prerendered Next.js site with hardcoded content and only a **tiny Express backend for the Contact form** (`modules/contact`, `modules/health`). This document is the *full* target backend (City/POI/Blog/Auth/CMS…) for *later* — the same modular-monolith pattern, more modules. Build only `contact`/`health` now.
 
 Each module is an **Express feature module** = one bounded context, living in its own folder (`apps/api/src/modules/<name>`). It owns its Mongoose model(s), service, router, and validation (Zod). It communicates with other modules **only** through the exported service interface — never by importing another module's Mongoose model.
 

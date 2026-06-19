@@ -14,7 +14,7 @@
 | **Tickets** | Outbound link to **official FIFA ticketing** only; hospitality via On Location. Strong "buy only from official sources" note |
 | **Match screening zones** | Curated links to FIFA Fan Festival / host-city public-viewing pages |
 | **News** | 2–3 items entered manually from FIFA, each with a source link |
-| **Contact form** | Posts to **Formspree / Web3Forms** (a no-backend form service) which emails the team. The only outbound POST on the site |
+| **Contact form** | Posts to our **small Express backend** (`POST /api/contact`), which emails the team via **Nodemailer over SMTP**. The only API the site calls. (A no-backend service like Formspree/Web3Forms is a drop-in alternative if a backend isn't wanted) |
 
 **Why this is fine for now:** the data doesn't change minute-to-minute, the volume is small (16 cities), and curated links are fast, free, SEO-friendly, and never break under traffic. Cost ≈ \$0 beyond hosting.
 
@@ -45,6 +45,6 @@ When we want listings to refresh automatically and be managed in a CMS, we add t
 - Still curated links, but managed in the CMS instead of code. Optional GTFS transit feeds later.
 
 ### Email
-- Resend / AWS SES for contact-form notifications (replacing the form service) once we have a backend.
+- Optionally move from raw SMTP to a transactional email API (Resend / AWS SES) for better deliverability and analytics as volume grows.
 
 **Migration principle:** the Phase 1 `data/` shapes mirror the Phase 2 documents, so turning on APIs swaps the *source* of the same fields — the pages don't change. See [05 §7](./05-architecture.md#7-phase-2-future--the-dynamic-platform).

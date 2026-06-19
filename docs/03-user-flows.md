@@ -49,7 +49,7 @@ Home
 Any page → Contact Us
   → reads "share your details and we'll guide you for your location"
   → fills form (name, email, city, message) → submit
-  → form service emails the team; success message shown
+  → backend (POST /api/contact) emails the team via SMTP; success message shown
 ```
 
 ## Cross-cutting rules

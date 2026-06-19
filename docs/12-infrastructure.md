@@ -1,41 +1,49 @@
 # 12 — Infrastructure & Operations (Phase 1: Static Site)
 
-There is almost nothing to operate. A static Next.js export on a CDN, plus a form service. That's the point — ship value with near-zero ops.
+Very little to operate: a prerendered Next.js site on Vercel, plus one small Express service for the contact form. Near-zero ops.
 
 ## 1. Deployment
 
 ```
-   GitHub repo ──push──▶ Vercel
-                          │  next build (output: 'export')
-                          │  → static HTML/CSS/JS
-                          ▼
-                   Vercel CDN (global edge, TLS, custom domain)
-                          │
-                          ▼
-                       Browser
-                          │ form POST
-                          ▼
-              Formspree / Web3Forms ──▶ email to team
+   GitHub repo ──┬──push──▶ Vercel  (frontend/, root dir = "frontend")
+                 │            │  next build → prerendered pages
+                 │            ▼
+                 │     Vercel (Next.js runtime + global edge, TLS, domain)
+                 │            │
+                 │            ▼
+                 │         Browser ──POST /api/contact──┐
+                 │                                       ▼
+                 └──push──▶ Render / Railway  (backend/, root dir = "backend")
+                              npm run build → npm start (Express)
+                              └─ Nodemailer ──SMTP──▶ email to team
 ```
 
-- **Host:** Vercel (free/Hobby tier is enough; Pro if needed). Could also be Netlify, Cloudflare Pages, or GitHub Pages — it's just static files.
-- **Build:** `next build` with `output: 'export'` → `frontend/out/`.
-- **Domain:** `www.sportsonepoint.com` via Vercel DNS / a CNAME.
-- **TLS:** automatic (Vercel).
-- **Preview deploys:** every PR gets a unique preview URL; merge to `main` → production.
+**Frontend (Vercel)**
+- **Root Directory = `frontend`** (the repo root has `frontend/`, `backend/`, `docs/`; Vercel must be pointed at the app, or it won't detect Next.js).
+- **Build:** `next build` (default). Vercel runs Next.js natively.
+- **Env:** `NEXT_PUBLIC_API_URL` = the backend URL.
+- **Domain:** `www.sportsonepoint.com` via Vercel DNS / CNAME. TLS automatic.
+- **Preview deploys:** every PR gets a URL; merge to `main` → production.
 
-No servers, containers, database, Nginx, Docker, or cloud infra to manage in Phase 1.
+**Backend (Render / Railway)**
+- **Root Directory = `backend`.** Build `npm install && npm run build`, start `npm start`.
+- **Env:** `SMTP_*`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = the Vercel domain(s).
+- A single small always-on instance is plenty (the free/Hobby tier suffices).
+
+No database, Nginx, Docker, or container orchestration in Phase 1.
 
 ## 2. Local development
 
 ```bash
-cd frontend
-npm install
-npm run dev          # http://localhost:3000
-npm run build        # static export → frontend/out/
+# Frontend
+cd frontend && npm install && npm run dev   # http://localhost:3000
+
+# Backend (separate terminal)
+cd backend && cp .env.example .env && npm install && npm run dev   # http://localhost:4000
 ```
 - Node 18+, npm.
-- No services to run locally (no DB/Redis). Editing content = editing `src/data/*.ts`.
+- The contact form needs both running; set `NEXT_PUBLIC_API_URL=http://localhost:4000`.
+- Editing site content = editing `frontend/src/data/*.ts`.
 
 ## 3. Caching
 
@@ -51,13 +59,13 @@ Kept minimal and sufficient:
 - **Form service dashboard** — submissions and delivery status.
 - **Errors:** optional Sentry browser SDK for client-side errors. Not essential for a static site.
 
-No Prometheus/Grafana/OTel/PagerDuty — there's no backend to observe.
+No Prometheus/Grafana/OTel/PagerDuty — the only backend is the tiny contact service, watched via Render's built-in logs/metrics.
 
 ## 5. Security & privacy
 
 - **TLS everywhere** (Vercel).
 - **No backend = tiny attack surface.** No database to inject, no auth to breach, no secrets on a server (Phase 1 has no API keys — links are public URLs).
-- **Contact form:** the form service handles spam (honeypot/captcha options); we add a honeypot field and rely on the provider's filtering. Only PII collected is what the fan types into the form, sent straight to email — we store nothing ourselves.
+- **Contact form / backend:** the Express service validates input (Zod), rate-limits submissions, and uses a honeypot field; CORS is restricted to the site origin. SMTP credentials live in the host's env (never committed). Only PII is what the fan types, sent straight to email — nothing is stored.
 - **Security headers** via `next.config` (CSP, X-Content-Type-Options, Referrer-Policy, frame-ancestors).
 - **Dependencies:** `npm audit` / Dependabot; pinned lockfile.
 - **Privacy:** a short privacy note; cookie banner only if analytics requires it (Plausible is cookieless).

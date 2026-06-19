@@ -115,7 +115,7 @@ Each entry: **Name · Phone · Address (+ Map link) · Distance from stadium**, 
 ```
 1. BANNER + copy: "You may share your details and we will guide you for your location."
 2. FORM         Name · Email · City (dropdown of 16) · Message → submit
-                (handled by Formspree / Web3Forms — no backend)
+                (posts to our small Express backend → SMTP email)
 3. (optional)   short FAQ / official-sources note
 ```
 

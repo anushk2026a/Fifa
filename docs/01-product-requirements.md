@@ -18,8 +18,8 @@ We are the **connective directory**: we collect the scattered authoritative link
 - Be **fast, clean, and trustworthy** — a fan stays and finds what they need.
 
 ### Non-goals (Phase 1)
-- **No backend, no database, no API of our own.** Content is hardcoded.
-- **No CMS** — content is edited in code (`data/` files) and redeployed.
+- **No database, no CMS, no content API.** All page content is hardcoded in `data/` files and edited in code.
+- **Backend is minimal** — a small Express service that exists **only** for the Contact form (sending email via SMTP). No data is stored.
 - **No live data** — matches and news are entered manually from FIFA's site.
 - No accounts, saved itineraries, or social features.
 - No native app — mobile-first responsive web.
@@ -71,14 +71,14 @@ Sections, top to bottom:
 
 ### 4.6 Contact page
 - **Banner** + copy: *"You may share your details and we will guide you for your location."*
-- **Form** (name, email, city, message) handled by a **no-backend form service** (Formspree / Web3Forms) — no server of ours.
+- **Form** (name, email, city, message) posts to our **small Express backend** (`POST /api/contact`), which emails the team via **SMTP**. Fans can ask which stadium hosts their match or how to get there.
 
 ## 5. Non-functional requirements
 
 | Area | Requirement |
 |------|-------------|
 | **Performance** | Static HTML; LCP < 2.0s on 4G; instant navigation |
-| **Hosting** | Next.js **static export** on Vercel; no servers |
+| **Hosting** | Next.js on **Vercel** (prerendered); small contact API on **Render/Railway** |
 | **SEO** | Pre-rendered pages, metadata, sitemap, structured data ([11](./11-seo.md)) |
 | **Accessibility** | WCAG 2.1 AA: semantic HTML, keyboard nav, contrast, alt text |
 | **Maintainability** | All content in clear `data/` files; one predictable city-page layout |

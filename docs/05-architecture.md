@@ -2,40 +2,48 @@
 
 ## 1. Phase 1 at a glance
 
-There is no backend. The entire site is a **Next.js app that exports to static HTML** and is served from a CDN (Vercel). Content lives in TypeScript data files inside the app.
+The site is a **Next.js app** (content from TypeScript data files, pages prerendered) on Vercel, plus **one small Express backend** that exists only to email the **Contact** form via SMTP. No database.
 
 ```
    ┌──────────────┐      build time       ┌─────────────────────────────┐
-   │  data/*.ts   │ ───────────────────▶  │  Next.js static export      │
-   │ (cities,     │   generateStaticParams│  → pre-rendered HTML for     │
+   │  data/*.ts   │ ───────────────────▶  │  Next.js (App Router)       │
+   │ (cities,     │   generateStaticParams│  prerendered pages for       │
    │  matches,    │   renders every page  │    /, /locations, /cities/*, │
    │  news, faq)  │                       │    /news, /contact           │
    └──────────────┘                       └──────────────┬──────────────┘
                                                          │ deploy
                                           ┌──────────────▼──────────────┐
-                                          │   Vercel (static + CDN)     │
+                                          │   Vercel (Next.js + CDN)    │
                                           └──────────────┬──────────────┘
                                                          │ HTTPS
                                           ┌──────────────▼──────────────┐
                                           │           Browser            │
-                                          └──────────────┬──────────────┘
-                            outbound links │              │ form POST
-                  ┌────────────────────────▼──┐   ┌───────▼────────────┐
-                  │ Google Maps · FIFA tickets │   │ Form service       │
-                  │ FIFA schedule · transit …  │   │ (Formspree/Web3-   │
-                  │ (the fan clicks out)       │   │  Forms) → email    │
-                  └────────────────────────────┘   └────────────────────┘
+                                          └──────┬───────────────┬──────┘
+                          outbound links         │               │ POST /api/contact
+              ┌────────────────────────▼──┐      │      ┌────────▼─────────────────┐
+              │ Google Maps · FIFA tickets │      │      │ Express backend (Render) │
+              │ FIFA schedule · transit …  │      │      │  modules/contact         │
+              │ (the fan clicks out)       │      │      │  → Nodemailer (SMTP)     │
+              └────────────────────────────┘      │      └────────┬─────────────────┘
+                                                  │               │ SMTP
+                                                  │      ┌────────▼─────────┐
+                                                  │      │  Email → team    │
+                                                  │      └──────────────────┘
 ```
 
-**That's the whole system.** One app, static output, a CDN, and outbound links. The only "dynamic" call anywhere is the **contact form**, which posts to a third-party form service — not a server of ours.
+**That's the whole system.** A prerendered Next.js site on a CDN, outbound links, and a tiny Express service whose only job is to receive the contact form and send an email. No database, queue, or CMS.
 
-## 2. Why Next.js (even for static)
+## 2. Why Next.js
 
-We use Next.js 15 with **static export** (`output: 'export'`) rather than plain HTML because:
+We use Next.js 15 (App Router) rather than plain HTML because:
 - **Components + data files** scale to 16 near-identical city pages far better than copy-pasted HTML. One `CityPage` template + `generateStaticParams` over `data/cities` produces all 16.
-- **Built-in SEO** — the Metadata API generates per-page `<title>`, meta, Open Graph, and JSON-LD at build time. ([11](./11-seo.md))
-- **`next/image`** optimizes banners automatically (responsive, lazy, modern formats).
-- **It's the same framework Phase 2 uses.** When we add live data/CMS later, the pages stay; only their data source changes (from `data/*.ts` to API fetches). No rewrite.
+- **Built-in SEO** — the Metadata API generates per-page `<title>`, meta, Open Graph, and JSON-LD. ([11](./11-seo.md))
+- **`next/image`** optimizes banners automatically (responsive, lazy, modern formats — handled by Vercel's runtime).
+- **Prerendered on Vercel** — pages are static/SSG and served from the edge; Vercel runs Next.js natively (no separate static-export step needed, though the app can also be exported to plain HTML if a non-Vercel static host is ever required).
+- **Same framework Phase 2 uses.** When we add live data/CMS later, the pages stay; only their data source changes (from `data/*.ts` to API fetches). No rewrite.
+
+### The contact backend
+`POST /api/contact` is handled by the Express **Contact module** ([06](./06-modules.md)): validate (Zod) → send via Nodemailer/SMTP → reply with `{ ok, delivered }`. It stores nothing. The frontend posts to `NEXT_PUBLIC_API_URL`. This is the modular-monolith backend in miniature — Phase 2 simply adds more modules beside `contact`.
 
 ## 3. How the data flows (Phase 1)
 
@@ -55,7 +63,7 @@ Pages read these at build time:
   /contact          → static form
 ```
 
-- **"Today/tomorrow"** is computed in a small helper from the device/current date against `data/matches`. With static export, this runs client-side on the home page (a tiny client component) so the right two days always show; the rest of Home is fully static.
+- **"Today/tomorrow"** is computed in a small helper from the device/current date against `data/matches`. This runs client-side on the home page (a tiny client component) so the right two days always show; the rest of Home is prerendered.
 - **All place data is curated** — each entry is `{ name, phone, address, mapUrl, distanceMiles, website?, note? }`. No API.
 
 ## 4. Component architecture
@@ -87,9 +95,8 @@ data/
 
 ## 5. Build & deploy
 
-- `next build` with `output: 'export'` → static HTML/CSS/JS in `frontend/out/`.
-- Deployed to **Vercel** (or any static host). No servers, no database, no runtime.
-- Every push → Vercel preview deploy; merge to main → production.
+- **Frontend:** `next build` → prerendered pages, deployed on **Vercel** (root directory `frontend`; Vercel runs Next.js natively). Every push → preview deploy; merge to main → production. (The app can also be `output: 'export'`-ed to plain static HTML for a non-Vercel host if ever needed.)
+- **Backend:** the Express contact service on **Render/Railway** (root directory `backend`). No database.
 
 ## 6. Maintainability
 
@@ -113,11 +120,11 @@ The migration is deliberately small: the `data/*.ts` shapes mirror the future Mo
 
 | Concern | Choice |
 |---------|--------|
-| Framework / rendering | Next.js 15 (App Router, **static export**) |
+| Framework / rendering | Next.js 15 (App Router, prerendered on Vercel) |
 | Language | TypeScript |
 | Styling / components | TailwindCSS + shadcn/ui (flat, restyled) |
 | Content | Local `data/*.ts` (typed, hardcoded) |
 | Images | `next/image` |
-| Contact form | Formspree / Web3Forms (no backend) |
+| Contact backend | Express + Nodemailer (SMTP) on Render/Railway |
 | Hosting | Vercel (static + CDN) |
 | Light client state | React state / a tiny Zustand store if needed (mobile menu, filters) |
