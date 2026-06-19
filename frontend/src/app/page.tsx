@@ -6,12 +6,15 @@ import { MatchList } from "@/components/home/MatchList";
 import { ExperienceBoxes } from "@/components/home/ExperienceBoxes";
 import { Faq } from "@/components/home/Faq";
 import { NewsCard } from "@/components/news/NewsCard";
+import { JsonLd } from "@/components/common/JsonLd";
+import { siteJsonLd } from "@/lib/seo";
 import { NEWS } from "@/data/news";
 import { SITE } from "@/data/site";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={siteJsonLd()} />
       {/* 1 — Banner */}
       <section className="border-b border-line bg-accent-soft">
         <Container className="py-16 sm:py-20">

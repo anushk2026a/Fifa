@@ -4,7 +4,10 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/common/Container";
 import { OutboundLink } from "@/components/common/OutboundLink";
 import { CitySection, EmptyState } from "@/components/city/CitySection";
+import { CityBanner } from "@/components/city/CityBanner";
 import { ListingRow } from "@/components/city/ListingRow";
+import { JsonLd } from "@/components/common/JsonLd";
+import { cityJsonLd } from "@/lib/seo";
 import { CITIES, getCity } from "@/data/cities";
 import type { HotelBand, RestaurantBand } from "@/data/types";
 
@@ -20,7 +23,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const city = getCity(slug);
   if (!city) return { title: "City not found" };
-  return { title: city.seo.title, description: city.seo.description };
+  return {
+    title: city.seo.title,
+    description: city.seo.description,
+    openGraph: {
+      title: city.seo.title,
+      description: city.seo.description,
+      images: city.bannerImage ? [{ url: city.bannerImage }] : undefined,
+    },
+  };
 }
 
 const RESTAURANT_BANDS: { band: RestaurantBand; label: string }[] = [
@@ -60,24 +71,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      {/* Banner / header */}
-      <section className="border-b border-line bg-accent-soft">
-        <Container className="py-12">
-          <p className="text-sm font-medium text-accent">{city.country} · {city.region} region</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{city.name}</h1>
-          <p className="mt-2 text-base text-ink">
-            {city.stadium.name}
-            {city.stadium.capacity ? ` · ${city.stadium.capacity.toLocaleString()} capacity` : ""}
-          </p>
-          <p className="mt-1 text-sm text-muted">
-            {city.stadium.address} · <OutboundLink href={city.stadium.mapUrl}>Map</OutboundLink>
-          </p>
-          <p className="mt-4 max-w-2xl text-sm text-muted">
-            <span className="font-medium text-ink">Getting there: </span>
-            {city.gettingThere}
-          </p>
-        </Container>
-      </section>
+      <JsonLd data={cityJsonLd(city)} />
+
+      {/* Banner — city photo */}
+      <CityBanner city={city} />
 
       {/* Sticky anchor chips */}
       <div className="sticky top-16 z-30 border-b border-line bg-paper/95 backdrop-blur">
