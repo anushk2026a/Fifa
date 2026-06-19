@@ -31,7 +31,7 @@ export default function HomePage() {
           className="absolute inset-0 -z-10 h-full w-full object-cover md:hidden"
         />
         {/* Overlay for text legibility */}
-        <div className="absolute inset-0 -z-10 bg-black/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 -z-10 bg-black/60" />
 
         <Container className="py-16 sm:py-24 text-white">
           <p className="text-sm font-semibold uppercase tracking-wide text-white/80">
