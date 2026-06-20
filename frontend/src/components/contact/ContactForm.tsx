@@ -116,8 +116,10 @@ export function ContactForm() {
 
             
               <div className="">
-                <label htmlFor="phone" className="mb-1 block text-sm font-medium text-ink">Phone</label>
-                <input id="phone" name="phone" type="phone" required className={fieldClass} />
+                <label htmlFor="phone" className="mb-1 block text-sm font-medium text-ink">
+                  Phone <span className="font-normal text-muted">(optional)</span>
+                </label>
+                <input id="phone" name="phone" type="tel" className={fieldClass} />
               </div>
               <div className="">
                 <label htmlFor="country" className="mb-1 block text-sm font-medium text-ink">Country</label>

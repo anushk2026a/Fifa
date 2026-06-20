@@ -1,5 +1,6 @@
 import type { City } from "@/data/types";
 import { SITE } from "@/data/site";
+import { FAQ } from "@/data/faq";
 
 const COUNTRY_CODE: Record<City["country"], string> = {
   USA: "US",
@@ -29,6 +30,19 @@ export function siteJsonLd() {
         publisher: { "@id": `${base}/#org` },
       },
     ],
+  };
+}
+
+/** FAQPage structured data — makes the FAQ eligible for Google rich results. */
+export function faqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
   };
 }
 

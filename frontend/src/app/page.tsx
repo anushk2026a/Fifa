@@ -8,7 +8,7 @@ import { Faq } from "@/components/home/Faq";
 import { DirectorySearch } from "@/components/home/DirectorySearch";
 import { NewsCard } from "@/components/news/NewsCard";
 import { JsonLd } from "@/components/common/JsonLd";
-import { siteJsonLd } from "@/lib/seo";
+import { siteJsonLd, faqJsonLd } from "@/lib/seo";
 import { NEWS } from "@/data/news";
 import { SITE } from "@/data/site";
 
@@ -112,8 +112,9 @@ export default function HomePage() {
 
       {/* 6 — FAQ */}
       <section>
+        <JsonLd data={faqJsonLd()} />
         <Container className="py-12">
-          <SectionHeading eyebrow="Help" title="Frequently asked questions" />
+          <SectionHeading title="FIFA World Cup 2026 — Frequently Asked Questions" />
           <Faq />
         </Container>
       </section>

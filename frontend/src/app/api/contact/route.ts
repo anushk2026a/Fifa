@@ -5,6 +5,8 @@ import { z } from "zod";
 const contactSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
+  phone: z.string().optional(),
+  country: z.string().optional(),
   city: z.string().optional(),
   message: z.string().min(1),
   company: z.string().optional(), // honeypot
@@ -47,9 +49,11 @@ export async function POST(req: Request) {
 
     const subject = `New enquiry${input.city ? ` — ${input.city}` : ""} from ${input.name}`;
     const text = [
-      `Name:  ${input.name}`,
-      `Email: ${input.email}`,
-      `City:  ${input.city || "—"}`,
+      `Name:    ${input.name}`,
+      `Email:   ${input.email}`,
+      `Phone:   ${input.phone || "—"}`,
+      `Country: ${input.country || "—"}`,
+      `City:    ${input.city || "—"}`,
       "",
       input.message,
     ].join("\n");

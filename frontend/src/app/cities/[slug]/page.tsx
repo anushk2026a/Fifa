@@ -9,6 +9,7 @@ import { ListingRow } from "@/components/city/ListingRow";
 import { JsonLd } from "@/components/common/JsonLd";
 import { cityJsonLd } from "@/lib/seo";
 import { CITIES, getCity } from "@/data/cities";
+import { youtubeEmbed } from "@/lib/utils";
 import type { HotelBand, RestaurantBand } from "@/data/types";
 
 export function generateStaticParams() {
@@ -151,6 +152,23 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <OutboundLink href={t.url}>{t.title}</OutboundLink>
               </p>
               {t.note && <p className="mt-0.5 text-sm text-muted">{t.note}</p>}
+              {t.video && youtubeEmbed(t.video) && (
+                <div className="mt-3 max-w-xl">
+                  <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-faint">
+                    Travel guide
+                  </p>
+                  <div className="relative aspect-video overflow-hidden rounded-[var(--radius-card)] border border-line">
+                    <iframe
+                      src={youtubeEmbed(t.video)!}
+                      title={`How to reach ${city.stadium.name}`}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>

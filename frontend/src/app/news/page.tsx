@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
 import { NewsCard } from "@/components/news/NewsCard";
-import { NEWS } from "@/data/news";
+import { getNews } from "@/lib/news";
 
 export const metadata: Metadata = {
   title: "News — FIFA World Cup 2026",
   description: "Recent FIFA World Cup 2026 match news and updates from the host cities.",
 };
 
-export default function NewsPage() {
+// Always render fresh news (admin-managed, served by the backend).
+export const dynamic = "force-dynamic";
+
+export default async function NewsPage() {
+  const news = await getNews();
   return (
     <>
       <section className="border-b border-line bg-accent-soft">
@@ -22,8 +26,8 @@ export default function NewsPage() {
 
       <Container className="py-12">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {NEWS.map((item) => (
-            <NewsCard key={item.title} item={item} />
+          {news.map((item) => (
+            <NewsCard key={item.id ?? item.title} item={item} />
           ))}
         </div>
       </Container>

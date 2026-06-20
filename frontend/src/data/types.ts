@@ -13,6 +13,7 @@ export type Place = {
   website?: string;
   distanceMiles: number; // curated distance from the stadium
   note?: string; // cuisine / price / extra info
+  image?: string; // photo URL (from Google Maps) shown beside the listing
 };
 
 export type RestaurantBand = "1mi" | "2mi" | "5mi" | "10mi";
@@ -23,6 +24,7 @@ export type TransportOption = {
   title: string;
   url: string;
   note?: string;
+  video?: string; // optional YouTube travel-guide link
 };
 
 export type TicketLink = {
@@ -71,6 +73,7 @@ export type Match = {
 };
 
 export type NewsItem = {
+  id?: string; // present for items served by the backend
   title: string;
   date: string; // YYYY-MM-DD
   summary: string;

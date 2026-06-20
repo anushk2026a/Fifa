@@ -11,15 +11,25 @@ const officialTickets = (cityName: string) => [
   { label: `Official FIFA tickets — ${cityName}`, url: FIFA_TICKETS_URL, official: true },
 ];
 
-/** A curated place. Phone is intentionally omitted unless verified. */
-function place(name: string, city: string, distanceMiles: number, address: string, note?: string): Place {
-  return { name, address, mapUrl: mapsSearch(`${name}, ${city}`), distanceMiles, note };
+/** A curated place. Phone is intentionally omitted unless verified.
+ *  `image` is an optional photo URL (e.g. from the place's Google Maps listing)
+ *  rendered as a thumbnail that links to the map. */
+function place(
+  name: string,
+  city: string,
+  distanceMiles: number,
+  address: string,
+  note?: string,
+  image?: string,
+): Place {
+  return { name, address, mapUrl: mapsSearch(`${name}, ${city}`), distanceMiles, note, image };
 }
 
 function transport(
   stadium: string,
   city: string,
   metro: { title: string; url: string; note?: string },
+  video?: string, // optional YouTube travel guide for reaching the stadium
 ): TransportOption[] {
   return [
     {
@@ -39,6 +49,7 @@ function transport(
       category: "getting_there",
       title: `Getting there | ${stadium} | FIFA World Cup 2026`,
       url: FIFA_TOURNAMENT_URL,
+      video,
     },
   ];
 }
@@ -73,28 +84,28 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/atlanta.jpg",
     restaurants: {
       "1mi": [
-        place("Der Biergarten", "Atlanta", 0.4, "300 Marietta St NW, Atlanta, GA", "German beer hall · $$"),
-        place("STATS Brewpub", "Atlanta", 0.3, "300 Marietta St NW, Atlanta, GA", "Sports bar · $$"),
-        place("Twin Smokers BBQ", "Atlanta", 0.5, "300 Marietta St NW, Atlanta, GA", "Barbecue · $$"),
+        place("Der Biergarten", "Atlanta", 0.4, "300 Marietta St NW, Atlanta, GA", "German beer hall · $$", "/images/places/f88195bfac05.jpg"),
+        place("STATS Brewpub", "Atlanta", 0.3, "300 Marietta St NW, Atlanta, GA", "Sports bar · $$", "/images/places/624ec32166d4.png"),
+        place("Twin Smokers BBQ", "Atlanta", 0.5, "300 Marietta St NW, Atlanta, GA", "Barbecue · $$", "/images/places/fda728b80b0c.jpg"),
       ],
-      "2mi": [place("The Varsity", "Atlanta", 1.4, "61 North Ave NW, Atlanta, GA", "Iconic drive-in · $")],
+      "2mi": [place("The Varsity", "Atlanta", 1.4, "61 North Ave NW, Atlanta, GA", "Iconic drive-in · $", "/images/places/7862208ed0f6.jpg")],
       "5mi": [
-        place("Mary Mac's Tea Room", "Atlanta", 2.4, "224 Ponce De Leon Ave NE, Atlanta, GA", "Classic Southern · $$"),
-        place("Ponce City Market", "Atlanta", 3.1, "675 Ponce De Leon Ave NE, Atlanta, GA", "Food hall"),
+        place("Mary Mac's Tea Room", "Atlanta", 2.4, "224 Ponce De Leon Ave NE, Atlanta, GA", "Classic Southern · $$", "/images/places/168508d50ec4.jpg"),
+        place("Ponce City Market", "Atlanta", 3.1, "675 Ponce De Leon Ave NE, Atlanta, GA", "Food hall", "/images/places/df80ffb2641f.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Omni Atlanta Hotel at Centennial Park", "Atlanta", 0.4, "100 CNN Center, Atlanta, GA"),
-        place("Embassy Suites by Hilton Atlanta at Centennial Olympic Park", "Atlanta", 0.5, "267 Marietta St NW, Atlanta, GA"),
+        place("Omni Atlanta Hotel at Centennial Park", "Atlanta", 0.4, "100 CNN Center, Atlanta, GA", undefined, "/images/places/fd5897d57d46.jpg"),
+        place("Embassy Suites by Hilton Atlanta at Centennial Olympic Park", "Atlanta", 0.5, "267 Marietta St NW, Atlanta, GA", undefined, "/images/places/9fa496c16566.jpg"),
       ],
-      "10mi": [place("The Georgian Terrace Hotel", "Atlanta", 2.5, "659 Peachtree St NE, Atlanta, GA", "Historic")],
+      "10mi": [place("The Georgian Terrace Hotel", "Atlanta", 2.5, "659 Peachtree St NE, Atlanta, GA", "Historic", "/images/places/1f8872605dac.jpg")],
     },
     transportation: transport("Mercedes-Benz Stadium", "Atlanta", {
       title: "MARTA rail — GWCC/CNN Center & Vine City stations",
       url: "https://www.itsmarta.com/",
       note: "Both stations are a short walk to the stadium; ~20 min from the airport.",
-    }),
+    }, "https://www.youtube.com/embed/qqWZKanP_Tc"),
     tickets: officialTickets("Atlanta"),
     screeningZones: fanFest("Atlanta"),
     seo: seo("Atlanta", "Mercedes-Benz Stadium"),
@@ -110,24 +121,23 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/boston.jpg",
     restaurants: {
       "1mi": [
-        place("Davio's Northern Italian Steakhouse", "Foxborough MA", 0.2, "Patriot Place, Foxborough, MA", "Italian steakhouse · $$$"),
-        place("CBS Scene Restaurant & Bar", "Foxborough MA", 0.2, "Patriot Place, Foxborough, MA", "American · $$"),
-        place("Six String Grill & Stage", "Foxborough MA", 0.2, "Patriot Place, Foxborough, MA", "American · live music · $$"),
+        place("Davio's Northern Italian Steakhouse", "Foxborough MA", 0.2, "Patriot Place, Foxborough, MA", "Italian steakhouse · $$$", "/images/places/b31823912884.jpg"),
+        place("Six String Grill & Stage", "Foxborough MA", 0.2, "Patriot Place, Foxborough, MA", "American · live music · $$", "/images/places/c58eddd2031a.jpg"),
       ],
-      "2mi": [place("Tavolino Ristorante", "Foxborough MA", 0.3, "Patriot Place, Foxborough, MA", "Italian · $$")],
+      "2mi": [place("Tavolino Ristorante", "Foxborough MA", 0.3, "Patriot Place, Foxborough, MA", "Italian · $$", "/images/places/8b6a4fb19d4c.jpg")],
     },
     hotels: {
       "5mi": [
-        place("Renaissance Boston Patriot Place Hotel & Spa", "Foxborough MA", 0.2, "28 Patriot Pl, Foxborough, MA", "At the stadium"),
-        place("Hilton Garden Inn Foxborough Patriot Place", "Foxborough MA", 0.3, "31 Patriot Pl, Foxborough, MA"),
+        place("Renaissance Boston Patriot Place Hotel & Spa", "Foxborough MA", 0.2, "28 Patriot Pl, Foxborough, MA", "At the stadium", "/images/places/a09fdc9905bd.jpg"),
+        place("Hilton Garden Inn Foxborough Patriot Place", "Foxborough MA", 0.3, "31 Patriot Pl, Foxborough, MA", undefined, "/images/places/89f0850a4a33.jpg"),
       ],
-      "10mi": [place("Residence Inn Foxborough", "Foxborough MA", 1.2, "250 Foxborough Blvd, Foxborough, MA")],
+      "10mi": [place("Residence Inn Foxborough", "Foxborough MA", 1.2, "250 Foxborough Blvd, Foxborough, MA", undefined, "/images/places/2c29c8632d4c.jpg")],
     },
     transportation: transport("Gillette Stadium", "Foxborough", {
       title: "MBTA special event commuter rail to Foxboro",
       url: "https://www.mbta.com/",
       note: "Event trains run from South Station on match days; check the MBTA event schedule.",
-    }),
+    }, "https://www.youtube.com/embed/IdBaJsLeqCU"),
     tickets: officialTickets("Boston"),
     screeningZones: fanFest("Boston"),
     seo: seo("Boston", "Gillette Stadium"),
@@ -143,25 +153,24 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/dallas.jpg",
     restaurants: {
       "1mi": [
-        place("Texas Live!", "Arlington TX", 0.3, "1650 E Randol Mill Rd, Arlington, TX", "Dining & entertainment district"),
-        place("Cuates Kitchen", "Arlington TX", 0.8, "Arlington, TX", "Tex-Mex · $$"),
+        place("Texas Live!", "Arlington TX", 0.3, "1650 E Randol Mill Rd, Arlington, TX", "Dining & entertainment district", "/images/places/d54dfac3c87e.jpg"),
+        place("Cuates Kitchen", "Arlington TX", 0.8, "Arlington, TX", "Tex-Mex · $$", "/images/places/7bffbb0ed2e7.jpg"),
       ],
-      "2mi": [place("Prince Lebanese Grill", "Arlington TX", 1.6, "502 W Randol Mill Rd, Arlington, TX", "Mediterranean · $$")],
-      "5mi": [place("Mercury Chophouse", "Arlington TX", 3.4, "Arlington, TX", "Steakhouse · $$$")],
-      "10mi": [place("Lonesome Dove Western Bistro", "Fort Worth TX", 9.2, "2406 N Main St, Fort Worth, TX", "Western fine dining · $$$")],
+      "2mi": [place("Prince Lebanese Grill", "Arlington TX", 1.6, "502 W Randol Mill Rd, Arlington, TX", "Mediterranean · $$", "/images/places/014ded7ff99f.jpg")],
+      "5mi": [place("Mercury Chophouse", "Arlington TX", 3.4, "Arlington, TX", "Steakhouse · $$$", "/images/places/a432d9e0aed3.jpg")],
+      "10mi": [place("Lonesome Dove Western Bistro", "Fort Worth TX", 9.2, "2406 N Main St, Fort Worth, TX", "Western fine dining · $$$", "/images/places/2b55a14054da.jpg")],
     },
     hotels: {
       "5mi": [
-        place("Live! by Loews — Arlington", "Arlington TX", 0.4, "1600 E Randol Mill Rd, Arlington, TX", "Walk to the stadium"),
-        place("Loews Arlington Hotel", "Arlington TX", 0.6, "888 Nolan Ryan Expy, Arlington, TX"),
+        place("Live! by Loews — Arlington", "Arlington TX", 0.4, "1600 E Randol Mill Rd, Arlington, TX", "Walk to the stadium", "/images/places/4a6faa2ffe7a.jpg"),
+        place("Loews Arlington Hotel", "Arlington TX", 0.6, "888 Nolan Ryan Expy, Arlington, TX", undefined, "/images/places/6248278e95ab.jpg"),
       ],
-      "10mi": [place("Sheraton Arlington Hotel", "Arlington TX", 1.1, "1500 Convention Center Dr, Arlington, TX")],
     },
     transportation: transport("AT&T Stadium", "Arlington", {
       title: "DART rail + Arlington shuttle",
       url: "https://www.dart.org/",
       note: "DART to a connecting shuttle; there is no direct rail to the stadium.",
-    }),
+    }, "https://www.youtube.com/embed/qxCtuu1qtd8"),
     tickets: officialTickets("Dallas"),
     screeningZones: [
       { name: "Dallas FIFA Fan Festival", type: "fan_festival", address: "Downtown Dallas (venue TBA)", url: FIFA_TOURNAMENT_URL, note: "Free live screenings, food and music during the tournament." },
@@ -179,26 +188,26 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/houston.jpg",
     restaurants: {
       "1mi": [
-        place("Pappas Bar-B-Q", "Houston TX", 0.9, "8777 S Main St, Houston, TX", "Barbecue · $$"),
-        place("Pappadeaux Seafood Kitchen", "Houston TX", 1.0, "6015 Westheimer Rd, Houston, TX", "Cajun seafood · $$"),
+        place("Pappas Bar-B-Q", "Houston TX", 0.9, "8777 S Main St, Houston, TX", "Barbecue · $$", "/images/places/6738b4521f93.jpg"),
+        place("Pappadeaux Seafood Kitchen", "Houston TX", 1.0, "6015 Westheimer Rd, Houston, TX", "Cajun seafood · $$", "/images/places/232bd21003d4.jpg"),
       ],
       "5mi": [
-        place("Lucille's", "Houston TX", 3.6, "5512 La Branch St, Houston, TX", "Southern · $$$"),
-        place("Lupe Tortilla", "Houston TX", 4.2, "Houston, TX", "Tex-Mex · $$"),
+        place("Lucille's", "Houston TX", 3.6, "5512 La Branch St, Houston, TX", "Southern · $$$", "/images/places/14818e66203c.jpg"),
+        place("Lupe Tortilla", "Houston TX", 4.2, "Houston, TX", "Tex-Mex · $$", "/images/places/a5555d7e21f0.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Houston Marriott Medical Center / Museum District", "Houston TX", 2.6, "6580 Fannin St, Houston, TX"),
-        place("The Westin Houston Medical Center", "Houston TX", 2.8, "1709 Dryden Rd, Houston, TX"),
+        place("Houston Marriott Medical Center / Museum District", "Houston TX", 2.6, "6580 Fannin St, Houston, TX", undefined, "/images/places/88d36b391aab.jpg"),
+        place("The Westin Houston Medical Center", "Houston TX", 2.8, "1709 Dryden Rd, Houston, TX", undefined, "/images/places/c77932ada3c0.jpg"),
       ],
-      "10mi": [place("Hilton Houston Plaza/Medical Center", "Houston TX", 3.0, "6633 Travis St, Houston, TX")],
+      "10mi": [place("Hilton Houston Plaza/Medical Center", "Houston TX", 3.0, "6633 Travis St, Houston, TX", undefined, "/images/places/f480c3dfe761.jpg")],
     },
     transportation: transport("NRG Stadium", "Houston", {
       title: "METRORail Red Line — Stadium Park/Astrodome station",
       url: "https://www.ridemetro.org/",
       note: "The Red Line drops you next to the stadium; extra trains run for World Cup matches.",
-    }),
+    }, "https://www.youtube.com/embed/zDmSqYPpwRI"),
     tickets: officialTickets("Houston"),
     screeningZones: fanFest("Houston"),
     seo: seo("Houston", "NRG Stadium"),
@@ -214,23 +223,23 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/kansas-city.jpg",
     restaurants: {
       "5mi": [
-        place("Gates Bar-B-Q", "Kansas City MO", 2.8, "4707 Paseo Blvd, Kansas City, MO", "KC barbecue · $$"),
-        place("Arthur Bryant's Barbeque", "Kansas City MO", 3.0, "1727 Brooklyn Ave, Kansas City, MO", "Legendary barbecue · $$"),
-        place("Q39", "Kansas City MO", 4.5, "1000 W 39th St, Kansas City, MO", "Modern barbecue · $$"),
+        place("Gates Bar-B-Q", "Kansas City MO", 2.8, "4707 Paseo Blvd, Kansas City, MO", "KC barbecue · $$", "/images/places/9063a6344521.jpg"),
+        place("Arthur Bryant's Barbeque", "Kansas City MO", 3.0, "1727 Brooklyn Ave, Kansas City, MO", "Legendary barbecue · $$", "/images/places/d57a05d3228d.jpg"),
+        place("Q39", "Kansas City MO", 4.5, "1000 W 39th St, Kansas City, MO", "Modern barbecue · $$", "/images/places/149ecaf9a9c3.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Drury Inn & Suites Kansas City Stadium", "Kansas City MO", 1.4, "7900 NE 38th St, Kansas City, MO"),
-        place("Best Western Plus Seville Plaza Hotel", "Kansas City MO", 4.8, "4309 Main St, Kansas City, MO"),
+        place("Drury Inn & Suites Kansas City Stadium", "Kansas City MO", 1.4, "7900 NE 38th St, Kansas City, MO", undefined, "/images/places/12c7bec25598.jpg"),
+        place("Best Western Plus Seville Plaza Hotel", "Kansas City MO", 4.8, "4309 Main St, Kansas City, MO", undefined, "/images/places/57e33004383b.jpg"),
       ],
-      "10mi": [place("Loews Kansas City Hotel", "Kansas City MO", 7.5, "1515 Wyandotte St, Kansas City, MO", "Downtown")],
+      "10mi": [place("Loews Kansas City Hotel", "Kansas City MO", 7.5, "1515 Wyandotte St, Kansas City, MO", "Downtown", "/images/places/17731379fd6d.jpg")],
     },
     transportation: transport("Arrowhead Stadium", "Kansas City", {
       title: "RideKC buses & game-day service",
       url: "https://www.kcata.org/",
       note: "RideKC runs game-day connections; the streetcar serves downtown only.",
-    }),
+    }, "https://www.youtube.com/embed/WrFkdzr-7o0"),
     tickets: officialTickets("Kansas City"),
     screeningZones: fanFest("Kansas City"),
     seo: seo("Kansas City", "Arrowhead Stadium"),
@@ -246,26 +255,26 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/los-angeles.jpg",
     restaurants: {
       "1mi": [
-        place("Three Weavers Brewing Company", "Inglewood CA", 0.9, "1031 W Manchester Blvd, Inglewood, CA", "Brewery · $$"),
-        place("Dulan's Soul Food Kitchen", "Inglewood CA", 1.0, "202 E Manchester Blvd, Inglewood, CA", "Soul food · $$"),
+        place("Three Weavers Brewing Company", "Inglewood CA", 0.9, "1031 W Manchester Blvd, Inglewood, CA", "Brewery · $$", "/images/places/3f9f6acf163d.jpg"),
+        place("Dulan's Soul Food Kitchen", "Inglewood CA", 1.0, "202 E Manchester Blvd, Inglewood, CA", "Soul food · $$", "/images/places/68daed80c5a6.jpg"),
       ],
       "5mi": [
-        place("Randy's Donuts", "Inglewood CA", 2.6, "805 W Manchester Blvd, Inglewood, CA", "Iconic · $"),
-        place("Pann's Restaurant", "Los Angeles CA", 3.4, "6710 La Tijera Blvd, Los Angeles, CA", "Diner · $$"),
+        place("Randy's Donuts", "Inglewood CA", 2.6, "805 W Manchester Blvd, Inglewood, CA", "Iconic · $", "/images/places/65ec12560b35.jpg"),
+        place("Pann's Restaurant", "Los Angeles CA", 3.4, "6710 La Tijera Blvd, Los Angeles, CA", "Diner · $$", "/images/places/4a632a77160e.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("H Hotel Los Angeles (Curio Collection by Hilton)", "Los Angeles CA", 3.4, "1717 E Imperial Hwy, El Segundo, CA"),
-        place("Hilton Los Angeles Airport", "Los Angeles CA", 3.6, "5711 W Century Blvd, Los Angeles, CA"),
+        place("H Hotel Los Angeles (Curio Collection by Hilton)", "Los Angeles CA", 3.4, "1717 E Imperial Hwy, El Segundo, CA", undefined, "/images/places/7f8d33c3d1ef.jpg"),
+        place("Hilton Los Angeles Airport", "Los Angeles CA", 3.6, "5711 W Century Blvd, Los Angeles, CA", undefined, "/images/places/dcf970a02d8d.jpg"),
       ],
-      "10mi": [place("Cambria Hotel LAX", "El Segundo CA", 4.2, "199 Continental Blvd, El Segundo, CA")],
+      "10mi": [place("Cambria Hotel LAX", "El Segundo CA", 4.2, "199 Continental Blvd, El Segundo, CA", undefined, "/images/places/84ca75eeeaf9.jpg")],
     },
     transportation: transport("SoFi Stadium", "Inglewood", {
       title: "LA Metro K Line — Downtown Inglewood station",
       url: "https://www.metro.net/",
       note: "Take the K Line to Downtown Inglewood, then a stadium shuttle.",
-    }),
+    }, "https://www.youtube.com/embed/rwbtZbVzbxw"),
     tickets: officialTickets("Los Angeles"),
     screeningZones: fanFest("Los Angeles"),
     seo: seo("Los Angeles", "SoFi Stadium"),
@@ -281,22 +290,22 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/miami.jpg",
     restaurants: {
       "5mi": [
-        place("Texas de Brazil", "Miami Lakes FL", 3.2, "15700 NW 57th Ave, Miami Lakes, FL", "Brazilian steakhouse · $$$"),
-        place("Pollo Tropical", "Miami Gardens FL", 2.0, "Miami Gardens, FL", "Caribbean · $"),
+        place("Texas de Brazil", "Miami Lakes FL", 3.2, "15700 NW 57th Ave, Miami Lakes, FL", "Brazilian steakhouse · $$$", "/images/places/21803f7e65f4.jpg"),
+        place("Pollo Tropical", "Miami Gardens FL", 2.0, "Miami Gardens, FL", "Caribbean · $", "/images/places/3809c92b7606.jpg"),
       ],
-      "10mi": [place("Bourbon Steak (JW Marriott Turnberry)", "Aventura FL", 6.5, "19999 W Country Club Dr, Aventura, FL", "Steakhouse · $$$$")],
+      "10mi": [place("Bourbon Steak (JW Marriott Turnberry)", "Aventura FL", 6.5, "19999 W Country Club Dr, Aventura, FL", "Steakhouse · $$$$", "/images/places/8f3d8bb6fa07.jpg")],
     },
     hotels: {
       "10mi": [
-        place("JW Marriott Miami Turnberry Resort & Spa", "Aventura FL", 6.5, "19999 W Country Club Dr, Aventura, FL"),
-        place("Residence Inn Aventura Mall", "Aventura FL", 6.8, "19900 W Country Club Dr, Aventura, FL"),
+        place("JW Marriott Miami Turnberry Resort & Spa", "Aventura FL", 6.5, "19999 W Country Club Dr, Aventura, FL", undefined, "/images/places/5c82d25e4728.jpg"),
+        place("Residence Inn Aventura Mall", "Aventura FL", 6.8, "19900 W Country Club Dr, Aventura, FL", undefined, "/images/places/5643806a2901.jpg"),
       ],
     },
     transportation: transport("Hard Rock Stadium", "Miami Gardens", {
       title: "Miami-Dade Transit & match-day shuttles",
       url: "https://www.miamidade.gov/global/transportation.page",
       note: "There's no direct rail; use rideshare, shuttles or Miami-Dade bus connections.",
-    }),
+    }, "https://www.youtube.com/embed/F3muHASHatE"),
     tickets: officialTickets("Miami"),
     screeningZones: fanFest("Miami"),
     seo: seo("Miami", "Hard Rock Stadium"),
@@ -312,23 +321,22 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/new-york-new-jersey.jpg",
     restaurants: {
       "2mi": [
-        place("Redd's Restaurant & Bar", "Carlstadt NJ", 1.6, "317 Hackensack St, Carlstadt, NJ", "American · $$"),
-        place("Il Villaggio", "Carlstadt NJ", 1.8, "651 NJ-17, Carlstadt, NJ", "Italian · $$$"),
+        place("Redd's Restaurant & Bar", "Carlstadt NJ", 1.6, "317 Hackensack St, Carlstadt, NJ", "American · $$", "/images/places/2d589c8a0d50.jpg"),
+        place("Il Villaggio", "Carlstadt NJ", 1.8, "651 NJ-17, Carlstadt, NJ", "Italian · $$$", "/images/places/84582378cbdc.jpg"),
       ],
-      "5mi": [place("Houlihan's", "Secaucus NJ", 3.2, "1 Plaza Dr, Secaucus, NJ", "American · $$")],
+      "5mi": [place("Houlihan's", "Secaucus NJ", 3.2, "1 Plaza Dr, Secaucus, NJ", "American · $$", "/images/places/4be2a24d51c0.jpg")],
     },
     hotels: {
       "5mi": [
-        place("Hilton Meadowlands", "East Rutherford NJ", 0.8, "2 Meadowlands Plaza, East Rutherford, NJ"),
-        place("Embassy Suites by Hilton Secaucus Meadowlands", "Secaucus NJ", 3.4, "455 Plaza Dr, Secaucus, NJ"),
+        place("Hilton Meadowlands", "East Rutherford NJ", 0.8, "2 Meadowlands Plaza, East Rutherford, NJ", undefined, "/images/places/3dcd1adde495.jpg"),
       ],
-      "10mi": [place("Hyatt Regency Jersey City on the Hudson", "Jersey City NJ", 8.0, "2 Exchange Pl, Jersey City, NJ", "NYC skyline views")],
+      "10mi": [place("Hyatt Regency Jersey City on the Hudson", "Jersey City NJ", 8.0, "2 Exchange Pl, Jersey City, NJ", "NYC skyline views", "/images/places/df089bc8aa28.jpg")],
     },
     transportation: transport("MetLife Stadium", "East Rutherford", {
       title: "NJ Transit — Meadowlands Rail Line (via Secaucus Junction)",
       url: "https://www.njtransit.com/",
       note: "Take NJ Transit to Secaucus Junction, then the Meadowlands train on match days.",
-    }),
+    }, "https://www.youtube.com/embed/hCkTUUy9Z6U"),
     tickets: officialTickets("New York / New Jersey"),
     screeningZones: fanFest("New York / New Jersey"),
     seo: seo("New York / New Jersey", "MetLife Stadium"),
@@ -344,27 +352,27 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/philadelphia.jpg",
     restaurants: {
       "1mi": [
-        place("Xfinity Live! Philadelphia", "Philadelphia PA", 0.3, "1100 Pattison Ave, Philadelphia, PA", "Dining & entertainment"),
-        place("Chickie's & Pete's", "Philadelphia PA", 0.9, "1526 Packer Ave, Philadelphia, PA", "Crab fries · sports bar · $$"),
-        place("Tony Luke's", "Philadelphia PA", 1.0, "39 E Oregon Ave, Philadelphia, PA", "Cheesesteaks · $"),
+        place("Xfinity Live! Philadelphia", "Philadelphia PA", 0.3, "1100 Pattison Ave, Philadelphia, PA", "Dining & entertainment", "/images/places/69b6d5f945ee.jpg"),
+        place("Chickie's & Pete's", "Philadelphia PA", 0.9, "1526 Packer Ave, Philadelphia, PA", "Crab fries · sports bar · $$", "/images/places/0527195bc8f9.jpg"),
+        place("Tony Luke's", "Philadelphia PA", 1.0, "39 E Oregon Ave, Philadelphia, PA", "Cheesesteaks · $", "/images/places/59d22eb40b2c.jpg"),
       ],
       "5mi": [
-        place("Pat's King of Steaks", "Philadelphia PA", 2.4, "1237 E Passyunk Ave, Philadelphia, PA", "Cheesesteaks · $"),
-        place("Geno's Steaks", "Philadelphia PA", 2.4, "1219 S 9th St, Philadelphia, PA", "Cheesesteaks · $"),
+        place("Pat's King of Steaks", "Philadelphia PA", 2.4, "1237 E Passyunk Ave, Philadelphia, PA", "Cheesesteaks · $", "/images/places/8c22445fd7f5.jpg"),
+        place("Geno's Steaks", "Philadelphia PA", 2.4, "1219 S 9th St, Philadelphia, PA", "Cheesesteaks · $", "/images/places/2fdfa929e965.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Holiday Inn Philadelphia Stadium", "Philadelphia PA", 0.7, "900 Packer Ave, Philadelphia, PA"),
-        place("Courtyard Philadelphia South at The Navy Yard", "Philadelphia PA", 1.6, "1001 Intrepid Ave, Philadelphia, PA"),
+        place("Holiday Inn Philadelphia Stadium", "Philadelphia PA", 0.7, "900 Packer Ave, Philadelphia, PA", undefined, "/images/places/808e32bd5dce.jpg"),
+        place("Courtyard Philadelphia South at The Navy Yard", "Philadelphia PA", 1.6, "1001 Intrepid Ave, Philadelphia, PA", undefined, "/images/places/3ebbe52ba69c.png"),
       ],
-      "10mi": [place("Sofitel Philadelphia at Rittenhouse Square", "Philadelphia PA", 4.0, "120 S 17th St, Philadelphia, PA", "Center City")],
+      "10mi": [place("Sofitel Philadelphia at Rittenhouse Square", "Philadelphia PA", 4.0, "120 S 17th St, Philadelphia, PA", "Center City", "/images/places/3dd3a26dd1cd.jpg")],
     },
     transportation: transport("Lincoln Financial Field", "Philadelphia", {
       title: "SEPTA Broad Street Line — NRG station",
       url: "https://www.septa.org/",
       note: "Ride the Broad Street Line straight to NRG, beside the stadium.",
-    }),
+    }, "https://www.youtube.com/embed/uzHkHrq1dUk"),
     tickets: officialTickets("Philadelphia"),
     screeningZones: fanFest("Philadelphia"),
     seo: seo("Philadelphia", "Lincoln Financial Field"),
@@ -380,23 +388,22 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/san-francisco-bay-area.jpg",
     restaurants: {
       "5mi": [
-        place("Pedro's Restaurant & Cantina", "Santa Clara CA", 1.8, "3935 Freedom Cir, Santa Clara, CA", "Mexican · $$"),
-        place("Faultline Brewing Company", "Sunnyvale CA", 3.0, "1235 Oakmead Pkwy, Sunnyvale, CA", "Brewpub · $$"),
-        place("Birk's Restaurant", "Santa Clara CA", 2.4, "3955 Freedom Cir, Santa Clara, CA", "Steakhouse · $$$"),
+        place("Pedro's Restaurant & Cantina", "Santa Clara CA", 1.8, "3935 Freedom Cir, Santa Clara, CA", "Mexican · $$", "/images/places/1604c5286d7c.jpg"),
+        place("Birk's Restaurant", "Santa Clara CA", 2.4, "3955 Freedom Cir, Santa Clara, CA", "Steakhouse · $$$", "/images/places/9b5e68cca846.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Hilton Santa Clara", "Santa Clara CA", 0.3, "4949 Great America Pkwy, Santa Clara, CA", "Next to the stadium"),
-        place("Hyatt Centric Santa Clara Silicon Valley", "Santa Clara CA", 0.4, "5101 Great America Pkwy, Santa Clara, CA"),
-        place("Santa Clara Marriott", "Santa Clara CA", 1.2, "2700 Mission College Blvd, Santa Clara, CA"),
+        place("Hilton Santa Clara", "Santa Clara CA", 0.3, "4949 Great America Pkwy, Santa Clara, CA", "Next to the stadium", "/images/places/171bae50da8d.jpg"),
+        place("Hyatt Centric Santa Clara Silicon Valley", "Santa Clara CA", 0.4, "5101 Great America Pkwy, Santa Clara, CA", undefined, "/images/places/12e4e331b6ef.jpg"),
+        place("Santa Clara Marriott", "Santa Clara CA", 1.2, "2700 Mission College Blvd, Santa Clara, CA", undefined, "/images/places/4fdd880be764.jpg"),
       ],
     },
     transportation: transport("Levi's Stadium", "Santa Clara", {
       title: "VTA light rail — Great America station",
       url: "https://www.vta.org/",
       note: "VTA light rail stops at the stadium; Caltrain riders connect via a shuttle.",
-    }),
+    }, "https://www.youtube.com/embed/9DGB2i_30o8"),
     tickets: officialTickets("San Francisco Bay Area"),
     screeningZones: fanFest("San Francisco Bay Area"),
     seo: seo("San Francisco Bay Area", "Levi's Stadium"),
@@ -412,23 +419,23 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/seattle.jpg",
     restaurants: {
       "1mi": [
-        place("The Pyramid Alehouse", "Seattle WA", 0.2, "1201 1st Ave S, Seattle, WA", "Brewpub · $$"),
-        place("Henry's Tavern", "Seattle WA", 0.3, "1518 1st Ave S, Seattle, WA", "Sports bar · $$"),
-        place("Damn the Weather", "Seattle WA", 0.8, "116 1st Ave S, Seattle, WA", "Pioneer Square · $$"),
+        place("The Pyramid Alehouse", "Seattle WA", 0.2, "1201 1st Ave S, Seattle, WA", "Brewpub · $$", "/images/places/1f33355042c4.jpg"),
+        place("Henry's Tavern", "Seattle WA", 0.3, "1518 1st Ave S, Seattle, WA", "Sports bar · $$", "/images/places/094f09764f68.jpg"),
+        place("Damn the Weather", "Seattle WA", 0.8, "116 1st Ave S, Seattle, WA", "Pioneer Square · $$", "/images/places/6c4b418a82e9.jpg"),
       ],
-      "2mi": [place("Il Corvo Pasta", "Seattle WA", 0.9, "217 James St, Seattle, WA", "Italian · $$")],
+      "2mi": [place("Il Corvo Pasta", "Seattle WA", 0.9, "217 James St, Seattle, WA", "Italian · $$", "/images/places/d21a71f0eb27.jpg")],
     },
     hotels: {
       "5mi": [
-        place("Silver Cloud Hotel Seattle Stadium", "Seattle WA", 0.2, "1046 1st Ave S, Seattle, WA", "Across from the stadium"),
-        place("Embassy Suites by Hilton Seattle Downtown Pioneer Square", "Seattle WA", 0.7, "255 S King St, Seattle, WA"),
+        place("Silver Cloud Hotel Seattle Stadium", "Seattle WA", 0.2, "1046 1st Ave S, Seattle, WA", "Across from the stadium", "/images/places/fe18ce55c987.jpg"),
+        place("Embassy Suites by Hilton Seattle Downtown Pioneer Square", "Seattle WA", 0.7, "255 S King St, Seattle, WA", undefined, "/images/places/6190bfdd7ec8.jpg"),
       ],
     },
     transportation: transport("Lumen Field", "Seattle", {
       title: "Sound Transit Link & Sounder — Stadium station",
       url: "https://www.soundtransit.org/",
       note: "Link light rail and Sounder trains stop right beside Lumen Field.",
-    }),
+    }, "https://www.youtube.com/embed/KP3wbW_QOgo"),
     tickets: officialTickets("Seattle"),
     screeningZones: fanFest("Seattle"),
     seo: seo("Seattle", "Lumen Field"),
@@ -444,23 +451,23 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/toronto.jpg",
     restaurants: {
       "1mi": [
-        place("Williams Landing", "Toronto", 0.6, "25 Lower Simcoe St, Toronto, ON", "Canadian · $$"),
-        place("Mildred's Temple Kitchen", "Toronto", 0.9, "85 Hanna Ave, Toronto, ON", "Brunch · $$$"),
-        place("Local Public Eatery Liberty Village", "Toronto", 0.8, "171 East Liberty St, Toronto, ON", "Gastropub · $$"),
+        place("Williams Landing", "Toronto", 0.6, "25 Lower Simcoe St, Toronto, ON", "Canadian · $$", "/images/places/53acc87329c2.jpg"),
+        place("Mildred's Temple Kitchen", "Toronto", 0.9, "85 Hanna Ave, Toronto, ON", "Brunch · $$$", "/images/places/7297ea00007a.jpg"),
+        place("Local Public Eatery Liberty Village", "Toronto", 0.8, "171 East Liberty St, Toronto, ON", "Gastropub · $$", "/images/places/acae7ce9c5ac.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("Hotel X Toronto", "Toronto", 0.4, "111 Princes' Blvd, Toronto, ON", "At Exhibition Place"),
-        place("Gladstone House", "Toronto", 1.6, "1214 Queen St W, Toronto, ON", "Boutique"),
+        place("Hotel X Toronto", "Toronto", 0.4, "111 Princes' Blvd, Toronto, ON", "At Exhibition Place", "/images/places/bc11a79867ce.jpg"),
+        place("Gladstone House", "Toronto", 1.6, "1214 Queen St W, Toronto, ON", "Boutique", "/images/places/cbb2bef7a76f.jpg"),
       ],
-      "10mi": [place("Fairmont Royal York", "Toronto", 2.5, "100 Front St W, Toronto, ON", "Downtown landmark")],
+      "10mi": [place("Fairmont Royal York", "Toronto", 2.5, "100 Front St W, Toronto, ON", "Downtown landmark", "/images/places/78d3dd06c2f7.jpg")],
     },
     transportation: transport("BMO Field", "Toronto", {
       title: "TTC streetcars 509/511 & GO Transit Exhibition",
       url: "https://www.ttc.ca/",
       note: "Take the 509 Harbourfront or 511 Bathurst streetcar, or GO Transit to Exhibition.",
-    }),
+    }, "https://www.youtube.com/embed/AADR96LBL2k"),
     tickets: officialTickets("Toronto"),
     screeningZones: fanFest("Toronto", "Toronto's official Fan Festival is planned at Fort York / Exhibition area — details to be confirmed."),
     seo: seo("Toronto", "BMO Field"),
@@ -476,23 +483,22 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/vancouver.jpg",
     restaurants: {
       "1mi": [
-        place("The Keg Steakhouse + Bar — Yaletown", "Vancouver", 0.5, "1011 Mainland St, Vancouver, BC", "Steakhouse · $$$"),
-        place("Rodney's Oyster House", "Vancouver", 0.6, "1228 Hamilton St, Vancouver, BC", "Seafood · $$$"),
-        place("Chambar", "Vancouver", 0.7, "568 Beatty St, Vancouver, BC", "Belgian · $$$"),
+        place("The Keg Steakhouse + Bar — Yaletown", "Vancouver", 0.5, "1011 Mainland St, Vancouver, BC", "Steakhouse · $$$", "/images/places/3b9d42c8f0d0.jpg"),
+        place("Rodney's Oyster House", "Vancouver", 0.6, "1228 Hamilton St, Vancouver, BC", "Seafood · $$$", "/images/places/e97bd6212c3c.jpg"),
+        place("Chambar", "Vancouver", 0.7, "568 Beatty St, Vancouver, BC", "Belgian · $$$", "/images/places/5f7212913e11.jpg"),
       ],
     },
     hotels: {
       "5mi": [
-        place("JW Marriott Parq Vancouver", "Vancouver", 0.2, "39 Smithe St, Vancouver, BC", "Next to BC Place"),
-        place("The Westin Grand Vancouver", "Vancouver", 0.6, "433 Robson St, Vancouver, BC"),
-        place("Georgian Court Hotel", "Vancouver", 0.3, "773 Beatty St, Vancouver, BC"),
+        place("JW Marriott Parq Vancouver", "Vancouver", 0.2, "39 Smithe St, Vancouver, BC", "Next to BC Place", "/images/places/72e0b9a2edff.jpg"),
+        place("Georgian Court Hotel", "Vancouver", 0.3, "773 Beatty St, Vancouver, BC", undefined, "/images/places/904c3ee2c4ba.jpg"),
       ],
     },
     transportation: transport("BC Place", "Vancouver", {
       title: "SkyTrain — Stadium–Chinatown station",
       url: "https://www.translink.ca/",
       note: "The Expo Line's Stadium–Chinatown station is at the door of BC Place.",
-    }),
+    }, "https://www.youtube.com/embed/DU_CxTz92us"),
     tickets: officialTickets("Vancouver"),
     screeningZones: fanFest("Vancouver", "Vancouver hosts a free fan festival with live matches on big screens — venue confirmed closer to kick-off."),
     seo: seo("Vancouver", "BC Place"),
@@ -508,22 +514,22 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/mexico-city.jpg",
     restaurants: {
       "5mi": [
-        place("Los Danzantes Coyoacán", "Mexico City", 4.0, "Plaza Jardín Centenario 12, Coyoacán, CDMX", "Contemporary Mexican · $$$"),
-        place("El Jarocho", "Mexico City", 4.2, "Av. México 25-C, Coyoacán, CDMX", "Famous coffee · $"),
+        place("Los Danzantes Coyoacán", "Mexico City", 4.0, "Plaza Jardín Centenario 12, Coyoacán, CDMX", "Contemporary Mexican · $$$", "/images/places/5d00ed6910d1.jpg"),
+        place("El Jarocho", "Mexico City", 4.2, "Av. México 25-C, Coyoacán, CDMX", "Famous coffee · $", "/images/places/6bd669518fc0.jpg"),
       ],
-      "10mi": [place("Mercado de San Ángel", "Mexico City", 6.0, "Av. Revolución, San Ángel, CDMX", "Market dining")],
+      "10mi": [place("Mercado de San Ángel", "Mexico City", 6.0, "Av. Revolución, San Ángel, CDMX", "Market dining", "/images/places/d8452e12966c.jpg")],
     },
     hotels: {
       "10mi": [
-        place("Fiesta Inn Perisur", "Mexico City", 5.5, "Periférico Sur 4949, Tlalpan, CDMX"),
-        place("Hampton Inn & Suites Mexico City Centro Historico", "Mexico City", 8.0, "Av. Juárez 85, Centro, CDMX"),
+        place("Fiesta Inn Perisur", "Mexico City", 5.5, "Periférico Sur 4949, Tlalpan, CDMX", undefined, "/images/places/ab5271545e55.jpg"),
+        place("Hampton Inn & Suites Mexico City Centro Historico", "Mexico City", 8.0, "Av. Juárez 85, Centro, CDMX", undefined, "/images/places/f8a7b878b3bc.jpg"),
       ],
     },
     transportation: transport("Estadio Azteca", "Mexico City", {
       title: "Tren Ligero — Estadio Azteca station",
       url: "https://www.metro.cdmx.gob.mx/",
       note: "Take the Metro to Tasqueña, then the Tren Ligero to Estadio Azteca.",
-    }),
+    }, "https://www.youtube.com/embed/Dl6tO2q_77M"),
     tickets: officialTickets("Mexico City"),
     screeningZones: fanFest("Mexico City"),
     seo: seo("Mexico City", "Estadio Azteca"),
@@ -539,19 +545,19 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/guadalajara.jpg",
     restaurants: {
       "5mi": [
-        place("Karne Garibaldi", "Guadalajara", 4.6, "Garibaldi 1306, Guadalajara, Jal.", "Famous fast service · $$"),
-        place("La Tequila", "Guadalajara", 4.8, "Av. México 2830, Guadalajara, Jal.", "Mexican · $$$"),
+        place("Karne Garibaldi", "Guadalajara", 4.6, "Garibaldi 1306, Guadalajara, Jal.", "Famous fast service · $$", "/images/places/5ca0a9222bd2.jpg"),
+        place("La Tequila", "Guadalajara", 4.8, "Av. México 2830, Guadalajara, Jal.", "Mexican · $$$", "/images/places/90f1ca585c3e.png"),
       ],
     },
     hotels: {
-      "5mi": [place("Riu Plaza Guadalajara", "Zapopan", 2.5, "Av. de las Rosas 2933, Zapopan, Jal.", "Near Andares")],
-      "10mi": [place("Fiesta Americana Guadalajara Country Club", "Guadalajara", 8.0, "Av. Mariano Otero 1313, Guadalajara, Jal.")],
+      "5mi": [place("Riu Plaza Guadalajara", "Zapopan", 2.5, "Av. de las Rosas 2933, Zapopan, Jal.", "Near Andares", "/images/places/65e435cbd770.jpg")],
+      "10mi": [place("Fiesta Americana Guadalajara Country Club", "Guadalajara", 8.0, "Av. Mariano Otero 1313, Guadalajara, Jal.", undefined, "/images/places/c8d4d2dcf9a4.jpg")],
     },
     transportation: transport("Estadio Akron", "Zapopan", {
       title: "Mi Macro Periférico & local transit (SITEUR)",
       url: "https://www.siteur.gob.mx/",
       note: "Transit reaches Zapopan; rideshare is the simplest door-to-door option.",
-    }),
+    }, "https://www.youtube.com/embed/-6jvqahWt7E"),
     tickets: officialTickets("Guadalajara"),
     screeningZones: fanFest("Guadalajara"),
     seo: seo("Guadalajara", "Estadio Akron"),
@@ -567,19 +573,19 @@ export const CITIES: City[] = [
     bannerImage: "/images/cities/monterrey.jpg",
     restaurants: {
       "5mi": [
-        place("El Gran Pastor", "Monterrey", 4.0, "Av. Gonzalitos, Monterrey, N.L.", "Cabrito · $$"),
-        place("La Nacional", "Monterrey", 4.4, "Barrio Antiguo, Monterrey, N.L.", "Mexican · $$"),
+        place("El Gran Pastor", "Monterrey", 4.0, "Av. Gonzalitos, Monterrey, N.L.", "Cabrito · $$", "/images/places/3d155fe8c301.jpg"),
+        place("La Nacional", "Monterrey", 4.4, "Barrio Antiguo, Monterrey, N.L.", "Mexican · $$", "/images/places/3491bab8d9a5.jpg"),
       ],
     },
     hotels: {
-      "5mi": [place("Holiday Inn Express Monterrey Aeropuerto", "Monterrey", 3.5, "Carr. Miguel Alemán, Apodaca, N.L.")],
-      "10mi": [place("Quinta Real Monterrey", "Monterrey", 9.0, "Diego Rivera 500, San Pedro Garza García, N.L.", "Upscale")],
+      "5mi": [place("Holiday Inn Express Monterrey Aeropuerto", "Monterrey", 3.5, "Carr. Miguel Alemán, Apodaca, N.L.", undefined, "/images/places/70435eb03036.jpg")],
+      "10mi": [place("Quinta Real Monterrey", "Monterrey", 9.0, "Diego Rivera 500, San Pedro Garza García, N.L.", "Upscale", "/images/places/874d8552f9c5.jpg")],
     },
     transportation: transport("Estadio BBVA", "Monterrey", {
       title: "Metrorrey & local transit",
       url: "https://www.nl.gob.mx/metrorrey",
       note: "Metrorrey serves the city; use rideshare for the final stretch to the stadium.",
-    }),
+    }, "https://www.youtube.com/embed/Yd7xjGshi2w"),
     tickets: officialTickets("Monterrey"),
     screeningZones: fanFest("Monterrey"),
     seo: seo("Monterrey", "Estadio BBVA"),
