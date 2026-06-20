@@ -16,10 +16,12 @@ export function Header() {
           <Link href="/" className="text-sm font-medium text-ink hover:text-accent">
             Sports
           </Link>
+          
           <LocationsDropdown />
           <Link href="/news" className="text-sm font-medium text-ink hover:text-accent">
             News
           </Link>
+          
           <Link
             href="/contact"
             className="rounded border border-accent px-3 py-1.5 text-sm font-medium text-accent hover:bg-accent hover:text-white"
