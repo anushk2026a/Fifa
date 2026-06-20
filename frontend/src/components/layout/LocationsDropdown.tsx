@@ -15,7 +15,8 @@ export function LocationsDropdown() {
   useEffect(() => {
     if (!open) return;
     const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("mousedown", onClick);
@@ -36,12 +37,14 @@ export function LocationsDropdown() {
       <button
         type="button"
         aria-expanded={open}
-        aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 text-sm font-medium text-[#0057b8] hover:text-accent"
+        className="inline-flex items-center text-accent"
       >
         Locations
-        <span aria-hidden className={cn("text-[0.7em] transition-transform", open && "rotate-180")}>
+        <span
+          aria-hidden
+          className={cn("transition-transform", open && "rotate-180")}
+        >
           ▾
         </span>
       </button>
@@ -53,7 +56,12 @@ export function LocationsDropdown() {
               {COUNTRY_ORDER.map((country) => (
                 <div key={country}>
                   <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-faint">
-                    <Flag iso2={countryFlagIso(country)} label={country} className="h-3.5 w-5" /> {country}
+                    <Flag
+                      iso2={countryFlagIso(country)}
+                      label={country}
+                      className="h-3.5 w-5"
+                    />{" "}
+                    {country}
                   </p>
                   <ul className="space-y-1">
                     {grouped[country].map((c) => (

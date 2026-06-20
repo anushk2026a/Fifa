@@ -1,15 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { CITIES } from "@/data/cities";
-import { Container } from "../common/Container";
-import Image from "next/image";
+import {
+  Globe,
+  Trophy,
+  Users,
+  Camera,
+  User,
+  Mail,
+  MapPin,
+  Phone,
+  Building2,
+  Send,
+} from "lucide-react";
 
-// Backend API route (internal Next.js route)
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaXTwitter,
+} from "react-icons/fa6";
+
 const API_URL = "/api/contact";
-
-const fieldClass =
-  "w-full rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
@@ -18,20 +30,24 @@ export function ContactForm() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
-    if (data.company) return; // honeypot
 
     setStatus("sending");
+
     try {
       const res = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
+
       if (res.ok) {
-        setStatus("ok");
         form.reset();
+        setStatus("ok");
       } else {
         setStatus("error");
       }
@@ -40,182 +56,254 @@ export function ContactForm() {
     }
   }
 
-  if (status === "ok") {
-    return (
-      <div className="max-w-4xl mx-auto rounded-[var(--radius-card)] border border-accent bg-accent-soft px-4 py-6 text-sm text-ink">
-        Thanks — we&apos;ve received your details and will get back to you to
-        help with your match location.
-      </div>
-    );
-  }
-
   return (
-    <div className="relative overflow-hidden py-16">
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-white/10 " />
+    <section className="py-16">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div className="grid lg:grid-cols-[380px_1fr]">
+            {/* LEFT PANEL */}
 
-      <Container className="relative z-10">
-        <div className="flex justify-center">
-          <form
-            onSubmit={onSubmit}
-            className="w-full max-w-2xl rounded-2xl border border-black/20 bg-gray-300/20 p-8 backdrop-blur-xl shadow-xl"
-          >
-            {/* honeypot */}
-            <input
-              type="text"
-              name="company"
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-              aria-hidden
-            />
+            <div className="bg-gradient-to-b from-[#012A6B] to-[#001B44] p-10 text-white">
+              <h2 className="mb-5 text-5xl font-bold leading-tight">
+                Share Your FIFA World Cup Experience
+              </h2>
 
-            <h2 className="mb-8 text-center text-3xl font-bold text-[#0057b8]">
-              Share Your Experience
-            </h2>
+              <p className="mb-10 text-lg text-white/90">
+                Your story. Your memories. Inspire millions of football fans
+                around the world.
+              </p>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  required
-                  className={`${fieldClass} bg-white/90`}
+              <div className="space-y-4">
+                <Feature
+                  icon={<Globe size={20} />}
+                  title="Be Heard Worldwide"
+                  text="Your experience can reach football fans across the globe."
                 />
-              </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className={`${fieldClass} bg-white/90`}
+                <Feature
+                  icon={<Trophy size={20} />}
+                  title="Get Featured"
+                  text="Top stories will be featured on FIFA-OnePoint."
                 />
-              </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Country
-                </label>
-                <input
-                  id="country"
-                  name="country"
-                  required
-                  className={`${fieldClass} bg-white/90`}
+                <Feature
+                  icon={<Users size={20} />}
+                  title="Join The Community"
+                  text="Become a part of a passionate football community."
                 />
-              </div>
 
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Phone
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  City
-                </label>
-                <input
-                  id="city"
-                  name="city"
-                  required
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  YouTube Link
-                </label>
-                <input
-                  id="youtube"
-                  name="youtube"
-                  type="url"
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Facebook Link
-                </label>
-                <input
-                  id="facebook"
-                  name="facebook"
-                  type="url"
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Instagram Link
-                </label>
-                <input
-                  id="instagram"
-                  name="instagram"
-                  type="url"
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm font-medium text-black">
-                  X (Twitter) Link
-                </label>
-                <input
-                  id="x"
-                  name="x"
-                  type="url"
-                  className={`${fieldClass} bg-white/90`}
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm font-medium text-black">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  required
-                  className={`${fieldClass} resize-none bg-white/90`}
-                  placeholder="Share your FIFA World Cup experience..."
+                <Feature
+                  icon={<Camera size={20} />}
+                  title="Share Your Moments"
+                  text="Photos, videos and stories make every memory unforgettable."
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="mt-8 w-full rounded-lg bg-accent py-3 text-sm font-semibold text-black transition hover:bg-accent-strong disabled:opacity-60"
-            >
-              {status === "sending" ? "Sending..." : "Submit Experience"}
-            </button>
+            {/* RIGHT PANEL */}
 
-            {status === "error" && (
-              <p className="mt-4 text-center text-sm text-red-300">
-                Something went wrong. Please try again.
-              </p>
-            )}
-          </form>
+            <div className="p-8 lg:p-12">
+              <h2 className="text-5xl font-bold text-[#012A6B]">
+                Share Your Experience
+              </h2>
+
+              <div className="mt-3 mb-10 h-1 w-16 rounded bg-blue-600"></div>
+
+              {status === "ok" && (
+                <div className="mb-6 rounded-xl bg-green-100 p-4 text-green-700">
+                  Experience submitted successfully.
+                </div>
+              )}
+
+              <form onSubmit={onSubmit} className="space-y-6">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <InputField
+                    icon={<User size={18} />}
+                    name="name"
+                    label="Name"
+                    placeholder="Your full name"
+                  />
+
+                  <InputField
+                    icon={<Mail size={18} />}
+                    name="email"
+                    type="email"
+                    label="Email"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-2">
+                  <InputField
+                    icon={<Globe size={18} />}
+                    name="country"
+                    label="Country"
+                    placeholder="Select your country"
+                  />
+
+                  <InputField
+                    icon={<Building2 size={18} />}
+                    name="city"
+                    label="City"
+                    placeholder="Your city"
+                  />
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-2">
+                  <InputField
+                    icon={<Phone size={18} />}
+                    name="phone"
+                    label="Phone"
+                    placeholder="Your phone number"
+                  />
+
+                  <InputField
+                    icon={<MapPin size={18} />}
+                    name="stadium"
+                    label="Stadium / Match"
+                    placeholder="E.g. Lusail Stadium"
+                  />
+                </div>
+
+                {/* SOCIAL LINKS */}
+
+                <div>
+                  <h3 className="mb-4 text-lg font-semibold text-slate-800">
+                    Social Profiles (Optional)
+                  </h3>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <InputField
+                      icon={<FaFacebookF />}
+                      name="facebook"
+                      placeholder="Facebook URL"
+                    />
+
+                    <InputField
+                      icon={<FaInstagram />}
+                      name="instagram"
+                      placeholder="Instagram URL"
+                    />
+
+                    <InputField
+                      icon={<FaXTwitter />}
+                      name="twitter"
+                      placeholder="X (Twitter) URL"
+                    />
+
+                    <InputField
+                      icon={<FaYoutube />}
+                      name="youtube"
+                      placeholder="YouTube URL"
+                    />
+                  </div>
+                </div>
+
+                {/* MESSAGE */}
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                    Message
+                  </label>
+
+                  <textarea
+                    name="message"
+                    rows={7}
+                    placeholder="Share your FIFA World Cup experience..."
+                    className="w-full rounded-xl border border-slate-300 p-4 outline-none transition-all focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-[#0057B8] text-lg font-semibold text-white transition hover:bg-[#00479A]"
+                >
+                  {status === "sending"
+                    ? "Submitting..."
+                    : "Submit Your Experience"}
+
+                  <Send size={18} />
+                </button>
+
+                {status === "error" && (
+                  <p className="text-center text-red-500">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+
+                <p className="text-center text-sm text-slate-500">
+                  🔒 Your information is safe with us.
+                </p>
+              </form>
+            </div>
+          </div>
         </div>
-      </Container>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FEATURE ---------------- */
+
+function Feature({
+  icon,
+  title,
+  text,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="border-b border-white/20 pb-6">
+      <div className="flex gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0A5CFF] text-white shadow-lg shadow-blue-500/30">
+          {icon}
+        </div>
+
+        <div>
+          <h3 className="text-xl font-semibold">{title}</h3>
+          <span className="mt-1 text-white/70">{text}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- INPUT ---------------- */
+
+function InputField({
+  icon,
+  label,
+  placeholder,
+  name,
+  type = "text",
+}: {
+  icon: React.ReactNode;
+  label?: string;
+  placeholder: string;
+  name: string;
+  type?: string;
+}) {
+  return (
+    <div>
+      {label && (
+        <label className="mb-2 block text-sm font-semibold text-slate-700">
+          {label}
+        </label>
+      )}
+
+      <div className="flex h-14 items-center gap-3 rounded-xl border border-slate-300 px-4 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100">
+        <span className="text-slate-500">{icon}</span>
+
+        <input
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          className="w-full bg-transparent outline-none"
+        />
+      </div>
     </div>
   );
 }

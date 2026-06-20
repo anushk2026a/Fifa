@@ -9,7 +9,6 @@ import { TbSourceCode } from "react-icons/tb";
 export function NewsCard({ item }: { item: NewsItem }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-black/5">
-
       {/* Image */}
       {item.image ? (
         <div className="relative h-48 overflow-hidden">
@@ -57,7 +56,6 @@ export function NewsCard({ item }: { item: NewsItem }) {
 
       {/* Body */}
       <div className="flex flex-1 flex-col gap-2 p-5">
-
         {/* Meta row */}
         <div className="flex items-center gap-3">
           {/* Live pulse dot — signals recency */}
@@ -98,11 +96,6 @@ export function NewsCard({ item }: { item: NewsItem }) {
             className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all duration-150 hover:gap-2.5"
           >
             Read full story
-            <MdOpenInNew
-              size={15}
-              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              aria-hidden="true"
-            />
           </OutboundLink>
           {/* External link indicator */}
           <span className="rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-widest text-faint">

@@ -34,41 +34,43 @@ export default function HomePage() {
         <div className="absolute inset-0 -z-10 bg-black/60" />
 
         <Container className="py-16 sm:py-24 text-white">
-         
           <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            One point for everything FIFA-One Point  World Cup 2026.
+            One point for everything FIFA-One Point World Cup 2026.
           </h1>
-         <div className="mt-4 max-w-2xl text-lg text-white sm:text-lg">
-            Find your host city and plan your match day — matches, restaurants, hotels,
-            transport, tickets and fan zones near every stadium.
+          <div className="mt-4 max-w-2xl text-lg text-white sm:text-lg">
+            Find your host city and plan your match day — matches, restaurants,
+            hotels, transport, tickets and fan zones near every stadium.
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-  <Link
-    href="/locations"
-    className="rounded-[var(--radius-card)] border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white !text-white transition-colors hover:bg-accent-strong"
-  >
-    Browse host cities
-  </Link>
+            <Link
+              href="/locations"
+              className="rounded-[var(--radius-card)] border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white !text-white transition-colors hover:bg-accent-strong"
+            >
+              Browse host cities
+            </Link>
 
-  <OutboundLink
-    href={SITE.fifaScheduleUrl}
-    showIcon={false}
-    className="rounded-[var(--radius-card)] border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium !text-white no-underline backdrop-blur-md transition-colors hover:bg-white/20 hover:!text-white"
-  >
-    Full schedule ↗
-  </OutboundLink>
-</div>
+            <OutboundLink
+              href={SITE.fifaScheduleUrl}
+              showIcon={false}
+              className="rounded-[var(--radius-card)] border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium !text-white no-underline backdrop-blur-md transition-colors hover:bg-white/20 hover:!text-white"
+            >
+              Full schedule
+            </OutboundLink>
+          </div>
         </Container>
       </section>
 
       {/* 2 — About */}
       <section className="border-b border-line">
         <Container className="py-10">
-          <p className="text-xs font-semibold uppercase tracking-wide text-faint">About</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-faint">
+            About
+          </p>
           <p className="mt-2 max-w-3xl text-lg text-ink">
-            Find places near your match location. We gather the official links and local
-            know-how for all 16 host cities so you can eat, sleep, get to the stadium, grab
-            tickets and find where to watch — all in one place.
+            Find places near your match location. We gather the official links
+            and local know-how for all 16 host cities so you can eat, sleep, get
+            to the stadium, grab tickets and find where to watch — all in one
+            place.
           </p>
         </Container>
       </section>
@@ -79,7 +81,11 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Matches"
             title="Today & Tomorrow"
-            action={<OutboundLink href={SITE.fifaScheduleUrl}>Full schedule</OutboundLink>}
+            action={
+              <OutboundLink href={SITE.fifaScheduleUrl}>
+                Full schedule
+              </OutboundLink>
+            }
           />
           <MatchList />
         </Container>
@@ -88,7 +94,10 @@ export default function HomePage() {
       {/* 4 — Experience */}
       <section className="border-b border-line bg-paper">
         <Container className="py-12">
-          <SectionHeading eyebrow="Plan your trip" title="Experience FIFA World Cup 2026" />
+          <SectionHeading
+            eyebrow="Plan your trip"
+            title="Experience FIFA World Cup 2026"
+          />
           <ExperienceBoxes />
         </Container>
       </section>
@@ -99,7 +108,14 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="News"
             title="From The Tournament"
-            action={<Link href="/news" className="text-accent hover:text-accent-strong">All news →</Link>}
+            action={
+              <Link
+                href="/news"
+                className="text-accent hover:text-accent-strong"
+              >
+                All news →
+              </Link>
+            }
           />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {NEWS.slice(0, 3).map((item) => (

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { FiExternalLink } from "react-icons/fi";
 
 /** External link with safe defaults and a "leaves the site" affordance. */
 export function OutboundLink({
@@ -17,14 +18,13 @@ export function OutboundLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn("text-accent hover:text-accent-strong underline-offset-2 hover:underline", className)}
+      className={cn(
+        "text-accent hover:text-accent-strong flex items-center gap-1 underline-offset-2 hover:underline",
+        className,
+      )}
     >
       {children}
-      {showIcon && (
-        <span aria-hidden="true" className="ml-0.5 text-[0.85em]">
-          ↗
-        </span>
-      )}
+      {showIcon && <FiExternalLink className="size-3.5" />}
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
   );
