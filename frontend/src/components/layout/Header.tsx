@@ -8,25 +8,34 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
       <Container className="relative flex h-16 items-center justify-between">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-ink">
+        <Link
+          href="/"
+          className="text-lg font-semibold tracking-tight text-ink"
+        >
           FIFA-<span className="text-accent">OnePoint</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
-          <Link href="/" className="text-sm font-medium text-ink hover:text-accent">
+          <Link
+            href="/"
+            className="text-sm font-medium text-ink hover:text-accent"
+          >
             Sports
           </Link>
-          
+
           <LocationsDropdown />
-          <Link href="/news" className="text-sm font-medium text-ink hover:text-accent">
+          <Link
+            href="/news"
+            className="text-sm font-medium text-ink hover:text-accent"
+          >
             News
           </Link>
-          
+
           <Link
             href="/contact"
             className="rounded border border-accent px-3 py-1.5 text-sm font-medium text-accent hover:bg-accent hover:text-white"
           >
-            Contact Us
+            Share Your Experience
           </Link>
         </nav>
 

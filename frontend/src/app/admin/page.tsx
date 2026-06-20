@@ -6,13 +6,40 @@ import { Container } from "@/components/common/Container";
 import { apiUrl } from "@/lib/api";
 import { authHeaders, clearToken, getToken } from "@/lib/admin-auth";
 import type { NewsItem } from "@/data/types";
+import {
+  Trash2,
+  LogOut,
+  Mail,
+  Phone,
+  Globe,
+  ChevronDown,
+  ChevronUp,
+  Calendar,
+  MapPin,
+  Plus,
+  ExternalLink,
+  Search,
+  MessageSquare
+} from "lucide-react";
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  country?: string;
+  city?: string;
+  youtube?: string;
+  facebook?: string;
+  instagram?: string;
+  x?: string;
+  message: string;
+  createdAt: string;
+};
 
 const fieldClass =
-  "w-full rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent";
+  "w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent transition-colors duration-200";
 
-/** Greeting based on local time:
- *   4:00am–11:59am → morning · 12:00pm–4:00pm → afternoon
- *   4:01pm–8:30pm → evening · 8:31pm–3:59am → good day */
 function adminGreeting(d = new Date()): string {
   const mins = d.getHours() * 60 + d.getMinutes();
   if (mins >= 240 && mins <= 719) return "Good morning, Admin";
@@ -26,8 +53,14 @@ export default function AdminDashboardPage() {
   const [ready, setReady] = useState(false);
   const [greeting, setGreeting] = useState("");
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [contacts, setContacts] = useState<ContactSubmission[]>([]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
+
+  // Filters
+  const [newsSearch, setNewsSearch] = useState("");
+  const [contactSearch, setContactSearch] = useState("");
+  const [expandedContactId, setExpandedContactId] = useState<string | null>(null);
 
   const loadNews = useCallback(async () => {
     const res = await fetch(apiUrl("/news"), { cache: "no-store" });
@@ -35,12 +68,16 @@ export default function AdminDashboardPage() {
     if (data.ok) setNews(data.news as NewsItem[]);
   }, []);
 
-  // Set greeting client-side (depends on the visitor's local clock).
+  const loadContacts = useCallback(async () => {
+    const res = await fetch(apiUrl("/contact"), { headers: authHeaders(), cache: "no-store" });
+    const data = await res.json();
+    if (data.ok) setContacts(data.contacts as ContactSubmission[]);
+  }, []);
+
   useEffect(() => {
     setGreeting(adminGreeting());
   }, []);
 
-  // Gate the page: no token → login. Otherwise verify it, then load news.
   useEffect(() => {
     if (!getToken()) {
       router.replace("/admin/login");
@@ -54,14 +91,14 @@ export default function AdminDashboardPage() {
           router.replace("/admin/login");
           return;
         }
-        await loadNews();
+        await Promise.all([loadNews(), loadContacts()]);
         setReady(true);
       } catch {
         setMsg({ kind: "err", text: "Could not reach the server. Is the backend running?" });
         setReady(true);
       }
     })();
-  }, [router, loadNews]);
+  }, [router, loadNews, loadContacts]);
 
   async function onAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -86,13 +123,13 @@ export default function AdminDashboardPage() {
       const data = await res.json();
       if (res.ok && data.ok) {
         form.reset();
-        setMsg({ kind: "ok", text: "News item added." });
+        setMsg({ kind: "ok", text: "News item added successfully." });
         await loadNews();
       } else if (res.status === 401) {
         clearToken();
         router.replace("/admin/login");
       } else {
-        setMsg({ kind: "err", text: "Could not add item. Check the fields (URL and image must be valid links)." });
+        setMsg({ kind: "err", text: "Could not add item. Check fields (URLs must be valid)." });
       }
     } catch {
       setMsg({ kind: "err", text: "Network error while saving." });
@@ -101,7 +138,7 @@ export default function AdminDashboardPage() {
     }
   }
 
-  async function onDelete(id?: string) {
+  async function onDeleteNews(id?: string) {
     if (!id) return;
     if (!confirm("Delete this news item?")) return;
     const res = await fetch(apiUrl(`/news/${id}`), { method: "DELETE", headers: authHeaders() });
@@ -113,109 +150,441 @@ export default function AdminDashboardPage() {
     }
   }
 
+  async function onDeleteContact(id: string) {
+    if (!confirm("Delete this contact submission?")) return;
+    const res = await fetch(apiUrl(`/contact/${id}`), { method: "DELETE", headers: authHeaders() });
+    if (res.ok) {
+      await loadContacts();
+      if (expandedContactId === id) setExpandedContactId(null);
+    } else if (res.status === 401) {
+      clearToken();
+      router.replace("/admin/login");
+    }
+  }
+
   function logout() {
     clearToken();
     router.replace("/admin/login");
   }
 
+  // Filter lists
+  const filteredNews = news.filter(
+    (n) =>
+      n.title.toLowerCase().includes(newsSearch.toLowerCase()) ||
+      n.summary.toLowerCase().includes(newsSearch.toLowerCase()) ||
+      (n.source && n.source.toLowerCase().includes(newsSearch.toLowerCase()))
+  );
+
+  const filteredContacts = contacts.filter(
+    (c) =>
+      c.name.toLowerCase().includes(contactSearch.toLowerCase()) ||
+      c.email.toLowerCase().includes(contactSearch.toLowerCase()) ||
+      c.message.toLowerCase().includes(contactSearch.toLowerCase()) ||
+      (c.city && c.city.toLowerCase().includes(contactSearch.toLowerCase())) ||
+      (c.country && c.country.toLowerCase().includes(contactSearch.toLowerCase()))
+  );
+
   if (!ready) {
     return (
       <Container className="py-16">
-        <p className="text-sm text-muted">Loading…</p>
+        <p className="text-sm text-muted">Loading Portal Data…</p>
       </Container>
     );
   }
 
   return (
     <Container className="py-10">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          {greeting && <p className="text-sm font-medium text-accent">{greeting}</p>}
-          <h1 className="mt-0.5 text-2xl font-semibold tracking-tight text-ink">News admin</h1>
-          <p className="mt-1 text-sm text-muted">Add or remove items shown on the public News page.</p>
+      {/* Header Banner */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-accent to-[#002f6c] p-8 text-white shadow-lg mb-8">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            {greeting && <p className="text-xs font-semibold tracking-wider text-accent-soft uppercase">{greeting}</p>}
+            <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white leading-none">FIFA Sports Admin Portal</h1>
+            <p className="mt-2 text-sm text-slate-200 max-w-xl">
+              Publish news items and manage submitted experiences or fan enquiries securely.
+            </p>
+          </div>
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 self-start md:self-center rounded-xl bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md border border-white/20 transition hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign out
+          </button>
         </div>
-        <button onClick={logout} className="rounded border border-line px-3 py-1.5 text-sm text-muted hover:border-accent hover:text-accent">
-          Sign out
-        </button>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full filter blur-3xl -translate-y-12 translate-x-12" />
       </div>
 
       {msg && (
         <div
-          className={`mb-6 rounded-[var(--radius-card)] border px-4 py-3 text-sm ${
-            msg.kind === "ok" ? "border-accent bg-accent-soft text-ink" : "border-red-300 bg-red-50 text-red-700"
+          className={`mb-6 rounded-xl border px-4 py-3.5 text-sm flex items-center justify-between ${
+            msg.kind === "ok" ? "border-success bg-green-50 text-green-800" : "border-red-300 bg-red-50 text-red-800"
           }`}
         >
-          {msg.text}
+          <span>{msg.text}</span>
+          <button onClick={() => setMsg(null)} className="text-xs font-bold hover:underline cursor-pointer">Dismiss</button>
         </div>
       )}
 
+      {/* Main Form & News Section */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Add form */}
-        <form onSubmit={onAdd} className="space-y-4 rounded-[var(--radius-card)] border border-line bg-surface p-5">
-          <h2 className="text-base font-semibold text-ink">Add news</h2>
-          <div>
-            <label htmlFor="title" className="mb-1 block text-sm font-medium text-ink">Title</label>
-            <input id="title" name="title" required className={fieldClass} />
+        {/* Add news form */}
+        <form onSubmit={onAdd} className="space-y-4 rounded-2xl border border-line bg-surface p-6 shadow-sm">
+          <div className="flex items-center gap-2 border-b border-line pb-3">
+            <Plus className="h-5 w-5 text-accent" />
+            <h2 className="text-lg font-bold text-ink">Publish News Update</h2>
           </div>
           <div>
-            <label htmlFor="summary" className="mb-1 block text-sm font-medium text-ink">Summary</label>
-            <textarea id="summary" name="summary" required rows={3} className={`${fieldClass} resize-none`} />
+            <label htmlFor="title" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Title</label>
+            <input id="title" name="title" required className={fieldClass} placeholder="Enter article headline..." />
           </div>
           <div>
-            <label htmlFor="url" className="mb-1 block text-sm font-medium text-ink">Link (URL)</label>
-            <input id="url" name="url" type="url" required placeholder="https://…" className={fieldClass} />
+            <label htmlFor="summary" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Summary</label>
+            <textarea id="summary" name="summary" required rows={3} className={`${fieldClass} resize-none`} placeholder="Write a short summary..." />
+          </div>
+          <div>
+            <label htmlFor="url" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Link (URL)</label>
+            <input id="url" name="url" type="url" required placeholder="https://..." className={fieldClass} />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="source" className="mb-1 block text-sm font-medium text-ink">Source <span className="font-normal text-muted">(optional)</span></label>
-              <input id="source" name="source" placeholder="FIFA" className={fieldClass} />
+              <label htmlFor="source" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Source</label>
+              <input id="source" name="source" placeholder="e.g. FIFA" className={fieldClass} />
             </div>
             <div>
-              <label htmlFor="date" className="mb-1 block text-sm font-medium text-ink">Date <span className="font-normal text-muted">(optional)</span></label>
+              <label htmlFor="date" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Date</label>
               <input id="date" name="date" type="date" className={fieldClass} />
             </div>
           </div>
           <div>
-            <label htmlFor="image" className="mb-1 block text-sm font-medium text-ink">Image URL <span className="font-normal text-muted">(optional)</span></label>
-            <input id="image" name="image" type="url" placeholder="https://…" className={fieldClass} />
+            <label htmlFor="image" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted">Image URL</label>
+            <input id="image" name="image" type="url" placeholder="https://..." className={fieldClass} />
           </div>
           <button
             type="submit"
             disabled={saving}
-            className="w-full rounded border border-accent bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-60 transition-colors"
+            className="w-full rounded-xl bg-accent py-2.5 text-sm font-semibold text-white hover:bg-accent-strong disabled:opacity-60 transition-all hover:shadow-md cursor-pointer"
           >
-            {saving ? "Adding…" : "Add news item"}
+            {saving ? "Publishing…" : "Publish Update"}
           </button>
         </form>
 
-        {/* Existing list */}
-        <div>
-          <h2 className="mb-3 text-base font-semibold text-ink">Current items ({news.length})</h2>
-          <ul className="space-y-3">
-            {news.map((item) => (
-              <li
-                key={item.id ?? item.title}
-                className="flex items-start justify-between gap-3 rounded-[var(--radius-card)] border border-line bg-surface p-3"
-              >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-ink">{item.title}</p>
-                  <p className="mt-0.5 text-xs text-faint">
-                    {item.date}
-                    {item.source ? ` · ${item.source}` : ""}
-                  </p>
-                </div>
-                <button
-                  onClick={() => onDelete(item.id)}
-                  disabled={!item.id}
-                  title={item.id ? "Delete" : "Seed/static item — not deletable"}
-                  className="shrink-0 rounded border border-line px-2 py-1 text-xs text-red-600 hover:border-red-300 hover:bg-red-50 disabled:opacity-40"
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+        {/* Existing news list */}
+        <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-line pb-3 mb-4">
+              <h2 className="text-lg font-bold text-ink">Active News Items ({filteredNews.length})</h2>
+              <div className="relative w-full sm:w-48">
+                <Search className="absolute top-2.5 left-3 h-4 w-4 text-faint" />
+                <input
+                  type="text"
+                  placeholder="Search news..."
+                  value={newsSearch}
+                  onChange={(e) => setNewsSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-line focus:border-accent outline-none"
+                />
+              </div>
+            </div>
+
+            {filteredNews.length === 0 ? (
+              <div className="py-12 text-center text-sm text-faint">No matching news items found.</div>
+            ) : (
+              <ul className="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                {filteredNews.map((item) => (
+                  <li
+                    key={item.id ?? item.title}
+                    className="flex items-start justify-between gap-3 rounded-xl border border-line bg-paper p-3 transition hover:border-line-strong hover:bg-surface"
+                  >
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-ink">{item.title}</p>
+                      <div className="mt-1 flex items-center gap-2 text-xs text-faint">
+                        <Calendar className="h-3.5 w-3.5" />
+                        <span>{item.date}</span>
+                        {item.source && (
+                          <>
+                            <span>•</span>
+                            <span className="font-medium text-accent">{item.source}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => onDeleteNews(item.id)}
+                      disabled={!item.id}
+                      title={item.id ? "Delete article" : "Static item - cannot delete"}
+                      className="shrink-0 rounded-lg p-1.5 text-red-600 hover:bg-red-50 disabled:opacity-40 transition-colors cursor-pointer"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* Shared Experiences & Enquiries Section */}
+      <div className="mt-12 rounded-2xl border border-line bg-surface p-6 shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-line pb-4 mb-6">
+          <div>
+            <div className="flex items-center gap-2">
+              <MessageSquare className="h-5 w-5 text-accent" />
+              <h2 className="text-xl font-bold text-ink">Shared Experiences & Enquiries</h2>
+            </div>
+            <p className="text-xs text-muted mt-1">Review contact form entries submitted by visitors.</p>
+          </div>
+          <div className="relative w-full md:w-64">
+            <Search className="absolute top-2.5 left-3 h-4 w-4 text-faint" />
+            <input
+              type="text"
+              placeholder="Search enquiries..."
+              value={contactSearch}
+              onChange={(e) => setContactSearch(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-line focus:border-accent outline-none"
+            />
+          </div>
+        </div>
+
+        {filteredContacts.length === 0 ? (
+          <div className="py-16 text-center text-sm text-faint border border-dashed border-line rounded-xl">
+            No contact form submissions found matching your search.
+          </div>
+        ) : (
+          <div className="overflow-x-auto rounded-xl border border-line bg-surface">
+            <table className="min-w-full divide-y divide-line text-left text-sm">
+              <thead className="bg-paper text-xs uppercase tracking-wider text-muted font-bold">
+                <tr>
+                  <th className="px-6 py-3">Sender</th>
+                  <th className="px-6 py-3">Location</th>
+                  <th className="px-6 py-3">Date Submitted</th>
+                  <th className="px-6 py-3">Message Preview</th>
+                  <th className="px-6 py-3">Social Links</th>
+                  <th className="px-6 py-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line bg-white">
+                {filteredContacts.map((contact) => {
+                  const isExpanded = expandedContactId === contact.id;
+                  const letter = contact.name.trim().charAt(0).toUpperCase() || "C";
+                  return (
+                    <>
+                      {/* Standard Row */}
+                      <tr
+                        key={contact.id}
+                        className={`hover:bg-accent-soft/30 transition-colors duration-150 cursor-pointer ${
+                          isExpanded ? "bg-accent-soft/20" : ""
+                        }`}
+                        onClick={() => setExpandedContactId(isExpanded ? null : contact.id)}
+                      >
+                        {/* Sender */}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center gap-3">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-white font-bold text-sm">
+                              {letter}
+                            </div>
+                            <div className="min-w-0">
+                              <p className="font-semibold text-ink leading-normal truncate max-w-xs">{contact.name}</p>
+                              <p className="text-xs text-muted leading-normal truncate max-w-xs">{contact.email}</p>
+                            </div>
+                          </div>
+                        </td>
+
+                        {/* Location */}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center gap-1.5 text-xs text-ink font-medium">
+                            <MapPin className="h-3.5 w-3.5 text-accent shrink-0" />
+                            <span>
+                              {[contact.city, contact.country].filter(Boolean).join(", ") || "Unknown"}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Date */}
+                        <td className="px-6 py-4 whitespace-nowrap text-xs text-muted">
+                          {new Date(contact.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </td>
+
+                        {/* Preview */}
+                        <td className="px-6 py-4 max-w-xs truncate text-xs text-muted">
+                          {contact.message}
+                        </td>
+
+                        {/* Social Links */}
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex gap-1.5" onClick={(e) => e.stopPropagation()}>
+                            {contact.youtube && (
+                              <a
+                                href={contact.youtube}
+                                target="_blank"
+                                rel="noreferrer"
+                                title="YouTube profile"
+                                className="h-6 w-6 rounded bg-red-50 hover:bg-red-100 flex items-center justify-center text-red-700 text-xs font-semibold"
+                              >
+                                YT
+                              </a>
+                            )}
+                            {contact.facebook && (
+                              <a
+                                href={contact.facebook}
+                                target="_blank"
+                                rel="noreferrer"
+                                title="Facebook profile"
+                                className="h-6 w-6 rounded bg-blue-50 hover:bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-semibold"
+                              >
+                                FB
+                              </a>
+                            )}
+                            {contact.instagram && (
+                              <a
+                                href={contact.instagram}
+                                target="_blank"
+                                rel="noreferrer"
+                                title="Instagram profile"
+                                className="h-6 w-6 rounded bg-pink-50 hover:bg-pink-100 flex items-center justify-center text-pink-700 text-xs font-semibold"
+                              >
+                                IG
+                              </a>
+                            )}
+                            {contact.x && (
+                              <a
+                                href={contact.x}
+                                target="_blank"
+                                rel="noreferrer"
+                                title="X profile"
+                                className="h-6 w-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-ink text-xs font-semibold"
+                              >
+                                X
+                              </a>
+                            )}
+                            {!contact.youtube && !contact.facebook && !contact.instagram && !contact.x && (
+                              <span className="text-xs text-faint">—</span>
+                            )}
+                          </div>
+                        </td>
+
+                        {/* Actions */}
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-xs" onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              onClick={() => setExpandedContactId(isExpanded ? null : contact.id)}
+                              className="rounded-lg p-1.5 text-muted hover:bg-paper hover:text-ink transition cursor-pointer"
+                              title={isExpanded ? "Collapse" : "Expand"}
+                            >
+                              {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                            </button>
+                            <button
+                              onClick={() => onDeleteContact(contact.id)}
+                              className="rounded-lg p-1.5 text-red-600 hover:bg-red-50 transition cursor-pointer"
+                              title="Delete Submission"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* Expandable Detail Sub-Row */}
+                      {isExpanded && (
+                        <tr key={`${contact.id}-detail`}>
+                          <td colSpan={6} className="bg-paper px-8 py-6 border-l-4 border-accent">
+                            <div className="space-y-4">
+                              {/* Metadata grid */}
+                              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                                <div>
+                                  <p className="font-semibold text-muted uppercase tracking-wider">Email Address</p>
+                                  <a href={`mailto:${contact.email}`} className="mt-1 flex items-center gap-1.5 text-accent font-medium hover:underline">
+                                    <Mail className="h-3.5 w-3.5" />
+                                    <span>{contact.email}</span>
+                                  </a>
+                                </div>
+                                {contact.phone && (
+                                  <div>
+                                    <p className="font-semibold text-muted uppercase tracking-wider">Phone Number</p>
+                                    <a href={`tel:${contact.phone}`} className="mt-1 flex items-center gap-1.5 text-ink font-medium hover:underline">
+                                      <Phone className="h-3.5 w-3.5" />
+                                      <span>{contact.phone}</span>
+                                    </a>
+                                  </div>
+                                )}
+                                <div>
+                                  <p className="font-semibold text-muted uppercase tracking-wider">Location</p>
+                                  <div className="mt-1 flex items-center gap-1.5 text-ink font-medium">
+                                    <Globe className="h-3.5 w-3.5 text-accent" />
+                                    <span>{[contact.city, contact.country].filter(Boolean).join(", ") || "Not Provided"}</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Speech bubble message display */}
+                              <div className="rounded-xl border border-line bg-surface p-4 shadow-inner">
+                                <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-2">Message / Fan Experience</p>
+                                <p className="text-sm text-ink leading-relaxed whitespace-pre-wrap">{contact.message}</p>
+                              </div>
+
+                              {/* Social buttons details */}
+                              {(contact.youtube || contact.facebook || contact.instagram || contact.x) && (
+                                <div>
+                                  <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-2">Connected Channels</p>
+                                  <div className="flex flex-wrap gap-3">
+                                    {contact.youtube && (
+                                      <a
+                                        href={contact.youtube}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1.5 rounded-lg bg-red-50 border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100 transition"
+                                      >
+                                        YouTube Profile <ExternalLink className="h-3 w-3" />
+                                      </a>
+                                    )}
+                                    {contact.facebook && (
+                                      <a
+                                        href={contact.facebook}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 border border-blue-200 px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-100 transition"
+                                      >
+                                        Facebook Profile <ExternalLink className="h-3 w-3" />
+                                      </a>
+                                    )}
+                                    {contact.instagram && (
+                                      <a
+                                        href={contact.instagram}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1.5 rounded-lg bg-pink-50 border border-pink-200 px-3 py-1.5 text-xs font-semibold text-pink-700 hover:bg-pink-100 transition"
+                                      >
+                                        Instagram Profile <ExternalLink className="h-3 w-3" />
+                                      </a>
+                                    )}
+                                    {contact.x && (
+                                      <a
+                                        href={contact.x}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center gap-1.5 rounded-lg bg-gray-100 border border-gray-200 px-3 py-1.5 text-xs font-semibold text-ink hover:bg-gray-200 transition"
+                                      >
+                                        X Profile <ExternalLink className="h-3 w-3" />
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </Container>
   );

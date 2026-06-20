@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/common/Container";
 import { ContactForm } from "@/components/contact/ContactForm";
-
+import img from "../../../public/images/contact/image.png";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
@@ -11,23 +11,27 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b border-line bg-accent-soft">
-        <Container className="py-12 sm:py-16">
-          <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Contact us</h1>
-          <p className="mt-3 max-w-2xl text-base text-muted">
-            Still have questions — which stadium hosts your match, or how to get there? Share
-            your details and we&apos;ll guide you for your location, including where to eat,
-            stay, park and watch.
-          </p>
+      <section
+        className="border-b border-line bg-accent-soft"
+        style={{
+          backgroundImage: `url(${img.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <Container className="py-12 sm:py-24">
+          <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Share Your FIFA World Cup™ Experience
+          </h1>
+          <span className="mt-3 max-w-2xl text-base text-white">
+            Celebrate the passion of football. Share your matchday memories,
+            stadium moments, fan celebrations, photos, and unforgettable
+            experiences with supporters around the world&.
+          </span>
         </Container>
       </section>
 
-      <Container className="py-12">
-        <ContactForm />
-        <p className="mt-6 max-w-xl text-xs text-faint">
-          We will use your details to respond to your enquiry.
-        </p>
-      </Container>
+      <ContactForm />
     </>
   );
 }

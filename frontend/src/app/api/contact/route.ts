@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { apiUrl } from "@/lib/api";
 
 const contactSchema = z.object({
   name: z.string().min(1),
@@ -8,6 +9,10 @@ const contactSchema = z.object({
   phone: z.string().optional(),
   country: z.string().optional(),
   city: z.string().optional(),
+  youtube: z.string().optional(),
+  facebook: z.string().optional(),
+  instagram: z.string().optional(),
+  x: z.string().optional(),
   message: z.string().min(1),
   company: z.string().optional(), // honeypot
 });
@@ -41,6 +46,34 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, delivered: false }, { status: 201 });
     }
 
+    // Save to the backend store
+    try {
+      const backendRes = await fetch(apiUrl("/contact"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          country: input.country,
+          city: input.city,
+          youtube: input.youtube,
+          facebook: input.facebook,
+          instagram: input.instagram,
+          x: input.x,
+          message: input.message,
+        }),
+      });
+      if (!backendRes.ok) {
+        const errText = await backendRes.text();
+        console.error("[contact API] Failed to store submission in backend:", errText);
+        return NextResponse.json({ ok: false, error: "Failed to store submission" }, { status: 500 });
+      }
+    } catch (backendErr) {
+      console.error("[contact API] Error contacting backend:", backendErr);
+      return NextResponse.json({ ok: false, error: "Backend communication error" }, { status: 500 });
+    }
+
     const transporter = getTransporter();
     if (!transporter) {
       console.warn("[contact API] SMTP not configured — message not sent.");
@@ -54,6 +87,10 @@ export async function POST(req: Request) {
       `Phone:   ${input.phone || "—"}`,
       `Country: ${input.country || "—"}`,
       `City:    ${input.city || "—"}`,
+      `YouTube: ${input.youtube || "—"}`,
+      `Facebook: ${input.facebook || "—"}`,
+      `Instagram: ${input.instagram || "—"}`,
+      `X (Twitter): ${input.x || "—"}`,
       "",
       input.message,
     ].join("\n");

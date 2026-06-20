@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Amar Maurya",
+    "email": "amarmaurya296@gmail.com",
+    "phone": "348-558-0253",
+    "country": "UP",
+    "city": "Lucknow",
+    "youtube": "https://youtu.be/0CQ4EEEM-QA?si=lQqPyBFx6y-7JoF3",
+    "message": "dfdjnkdjd",
+    "id": "53af88d2-2836-426b-9d3d-f3f3e7d391c4",
+    "createdAt": "2026-06-20T17:10:38.339Z"
+  },
+  {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "9876543210",
+    "country": "India",
+    "city": "Mumbai",
+    "youtube": "https://youtube.com/watch?v=456",
+    "facebook": "https://facebook.com/john",
+    "message": "Excellent organization!",
+    "id": "8b69bad9-de20-4614-8b49-882c40341b64",
+    "createdAt": "2026-06-20T16:59:03.754Z"
+  }
+]
