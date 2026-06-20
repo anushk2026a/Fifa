@@ -5,7 +5,8 @@ import type { City } from "@/data/types";
 
 export function CityBanner({ city }: { city: City }) {
   return (
-    <section className="relative isolate flex min-h-[340px] items-end overflow-hidden border-b border-line sm:min-h-[420px]">
+    <section className="relative isolate flex min-h-[340px] items-end overflow-hidden border-b border-line sm:min-h-[520px]">
+      {/* Background Image */}
       {city.bannerImage && (
         <Image
           src={city.bannerImage}
@@ -13,31 +14,46 @@ export function CityBanner({ city }: { city: City }) {
           fill
           priority
           sizes="100vw"
-          className="-z-10 object-cover"
+          className="-z-20 object-cover"
         />
       )}
-      {/* legibility scrim — flat, no decorative gradient stack, now with subtle blur */}
-      <div className="absolute inset-0 -z-10 bg-black/50 backdrop-blur-[3px]" />
 
-      <Container className="py-10 text-white">
-        <p className="text-sm font-medium text-white/85">
-          {city.country} · {city.region} region
-        </p>
-        <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">{city.name}</h1>
-        <p className="mt-3 text-lg text-white/90">
-          {city.stadium.name}
-          {city.stadium.capacity ? ` · ${city.stadium.capacity.toLocaleString()} capacity` : ""}
-        </p>
-        <p className="mt-1 text-sm text-white/80">
-          {city.stadium.address} ·{" "}
-          <OutboundLink href={city.stadium.mapUrl} className="text-white underline hover:text-white">
-            Map
-          </OutboundLink>
-        </p>
-        <p className="mt-4 max-w-2xl text-sm text-white/90">
-          <span className="font-medium text-white">Getting there: </span>
-          {city.gettingThere}
-        </p>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 -z-10 bg-black/70" />
+
+      <Container className="relative z-10 py-12">
+        <div className="max-w-3xl text-white">
+          <p className="text-sm font-medium !text-white opacity-90">
+            {city.country} · {city.region} Region
+          </p>
+
+          <h1 className="mt-3 text-4xl font-bold tracking-tight !text-white sm:text-6xl">
+            {city.name}
+          </h1>
+
+          <p className="mt-4 text-lg !text-white opacity-95">
+            {city.stadium.name}
+            {city.stadium.capacity &&
+              ` · ${city.stadium.capacity.toLocaleString()} Capacity`}
+          </p>
+
+          <p className="mt-2 text-sm !text-white opacity-90">
+            {city.stadium.address} ·{" "}
+            <OutboundLink
+              href={city.stadium.mapUrl}
+              className="!text-white underline underline-offset-4 hover:opacity-80"
+            >
+              View on Map
+            </OutboundLink>
+          </p>
+
+          <p className="mt-5 max-w-2xl text-base leading-7 !text-white opacity-95">
+            <span className="font-semibold !text-white">
+              Getting There:
+            </span>{" "}
+            {city.gettingThere}
+          </p>
+        </div>
       </Container>
     </section>
   );

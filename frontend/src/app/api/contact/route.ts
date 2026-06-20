@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       input.message,
     ].join("\n");
 
-    const MAIL_FROM = process.env.MAIL_FROM || "SportsOnePoint <no-reply@sportsonepoint.com>";
+    const MAIL_FROM = process.env.MAIL_FROM || "SportsOnePoint<no-reply@FIFA-One Point.com>";
     const CONTACT_TO = process.env.CONTACT_TO!;
 
     await transporter.sendMail({

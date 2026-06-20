@@ -11,7 +11,7 @@ export function Footer() {
       <Container className="grid grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="text-base font-semibold text-ink">
-            Sports<span className="text-accent">One</span>Point
+            FIFA-<span className="text-accent">OnePoint</span>
           </p>
           <p className="mt-2 max-w-xs text-sm text-muted">{SITE.tagline}</p>
           <p className="mt-3 text-xs text-faint">

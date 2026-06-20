@@ -2,7 +2,7 @@ import type { FaqItem } from "./types";
 
 export const FAQ: FaqItem[] = [
   {
-    q: "What is SportsOnePoint?",
+    q: "What is FIFA-One Point?",
     a: "A single place to plan your FIFA World Cup 2026 match day — host cities, today's and tomorrow's matches, and the restaurants, hotels, transport, tickets and fan zones near each stadium.",
   },
   {
@@ -19,6 +19,6 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Is this an official FIFA website?",
-    a: "No. SportsOnePoint is an independent information directory. We link out to official FIFA and local sources for bookings and tickets.",
+    a: "No. SportsOnePointis an independent information directory. We link out to official FIFA and local sources for bookings and tickets.",
   },
 ];

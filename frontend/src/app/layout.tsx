@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://${SITE.domain}`),
+  
   title: {
     default: `${SITE.name} — FIFA World Cup 2026`,
     template: `%s | ${SITE.name}`,

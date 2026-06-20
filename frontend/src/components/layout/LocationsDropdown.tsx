@@ -38,7 +38,7 @@ export function LocationsDropdown() {
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-accent"
+        className="inline-flex items-center gap-1 text-sm font-medium text-[#0057b8] hover:text-accent"
       >
         Locations
         <span aria-hidden className={cn("text-[0.7em] transition-transform", open && "rotate-180")}>

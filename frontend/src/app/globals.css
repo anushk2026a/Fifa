@@ -1,50 +1,169 @@
 @import "tailwindcss";
 
-/*
-  SportsOnePoint design tokens — flat, editorial, low-chrome.
-  See docs/04-ux-design.md. One accent, hairline borders, warm paper.
-  No decorative shadows or gradients.
-*/
+/* FIFA Inspired Design System */
 @theme {
-  --color-paper: #fbfbf9; /* page background — warm near-white */
-  --color-surface: #ffffff; /* cards/inputs */
-  --color-ink: #16181d; /* primary text */
-  --color-muted: #696d74; /* secondary text */
-  --color-faint: #9a9ea4; /* tertiary / meta */
-  --color-line: #e6e6e2; /* hairline borders */
-  --color-line-strong: #d6d6d0;
-  --color-accent: #0f6b41; /* single brand accent (pitch green) */
-  --color-accent-strong: #0b5333;
-  --color-accent-soft: #eaf3ee;
+  /* Background */
+  --color-paper: #f5f7fa;
+  --color-surface: #ffffff;
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Text */
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-faint: #64748b;
 
-  --radius-card: 6px;
+  /* Borders */
+  --color-line: #e2e8f0;
+  --color-line-strong: #cbd5e1;
+
+  /* FIFA Blue */
+  --color-accent: #0057b8;
+  --color-accent-strong: #003f88;
+  --color-accent-soft: #e8f1fd;
+
+  /* Optional Success */
+  --color-success: #16a34a;
+
+  /* Typography */
+  --font-sans:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  --font-mono:
+    "JetBrains Mono",
+    monospace;
+
+  /* Radius */
+  --radius-card: 10px;
 }
 
 :root {
   color-scheme: light;
+
+  /* Better readability */
+  font-size: 17px;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+
+  font-family: var(--font-sans);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Consistent, visible focus for keyboard users. */
+/* Typography */
+
+h1 {
+  font-size: clamp(2.6rem, 4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+small {
+  font-size: 0.875rem;
+  color: var(--color-faint);
+}
+
+/* Links */
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-strong);
+}
+
+/* Buttons */
+
+button {
+  font-size: 0.95rem;
+  font-weight: 600;
+
+}
+
+
+
+/* Inputs */
+
+input,
+textarea,
+select {
+  font-size: 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+}
+
+/* Cards */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+/* Focus */
+
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: 3px;
 }
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Motion */
 
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

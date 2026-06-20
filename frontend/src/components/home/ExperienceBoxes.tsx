@@ -26,14 +26,14 @@ const BOXES: Box[] = [
     label: "Transportation",
     blurb: "Rideshare, metro, parking and getting there.",
     image:
-      "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=60",
+      "https://i.ytimg.com/vi/S1eNwqxuokA/sddefault.jpg",
     gradient: "from-emerald-500/90 to-teal-600/90",
   },
   {
     label: "Tickets",
     blurb: "Official FIFA ticket links for every host city.",
     image:
-      "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&q=60",
+      "https://www.theglobeandmail.com/resizer/v2/4BKQYLDUKJDPZEA56GFN3JN2CQ.JPG?auth=54b15254f653e2a107aea08711036998df0b8613093727189bb3293e92269204&width=900&height=600&quality=80&smart=true",
     gradient: "from-violet-500/90 to-purple-600/90",
   },
   {
@@ -70,8 +70,8 @@ export function ExperienceBoxes() {
           {/* Bottom darkening for text legibility */}
           <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-black/60 to-transparent" />
 
-          <span className="text-lg font-semibold tracking-tight drop-shadow-sm">{box.label}</span>
-          <span className="mt-1 text-sm text-white/90">{box.blurb}</span>
+          <span className="text-lg font-semibold text-white tracking-tight drop-shadow-sm">{box.label}</span>
+          <span className="mt-1 text-sm text-white/80">{box.blurb}</span>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-white">
             Choose a city
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

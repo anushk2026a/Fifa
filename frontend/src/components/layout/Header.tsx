@@ -9,7 +9,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
       <Container className="relative flex h-16 items-center justify-between">
         <Link href="/" className="text-lg font-semibold tracking-tight text-ink">
-          Sports<span className="text-accent">One</span>Point
+          FIFA-<span className="text-accent">OnePoint</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">

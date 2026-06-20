@@ -34,31 +34,30 @@ export default function HomePage() {
         <div className="absolute inset-0 -z-10 bg-black/60" />
 
         <Container className="py-16 sm:py-24 text-white">
-          <p className="text-sm font-semibold uppercase tracking-wide text-white/80">
-            FIFA World Cup 2026 · USA · Canada · Mexico
-          </p>
+         
           <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            One point for everything World Cup 2026.
+            One point for everything FIFA-One Point  World Cup 2026.
           </h1>
-          <p className="mt-4 max-w-2xl text-base text-white/90 sm:text-lg">
+         <div className="mt-4 max-w-2xl text-lg text-white sm:text-lg">
             Find your host city and plan your match day — matches, restaurants, hotels,
             transport, tickets and fan zones near every stadium.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/locations"
-              className="rounded-[var(--radius-card)] border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong"
-            >
-              Browse host cities
-            </Link>
-            <OutboundLink
-              href={SITE.fifaScheduleUrl}
-              showIcon={false}
-              className="rounded-[var(--radius-card)] border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium text-white no-underline backdrop-blur-md transition-colors hover:bg-white/20 hover:text-white"
-            >
-              Full schedule ↗
-            </OutboundLink>
           </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+  <Link
+    href="/locations"
+    className="rounded-[var(--radius-card)] border border-accent bg-accent px-5 py-2.5 text-sm font-medium text-white !text-white transition-colors hover:bg-accent-strong"
+  >
+    Browse host cities
+  </Link>
+
+  <OutboundLink
+    href={SITE.fifaScheduleUrl}
+    showIcon={false}
+    className="rounded-[var(--radius-card)] border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium !text-white no-underline backdrop-blur-md transition-colors hover:bg-white/20 hover:!text-white"
+  >
+    Full schedule ↗
+  </OutboundLink>
+</div>
         </Container>
       </section>
 
@@ -79,7 +78,7 @@ export default function HomePage() {
         <Container className="py-12">
           <SectionHeading
             eyebrow="Matches"
-            title="Today & tomorrow"
+            title="Today & Tomorrow"
             action={<OutboundLink href={SITE.fifaScheduleUrl}>Full schedule</OutboundLink>}
           />
           <MatchList />
@@ -99,7 +98,7 @@ export default function HomePage() {
         <Container className="py-12">
           <SectionHeading
             eyebrow="News"
-            title="From the tournament"
+            title="From The Tournament"
             action={<Link href="/news" className="text-accent hover:text-accent-strong">All news →</Link>}
           />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
