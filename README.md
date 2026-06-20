@@ -163,5 +163,5 @@ The entire project is built to deploy on Vercel natively.
 1. **Static-first.** A fast site with almost no backend; add complexity only when needed.
 2. **Links, not heavy APIs.** Curated outbound links; the fan clicks out to official sources.
 3. **One predictable city-page layout** — learn it once, know every city.
-4. **Content-first design** — clean, legible, not "AI-generated"; no decorative shadow soup.
+4. **Content-first design** — clean & legible.
 5. **Modular monolith (backend) + feature-wise (frontend)** so the codebase grows cleanly.
