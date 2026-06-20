@@ -3,6 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import { corsOrigins } from "./config/env";
 import { healthRouter } from "./modules/health";
+import { authRouter } from "./modules/auth";
+import { newsRouter } from "./modules/news";
 import { errorHandler, notFound } from "./shared/middleware/error-handler";
 
 export function createApp() {
@@ -16,6 +18,8 @@ export function createApp() {
 
   // Feature modules (modular monolith — each owns its routes).
   app.use("/health", healthRouter);
+  app.use("/auth", authRouter);
+  app.use("/news", newsRouter);
 
   app.use(notFound);
   app.use(errorHandler);

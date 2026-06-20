@@ -1,0 +1,10 @@
+[
+  {
+    "email": "adminfifa@gmail.com",
+    "passwordHash": "$2b$10$NVBlfX0oIMFX6QC9yEt2leqGvDSgYhuTLRm/gqZrhD/1qXSYgwTQu",
+    "name": "Site Admin",
+    "role": "admin",
+    "id": "4f77f0a0-b487-4024-acdf-167eeb31c76c",
+    "createdAt": "2026-06-20T06:27:35.946Z"
+  }
+]
