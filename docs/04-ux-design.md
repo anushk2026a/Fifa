@@ -14,17 +14,17 @@
 
 ## 2. Visual language
 
-| Token | Choice | Notes |
-|-------|--------|-------|
-| **Type** | One strong sans (Inter / system stack) + a slightly condensed display weight for headings | Real hierarchy, not size-soup |
-| **Color — ink** | Near-black `#16181d` text on warm near-white `#fbfbf9` | Paper, not pure white |
-| **Color — accent** | One brand accent (finalized with brand) for links/CTAs/active | One accent only |
-| **Color — support** | 3–4 greys for borders, muted text, surfaces | |
-| **Borders** | 1px hairline `#e6e6e2`; small radius (4–6px), consistent | Borders do the work shadows would |
-| **Spacing** | 4px base scale; sections separated by large vertical rhythm | Whitespace is the layout tool |
-| **Shadows** | None on cards. One soft shadow reserved for the dropdown only | |
-| **Icons** | Lucide line icons, 1.5px stroke, for wayfinding not decoration | |
-| **Banner imagery** | Real stadium/cup/team photography with a soft blur/darken so headline text reads | No AI-gradient hero |
+| Token               | Choice                                                                                    | Notes                             |
+| ------------------- | ----------------------------------------------------------------------------------------- | --------------------------------- |
+| **Type**            | One strong sans (Inter / system stack) + a slightly condensed display weight for headings | Real hierarchy, not size-soup     |
+| **Color — ink**     | Near-black `#16181d` text on warm near-white `#fbfbf9`                                    | Paper, not pure white             |
+| **Color — accent**  | One brand accent (finalized with brand) for links/CTAs/active                             | One accent only                   |
+| **Color — support** | 3–4 greys for borders, muted text, surfaces                                               |                                   |
+| **Borders**         | 1px hairline `#e6e6e2`; small radius (4–6px), consistent                                  | Borders do the work shadows would |
+| **Spacing**         | 4px base scale; sections separated by large vertical rhythm                               | Whitespace is the layout tool     |
+| **Shadows**         | None on cards. One soft shadow reserved for the dropdown only                             |                                   |
+| **Icons**           | Lucide line icons, 1.5px stroke, for wayfinding not decoration                            |                                   |
+| **Banner imagery**  | Real stadium/cup/team photography with a soft blur/darken so headline text reads          | No AI-gradient hero               |
 
 ## 3. Layout system
 
@@ -35,6 +35,7 @@
 ## 4. Page wireframes
 
 ### 4.1 Home ("Sports", `/`)
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ HEADER  SportsOnePoint   Sports  Locations▾  News  Contact │
@@ -66,6 +67,7 @@
 ```
 
 ### 4.2 Locations (`/locations`)
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ ░░░ BANNER ░░░                                            │
@@ -83,6 +85,7 @@
 ```
 
 ### 4.3 City page (Dallas example)
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ ░░░ BANNER ░░░   Dallas · AT&T Stadium                     │
@@ -112,6 +115,7 @@
 ```
 
 ### 4.4 Listing row (the unit of the city page)
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  Name of place                                              │
@@ -119,13 +123,16 @@
 │  123 Main St, Arlington TX           [ Map ↗ ]  [ Site ↗ ] │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 - No shadow. Hairline separator between rows. Hover = subtle background tint only.
 - Distance bands are simple labeled sub-headings (1 / 2 / 5 / 10 mi), entries listed under each.
 
 ### 4.5 News (`/news`)
+
 - Simple list: title, date, 1–2 line summary, "Read at FIFA ↗". Plain bordered cards, no shadow.
 
 ### 4.6 Contact (`/contact`)
+
 - Banner + one line of copy. Single-column form (Name, Email, City dropdown, Message), labels above fields, clear success state. No marketing fluff.
 
 ## 5. Components (shadcn/ui, restyled flat)
@@ -135,11 +142,11 @@ Use shadcn/ui primitives but **strip default shadows, reduce radii, apply our to
 
 ## 6. Responsive behavior
 
-| Breakpoint | Behavior |
-|-----------|----------|
-| **< 640 (mobile)** | Single column. Header collapses to logo + menu (Sheet). City anchor chips become a horizontal scroll bar. Listing rows stack. Category boxes 1–2 per row. |
-| **640–1024 (tablet)** | City cards 2–3 per row; listings two columns where space allows. |
-| **> 1024 (desktop)** | Full grid; city header can show map + info side by side. |
+| Breakpoint            | Behavior                                                                                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **< 640 (mobile)**    | Single column. Header collapses to logo + menu (Sheet). City anchor chips become a horizontal scroll bar. Listing rows stack. Category boxes 1–2 per row. |
+| **640–1024 (tablet)** | City cards 2–3 per row; listings two columns where space allows.                                                                                          |
+| **> 1024 (desktop)**  | Full grid; city header can show map + info side by side.                                                                                                  |
 
 ## 7. Accessibility
 

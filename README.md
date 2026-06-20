@@ -3,7 +3,7 @@
 > **Your single point of reference for FIFA World Cup 2026.**
 > FIFA-related information, resources, and links in one place — for fans, enthusiasts, travelers, local communities, and businesses across all 16 host cities.
 
-🌐 **Domain:** [www.sportsonepoint.com](https://www.sportsonepoint.com)
+🌐 **Domain:** [www.SportsOnePoint.com](https://www.SportsOnePoint.com)
 📁 **Docs:** [`/docs`](./docs/README.md)
 
 ---
@@ -24,10 +24,10 @@ Most of the site is **curated links and content**. The only dynamic piece is **C
 
 A simple two-app setup (see [`/docs`](./docs/README.md)):
 
-| App | Stack | Hosts | Role |
-|-----|-------|-------|------|
-| **`frontend/`** | Next.js 15 (App Router), TypeScript, Tailwind, shadcn/ui | Vercel | The whole public site (prerendered) |
-| **`backend/`** | Express + TypeScript (**modular monolith**), Nodemailer (SMTP) | Render / Railway | The Contact feature (emails submissions) |
+| App             | Stack                                                          | Hosts            | Role                                     |
+| --------------- | -------------------------------------------------------------- | ---------------- | ---------------------------------------- |
+| **`frontend/`** | Next.js 15 (App Router), TypeScript, Tailwind, shadcn/ui       | Vercel           | The whole public site (prerendered)      |
+| **`backend/`**  | Express + TypeScript (**modular monolith**), Nodemailer (SMTP) | Render / Railway | The Contact feature (emails submissions) |
 
 - **Frontend** is **feature-wise**: `components/{home,city,news,contact,common}`, content in `src/data`, helpers in `src/lib`.
 - **Backend** is a **modular monolith**: feature modules under `src/modules/<feature>` (currently `contact`, `health`), shared code in `src/shared`.
@@ -39,28 +39,28 @@ A simple two-app setup (see [`/docs`](./docs/README.md)):
 
 ## Build Status — Phase 1
 
-| Layer | Status | Notes |
-|-------|--------|-------|
-| Menu / Nav | ✅ | Sports · Locations (dropdown, 16 cities) · News · Contact + mobile menu + footer |
-| Home (Sports) | ✅ | Banner, about, today/tomorrow matches, category boxes, news, FAQ |
-| Locations | ✅ | All 16 cities as photo cards, grouped by country |
-| City Pages (×16) | ✅ | Photo banner + 5 sections, curated restaurants/hotels/transport/tickets/screening |
-| News | ✅ | Static match items |
-| Contact | ✅ | Form → backend → **SMTP email** |
-| Backend (Contact) | ✅ | Express modular monolith, Nodemailer |
-| SEO | ✅ | Per-page metadata + JSON-LD, sitemap.xml, robots.txt, custom 404 |
+| Layer             | Status | Notes                                                                             |
+| ----------------- | ------ | --------------------------------------------------------------------------------- |
+| Menu / Nav        | ✅     | Sports · Locations (dropdown, 16 cities) · News · Contact + mobile menu + footer  |
+| Home (Sports)     | ✅     | Banner, about, today/tomorrow matches, category boxes, news, FAQ                  |
+| Locations         | ✅     | All 16 cities as photo cards, grouped by country                                  |
+| City Pages (×16)  | ✅     | Photo banner + 5 sections, curated restaurants/hotels/transport/tickets/screening |
+| News              | ✅     | Static match items                                                                |
+| Contact           | ✅     | Form → backend → **SMTP email**                                                   |
+| Backend (Contact) | ✅     | Express modular monolith, Nodemailer                                              |
+| SEO               | ✅     | Per-page metadata + JSON-LD, sitemap.xml, robots.txt, custom 404                  |
 
 ---
 
 ## Pages
 
-| Route | Page |
-|-------|------|
-| `/` | Home (Sports) |
-| `/locations` | All 16 cities |
+| Route            | Page                 |
+| ---------------- | -------------------- |
+| `/`              | Home (Sports)        |
+| `/locations`     | All 16 cities        |
 | `/cities/[slug]` | Individual city page |
-| `/news` | News |
-| `/contact` | Contact Us |
+| `/news`          | News                 |
+| `/contact`       | Contact Us           |
 
 ### 16 Host Cities
 
@@ -99,9 +99,11 @@ The contact form needs **both** running locally: the frontend posts to `NEXT_PUB
 ---
 
 ## Deployment
+
 ## 🚀 Setup & Development
 
 1. **Clone & Install**
+
    ```bash
    git clone https://github.com/yourusername/Fifa.git
    cd Fifa/frontend
@@ -120,7 +122,9 @@ The contact form needs **both** running locally: the frontend posts to `NEXT_PUB
 ## 🌍 Deployment
 
 ### Vercel (Frontend & Serverless API)
+
 The entire project is built to deploy on Vercel natively.
+
 1. Import the `frontend` folder into a new Vercel project.
 2. In Vercel Project Settings → Environment Variables, add:
    - `SMTP_HOST` (e.g. `smtp.gmail.com`)

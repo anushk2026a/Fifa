@@ -19,7 +19,7 @@ const schema = z.object({
   // MONGO_URI is accepted as an alias for convenience.
   MONGODB_URI: z.string().optional(),
   MONGO_URI: z.string().optional(),
-  MONGODB_DB: z.string().default("sportsonepoint"),
+  MONGODB_DB: z.string().default("SportsOnePoint"),
 });
 
 const parsed = schema.parse(process.env);

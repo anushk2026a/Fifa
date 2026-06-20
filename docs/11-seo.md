@@ -1,6 +1,6 @@
 # 11 — SEO Strategy (Phase 1: Static Site)
 
-SEO is a primary acquisition channel: fans search "[city] world cup hotels / transport / fan festival". Static export plays *into* this — every page is pre-rendered HTML with full metadata, so crawlers get real content on first byte, and pages are fast.
+SEO is a primary acquisition channel: fans search "[city] world cup hotels / transport / fan festival". Static export plays _into_ this — every page is pre-rendered HTML with full metadata, so crawlers get real content on first byte, and pages are fast.
 
 ## 1. URL structure
 
@@ -26,6 +26,7 @@ SEO is a primary acquisition channel: fans search "[city] world cup hotels / tra
 ## 4. Structured data (JSON-LD)
 
 Rendered as `<script type="application/ld+json">` in each static page:
+
 - **City page:** `Place`/`TouristDestination` for the city; `StadiumOrArena` for the stadium (name, address); `ItemList` for restaurants/hotels; `SportsEvent` for matches in that city.
 - **Restaurant/Hotel items:** `Restaurant` / `LodgingBusiness` with `address` and (where known) `telephone` — only fields we actually curate, no invented ratings.
 - **Breadcrumbs:** `BreadcrumbList` on city pages.
@@ -40,6 +41,7 @@ Rendered as `<script type="application/ld+json">` in each static page:
 ## 6. Programmatic SEO
 
 The 16 cities × consistent sections = a scalable, templated content surface:
+
 - **One canonical, rich page per city** — ranks for the city + multiple intents (hotels, restaurants, transport, tickets, screening) because the page genuinely covers them with real curated links.
 - **News** items target timely, recent-match queries.
 - **Internal linking:** home → cities; locations → cities; city → nearby cities + full schedule; consistent footer links spread equity.
@@ -48,6 +50,7 @@ The 16 cities × consistent sections = a scalable, templated content surface:
 ## 7. Performance = ranking
 
 Core Web Vitals are both a ranking factor and the UX bar:
+
 - Static export + Vercel CDN → fast TTFB and LCP.
 - `next/image` (responsive `srcset`, lazy, modern formats); reserved dimensions → low CLS.
 - Minimal JS (only the few interactive components hydrate) → good INP.

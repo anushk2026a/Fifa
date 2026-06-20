@@ -1,19 +1,20 @@
 # 07 — Database Design (MongoDB + Mongoose)
 
 > ⚠ **PHASE 2+ (FUTURE) — NOT part of the current static build.**
-> Phase 1 has **no database**; content lives in local `data/` files in the Next.js app. This MongoDB design is for *later*. The document shapes here intentionally mirror the Phase 1 data files, so migrating from hardcoded data to MongoDB is a swap, not a rewrite.
+> Phase 1 has **no database**; content lives in local `data/` files in the Next.js app. This MongoDB design is for _later_. The document shapes here intentionally mirror the Phase 1 data files, so migrating from hardcoded data to MongoDB is a swap, not a rewrite.
 
 MongoDB is a document database, so the design is about **collections, document shape, and embed-vs-reference decisions** — not normalized tables and joins. We model around how the app reads: the **city page is the hottest read**, so the city document is shaped to serve most of that page in one or two queries.
 
 ## 1. Embed vs reference — the rule we follow
 
-| Embed (store inside the parent document) when… | Reference (separate collection + id) when… |
-|---|---|
-| Data is small, bounded, owned by the parent | Data is large or unbounded (grows over time) |
-| Always read together with the parent | Queried/listed on its own |
-| Changes with the parent | Has its own lifecycle / many writers |
+| Embed (store inside the parent document) when… | Reference (separate collection + id) when…   |
+| ---------------------------------------------- | -------------------------------------------- |
+| Data is small, bounded, owned by the parent    | Data is large or unbounded (grows over time) |
+| Always read together with the parent           | Queried/listed on its own                    |
+| Changes with the parent                        | Has its own lifecycle / many writers         |
 
 Applied here:
+
 - **Embedded in `cities`:** stadium summary, SEO block, the 5 transport categories, ticket links. (Small, bounded, read with the page.)
 - **Separate collections referenced by `cityId`:** `pois` (restaurants/hotels — many, refreshed by a scheduled job), `fan_zones`, `matches`, `blog_posts`. (Large or independently queried.)
 - `stadiums` is kept as a thin separate collection (referenced) so geo queries and the POI refresh job have a clean target, with a denormalized summary copied into the city doc for fast reads.
@@ -21,6 +22,7 @@ Applied here:
 ## 2. Collections
 
 ### `cities` (aggregate root)
+
 ```jsonc
 {
   "_id": ObjectId,
@@ -55,13 +57,14 @@ Applied here:
     "title": "Dallas — FIFA World Cup 2026 Guide | SportsOnePoint",
     "description": "...",
     "ogImageId": ObjectId,
-    "canonical": "https://sportsonepoint.com/cities/dallas"
+    "canonical": "https://SportsOnePoint.com/cities/dallas"
   },
   "createdAt": ISODate, "updatedAt": ISODate
 }
 ```
 
 ### `stadiums`
+
 ```jsonc
 {
   "_id": ObjectId,
@@ -78,6 +81,7 @@ Applied here:
 ```
 
 ### `pois` (restaurants + hotels — curated + cached)
+
 ```jsonc
 {
   "_id": ObjectId,
@@ -103,6 +107,7 @@ Applied here:
 ```
 
 ### `fan_zones`
+
 ```jsonc
 {
   "_id": ObjectId, "cityId": ObjectId,
@@ -116,6 +121,7 @@ Applied here:
 ```
 
 ### `matches` & `teams`
+
 ```jsonc
 // matches
 {
@@ -134,6 +140,7 @@ Applied here:
 ```
 
 ### `blog_posts`, `blog_categories`, `redirects`
+
 ```jsonc
 // blog_posts
 {
@@ -157,6 +164,7 @@ Applied here:
 ```
 
 ### Platform collections
+
 ```jsonc
 // admin_users
 { "_id": ObjectId, "email": "editor@...", "passwordHash": "...", "role": "editor", // admin | editor
@@ -194,18 +202,18 @@ Applied here:
 
 ## 3. Indexes
 
-| Collection | Index | Why |
-|-----------|-------|-----|
-| `cities` | `{ slug: 1 }` unique; `{ region: 1 }`; `{ status: 1 }` | slug lookup, region listing |
-| `stadiums` | `{ cityId: 1 }`; `{ location: '2dsphere' }` | geo queries for POI banding |
-| `pois` | `{ cityId: 1, type: 1, band: 1 }`; `{ externalId: 1 }` unique; `{ location: '2dsphere' }`; `{ cityId:1, type:1, 'curation.isHidden':1, rating:-1 }` | city section reads, upsert key, distance, ranking |
-| `fan_zones` | `{ cityId: 1, category: 1 }`; `{ location: '2dsphere' }` | section reads |
-| `matches` | `{ kickoffUtc: 1 }`; `{ cityId: 1 }`; `{ externalId: 1 }` unique; `{ status: 1 }` | today/tomorrow, city schedule, upsert |
-| `blog_posts` | `{ slug: 1 }` unique; `{ status:1, publishedAt:-1 }`; `{ categorySlugs: 1 }`; Atlas Search / `$text` | index list, category, search |
-| `contact_submissions` | `{ status: 1, createdAt: -1 }` | CMS inbox |
-| `admin_users` | `{ email: 1 }` unique | login |
-| `analytics_events` | time-series `{ ts }` + `{ type:1, ts:-1 }` | dashboards |
-| `redirects` | `{ from: 1 }` unique | redirect lookup |
+| Collection            | Index                                                                                                                                               | Why                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `cities`              | `{ slug: 1 }` unique; `{ region: 1 }`; `{ status: 1 }`                                                                                              | slug lookup, region listing                       |
+| `stadiums`            | `{ cityId: 1 }`; `{ location: '2dsphere' }`                                                                                                         | geo queries for POI banding                       |
+| `pois`                | `{ cityId: 1, type: 1, band: 1 }`; `{ externalId: 1 }` unique; `{ location: '2dsphere' }`; `{ cityId:1, type:1, 'curation.isHidden':1, rating:-1 }` | city section reads, upsert key, distance, ranking |
+| `fan_zones`           | `{ cityId: 1, category: 1 }`; `{ location: '2dsphere' }`                                                                                            | section reads                                     |
+| `matches`             | `{ kickoffUtc: 1 }`; `{ cityId: 1 }`; `{ externalId: 1 }` unique; `{ status: 1 }`                                                                   | today/tomorrow, city schedule, upsert             |
+| `blog_posts`          | `{ slug: 1 }` unique; `{ status:1, publishedAt:-1 }`; `{ categorySlugs: 1 }`; Atlas Search / `$text`                                                | index list, category, search                      |
+| `contact_submissions` | `{ status: 1, createdAt: -1 }`                                                                                                                      | CMS inbox                                         |
+| `admin_users`         | `{ email: 1 }` unique                                                                                                                               | login                                             |
+| `analytics_events`    | time-series `{ ts }` + `{ type:1, ts:-1 }`                                                                                                          | dashboards                                        |
+| `redirects`           | `{ from: 1 }` unique                                                                                                                                | redirect lookup                                   |
 
 ## 4. Geo queries (5mi / 10mi bands)
 
@@ -214,6 +222,7 @@ POIs carry a precomputed `distanceMiles` and `band` (set by the refresh job from
 ## 5. Data integrity (without foreign keys)
 
 MongoDB has no FK constraints, so integrity is enforced in the **service layer**:
+
 - References (`cityId`, `stadiumId`) validated on write; orphan cleanup on city delete (cascade in `cityService`).
 - **Multi-document transactions** (replica set) used where a write spans collections (e.g., publish city + write featured entry + audit log).
 - Schema enforced by **Mongoose schemas + Zod** at the API edge; MongoDB JSON Schema validation enabled on critical collections as a backstop.

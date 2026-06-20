@@ -19,13 +19,15 @@ Very little to operate: a prerendered Next.js site on Vercel, plus one small Exp
 ```
 
 **Frontend (Vercel)**
+
 - **Root Directory = `frontend`** (the repo root has `frontend/`, `backend/`, `docs/`; Vercel must be pointed at the app, or it won't detect Next.js).
 - **Build:** `next build` (default). Vercel runs Next.js natively.
 - **Env:** `NEXT_PUBLIC_API_URL` = the backend URL.
-- **Domain:** `www.sportsonepoint.com` via Vercel DNS / CNAME. TLS automatic.
+- **Domain:** `www.SportsOnePoint.com` via Vercel DNS / CNAME. TLS automatic.
 - **Preview deploys:** every PR gets a URL; merge to `main` → production.
 
 **Backend (Render / Railway)**
+
 - **Root Directory = `backend`.** Build `npm install && npm run build`, start `npm start`.
 - **Env:** `SMTP_*`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = the Vercel domain(s).
 - A single small always-on instance is plenty (the free/Hobby tier suffices).
@@ -41,6 +43,7 @@ cd frontend && npm install && npm run dev   # http://localhost:3000
 # Backend (separate terminal)
 cd backend && cp .env.example .env && npm install && npm run dev   # http://localhost:4000
 ```
+
 - Node 18+, npm.
 - The contact form needs both running; set `NEXT_PUBLIC_API_URL=http://localhost:4000`.
 - Editing site content = editing `frontend/src/data/*.ts`.
@@ -53,6 +56,7 @@ cd backend && cp .env.example .env && npm install && npm run dev   # http://loca
 ## 4. Monitoring & logging
 
 Kept minimal and sufficient:
+
 - **Vercel dashboard** — build logs, deploy status, basic traffic/analytics.
 - **Vercel Web Analytics** (or Plausible) — page views and Web Vitals.
 - **Uptime ping** (UptimeRobot/BetterStack) on the home page — optional.
@@ -73,6 +77,7 @@ No Prometheus/Grafana/OTel/PagerDuty — the only backend is the tiny contact se
 ## 6. CI/CD
 
 Lightweight — GitHub Actions for checks, Vercel for deploys.
+
 ```
 on PR:
   npm ci → typecheck → lint → build (next build / export)
@@ -81,6 +86,7 @@ on PR:
 on merge to main:
   Vercel auto-deploys to production
 ```
+
 - Gates: typecheck, lint, successful static build. Optional Lighthouse budget check on the preview URL.
 - **Rollback:** Vercel keeps previous deploys — one-click rollback.
 

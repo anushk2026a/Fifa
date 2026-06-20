@@ -5,7 +5,7 @@ Phase 1 is the **Next.js app** in `frontend/` plus a **small Express backend** i
 ## 1. Repo top level
 
 ```
-sportsonepoint/
+SportsOnePoint/
 ├─ CLAUDE.md              # repo working agreement (git rule, architecture)
 ├─ docs/                  # this documentation set
 ├─ frontend/              # the Next.js 15 app (the public site)
@@ -79,45 +79,51 @@ export type Place = {
   name: string;
   phone?: string;
   address: string;
-  mapUrl: string;           // google maps link — powers [Map ↗]
+  mapUrl: string; // google maps link — powers [Map ↗]
   website?: string;
-  distanceMiles: number;    // curated distance from the stadium
-  note?: string;            // cuisine/price/route note, etc.
+  distanceMiles: number; // curated distance from the stadium
+  note?: string; // cuisine/price/route note, etc.
 };
 
-export type DistanceBand = '1mi' | '2mi' | '5mi' | '10mi';
+export type DistanceBand = "1mi" | "2mi" | "5mi" | "10mi";
 
 export type TransportOption = {
-  category: 'shared_ride' | 'metro' | 'parking' | 'getting_there';
+  category: "shared_ride" | "metro" | "parking" | "getting_there";
   title: string;
   url: string;
   note?: string;
 };
 
 export type City = {
-  slug: string;             // 'dallas'
-  name: string;             // 'Dallas'
-  country: 'USA' | 'Canada' | 'Mexico';
-  region: 'West' | 'Central' | 'East';
+  slug: string; // 'dallas'
+  name: string; // 'Dallas'
+  country: "USA" | "Canada" | "Mexico";
+  region: "West" | "Central" | "East";
   stadium: { name: string; address: string; mapUrl: string };
-  gettingThere: string;     // one-line summary
-  bannerImage: string;      // /images/cities/dallas.jpg
+  gettingThere: string; // one-line summary
+  bannerImage: string; // /images/cities/dallas.jpg
   restaurants: Partial<Record<DistanceBand, Place[]>>; // 1/2/5/10
-  hotels: Partial<Record<'5mi' | '10mi', Place[]>>;
+  hotels: Partial<Record<"5mi" | "10mi", Place[]>>;
   transportation: TransportOption[];
   tickets: { label: string; url: string; official: boolean }[];
-  screeningZones: { name: string; type: string; address?: string; url: string; note?: string }[];
+  screeningZones: {
+    name: string;
+    type: string;
+    address?: string;
+    url: string;
+    note?: string;
+  }[];
   seo: { title: string; description: string };
 };
 
 export type Match = {
-  date: string;             // '2026-06-18' (venue-local date)
-  kickoff: string;          // '18:00'
+  date: string; // '2026-06-18' (venue-local date)
+  kickoff: string; // '18:00'
   citySlug: string;
   stadium: string;
   home: { name: string; code: string; score?: number };
   away: { name: string; code: string; score?: number };
-  status: 'scheduled' | 'live' | 'finished';
+  status: "scheduled" | "live" | "finished";
 };
 ```
 

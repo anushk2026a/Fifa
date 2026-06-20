@@ -1,11 +1,13 @@
 # CLAUDE.md — working agreement for this repo
 
 ## Git (hard rule — do not break)
+
 - **NEVER run `git add`, `git commit`, or `git push`** (or any other git write command).
 - Only **suggest** the exact git commands; the user runs them.
 - The user owns every commit and push.
 
 ## Architecture
+
 - **Backend (`backend/`): Modular Monolith.** One Express app. Organize by bounded
   context under `src/modules/<feature>` (e.g. `modules/contact`). Each module owns its
   router, service, validation and types. Modules talk only through exported services —
@@ -15,7 +17,9 @@
   shared pieces in `components/common`, content in `src/data`, helpers in `src/lib`.
 
 ## Project
-SportsOnePoint.com — a FIFA World Cup 2026 information directory.
+
+FIFA-One Point.com — a FIFA World Cup 2026 information directory.
+
 - **Frontend:** Next.js 15 (App Router, static export) on Vercel. Content curated in
   `frontend/src/data`.
 - **Backend:** a small Express service. Phase 1 scope = the **Contact** feature, which
@@ -23,6 +27,7 @@ SportsOnePoint.com — a FIFA World Cup 2026 information directory.
 - Full design docs are in `/docs`.
 
 ## Conventions
+
 - TypeScript end-to-end. Validate all input with **Zod**.
 - Keep it simple — add infrastructure only when there's a real need.
 - Secrets via environment variables only; never commit real credentials.

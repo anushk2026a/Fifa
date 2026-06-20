@@ -12,7 +12,7 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 ## 1. Brand / Global
 
 - **Site name:** "SportsOnePoint" _(shown as Sports**One**Point)_
-- **Domain:** sportsonepoint.com
+- **Domain:** SportsOnePoint.com
 - **Tagline:** "Your single point of reference for FIFA World Cup 2026."
 - **Site description (SEO / social share):** "FIFA World Cup 2026 in one place — host cities, today's & tomorrow's matches, and the restaurants, hotels, transport, tickets and fan zones near every stadium."
 - **Default browser tab title:** "SportsOnePoint — FIFA World Cup 2026"
@@ -22,25 +22,28 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 ## 2. Navigation
 
 ### Header (top menu)
+
 - "Sports" _(link to Home)_
 - "Locations" _(dropdown of host cities)_
 - "News"
 - "Contact Us"
 
 ### Footer
+
 - Brand line: "Sports**One**Point"
 - Tagline: "Your single point of reference for FIFA World Cup 2026."
 - Disclaimer: "Always buy tickets only from official FIFA sources."
 - Column heading: "Explore" → links: "Sports (Home)", "Locations", "News", "Contact Us", "Full FIFA schedule"
 - Column heading: "Host cities" → list of all 16 city names
 - Bottom line (left): "© [current year] SportsOnePoint. Not affiliated with FIFA."
-- Bottom line (right): "sportsonepoint.com"
+- Bottom line (right): "SportsOnePoint.com"
 
 ---
 
 ## 3. Home page
 
 ### Hero banner
+
 - Eyebrow: "FIFA World Cup 2026 · USA · Canada · Mexico"
 - Heading (H1): "One point for everything World Cup 2026."
 - Subtext: "Find your host city and plan your match day — matches, restaurants, hotels, transport, tickets and fan zones near every stadium."
@@ -48,16 +51,19 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 - Button 2: "Full schedule ↗"
 
 ### About
+
 - Eyebrow: "About"
 - Body: "Find places near your match location. We gather the official links and local know-how for all 16 host cities so you can eat, sleep, get to the stadium, grab tickets and find where to watch — all in one place."
 
 ### Matches
+
 - Eyebrow: "Matches"
 - Heading: "Today & tomorrow"
 - Link: "Full schedule"
 - _(The match list itself — teams, dates, kickoff times — is live fixture data.)_
 
 ### Experience / Plan your trip (the 5 cards)
+
 - Eyebrow: "Plan your trip"
 - Heading: "Experience FIFA World Cup 2026"
 - Card 1 — "Restaurants": "Eat near the stadium — within 1, 2, 5 or 10 miles."
@@ -68,15 +74,18 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 - Each card link: "Choose a city →"
 
 ### News (homepage preview)
+
 - Eyebrow: "News"
 - Heading: "From the tournament"
 - Link: "All news →"
 - _(Shows the 3 latest news items — see section 6.)_
 
 ### FAQ _(see full list in section 9)_
+
 - Heading (H2): "FIFA World Cup 2026 — Frequently Asked Questions"
 
 ### Directory search box
+
 - Heading: "Refine Your Search"
 - Subtext: "Use our directory finder to instantly discover curated local recommendations for your host city:"
 - Field 1 label: "Host City" (placeholder "Select City")
@@ -105,6 +114,7 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 - Below form: "We will use your details to respond to your enquiry."
 
 ### Contact info panel (left side of form)
+
 - Heading: "Get in Touch"
 - Subtext: "Have questions about locations, venues, or host cities? Drop us a line."
 - Location Name: "One Main Place"
@@ -114,6 +124,7 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 - Working Hours: Mon – Fri "6:00 AM - 7:00 PM" · Sat "6:00 AM - 1:00 PM" · Sun "Closed"
 
 ### Contact form
+
 - Fields: "Name", "Email", "Phone (optional)", "Country", "City", "Message"
 - Message placeholder: "e.g. Which stadium hosts the Dallas matches, and how do I get there?"
 - Submit button: "Send details" (while sending: "Sending…")
@@ -161,18 +172,22 @@ These appear the same on all 16 city pages:
 - Back link: "← All host cities"
 
 **Shared transport options (same wording in every city, alongside the city-specific transit line):**
+
 - "Uber & Lyft pickup zones" — "Use the stadium's marked rideshare areas on match days."
 - "Pre-book stadium parking" — "Reserve a spot ahead of match day to skip the queues."
 - "Getting there | [Stadium] | FIFA World Cup 2026" (+ embedded YouTube travel guide)
 
 **Default Fan Festival text (used where a city has no custom note):**
+
 - "[City] FIFA Fan Festival" — "Free live screenings, food and music during the tournament (venue confirmed closer to kick-off)."
 
 **Empty-state text (shown if a section has no listings yet):**
+
 - Restaurants/Hotels: "Curated [restaurant/hotel] listings for [City] are coming soon. In the meantime, search near [Stadium]."
 - Screening: "Fan festival and public viewing details are coming soon."
 
 **Each city's SEO title/description follow this pattern:**
+
 - Title: "[City] — FIFA World Cup 2026 Guide | SportsOnePoint"
 - Description: "Restaurants, hotels, transportation, tickets and fan zones near [Stadium] for FIFA World Cup 2026 in [City]."
 
@@ -183,6 +198,7 @@ These appear the same on all 16 city pages:
 _Format for each place: **Name** — note/cuisine · price — distance — address_
 
 ### 8.1 Atlanta (USA · East)
+
 - **Stadium:** Mercedes-Benz Stadium · 1 AMB Dr NW, Atlanta, GA 30313 · 71,000 capacity
 - **Getting there:** "MARTA rail runs from the airport to downtown, a short walk from the stadium."
 - **Transit line:** "MARTA rail — GWCC/CNN Center & Vine City stations" — "Both stations are a short walk to the stadium; ~20 min from the airport."
@@ -195,6 +211,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: The Georgian Terrace Hotel (Historic, 2.5 mi, 659 Peachtree St NE)
 
 ### 8.2 Boston (USA · East)
+
 - **Stadium:** Gillette Stadium · 1 Patriot Pl, Foxborough, MA 02035 · 65,000 capacity
 - **Getting there:** "Match-day express commuter rail and buses run to Foxborough from Boston's South Station."
 - **Transit line:** "MBTA special event commuter rail to Foxboro" — "Event trains run from South Station on match days; check the MBTA event schedule."
@@ -206,6 +223,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Residence Inn Foxborough (1.2 mi, 250 Foxborough Blvd)
 
 ### 8.3 Dallas (USA · Central)
+
 - **Stadium:** AT&T Stadium · 1 AT&T Way, Arlington, TX 76011 · 80,000 capacity
 - **Getting there:** "Take a DART connection plus a match-day shuttle, or pre-book parking near the stadium."
 - **Transit line:** "DART rail + Arlington shuttle" — "DART to a connecting shuttle; there is no direct rail to the stadium."
@@ -219,6 +237,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
 - **Fan Festival (custom):** "Dallas FIFA Fan Festival" · Downtown Dallas (venue TBA) — "Free live screenings, food and music during the tournament."
 
 ### 8.4 Houston (USA · Central)
+
 - **Stadium:** NRG Stadium · 1 NRG Pkwy, Houston, TX 77054 · 72,000 capacity
 - **Getting there:** "METRORail's Red Line stops right at NRG Stadium; extra World Cup service runs on match days."
 - **Transit line:** "METRORail Red Line — Stadium Park/Astrodome station" — "The Red Line drops you next to the stadium; extra trains run for World Cup matches."
@@ -230,6 +249,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Hilton Houston Plaza/Medical Center (3.0 mi, 6633 Travis St)
 
 ### 8.5 Kansas City (USA · Central)
+
 - **Stadium:** Arrowhead Stadium · 1 Arrowhead Dr, Kansas City, MO 64129 · 76,000 capacity
 - **Getting there:** "Game-day bus passes connect the airport, downtown and the stadium; rideshare and parking are also available."
 - **Transit line:** "RideKC buses & game-day service" — "RideKC runs game-day connections; the streetcar serves downtown only."
@@ -240,6 +260,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Loews Kansas City Hotel (Downtown, 7.5 mi, 1515 Wyandotte St)
 
 ### 8.6 Los Angeles (USA · West)
+
 - **Stadium:** SoFi Stadium · 1001 Stadium Dr, Inglewood, CA 90301 · 70,000 capacity
 - **Getting there:** "Metro rail plus stadium shuttles; reserve parking ahead or connect from LAX."
 - **Transit line:** "LA Metro K Line — Downtown Inglewood station" — "Take the K Line to Downtown Inglewood, then a stadium shuttle."
@@ -251,6 +272,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Cambria Hotel LAX (4.2 mi, 199 Continental Blvd, El Segundo)
 
 ### 8.7 Miami (USA · East)
+
 - **Stadium:** Hard Rock Stadium · 347 Don Shula Dr, Miami Gardens, FL 33056 · 65,000 capacity
 - **Getting there:** "Rideshare and pre-booked parking are the simplest routes to Miami Gardens."
 - **Transit line:** "Miami-Dade Transit & match-day shuttles" — "There's no direct rail; use rideshare, shuttles or Miami-Dade bus connections."
@@ -261,6 +283,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: JW Marriott Miami Turnberry Resort & Spa (6.5 mi, 19999 W Country Club Dr) · Residence Inn Aventura Mall (6.8 mi, 19900 W Country Club Dr)
 
 ### 8.8 New York / New Jersey (USA · East)
+
 - **Stadium:** MetLife Stadium · 1 MetLife Stadium Dr, East Rutherford, NJ 07073 · 82,000 capacity
 - **Getting there:** "NJ Transit runs match-day trains to the Meadowlands from NY Penn Station via Secaucus Junction."
 - **Transit line:** "NJ Transit — Meadowlands Rail Line (via Secaucus Junction)" — "Take NJ Transit to Secaucus Junction, then the Meadowlands train on match days."
@@ -272,6 +295,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Hyatt Regency Jersey City on the Hudson (NYC skyline views, 8.0 mi, 2 Exchange Pl)
 
 ### 8.9 Philadelphia (USA · East)
+
 - **Stadium:** Lincoln Financial Field · 1 Lincoln Financial Field Way, Philadelphia, PA 19148 · 69,000 capacity
 - **Getting there:** "SEPTA's Broad Street Line drops you steps from the South Philadelphia sports complex."
 - **Transit line:** "SEPTA Broad Street Line — NRG station" — "Ride the Broad Street Line straight to NRG, beside the stadium."
@@ -283,6 +307,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Sofitel Philadelphia at Rittenhouse Square (Center City, 4.0 mi, 120 S 17th St)
 
 ### 8.10 San Francisco Bay Area (USA · West)
+
 - **Stadium:** Levi's Stadium · 4900 Marie P DeBartolo Way, Santa Clara, CA 95054 · 68,500 capacity
 - **Getting there:** "VTA light rail and Caltrain (with a shuttle) connect to Santa Clara on match days."
 - **Transit line:** "VTA light rail — Great America station" — "VTA light rail stops at the stadium; Caltrain riders connect via a shuttle."
@@ -292,6 +317,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 5 mi: Hilton Santa Clara (Next to the stadium, 0.3 mi, 4949 Great America Pkwy) · Hyatt Centric Santa Clara Silicon Valley (0.4 mi, 5101 Great America Pkwy) · Santa Clara Marriott (1.2 mi, 2700 Mission College Blvd)
 
 ### 8.11 Seattle (USA · West)
+
 - **Stadium:** Lumen Field · 800 Occidental Ave S, Seattle, WA 98134 · 69,000 capacity
 - **Getting there:** "Link light rail and Sounder trains stop next to the stadium in downtown Seattle."
 - **Transit line:** "Sound Transit Link & Sounder — Stadium station" — "Link light rail and Sounder trains stop right beside Lumen Field."
@@ -302,6 +328,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 5 mi: Silver Cloud Hotel Seattle Stadium (Across from the stadium, 0.2 mi, 1046 1st Ave S) · Embassy Suites by Hilton Seattle Downtown Pioneer Square (0.7 mi, 255 S King St)
 
 ### 8.12 Toronto (Canada · East)
+
 - **Stadium:** BMO Field · 170 Princes' Blvd, Toronto, ON M6K 3C3 · 45,000 capacity
 - **Getting there:** "TTC streetcars and GO Transit serve Exhibition Place, right beside the stadium."
 - **Transit line:** "TTC streetcars 509/511 & GO Transit Exhibition" — "Take the 509 Harbourfront or 511 Bathurst streetcar, or GO Transit to Exhibition."
@@ -313,6 +340,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
 - **Fan Festival (custom note):** "Toronto's official Fan Festival is planned at Fort York / Exhibition area — details to be confirmed."
 
 ### 8.13 Vancouver (Canada · West)
+
 - **Stadium:** BC Place · 777 Pacific Blvd, Vancouver, BC V6B 4Y8 · 54,000 capacity
 - **Getting there:** "SkyTrain's Stadium–Chinatown station is right at BC Place."
 - **Transit line:** "SkyTrain — Stadium–Chinatown station" — "The Expo Line's Stadium–Chinatown station is at the door of BC Place."
@@ -323,6 +351,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
 - **Fan Festival (custom note):** "Vancouver hosts a free fan festival with live matches on big screens — venue confirmed closer to kick-off."
 
 ### 8.14 Mexico City (Mexico · Central)
+
 - **Stadium:** Estadio Azteca · Calz. de Tlalpan 3465, Coyoacán, CDMX · 83,000 capacity
 - **Getting there:** "The Tren Ligero light rail connects the Metro network to the Estadio Azteca stop."
 - **Transit line:** "Tren Ligero — Estadio Azteca station" — "Take the Metro to Tasqueña, then the Tren Ligero to Estadio Azteca."
@@ -333,6 +362,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Fiesta Inn Perisur (5.5 mi, Periférico Sur 4949) · Hampton Inn & Suites Mexico City Centro Historico (8.0 mi, Av. Juárez 85)
 
 ### 8.15 Guadalajara (Mexico · Central)
+
 - **Stadium:** Estadio Akron · Anillo Perif. Sur, Zapopan, Jalisco · 49,000 capacity
 - **Getting there:** "Use rideshare or pre-booked parking to reach Zapopan on match days."
 - **Transit line:** "Mi Macro Periférico & local transit (SITEUR)" — "Transit reaches Zapopan; rideshare is the simplest door-to-door option."
@@ -343,6 +373,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
   - Within 10 mi: Fiesta Americana Guadalajara Country Club (8.0 mi, Av. Mariano Otero 1313)
 
 ### 8.16 Monterrey (Mexico · Central)
+
 - **Stadium:** Estadio BBVA · Av. Pablo Livas 2011, Guadalupe, Nuevo León · 53,000 capacity
 - **Getting there:** "Rideshare and shuttle services are the easiest way to reach Estadio BBVA in Guadalupe."
 - **Transit line:** "Metrorrey & local transit" — "Metrorrey serves the city; use rideshare for the final stretch to the stadium."
@@ -372,6 +403,7 @@ _Format for each place: **Name** — note/cuisine · price — distance — addr
 ## 10. Other pages
 
 ### 404 / Page not found
+
 - Label: "404"
 - Heading: "Page not found"
 - Body: "That page isn't here. Pick a host city or head back to the home page."

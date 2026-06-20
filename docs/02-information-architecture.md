@@ -10,13 +10,13 @@ A small, deliberate header. The logo and **Sports** both go Home.
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
-| Item | Goes to | Notes |
-|------|---------|-------|
-| **Logo / wordmark** | `/` | Home |
-| **Sports** | `/` | The client's name for **Home** — Sports *is* the home page |
-| **Locations ▾** | dropdown + `/locations` | 16 cities grouped by country; also a landing page |
-| **News** | `/news` | Static recent-match items |
-| **Contact Us** | `/contact` | Form |
+| Item                | Goes to                 | Notes                                                      |
+| ------------------- | ----------------------- | ---------------------------------------------------------- |
+| **Logo / wordmark** | `/`                     | Home                                                       |
+| **Sports**          | `/`                     | The client's name for **Home** — Sports _is_ the home page |
+| **Locations ▾**     | dropdown + `/locations` | 16 cities grouped by country; also a landing page          |
+| **News**            | `/news`                 | Static recent-match items                                  |
+| **Contact Us**      | `/contact`              | Form                                                       |
 
 > "Sports" = Home is intentional. The client didn't want the label "Home." When this doc says "Home page," that is the **Sports** tab at `/`.
 
@@ -54,6 +54,7 @@ Locations ▾
 ## 4. Page-by-page structure
 
 ### 4.1 Home (`/`, the "Sports" tab)
+
 ```
 1. BANNER            FIFA cup / stadium / teams, soft-blur treatment
 2. ABOUT             "Find Places near your Match Location" + short intro
@@ -68,10 +69,12 @@ Locations ▾
 6. FAQ              common questions (accordion)
    FOOTER            cities, news, contact, official-sources note
 ```
+
 - Match rows show: teams, score (if finished) or kickoff time, host city (links to that city page), stadium, status.
 - "Today/Tomorrow" is derived from the device date against the static match data — the correct two days surface automatically.
 
 ### 4.2 Locations (`/locations`)
+
 ```
 1. BANNER
 2. CITY GRID         16 cards, grouped by country (USA / Canada / Mexico)
@@ -81,7 +84,9 @@ Locations ▾
 ```
 
 ### 4.3 City page (`/cities/{slug}`)
+
 Identical structure for all 16, so a fan learns it once. Order: orient → eat → sleep → get there → tickets → watch.
+
 ```
 1. BANNER            city + stadium
    (header: city, country, stadium name, "getting there" one-liner,
@@ -98,20 +103,24 @@ Identical structure for all 16, so a fan learns it once. Order: orient → eat �
 ```
 
 **Listing format (left-aligned), the unit of the page:**
+
 ```
 Name of place
 Phone · 1.2 mi from stadium
 123 Main St, Arlington, TX        [ Map ↗ ]   [ Website ↗ ]
 ```
+
 Each entry: **Name · Phone · Address (+ Map link) · Distance from stadium**, plus category-specific extras (e.g., cuisine/price for restaurants, a route note for transport).
 
 ### 4.4 News (`/news`)
+
 ```
 1. BANNER (optional / lightweight)
 2. NEWS LIST   2–3 items: title, date, short summary, source link ↗
 ```
 
 ### 4.5 Contact (`/contact`)
+
 ```
 1. BANNER + copy: "You may share your details and we will guide you for your location."
 2. FORM         Name · Email · City (dropdown of 16) · Message → submit
@@ -123,24 +132,24 @@ Each entry: **Name · Phone · Address (+ Map link) · Distance from stadium**, 
 
 This is the seed data for `data/cities`.
 
-| City | Country | Region | Stadium |
-|------|---------|--------|---------|
-| Atlanta | USA | East | Mercedes-Benz Stadium |
-| Boston (Foxborough) | USA | East | Gillette Stadium |
-| Dallas (Arlington) | USA | Central | AT&T Stadium |
-| Houston | USA | Central | NRG Stadium |
-| Kansas City | USA | Central | Arrowhead Stadium |
-| Los Angeles (Inglewood) | USA | West | SoFi Stadium |
-| Miami (Miami Gardens) | USA | East | Hard Rock Stadium |
-| New York / New Jersey (East Rutherford) | USA | East | MetLife Stadium |
-| Philadelphia | USA | East | Lincoln Financial Field |
-| San Francisco Bay Area (Santa Clara) | USA | West | Levi's Stadium |
-| Seattle | USA | West | Lumen Field |
-| Toronto | Canada | East | BMO Field |
-| Vancouver | Canada | West | BC Place |
-| Mexico City | Mexico | Central | Estadio Azteca |
-| Guadalajara | Mexico | Central | Estadio Akron |
-| Monterrey | Mexico | Central | Estadio BBVA |
+| City                                    | Country | Region  | Stadium                 |
+| --------------------------------------- | ------- | ------- | ----------------------- |
+| Atlanta                                 | USA     | East    | Mercedes-Benz Stadium   |
+| Boston (Foxborough)                     | USA     | East    | Gillette Stadium        |
+| Dallas (Arlington)                      | USA     | Central | AT&T Stadium            |
+| Houston                                 | USA     | Central | NRG Stadium             |
+| Kansas City                             | USA     | Central | Arrowhead Stadium       |
+| Los Angeles (Inglewood)                 | USA     | West    | SoFi Stadium            |
+| Miami (Miami Gardens)                   | USA     | East    | Hard Rock Stadium       |
+| New York / New Jersey (East Rutherford) | USA     | East    | MetLife Stadium         |
+| Philadelphia                            | USA     | East    | Lincoln Financial Field |
+| San Francisco Bay Area (Santa Clara)    | USA     | West    | Levi's Stadium          |
+| Seattle                                 | USA     | West    | Lumen Field             |
+| Toronto                                 | Canada  | East    | BMO Field               |
+| Vancouver                               | Canada  | West    | BC Place                |
+| Mexico City                             | Mexico  | Central | Estadio Azteca          |
+| Guadalajara                             | Mexico  | Central | Estadio Akron           |
+| Monterrey                               | Mexico  | Central | Estadio BBVA            |
 
 ## 6. URL conventions
 
