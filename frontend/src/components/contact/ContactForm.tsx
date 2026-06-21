@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   Globe,
   Trophy,
-  Users,
   Camera,
   User,
   Mail,
@@ -12,14 +11,8 @@ import {
   Phone,
   Building2,
   Send,
+  Link2,
 } from "lucide-react";
-
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaYoutube,
-  FaXTwitter,
-} from "react-icons/fa6";
 
 const API_URL = "/api/contact";
 
@@ -65,7 +58,7 @@ export function ContactForm() {
 
             <div className="bg-gradient-to-b from-[#012A6B] to-[#001B44] p-10 text-white">
               <h2 className="mb-5 text-5xl font-bold leading-tight">
-                Share Your FIFA World Cup Experience
+                Share Your FIFA Experiences
               </h2>
 
               <p className="mb-10 text-lg text-white/90">
@@ -86,16 +79,16 @@ export function ContactForm() {
                   text="Top stories will be featured on FIFA-OnePoint."
                 />
 
-                <Feature
+                {/* <Feature
                   icon={<Users size={20} />}
                   title="Join The Community"
                   text="Become a part of a passionate football community."
-                />
+                /> */}
 
                 <Feature
                   icon={<Camera size={20} />}
                   title="Share Your Moments"
-                  text="Photos, videos and stories make every memory unforgettable."
+                  text="Share your stories and make every moments unforgettable."
                 />
               </div>
             </div>
@@ -104,7 +97,7 @@ export function ContactForm() {
 
             <div className="p-8 lg:p-12">
               <h2 className="text-5xl font-bold text-[#012A6B]">
-                Share Your Experience
+                Share Experiences
               </h2>
 
               <div className="mt-3 mb-10 h-1 w-16 rounded bg-blue-600"></div>
@@ -168,38 +161,18 @@ export function ContactForm() {
                 {/* SOCIAL LINKS */}
 
                 <div>
-                  <h3 className="mb-4 text-lg font-semibold text-slate-800">
-                    Social Profiles (Optional)
-                  </h3>
-
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="">
+                    <label className="mb-2 block text-sm font-semibold text-slate-700">
+                      Social Profile / URL
+                    </label>
                     <InputField
-                      icon={<FaFacebookF />}
-                      name="facebook"
-                      placeholder="Facebook URL"
-                    />
-
-                    <InputField
-                      icon={<FaInstagram />}
-                      name="instagram"
-                      placeholder="Instagram URL"
-                    />
-
-                    <InputField
-                      icon={<FaXTwitter />}
-                      name="twitter"
-                      placeholder="X (Twitter) URL"
-                    />
-
-                    <InputField
-                      icon={<FaYoutube />}
-                      name="youtube"
-                      placeholder="YouTube URL"
+                      icon={<Link2 size={18} />}
+                      name="socialUrl"
+                      type="url"
+                      placeholder="https://instagram.com/yourprofile"
                     />
                   </div>
                 </div>
-
-                {/* MESSAGE */}
 
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-slate-700">
@@ -208,8 +181,8 @@ export function ContactForm() {
 
                   <textarea
                     name="message"
-                    rows={7}
-                    placeholder="Share your FIFA World Cup experience..."
+                    rows={3}
+                    placeholder="Share your FIFA  experiences 50 words"
                     className="w-full rounded-xl border border-slate-300 p-4 outline-none transition-all focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                   />
                 </div>

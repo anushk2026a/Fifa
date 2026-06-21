@@ -19,7 +19,9 @@ import {
   Plus,
   ExternalLink,
   Search,
-  MessageSquare
+  MessageSquare,
+  CheckCircle,
+  Star,
 } from "lucide-react";
 
 export type ContactSubmission = {
@@ -29,12 +31,15 @@ export type ContactSubmission = {
   phone?: string;
   country?: string;
   city?: string;
+  stadium?: string;
+  socialUrl?: string;
   youtube?: string;
   facebook?: string;
   instagram?: string;
   x?: string;
   message: string;
   createdAt: string;
+  approved?: boolean;
 };
 
 const fieldClass =
@@ -162,6 +167,21 @@ export default function AdminDashboardPage() {
     }
   }
 
+  async function onApproveContact(id: string, approved: boolean) {
+    const res = await fetch(apiUrl(`/contact/${id}/approve`), {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...authHeaders() },
+      body: JSON.stringify({ approved }),
+    });
+    if (res.ok) {
+      await loadContacts();
+      setMsg({ kind: "ok", text: approved ? "Story approved and published." : "Story unapproved." });
+    } else if (res.status === 401) {
+      clearToken();
+      router.replace("/admin/login");
+    }
+  }
+
   function logout() {
     clearToken();
     router.replace("/admin/login");
@@ -213,6 +233,21 @@ export default function AdminDashboardPage() {
           </button>
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full filter blur-3xl -translate-y-12 translate-x-12" />
+      </div>
+
+      {/* Stats */}
+      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {[
+          { label: "Total Submissions", value: contacts.length, color: "text-ink" },
+          { label: "Pending Review", value: contacts.filter(c => !c.approved).length, color: "text-amber-600" },
+          { label: "Approved Stories", value: contacts.filter(c => c.approved).length, color: "text-green-600" },
+          { label: "News Items", value: news.length, color: "text-accent" },
+        ].map((s) => (
+          <div key={s.label} className="rounded-xl border border-line bg-surface p-4 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">{s.label}</p>
+            <p className={`mt-1 text-3xl font-extrabold ${s.color}`}>{s.value}</p>
+          </div>
+        ))}
       </div>
 
       {msg && (
@@ -380,11 +415,18 @@ export default function AdminDashboardPage() {
                         {/* Sender */}
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center gap-3">
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-white font-bold text-sm">
+                            <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-bold text-sm text-white ${contact.approved ? "bg-green-500" : "bg-accent"}`}>
                               {letter}
                             </div>
                             <div className="min-w-0">
-                              <p className="font-semibold text-ink leading-normal truncate max-w-xs">{contact.name}</p>
+                              <div className="flex items-center gap-1.5">
+                                <p className="font-semibold text-ink leading-normal truncate max-w-xs">{contact.name}</p>
+                                {contact.approved && (
+                                  <span className="inline-flex items-center gap-0.5 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-semibold text-green-700">
+                                    <CheckCircle className="h-2.5 w-2.5" /> Story
+                                  </span>
+                                )}
+                              </div>
                               <p className="text-xs text-muted leading-normal truncate max-w-xs">{contact.email}</p>
                             </div>
                           </div>
@@ -476,6 +518,13 @@ export default function AdminDashboardPage() {
                               title={isExpanded ? "Collapse" : "Expand"}
                             >
                               {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                            </button>
+                            <button
+                              onClick={() => onApproveContact(contact.id, !contact.approved)}
+                              className={`rounded-lg p-1.5 transition cursor-pointer ${contact.approved ? "text-green-600 hover:bg-green-50" : "text-muted hover:bg-green-50 hover:text-green-600"}`}
+                              title={contact.approved ? "Unapprove Story" : "Approve as Story"}
+                            >
+                              {contact.approved ? <Star className="h-4 w-4 fill-green-500" /> : <Star className="h-4 w-4" />}
                             </button>
                             <button
                               onClick={() => onDeleteContact(contact.id)}

@@ -1,7 +1,7 @@
 export const SITE = {
   name: "FIFA-One Point",
   domain: "FIFA-One Point.com",
-  tagline: "Your single point of reference for FIFA World Cup 2026.",
+  tagline: "Your single point of reference for FIFA 2026.",
   description:
     "FIFA World Cup 2026 in one place — host cities, today's & tomorrow's matches, and the restaurants, hotels, transport, tickets and fan zones near every stadium.",
   fifaScheduleUrl:
@@ -13,5 +13,6 @@ export const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Sports", href: "/" },
   { label: "Locations", href: "/locations" },
   { label: "News", href: "/news" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Stories", href: "/stories" },
+  { label: "Share Experiences", href: "/contact" },
 ];

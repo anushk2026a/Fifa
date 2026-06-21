@@ -29,3 +29,13 @@ export async function deleteContact(id: string): Promise<boolean> {
   const store = await getContactStore();
   return store.remove(id);
 }
+
+export async function approveContact(id: string, approved: boolean): Promise<WithId<ContactSubmission> | null> {
+  const store = await getContactStore();
+  return store.approve(id, approved);
+}
+
+export async function listApprovedContacts(): Promise<WithId<ContactSubmission>[]> {
+  const store = await getContactStore();
+  return store.listApproved();
+}

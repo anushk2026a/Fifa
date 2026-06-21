@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { citiesByCountry, COUNTRY_ORDER } from "@/data/cities";
 import { countryFlagIso } from "@/lib/flags";
 import { Flag } from "@/components/common/Flag";
@@ -10,7 +11,10 @@ import { cn } from "@/lib/utils";
 export function LocationsDropdown() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const grouped = citiesByCountry();
+
+  const isActive = pathname.startsWith("/cities") || pathname === "/locations";
 
   useEffect(() => {
     if (!open) return;
@@ -38,9 +42,14 @@ export function LocationsDropdown() {
         type="button"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center text-accent"
+        className={cn(
+          "relative inline-flex items-center gap-1.5 pb-1 text-sm !font-medium transition-colors duration-200",
+          isActive
+            ? "text-accent border-b-2 border-accent"
+            : "text-accent hover:text-accent-strong"
+        )}
       >
-        Locations
+        <span>Locations</span>
         <span
           aria-hidden
           className={cn("transition-transform", open && "rotate-180")}

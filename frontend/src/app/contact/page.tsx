@@ -21,12 +21,12 @@ export default function ContactPage() {
       >
         <Container className="py-12 sm:py-24">
           <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Share Your FIFA World Cup™ Experience
+            Share Your FIFA Experiences
           </h1>
           <span className="mt-3 max-w-2xl text-base text-white">
             Celebrate the passion of football. Share your matchday memories,
             stadium moments, fan celebrations, photos, and unforgettable
-            experiences with supporters around the world&.
+            experiences with supporters around the world.
           </span>
         </Container>
       </section>

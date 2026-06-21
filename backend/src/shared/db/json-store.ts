@@ -65,6 +65,15 @@ export class JsonCollection<T extends Record<string, unknown>> {
     return true;
   }
 
+  updateById(id: string, patch: Partial<T>): WithId<T> | undefined {
+    const rows = this.readRaw();
+    const idx = rows.findIndex((r) => r.id === id);
+    if (idx === -1) return undefined;
+    rows[idx] = { ...rows[idx], ...patch };
+    this.writeRaw(rows);
+    return rows[idx];
+  }
+
   /** Replace the entire collection (used by the seed script). */
   replaceAll(docs: T[]): WithId<T>[] {
     const now = Date.now();

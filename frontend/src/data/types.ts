@@ -16,20 +16,22 @@ export type Place = {
   image?: string; // photo URL (from Google Maps) shown beside the listing
 };
 
-export type RestaurantBand = "1mi" | "2mi" | "5mi" | "10mi";
-export type HotelBand = "5mi" | "10mi";
+export type RestaurantBand = "2mi" | "5mi";
+export type HotelBand = "2mi" | "5mi" | "10mi" | "20mi";
 
 export type TransportOption = {
   category: "shared_ride" | "metro" | "parking" | "getting_there";
   title: string;
   url: string;
   note?: string;
+  image?: string;
   video?: string; // optional YouTube travel-guide link
 };
 
 export type TicketLink = {
   label: string;
   url: string;
+  image?: string;
   official: boolean;
 };
 
@@ -39,6 +41,7 @@ export type ScreeningZone = {
   address?: string;
   url: string;
   note?: string;
+  image?: string;
 };
 
 export type City = {

@@ -12,6 +12,8 @@ export const createContactSchema = z.object({
   phone: emptyToUndefined,
   country: emptyToUndefined,
   city: emptyToUndefined,
+  stadium: emptyToUndefined,
+  socialUrl: urlOrEmpty,
   youtube: urlOrEmpty,
   facebook: urlOrEmpty,
   instagram: urlOrEmpty,

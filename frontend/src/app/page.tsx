@@ -27,7 +27,7 @@ export default function HomePage() {
         {/* Mobile Image */}
         <img
           src="/banner/fifamobile.png"
-          alt="FIFA World Cup 2026"
+          alt="FIFA 2026"
           className="absolute inset-0 -z-10 h-full w-full object-cover md:hidden"
         />
         {/* Overlay for text legibility */}
@@ -35,7 +35,7 @@ export default function HomePage() {
 
         <Container className="py-16 sm:py-24 text-white">
           <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            One point for everything FIFA-One Point World Cup 2026.
+            One point for everything FIFA-One Point 2026.
           </h1>
           <div className="mt-4 max-w-2xl text-lg text-white sm:text-lg">
             Find your host city and plan your match day — matches, restaurants,

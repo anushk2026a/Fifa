@@ -6,8 +6,10 @@ import type { ContactSubmission } from "./contact.repo";
 /** Storage contract for contact submissions. */
 export interface ContactStore {
   list(): Promise<WithId<ContactSubmission>[]>;
+  listApproved(): Promise<WithId<ContactSubmission>[]>;
   create(doc: ContactSubmission): Promise<WithId<ContactSubmission>>;
   remove(id: string): Promise<boolean>;
+  approve(id: string, approved: boolean): Promise<WithId<ContactSubmission> | null>;
   count(): Promise<number>;
 }
 
@@ -17,18 +19,15 @@ function stamp(doc: ContactSubmission, offsetMs = 0): WithId<ContactSubmission> 
 
 class JsonContactStore implements ContactStore {
   private col = new JsonCollection<ContactSubmission>("contacts");
-  async list() {
-    return this.col.all();
+  async list() { return this.col.all(); }
+  async listApproved() { return this.col.all().filter((r) => r.approved === true); }
+  async create(doc: ContactSubmission) { return this.col.insert(doc); }
+  async remove(id: string) { return this.col.deleteById(id); }
+  async approve(id: string, approved: boolean) {
+    const result = this.col.updateById(id, { approved } as Partial<ContactSubmission>);
+    return result ?? null;
   }
-  async create(doc: ContactSubmission) {
-    return this.col.insert(doc);
-  }
-  async remove(id: string) {
-    return this.col.deleteById(id);
-  }
-  async count() {
-    return this.col.count();
-  }
+  async count() { return this.col.count(); }
 }
 
 class MongoContactStore implements ContactStore {
@@ -44,6 +43,12 @@ class MongoContactStore implements ContactStore {
       .sort({ createdAt: -1 })
       .toArray()) as WithId<ContactSubmission>[];
   }
+  async listApproved() {
+    return (await this.col
+      .find({ approved: true }, { projection: { _id: 0 } })
+      .sort({ createdAt: -1 })
+      .toArray()) as WithId<ContactSubmission>[];
+  }
   async create(doc: ContactSubmission) {
     const row = stamp(doc);
     await this.col.insertOne({ ...row });
@@ -53,9 +58,15 @@ class MongoContactStore implements ContactStore {
     const res = await this.col.deleteOne({ id });
     return res.deletedCount === 1;
   }
-  async count() {
-    return this.col.countDocuments();
+  async approve(id: string, approved: boolean) {
+    const res = await this.col.findOneAndUpdate(
+      { id },
+      { $set: { approved } },
+      { returnDocument: "after", projection: { _id: 0 } },
+    );
+    return (res as WithId<ContactSubmission> | null);
   }
+  async count() { return this.col.countDocuments(); }
 }
 
 let cached: ContactStore | null = null;

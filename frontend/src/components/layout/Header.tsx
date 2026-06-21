@@ -6,7 +6,8 @@ import { Container } from "@/components/common/Container";
 import { LocationsDropdown } from "./LocationsDropdown";
 import { MobileMenu } from "./MobileMenu";
 import { SITE } from "@/data/site";
-
+import logo from "../../../public/logo/fifalogo.png";
+import Image from "next/image";
 export function Header() {
   const pathname = usePathname();
 
@@ -24,18 +25,22 @@ export function Header() {
     }`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
-      <Container className="relative flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-ink"
-        >
-          FIFA-<span className="text-accent">OnePoint</span>
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur ">
+      <Container className="relative flex items-center justify-between py-2">
+        <Link href="/" className="flex items-center">
+          <div className="h-6 w-20 md:h-10 md:w-28">
+            <Image
+              src={logo}
+              alt="Sports One Point Logo"
+              className="h-full w-full"
+              priority
+            />
+          </div>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
           <Link href="/" className={navLink("/")}>
-            Sports
+            FIFA
           </Link>
 
           <LocationsDropdown />
@@ -44,8 +49,12 @@ export function Header() {
             News
           </Link>
 
+          <Link href="/stories" className={navLink("/stories")}>
+            Stories
+          </Link>
+
           <Link href="/contact" className={navLink("/contact")}>
-            Share Your Experience
+            Share Experiences
           </Link>
         </nav>
 
