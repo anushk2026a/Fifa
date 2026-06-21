@@ -117,7 +117,7 @@ export const CITIES: City[] = [
           1.8,
           "225 Baker St NW, Atlanta, GA 30313",
           "World-famous aquarium",
-          "data=!3m7!1e2!3m5!1sCIHM0ogKEICAgICE8rzExAE!2e10!3e12!7i4032!8i2268!4m7!3m6!1s0x88f5047e45f40419_0xfed77076a9af4adc!8m2!3d33.763382!4d-84",
+          "https://upload.wikimedia.org/wikipedia/commons/0/00/Georgia_Aquarium_Jan_2006.jpg",
         ),
         place(
           "Centennial Olympic Park",
@@ -125,7 +125,7 @@ export const CITIES: City[] = [
           1.9,
           "265 Park Ave W NW, Atlanta, GA 30313",
           "Public park & attractions",
-          "/images/places/centennial-park.jpg",
+          "https://res.cloudinary.com/atlanta/images/w_2048,h_939,c_scale/f_auto,q_auto/v1747837790/newAtlanta.com/AtlantaDowntownCentennialParkAerial2024_25122935d24/AtlantaDowntownCentennialParkAerial2024_25122935d24.jpg?_i=AA",
         ),
       ],
 
@@ -136,7 +136,7 @@ export const CITIES: City[] = [
           2.4,
           "224 Ponce De Leon Ave NE, Atlanta, GA 30308",
           "Classic Southern cuisine · $$",
-          "/images/places/mary-macs.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/13/11/d7/08/mary-mac-s-dining-room.jpg",
         ),
         place(
           "Ponce City Market",
@@ -144,7 +144,7 @@ export const CITIES: City[] = [
           3.1,
           "675 Ponce De Leon Ave NE, Atlanta, GA 30308",
           "Food hall & shopping",
-          "/images/places/ponce-city-market.jpg",
+          "https://d1fegwn2wjh0cs.cloudfront.net/06-28-2020/t_bdd15765913743e5a51301068973254e_name_9378cc842396454eac50a2dc6d7c0f9e_scaled.jpg",
         ),
         place(
           "Atlanta Botanical Garden",
@@ -152,7 +152,7 @@ export const CITIES: City[] = [
           3.4,
           "1345 Piedmont Ave NE, Atlanta, GA 30309",
           "Botanical garden",
-          "/images/places/atlanta-botanical-garden.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9zd2GuDLxyKzopfAdAkWdQK-9okB-FDFCPQ&s",
         ),
         place(
           "Fox Theatre",
@@ -160,7 +160,7 @@ export const CITIES: City[] = [
           2.6,
           "660 Peachtree St NE, Atlanta, GA 30308",
           "Historic performing arts venue",
-          "/images/places/fox-theatre.jpg",
+          "https://thumbs.dreamstime.com/b/historic-fox-theater-detroit-michigan-usa-march-exterior-downtown-opened-continues-to-operate-today-114702211.jpg",
         ),
         place(
           "World of Coca-Cola",
@@ -168,7 +168,7 @@ export const CITIES: City[] = [
           2.0,
           "121 Baker St NW, Atlanta, GA 30313",
           "Interactive museum",
-          "/images/JPplaces/world-of-coca-cola.jpg",
+          "https://dorismercy.travel.blog/wp-content/uploads/2019/09/wocc-vintagevendingmachines-7d9cdf1a-listing-5c0e647a5056b3a_5c0e67bb-5056-b3a8-490613a8688d6ddc.jpg",
         ),
         place(
           "Piedmont Park",
@@ -176,7 +176,7 @@ export const CITIES: City[] = [
           4.2,
           "1320 Monroe Dr NE, Atlanta, GA 30306",
           "Urban park & skyline views",
-          "/images/places/piedmont-park.jpg",
+          "https://travel.usnews.com/images/piedmont_park_atlanta_H9x8oZk.jpg",
         ),
       ],
     },
@@ -188,7 +188,7 @@ export const CITIES: City[] = [
           0.4,
           "100 CNN Center, Atlanta, GA 30303",
           "Luxury hotel near Centennial Olympic Park",
-          "/images/places/omni-atlanta.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyE8zg4P9iwRW728ZZK9rjfRBumadaUuJqmQ&s",
         ),
         place(
           "Embassy Suites by Hilton Atlanta at Centennial Olympic Park",
@@ -196,7 +196,7 @@ export const CITIES: City[] = [
           0.5,
           "267 Marietta St NW, Atlanta, GA 30313",
           "All-suite hotel with complimentary breakfast",
-          "/images/places/embassy-suites.jpg",
+          "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEgijhj_qJGriqYQMjG49nAHaTMv3qRqDdgqkYuCAk05JEEitJPcIYExkl46XAQ3nGiRTkeAOwirdpa-g5WGT2N0J7dBzlZSME5ItFO1n2LwNwPioZg8xaGkD4o3dt6WIgkeAlR=s1360-w1360-h1020-rw",
         ),
         place(
           "Hilton Garden Inn Atlanta Downtown",
@@ -204,7 +204,7 @@ export const CITIES: City[] = [
           0.6,
           "275 Baker St NW, Atlanta, GA 30313",
           "Downtown hotel near Georgia Aquarium",
-          "/images/places/hilton-garden.jpg",
+          "https://www.hilton.com/im/en/ATLAMGI/3696583/201235-01b.jpg?impolicy=crop&cw=3738&ch=2492&gravity=NorthWest&xposition=331&yposition=0&rw=640&rh=427g",
         ),
         place(
           "Glenn Hotel, Autograph Collection",
@@ -212,7 +212,7 @@ export const CITIES: City[] = [
           0.7,
           "110 Marietta St NW, Atlanta, GA 30303",
           "Boutique luxury hotel",
-          "/images/places/glenn-hotel.jpg",
+          "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/39/b2/f8/lobby.jpg?w=900&h=500&s=1",
         ),
         place(
           "The American Hotel Atlanta Downtown",
@@ -220,7 +220,7 @@ export const CITIES: City[] = [
           0.8,
           "160 Ted Turner Dr NW, Atlanta, GA 30303",
           "Historic downtown hotel",
-          "/images/places/american-hotel.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/2d/45/32/79/caption.jpg",
         ),
       ],
       "5mi": [
@@ -257,15 +257,7 @@ export const CITIES: City[] = [
           8.3,
           "3434 Peachtree Rd NE, Atlanta, GA 30326",
           "Luxury Buckhead hotel",
-          "/images/places/the-whitley.jpg",
-        ),
-        place(
-          "JW Marriott Atlanta Buckhead",
-          "Atlanta",
-          8.5,
-          "3300 Lenox Rd NE, Atlanta, GA 30326",
-          "Premium business hotel",
-          "/images/places/jw-marriott.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGQDdNOgcqo2VApDM6aGVFpBCBLlKVsmu0gw&s",
         ),
         place(
           "InterContinental Buckhead Atlanta",
@@ -273,23 +265,7 @@ export const CITIES: City[] = [
           8.8,
           "3315 Peachtree Rd NE, Atlanta, GA 30326",
           "Luxury hotel with spa",
-          "/images/places/intercontinental.jpg",
-        ),
-        place(
-          "Grand Hyatt Atlanta in Buckhead",
-          "Atlanta",
-          9.0,
-          "3300 Peachtree Rd NE, Atlanta, GA 30305",
-          "Upscale Hyatt property",
-          "/images/places/grand-hyatt.jpg",
-        ),
-        place(
-          "The Westin Buckhead Atlanta",
-          "Atlanta",
-          9.2,
-          "3391 Peachtree Rd NE, Atlanta, GA 30326",
-          "Modern luxury hotel",
-          "/images/places/westin-buckhead.jpg",
+          "https://symphony.cdn.tambourine.com/intercon-buckhead-redesign/media/intercontinentalbuckheadatlanta-accessibility-header-646f94a824c0f.jpg",
         ),
       ],
 
@@ -300,7 +276,7 @@ export const CITIES: City[] = [
           12.5,
           "2020 Convention Center Concourse, Atlanta, GA 30337",
           "Airport hotel with SkyTrain access",
-          "/images/places/marriott-gateway.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/2c/07/4e/55/exterior.jpg",
         ),
         place(
           "Renaissance Concourse Atlanta Airport Hotel",
@@ -308,31 +284,7 @@ export const CITIES: City[] = [
           13.1,
           "1 Hartsfield Centre Pkwy, Atlanta, GA 30354",
           "Airport-view hotel",
-          "/images/places/renaissance-concourse.jpg",
-        ),
-        place(
-          "The Ritz-Carlton, Atlanta",
-          "Atlanta",
-          1.1,
-          "181 Peachtree St NE, Atlanta, GA 30303",
-          "Five-star luxury hotel",
-          "/images/places/ritz-carlton.jpg",
-        ),
-        place(
-          "W Atlanta - Buckhead",
-          "Atlanta",
-          9.5,
-          "3377 Peachtree Rd NE, Atlanta, GA 30326",
-          "Luxury lifestyle hotel",
-          "/images/places/w-atlanta.jpg",
-        ),
-        place(
-          "Kimpton Sylvan Hotel",
-          "Atlanta",
-          9.8,
-          "374 East Paces Ferry Rd NE, Atlanta, GA 30305",
-          "Boutique luxury hotel",
-          "/images/places/kimpton-sylvan.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/1a/83/a6/4e/renaissance-concourse.jpg",
         ),
       ],
     },
@@ -342,7 +294,8 @@ export const CITIES: City[] = [
         title: "MARTA rail — GWCC/CNN Center & Vine City stations",
         url: "https://www.itsmarta.com/",
         note: "Both stations are a short walk to the stadium; ~20 min from the airport.",
-        image: "/images/transport/marta.jpg",
+        image:
+          "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/a8/08/bf/exterior.jpg?w=900&h=-1&s=1",
         video: "https://www.youtube.com/embed/qqWZKanP_Tc",
       },
     ],
@@ -351,7 +304,8 @@ export const CITIES: City[] = [
       {
         label: "Official FIFA Tickets",
         url: "https://www.fifa.com/tickets",
-        image: "/images/tickets/fifa-tickets.jpg",
+        image:
+          "https://worldcup2026.jp/wp-content/uploads/2025/11/Gemini_Generated_Image_ys2nvoys2nvoys2n-2-2048x1117.jpg.webp",
         official: true,
       },
     ],
@@ -363,7 +317,8 @@ export const CITIES: City[] = [
         address: "Centennial Olympic Park, Atlanta, GA",
         url: "https://www.fifa.com/",
         note: "Official public viewing area.",
-        image: "/images/screening/atlanta-fan-fest.jpg",
+        image:
+          "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2018/05/30/Pictures/fbl-fra-cup-herbiers-psg-fans-feature_67e0a268-63c3-11e8-a998-12ee0acfa260.jpg",
       },
     ],
 

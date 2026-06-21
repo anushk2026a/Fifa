@@ -17,7 +17,7 @@ export function Header() {
   };
 
   const navLink = (href: string) =>
-    `relative pb-1 text-sm font-medium transition-colors duration-200
+    `relative  text-sm font-medium transition-colors duration-200
     ${
       isActive(href)
         ? "text-accent border-b-2 border-accent"
@@ -43,7 +43,10 @@ export function Header() {
             FIFA
           </Link>
 
-          <LocationsDropdown />
+          <div className="mb-.5">
+            {" "}
+            <LocationsDropdown />
+          </div>
 
           <Link href="/news" className={navLink("/news")}>
             News

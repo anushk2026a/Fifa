@@ -35,11 +35,14 @@ export default function HomePage() {
 
         <Container className="py-16 sm:py-24 text-white">
           <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-            One point for everything FIFA-One Point 2026.
+            Your single point of reference for FIFA 2026.
           </h1>
+          <h3 className="mt-3 max-w-3xl text-xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
+            FIFA related information, resources, and links in one place.
+          </h3>
           <div className="mt-4 max-w-2xl text-lg text-white sm:text-lg">
-            Find your host city and plan your match day — matches, restaurants,
-            hotels, transport, tickets and fan zones near every stadium.
+            One Point destination for FIFA Fans, Enthusiasts, Travelers, Local
+            Communities, and Businesses.
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -64,13 +67,14 @@ export default function HomePage() {
       <section className="border-b border-line">
         <Container className="py-10">
           <p className="text-xs font-semibold uppercase tracking-wide text-faint">
-            About
+            About Us
           </p>
           <p className="mt-2 max-w-3xl text-lg text-ink">
-            Find places near your match location. We gather the official links
-            and local know-how for all 16 host cities so you can eat, sleep, get
-            to the stadium, grab tickets and find where to watch — all in one
-            place.
+            One Point. Everything You Need - From hotels and restaurants to
+            transportation, stadium access, tickets, and fan zones, FIFA One
+            Point gathers official resources and local insights from all 16 host
+            cities, trying to make your match-day experience simple, convenient,
+            and unforgettable. .
           </p>
         </Container>
       </section>
@@ -80,7 +84,7 @@ export default function HomePage() {
         <Container className="py-12">
           <SectionHeading
             eyebrow="Matches"
-            title="Today & Tomorrow"
+            title=""
             action={
               <OutboundLink href={SITE.fifaScheduleUrl}>
                 Full schedule

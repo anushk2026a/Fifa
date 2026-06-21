@@ -2,20 +2,16 @@ import type { FaqItem } from "./types";
 
 export const FAQ: FaqItem[] = [
   {
-    q: "What is FIFA-One Point?",
-    a: "A single place to plan your FIFA World Cup 2026 match day — host cities, today's and tomorrow's matches, and the restaurants, hotels, transport, tickets and fan zones near each stadium.",
+    q: "What is FIFA One Point? (replace with the below)",
+    a: "Your single point of reference for FIFA 2026. FIFA One Point gathers official resources and local insights from all 16 host cities, trying to make your match-day experience simple, convenient, and unforgettable.",
   },
   {
-    q: "Where do I buy match tickets?",
-    a: "Only through official FIFA channels. Every city page links to the official FIFA ticketing site. Avoid unofficial resellers.",
+    q: "How do I find places near a stadium?",
+    a: "Go to Locations and choose your host city. You'll find nearby restaurants and hotels sorted by distance from the stadium, along with transportation resources, fan zones, and other useful local information.",
   },
   {
     q: "How do I find places near a stadium?",
     a: "Open Locations, choose your host city, and you'll see restaurants and hotels grouped by distance from the stadium, plus transport and fan-zone links.",
-  },
-  {
-    q: "Are the restaurant and hotel listings complete?",
-    a: "We're adding curated listings city by city. Where a section is still being filled, you'll see the official city resources in the meantime.",
   },
   {
     q: "Is this an official FIFA website?",

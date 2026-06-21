@@ -91,7 +91,7 @@ by page and section. Edit any wording here; we'll copy your changes back into th
 - Field 1 label: "Host City" (placeholder "Select City")
 - Field 2 label: "Directory Service" (placeholder "Any Service")
 - Service options: "Restaurants & Dining", "Hotels & Stays", "Transportation", "Match Tickets", "Watch & Fan Zones"
-- Button: "Search >"
+- Button: "Search "
 
 ---
 

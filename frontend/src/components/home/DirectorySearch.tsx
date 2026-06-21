@@ -20,12 +20,12 @@ export function DirectorySearch() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!city) return;
-    
+
     let url = `/cities/${city}`;
     if (service) {
       url += `#${service}`;
     }
-    
+
     router.push(url);
   };
 
@@ -33,12 +33,19 @@ export function DirectorySearch() {
     <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6 shadow-sm md:p-8">
       <h2 className="text-lg font-semibold text-ink">Refine Your Search</h2>
       <p className="mt-1 text-sm text-muted">
-        Use our directory finder to instantly discover curated local recommendations for your host city:
+        Use our directory finder to instantly discover curated local
+        recommendations for your host city:
       </p>
 
-      <form onSubmit={handleSearch} className="mt-6 flex flex-col items-end gap-4 md:flex-row">
+      <form
+        onSubmit={handleSearch}
+        className="mt-6 flex flex-col items-end gap-4 md:flex-row"
+      >
         <div className="w-full flex-1">
-          <label htmlFor="city-select" className="mb-2 block text-sm font-medium text-ink">
+          <label
+            htmlFor="city-select"
+            className="mb-2 block text-sm font-medium text-ink"
+          >
             Host City
           </label>
           <select
@@ -48,7 +55,9 @@ export function DirectorySearch() {
             required
             className="w-full rounded-[var(--radius-card)] border border-line bg-paper px-3 py-2.5 text-sm text-ink outline-none focus:border-accent"
           >
-            <option value="" disabled>Select City</option>
+            <option value="" disabled>
+              Select City
+            </option>
             {CITIES.map((c) => (
               <option key={c.slug} value={c.slug}>
                 {c.name}
@@ -58,7 +67,10 @@ export function DirectorySearch() {
         </div>
 
         <div className="w-full flex-1">
-          <label htmlFor="service-select" className="mb-2 block text-sm font-medium text-ink">
+          <label
+            htmlFor="service-select"
+            className="mb-2 block text-sm font-medium text-ink"
+          >
             Directory Service
           </label>
           <select
@@ -79,9 +91,9 @@ export function DirectorySearch() {
         <button
           type="submit"
           disabled={!city}
-          className="w-full rounded-[var(--radius-card)] border border-accent bg-accent px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-50 md:w-auto"
+          className="w-full rounded-[var(--radius-card)] border border-accent bg-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-strong md:w-auto"
         >
-          Search &gt;
+          Search
         </button>
       </form>
     </div>

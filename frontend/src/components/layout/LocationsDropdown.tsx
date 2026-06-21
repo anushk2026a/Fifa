@@ -43,10 +43,10 @@ export function LocationsDropdown() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "relative inline-flex items-center gap-1.5 pb-1 text-sm !font-medium transition-colors duration-200",
+          "relative inline-flex items-center gap-1.5  text-sm !font-medium transition-colors duration-200",
           isActive
             ? "text-accent border-b-2 border-accent"
-            : "text-accent hover:text-accent-strong"
+            : "text-accent hover:text-accent-strong",
         )}
       >
         <span>Locations</span>
