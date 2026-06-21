@@ -6,7 +6,7 @@ import { requireAdmin } from "../auth";
 
 export const contactRouter = Router();
 
-// Public — save a contact submission
+// Public— save a contact submission
 contactRouter.post("/", validateBody(createContactSchema), async (req, res, next) => {
   try {
     const created = await createContact(req.body as CreateContactInput);
