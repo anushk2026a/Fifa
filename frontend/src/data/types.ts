@@ -16,7 +16,7 @@ export type Place = {
   image?: string; // photo URL (from Google Maps) shown beside the listing
 };
 
-export type RestaurantBand = "2mi" | "5mi";
+export type RestaurantBand = "2mi" | "5mi" | "10mi";
 export type HotelBand = "2mi" | "5mi" | "10mi" | "20mi";
 
 export type TransportOption = {
