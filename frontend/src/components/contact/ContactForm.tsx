@@ -158,7 +158,7 @@ export function ContactForm() {
                   />
                 </div>
 
-                {/* SOCIAL LINKS */}
+                {/* SOCIAL LINK */}
 
                 <div>
                   <div className="">
