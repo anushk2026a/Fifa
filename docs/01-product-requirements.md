@@ -93,14 +93,14 @@ Sections, top to bottom:
 | **Accessibility**   | WCAG 2.1 AA: semantic HTML, keyboard nav, contrast, alt text                 |
 | **Maintainability** | All content in clear `data/` files; one predictable city-page layout         |
 | **Responsive**      | Mobile-first — most match-goers are on a phone                               |
-| **No-AI look**      | Clean, editorial, no decorative shadows/gradients ([04](./04-ux-design.md))  |
+|  | Clean, editorial, no decorative shadows/gradients ([04](./04-ux-design.md))  |
 
 ## 6. Success criteria (Phase 1)
 
 - All 16 city pages live with curated entries, one consistent layout.
 - Home shows correct today/tomorrow matches and links to the full FIFA schedule.
 - Menu, Locations, News, Contact all working.
-- Fast (Lighthouse green), accessible, and it **doesn't look templated/AI-generated**.
+- Fast (Lighthouse green), accessible.
 - Updating a link or adding a place = edit one `data/` file + redeploy.
 
 ## 7. Constraints & assumptions

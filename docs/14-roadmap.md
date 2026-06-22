@@ -31,7 +31,7 @@ We build in phases on purpose: ship a real, useful **static site** first, then a
 - All content in typed `src/data/*.ts` files.
 - Today/tomorrow matches derived from the current date.
 - SEO baseline: metadata, JSON-LD, sitemap, robots, canonical ([11](./11-seo.md)).
-- Accessible, mobile-first, **non-AI-looking** visual design ([04](./04-ux-design.md)).
+- Accessible, mobile-first, visual design ([04](./04-ux-design.md)).
 - Static export → deploy on Vercel.
 
 ### Explicitly NOT in Phase 1
@@ -43,7 +43,7 @@ We build in phases on purpose: ship a real, useful **static site** first, then a
 - Menu, Home, Locations, all 16 city pages, News, Contact all live.
 - Every city page has real curated entries in one consistent layout.
 - Home shows correct today/tomorrow matches + full schedule link.
-- Lighthouse green; it does **not** look templated/AI-generated.
+- Lighthouse green; it does **not** look templated.
 - Adding a place or changing a link = edit one `data/` file + redeploy.
 
 ### Suggested working sequence

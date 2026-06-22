@@ -1,6 +1,6 @@
 # 04 — UX & Visual Design (Phase 1: Static Site)
 
-> Hard requirement: **the site must not look "AI-generated."** No decorative shadow stacks, no purple gradients, no glassmorphism, no emoji-as-design. A FIFA fan should land, trust it, and find what they need. This document encodes that.
+> Hard requirement: "** No decorative shadow stacks, no purple gradients, no glassmorphism, no emoji-as-design. A FIFA fan should land, trust it, and find what they need. This document encodes that.
 
 ## 1. Design principles
 
@@ -24,7 +24,7 @@
 | **Spacing**         | 4px base scale; sections separated by large vertical rhythm                               | Whitespace is the layout tool     |
 | **Shadows**         | None on cards. One soft shadow reserved for the dropdown only                             |                                   |
 | **Icons**           | Lucide line icons, 1.5px stroke, for wayfinding not decoration                            |                                   |
-| **Banner imagery**  | Real stadium/cup/team photography with a soft blur/darken so headline text reads          | No AI-gradient hero               |
+| **Banner imagery**  | Real stadium/cup/team photography with a soft blur/darken so headline text reads    
 
 ## 3. Layout system
 

@@ -79,5 +79,5 @@ Everything is a **curated link or a short content block** — the fan reads, the
 1. **Static-first, minimal backend.** Ship a fast prerendered site; the only backend is a small contact API. Add complexity only when needed.
 2. **Links, not APIs.** Curated outbound links and content; the fan clicks out to official sources.
 3. **One predictable city-page layout**, so a fan learns it once.
-4. **Content-first, low-chrome design** — clean, legible, _not_ AI-generated-looking; no decorative shadows/gradients. ([principles](./04-ux-design.md#design-principles))
+4. **Content-first, low-chrome design** — clean, legible, no decorative shadows/gradients. ([principles](./04-ux-design.md#design-principles))
 5. **Build to grow.** Page structure and data shapes are designed so the Phase 2 CMS/API drop in cleanly.
