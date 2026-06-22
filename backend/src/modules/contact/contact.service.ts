@@ -2,6 +2,7 @@ import type { ContactSubmission } from "./contact.repo";
 import type { WithId } from "../../shared/db/json-store";
 import { getContactStore } from "./contact.store";
 import type { CreateContactInput } from "./contact.validation";
+import { sendContactEmail } from "../../shared/mailer";
 
 export async function listContacts(): Promise<WithId<ContactSubmission>[]> {
   const store = await getContactStore();
@@ -22,7 +23,11 @@ export async function createContact(input: CreateContactInput): Promise<WithId<C
     x: input.x?.trim(),
     message: input.message.trim(),
   };
-  return store.create(doc);
+  const saved = await store.create(doc);
+  sendContactEmail(doc).catch((err) =>
+    console.error("[mailer] failed to send contact email:", err)
+  );
+  return saved;
 }
 
 export async function deleteContact(id: string): Promise<boolean> {

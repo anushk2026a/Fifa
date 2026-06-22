@@ -20,6 +20,13 @@ const schema = z.object({
   MONGODB_URI: z.string().optional(),
   MONGO_URI: z.string().optional(),
   MONGODB_DB: z.string().default("SportsOnePoint"),
+
+  // SMTP — contact form email delivery via Gmail
+  SMTP_HOST: z.string().default("smtp.gmail.com"),
+  SMTP_PORT: z.coerce.number().default(587),
+  SMTP_USER: z.string().default(""),
+  SMTP_PASS: z.string().default(""),
+  SMTP_TO: z.string().default(""),
 });
 
 const parsed = schema.parse(process.env);
