@@ -219,7 +219,7 @@ export const CITIES: City[] = [
           0.5,
           "267 Marietta St NW, Atlanta, GA 30313",
           "All-suite hotel with complimentary breakfast",
-          "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEgijhj_qJGriqYQMjG49nAHaTMv3qRqDdgqkYuCAk05JEEitJPcIYExkl46XAQ3nGiRTkeAOwirdpa-g5WGT2N0J7dBzlZSME5ItFO1n2LwNwPioZg8xaGkD4o3dt6WIgkeAlR=s1360-w1360-h1020-rw",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRjKFNuaP5Eg7NzFZxtbpTu13qeNf2ROghwGRpJgWwKg&s=10",
         ),
         place(
           "Hilton Garden Inn Atlanta Downtown",
@@ -366,7 +366,7 @@ export const CITIES: City[] = [
           0.2,
           "Patriot Place, Foxborough, MA 02035",
           "Italian steakhouse · $$$",
-          "https://loremflickr.com/600/400/italian,restaurant?lock=11",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkjgz4QMHHVjbebyRV-JJ6GMBHWCl7skACXNIVErQGuw&s=10",
         ),
         place(
           "Six String Grill & Stage",
@@ -408,7 +408,7 @@ export const CITIES: City[] = [
           2.4,
           "56 South St, Foxborough, MA 02035",
           "Italian · $$",
-          "https://loremflickr.com/600/400/italian,pasta?lock=16",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvmyvAkkgpygusNlfs2lPo_-PQ7dH4DcjHXPQtabWWLg&s",
         ),
         place(
           "Foxboro House of Pizza",
@@ -534,7 +534,7 @@ export const CITIES: City[] = [
           18.0,
           "1 W Exchange St, Providence, RI 02903",
           "Downtown · convention center",
-          "https://loremflickr.com/600/400/hotel,luxury?lock=39",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKJhE3I1xFzzIsc23AylWYhbqAHFcYVScFr4LbRnyCQ&s=10",
         ),
         place(
           "Hilton Providence",
@@ -707,7 +707,7 @@ export const CITIES: City[] = [
           1.5,
           "1311 Wet N Wild Way, Arlington, TX 76011",
           "Family-friendly",
-          "https://loremflickr.com/600/400/hotel,pool?lock=744",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAEqtvVENZt291PrWfpIoC89ICscwOYBiJw3ggWOsn8g&s=10",
         ),
         place(
           "Hilton Arlington",
@@ -831,7 +831,7 @@ export const CITIES: City[] = [
           1.5,
           "2515 S Loop W, Houston, TX 77054",
           "Tex-Mex · $$",
-          "https://loremflickr.com/600/400/texmex,fajitas?lock=102",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrIW8VQObyjvSkVskOCxTMjpbcpZPX2cCXT7VUx8l-Zg&s=10",
         ),
         place(
           "Buffalo Wild Wings South Loop",
@@ -839,7 +839,7 @@ export const CITIES: City[] = [
           1.6,
           "8130 S Main St, Houston, TX 77025",
           "Wings & sports bar · $$",
-          "https://loremflickr.com/600/400/wings,sportsbar?lock=103",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiuo5YwNXNR8SZo7LIvYoXbrjmAXQV3YQriypLVyfSKA&s=10",
         ),
         place(
           "Houston Museum of Natural Science",
@@ -847,7 +847,7 @@ export const CITIES: City[] = [
           2.0,
           "5555 Hermann Park Dr, Houston, TX 77030",
           "Museum · attraction",
-          "https://loremflickr.com/600/400/museum,dinosaur?lock=104",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2a4SZhGiITzdjcku-XhA-v31hCJi4Mg_Xn3R7PclKyQ&s=10",
         ),
       ],
       "5mi": [
@@ -857,7 +857,7 @@ export const CITIES: City[] = [
           3.6,
           "5512 La Branch St, Houston, TX 77004",
           "Southern · $$$",
-          "https://loremflickr.com/600/400/southern,comfortfood?lock=105",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyWrsZBaVXEyHQxX2jpfe_UKlp-Qq9pYGFxXJq3TxZhA&s=10",
         ),
         place(
           "Lupe Tortilla",
@@ -865,7 +865,7 @@ export const CITIES: City[] = [
           4.2,
           "2414 Southwest Fwy, Houston, TX 77098",
           "Tex-Mex · $$",
-          "https://loremflickr.com/600/400/tacos,mexican?lock=106",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTItW9gczBhyY3yDbD4TO23_wElgROXs2EIk--d8W1zOw&s=10",
         ),
         place(
           "Hugo's",
@@ -873,7 +873,7 @@ export const CITIES: City[] = [
           4.5,
           "1600 Westheimer Rd, Houston, TX 77006",
           "Upscale Mexican · $$$",
-          "https://loremflickr.com/600/400/mexican,mole?lock=107",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsG5GXM97KgC17Ecfs75XqxdhvNhcO2WwJZkgd8UIEgA&s=10",
         ),
         place(
           "The Pit Room",
@@ -881,7 +881,7 @@ export const CITIES: City[] = [
           4.8,
           "1201 Richmond Ave, Houston, TX 77006",
           "Texas BBQ · $$",
-          "https://loremflickr.com/600/400/bbq,smoker?lock=108",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSllXMzORnxKziucF5eyfyIgQ4d-XzK_AKMwadW5kEFrg&s=10",
         ),
         place(
           "Pappadeaux Seafood Kitchen",
@@ -889,7 +889,7 @@ export const CITIES: City[] = [
           5.0,
           "6015 Westheimer Rd, Houston, TX 77057",
           "Cajun seafood · $$",
-          "https://loremflickr.com/600/400/seafood,cajun?lock=109",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmmO-OAMpha4PygR1LssK5Maz-Wxrxdw844rpxfKmisA&s=10",
         ),
       ],
       "10mi": [
@@ -899,7 +899,7 @@ export const CITIES: City[] = [
           5.5,
           "1777 Walker St, Houston, TX 77010",
           "Oaxacan · $$$",
-          "https://loremflickr.com/600/400/oaxacan,mexicanfood?lock=110",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTovqg90zxo7syy59qlvW6PbP1xFfhBFRa55bI3m6s1VQ&s=10",
         ),
         place(
           "Truth BBQ",
@@ -917,7 +917,7 @@ export const CITIES: City[] = [
           12.0,
           "3613 E Broadway St, Pearland, TX 77581",
           "Legendary Texas BBQ · $$",
-          "https://loremflickr.com/600/400/brisket,bbq?lock=112",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv28vo9mlYCsZPAvZExtIq-kKV5mqcpfU3441tvUxoWA&s=10",
         ),
       ],
     },
@@ -955,7 +955,7 @@ export const CITIES: City[] = [
           2.3,
           "6750 Main St, Houston, TX 77030",
           "Upscale · IHG",
-          "https://loremflickr.com/600/400/hotel,luxury?lock=144",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOT-huyylksmaFWmz19WmfaVtT0Hwzjd8eldpdOaHucg&s=10",
         ),
         place(
           "Hotel ZaZa Museum District",
