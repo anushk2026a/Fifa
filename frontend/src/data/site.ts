@@ -1,6 +1,6 @@
 export const SITE = {
   name: "FIFA One Point",
-  domain: "fifaonepoint.com",
+  domain: "www.fifaonepoint.com",
   tagline: "Your single point of reference for FIFA 2026.",
   description:
     "FIFA World Cup 2026 in one place — host cities, today's & tomorrow's matches, and the restaurants, hotels, transport, tickets and fan zones near every stadium.",
