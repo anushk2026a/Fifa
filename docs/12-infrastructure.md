@@ -23,13 +23,13 @@ Very little to operate: a prerendered Next.js site on Vercel, plus one small Exp
 - **Root Directory = `frontend`** (the repo root has `frontend/`, `backend/`, `docs/`; Vercel must be pointed at the app, or it won't detect Next.js).
 - **Build:** `next build` (default). Vercel runs Next.js natively.
 - **Env:** `NEXT_PUBLIC_API_URL` = the backend URL.
-- **Domain:** `www.SportsOnePoint.com` via Vercel DNS / CNAME. TLS automatic.
+- **Domain:** `www.fifaonepoint.com` via Vercel DNS / CNAME (apex `fifaonepoint.com` redirects to www). TLS automatic.
 - **Preview deploys:** every PR gets a URL; merge to `main` → production.
 
 **Backend (Render / Railway)**
 
 - **Root Directory = `backend`.** Build `npm install && npm run build`, start `npm start`.
-- **Env:** `SMTP_*`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = the Vercel domain(s).
+- **Env:** `SMTP_*`, `MAIL_FROM`, `CONTACT_TO`, and `CORS_ORIGIN` = the allowed origins (custom domain + Vercel URL), e.g. `https://www.fifaonepoint.com,https://fifaonepoint.com,https://SportsOnePoint.vercel.app`.
 - A single small always-on instance is plenty (the free/Hobby tier suffices).
 
 No database, Nginx, Docker, or container orchestration in Phase 1.
