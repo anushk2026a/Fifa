@@ -50,7 +50,7 @@ const SEED_NEWS: News[] = [
     summary:
       "Estadio Azteca becomes the first stadium to host matches across three different World Cups, with a record crowd for the opener.",
     url: FIFA,
-    source: "SportsOnePoint",
+    source: "FIFA One Point",
     image: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=800&q=80",
   },
   {
@@ -68,7 +68,7 @@ const SEED_NEWS: News[] = [
     summary:
       "Arlington gears up for one of the busiest match schedules of the tournament, with DART shuttles and fan zones across the metroplex.",
     url: FIFA,
-    source: "SportsOnePoint",
+    source: "FIFA One Point",
     image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80",
   },
   {
@@ -86,7 +86,7 @@ const SEED_NEWS: News[] = [
     summary:
       "Famous for its atmosphere, Lumen Field welcomes fans straight off Link light rail for a packed slate of Western-region matches.",
     url: FIFA,
-    source: "SportsOnePoint",
+    source: "FIFA One Point",
     image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80",
   },
 ];
