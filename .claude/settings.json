@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p hotels restaurants screening)",
+      "Bash(:)",
+      "Bash(node scripts/match-images.cjs --dry)",
+      "Bash(node -e ' *)",
+      "Bash(node scripts/match-images.cjs)",
+      "Bash(node scripts/update-maplinks.cjs)",
+      "Bash(echo \"tsc EXIT: $?\")",
+      "Bash(npx --prefix frontend tsc --noEmit -p frontend/tsconfig.json)",
+      "Bash(node scripts/convert-webp.cjs)",
+      "Bash(mv \"The Lamar.webp\" \"Crowne Plaza Suites Arlington.webp\")",
+      "Bash(ls *.jpg *.jpeg *.png)",
+      "Bash(mv \"Arctic Club Hotel.webp\" \"The Arctic Club Seattle DoubleTree by Hilton.webp\")",
+      "Bash(mv \"Courtyard by Marriott Seattle Downtown.webp\" \"Courtyard Seattle Downtown Pioneer Square.webp\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/subway,train\" -o /tmp/t.jpg)",
+      "Read(//tmp/**)",
+      "Bash(node -e \"const s=require\\('./frontend/node_modules/sharp'\\); s\\('/tmp/t.jpg'\\).webp\\({quality:82}\\).toFile\\('/tmp/t.webp'\\).then\\(\\(\\)=>{const fs=require\\('fs'\\);console.log\\('webp bytes:', fs.statSync\\('/tmp/t.webp'\\).size\\);}\\).catch\\(e=>console.log\\('ERR',e.message\\)\\)\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/uber,taxi,car\" -o \"rideshare.jpg\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/subway,train,metro\" -o \"metro.jpg\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/parking,garage\" -o \"parking.jpg\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/stadium,soccer\" -o \"stadium.jpg\")",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/parking\" -o \"parking.jpg\")",
+      "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/stadium\" -o \"stadium.jpg\")",
+      "Bash(node -e 'const s=require\\(\"./frontend/node_modules/sharp\"\\),fs=require\\(\"fs\"\\),d=\"frontend/public/images/transport/\";s\\(d+\"parking.jpg\"\\).webp\\({quality:82}\\).toFile\\(d+\"parking.webp\"\\).then\\(\\(\\)=>{fs.unlinkSync\\(d+\"parking.jpg\"\\);console.log\\(\"parking.webp\",fs.statSync\\(d+\"parking.webp\"\\).size\\)}\\)')",
+      "Bash(node -e 'const s=require\\(\"./frontend/node_modules/sharp\"\\),fs=require\\(\"fs\"\\);s\\(\"frontend/public/images/stadium.jpg\"\\).webp\\({quality:82}\\).toFile\\(\"frontend/public/images/transport/stadium.webp\"\\).then\\(\\(\\)=>{fs.unlinkSync\\(\"frontend/public/images/stadium.jpg\"\\);console.log\\(\"ok\",fs.statSync\\(\"frontend/public/images/transport/stadium.webp\"\\).size\\)}\\)')"
+    ]
+  }
+}
