@@ -61,7 +61,7 @@ export function ContactForm() {
                 Share Your FIFA Experiences
               </h2>
 
-              <p className="mb-10 text-lg text-white/90">
+              <p className="mb-10 text-lg text-[#F5F7FA] font-medium">
                 Your story. Your memories. Inspire millions of football fans
                 around the world.
               </p>
@@ -73,11 +73,7 @@ export function ContactForm() {
                   text="Your experience can reach football fans across the globe."
                 />
 
-                <Feature
-                  icon={<Trophy size={20} />}
-                  title="Get Featured"
-                  text="Top stories will be featured on FIFA-OnePoint."
-                />
+
 
                 {/* <Feature
                   icon={<Users size={20} />}
@@ -88,7 +84,7 @@ export function ContactForm() {
                 <Feature
                   icon={<Camera size={20} />}
                   title="Share Your Moments"
-                  text="Share your stories and make every moments unforgettable."
+                  text="Share your stories and make every moments unforgettable. Your stories will be featured on fifaonepoint.com"
                 />
               </div>
             </div>
@@ -115,6 +111,7 @@ export function ContactForm() {
                     name="name"
                     label="Name"
                     placeholder="Your full name"
+                    required
                   />
 
                   <InputField
@@ -123,6 +120,7 @@ export function ContactForm() {
                     type="email"
                     label="Email"
                     placeholder="you@example.com"
+                    required
                   />
                 </div>
 
@@ -132,6 +130,7 @@ export function ContactForm() {
                     name="country"
                     label="Country"
                     placeholder="Select your country"
+                    required
                   />
 
                   <InputField
@@ -139,6 +138,7 @@ export function ContactForm() {
                     name="city"
                     label="City"
                     placeholder="Your city"
+                    required
                   />
                 </div>
 
@@ -153,8 +153,8 @@ export function ContactForm() {
                   <InputField
                     icon={<MapPin size={18} />}
                     name="stadium"
-                    label="Stadium / Match"
-                    placeholder="E.g. Lusail Stadium"
+                    label="Match Location"
+                    placeholder="1 AMB Dr NW, Atlanta, GA 30313, United States"
                   />
                 </div>
 
@@ -177,11 +177,13 @@ export function ContactForm() {
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-slate-700">
                     Message
+                    <span className="ml-0.5 text-red-500">*</span>
                   </label>
 
                   <textarea
                     name="message"
                     rows={3}
+                    required
                     placeholder="Share your FIFA  experiences 50 words"
                     className="w-full rounded-xl border border-slate-300 p-4 outline-none transition-all focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                   />
@@ -252,18 +254,21 @@ function InputField({
   placeholder,
   name,
   type = "text",
+  required = false,
 }: {
   icon: React.ReactNode;
   label?: string;
   placeholder: string;
   name: string;
   type?: string;
+  required?: boolean;
 }) {
   return (
     <div>
       {label && (
         <label className="mb-2 block text-sm font-semibold text-slate-700">
           {label}
+          {required && <span className="ml-0.5 text-red-500">*</span>}
         </label>
       )}
 
@@ -274,6 +279,7 @@ function InputField({
           name={name}
           type={type}
           placeholder={placeholder}
+          required={required}
           className="w-full bg-transparent outline-none"
         />
       </div>
