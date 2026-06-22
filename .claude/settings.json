@@ -25,7 +25,12 @@
       "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/parking\" -o \"parking.jpg\")",
       "Bash(curl -sL -m 25 \"https://loremflickr.com/600/400/stadium\" -o \"stadium.jpg\")",
       "Bash(node -e 'const s=require\\(\"./frontend/node_modules/sharp\"\\),fs=require\\(\"fs\"\\),d=\"frontend/public/images/transport/\";s\\(d+\"parking.jpg\"\\).webp\\({quality:82}\\).toFile\\(d+\"parking.webp\"\\).then\\(\\(\\)=>{fs.unlinkSync\\(d+\"parking.jpg\"\\);console.log\\(\"parking.webp\",fs.statSync\\(d+\"parking.webp\"\\).size\\)}\\)')",
-      "Bash(node -e 'const s=require\\(\"./frontend/node_modules/sharp\"\\),fs=require\\(\"fs\"\\);s\\(\"frontend/public/images/stadium.jpg\"\\).webp\\({quality:82}\\).toFile\\(\"frontend/public/images/transport/stadium.webp\"\\).then\\(\\(\\)=>{fs.unlinkSync\\(\"frontend/public/images/stadium.jpg\"\\);console.log\\(\"ok\",fs.statSync\\(\"frontend/public/images/transport/stadium.webp\"\\).size\\)}\\)')"
+      "Bash(node -e 'const s=require\\(\"./frontend/node_modules/sharp\"\\),fs=require\\(\"fs\"\\);s\\(\"frontend/public/images/stadium.jpg\"\\).webp\\({quality:82}\\).toFile\\(\"frontend/public/images/transport/stadium.webp\"\\).then\\(\\(\\)=>{fs.unlinkSync\\(\"frontend/public/images/stadium.jpg\"\\);console.log\\(\"ok\",fs.statSync\\(\"frontend/public/images/transport/stadium.webp\"\\).size\\)}\\)')",
+      "Bash(mv \"almenda central.webp\" \"Alameda Central.webp\")",
+      "Bash(mv \"aveinda plaza.webp\" \"Avenida Houston.webp\")",
+      "Bash(mv \"bayside market.webp\" \"Bayside Marketplace.webp\")",
+      "Bash(mv \"boosten city hall.webp\" \"City Hall Plaza.webp\")",
+      "Bash(mv \"canada park.webp\" \"Canada Place.webp\")"
     ]
   }
 }
