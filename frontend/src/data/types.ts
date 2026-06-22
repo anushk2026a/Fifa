@@ -26,6 +26,7 @@ export type TransportOption = {
   note?: string;
   image?: string;
   video?: string; // optional YouTube travel-guide link
+  links?: { label: string; url: string }[]; // extra action links (e.g. Uber, taxi map)
 };
 
 export type TicketLink = {

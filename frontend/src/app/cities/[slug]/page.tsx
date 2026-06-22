@@ -191,6 +191,15 @@ export default async function CityPage({
                     <OutboundLink href={t.url}>{t.title}</OutboundLink>
                   </p>
                   {t.note && <p className="mt-0.5 text-sm text-muted">{t.note}</p>}
+                  {t.links && t.links.length > 0 && (
+                    <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                      {t.links.map((l) => (
+                        <OutboundLink key={l.label} href={l.url}>
+                          {l.label}
+                        </OutboundLink>
+                      ))}
+                    </p>
+                  )}
                   {t.video && youtubeEmbed(t.video) && (
                     <div className="mt-3 max-w-xl">
                       <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-faint">

@@ -8,6 +8,15 @@ export function mapsSearch(query: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
+/** Uber universal deep link. Opens the Uber app (or m.uber.com on desktop)
+ *  with the rider's current location as pickup and `dropoff` as the
+ *  destination. `dropoff` is a text address Uber geocodes (e.g. a stadium). */
+export function uberLink(dropoff: string): string {
+  return `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodeURIComponent(
+    dropoff,
+  )}`;
+}
+
 /** Convert any YouTube URL (watch, youtu.be, shorts, embed) into an embed URL. */
 export function youtubeEmbed(url: string): string | null {
   try {
