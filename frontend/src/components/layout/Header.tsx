@@ -31,7 +31,7 @@ export function Header() {
           <div className="h-6 w-20 md:h-10 md:w-28">
             <Image
               src={logo}
-              alt="Sports One Point Logo"
+              alt="FIFA One Point Logo"
               className="h-full w-full"
               priority
             />

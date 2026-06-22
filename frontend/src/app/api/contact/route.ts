@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { apiUrl } from "@/lib/api";
 
 const contactSchema = z.object({
   name: z.string().min(1),
@@ -34,13 +33,13 @@ function getTransporter() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
+
     // Validate request
     const parsed = contactSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ ok: false, error: "Invalid data" }, { status: 400 });
     }
-    
+
     const input = parsed.data;
 
     // Honeypot tripped → pretend success
@@ -48,36 +47,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, delivered: false }, { status: 201 });
     }
 
-    // Save to the backend store
-    try {
-      const backendRes = await fetch(apiUrl("/contact"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          country: input.country,
-          city: input.city,
-          stadium: input.stadium,
-          socialUrl: input.socialUrl,
-          youtube: input.youtube,
-          facebook: input.facebook,
-          instagram: input.instagram,
-          x: input.x,
-          message: input.message,
-        }),
-      });
-      if (!backendRes.ok) {
-        const errText = await backendRes.text();
-        console.error("[contact API] Failed to store submission in backend:", errText);
-        return NextResponse.json({ ok: false, error: "Failed to store submission" }, { status: 500 });
-      }
-    } catch (backendErr) {
-      console.error("[contact API] Error contacting backend:", backendErr);
-      return NextResponse.json({ ok: false, error: "Backend communication error" }, { status: 500 });
-    }
-
+    // Email via SMTP (runs on Vercel — no backend dependency).
     const transporter = getTransporter();
     if (!transporter) {
       console.warn("[contact API] SMTP not configured — message not sent.");
@@ -86,20 +56,18 @@ export async function POST(req: Request) {
 
     const subject = `New enquiry${input.city ? ` — ${input.city}` : ""} from ${input.name}`;
     const text = [
-      `Name:    ${input.name}`,
-      `Email:   ${input.email}`,
-      `Phone:   ${input.phone || "—"}`,
-      `Country: ${input.country || "—"}`,
-      `City:    ${input.city || "—"}`,
-      `YouTube: ${input.youtube || "—"}`,
-      `Facebook: ${input.facebook || "—"}`,
-      `Instagram: ${input.instagram || "—"}`,
-      `X (Twitter): ${input.x || "—"}`,
+      `Name:        ${input.name}`,
+      `Email:       ${input.email}`,
+      `Phone:       ${input.phone || "—"}`,
+      `Country:     ${input.country || "—"}`,
+      `City:        ${input.city || "—"}`,
+      `Stadium:     ${input.stadium || "—"}`,
+      `Social link: ${input.socialUrl || "—"}`,
       "",
       input.message,
     ].join("\n");
 
-    const MAIL_FROM = process.env.MAIL_FROM || "SportsOnePoint<no-reply@FIFA-One Point.com>";
+    const MAIL_FROM = process.env.MAIL_FROM || "FIFA One Point <no-reply@fifaonepoint.com>";
     const CONTACT_TO = process.env.CONTACT_TO!;
 
     await transporter.sendMail({

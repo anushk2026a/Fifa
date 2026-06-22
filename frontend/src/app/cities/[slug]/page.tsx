@@ -39,6 +39,7 @@ const RESTAURANT_BANDS: { band: RestaurantBand; label: string }[] = [
   { band: "2mi", label: "Within 2 miles" },
   { band: "5mi", label: "Within 5 miles" },
   { band: "10mi", label: "Within 10 miles" },
+  { band: "20mi", label: "Within 20 miles" },
 ];
 
 const HOTEL_BANDS: { band: HotelBand; label: string }[] = [

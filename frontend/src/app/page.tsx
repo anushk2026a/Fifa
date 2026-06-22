@@ -20,13 +20,13 @@ export default function HomePage() {
       <section className="relative isolate border-b border-line overflow-hidden">
         {/* Desktop Image */}
         <img
-          src="/banner/fifabanner.jpg"
+          src="/banner/new_fifabanner.png"
           alt="FIFA World Cup 2026"
           className="absolute inset-0 -z-10 hidden h-full w-full object-cover md:block"
         />
         {/* Mobile Image */}
         <img
-          src="/banner/fifamobile.png"
+          src="/banner/new_fifamobile.png"
           alt="FIFA 2026"
           className="absolute inset-0 -z-10 h-full w-full object-cover md:hidden"
         />
