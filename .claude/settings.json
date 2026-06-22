@@ -30,7 +30,8 @@
       "Bash(mv \"aveinda plaza.webp\" \"Avenida Houston.webp\")",
       "Bash(mv \"bayside market.webp\" \"Bayside Marketplace.webp\")",
       "Bash(mv \"boosten city hall.webp\" \"City Hall Plaza.webp\")",
-      "Bash(mv \"canada park.webp\" \"Canada Place.webp\")"
+      "Bash(mv \"canada park.webp\" \"Canada Place.webp\")",
+      "Bash(node scripts/remove-places.cjs)"
     ]
   }
 }

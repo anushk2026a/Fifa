@@ -137,7 +137,7 @@ export const CITIES: City[] = [
           0.4,
           "180 Walker St SW, Atlanta, GA 30313, USA",
           undefined,
-          "/images/restaurants/atlanta-no-mas-cantina.webp",
+          "/images/restaurants/no%20mas%20cantina.webp",
           "https://maps.google.com/?q=No+Mas+Cantina+Atlanta",
         ),
         place(
@@ -146,7 +146,7 @@ export const CITIES: City[] = [
           0.5,
           "300 Marietta St NW, Atlanta, GA 30313, USA",
           undefined,
-          "/images/restaurants/atlanta-max-s-coal-oven-pizzeria.webp",
+          "/images/restaurants/max's%20coal%20oven.webp",
           "https://maps.google.com/?q=Maxs+Coal+Oven+Pizzeria+Atlanta",
         ),
         place(
@@ -155,7 +155,7 @@ export const CITIES: City[] = [
           0.3,
           "48 Northside Dr SW, Atlanta, GA 30313, USA",
           undefined,
-          "/images/restaurants/atlanta-rosie-s-coffee-cafe.webp",
+          "/images/restaurants/Rosie's%20Coffee%20Cafe.webp",
           "https://maps.google.com/?q=Rosies+Coffee+Cafe+Atlanta",
         ),
         place(
@@ -164,7 +164,7 @@ export const CITIES: City[] = [
           0.6,
           "159 Northside Dr NW, Atlanta, GA 30313, USA",
           undefined,
-          "/images/restaurants/atlanta-capolinea.webp",
+          "/images/restaurants/Capolinea.webp",
           "https://maps.google.com/?q=Capolinea+Atlanta",
         ),
         place(
@@ -173,7 +173,7 @@ export const CITIES: City[] = [
           1.5,
           "Peachtree Center Area, Atlanta, GA, USA",
           undefined,
-          "/images/restaurants/atlanta-big-kahuna.webp",
+          "/images/restaurants/big%20kahuna%20atlanta.webp",
           "https://maps.google.com/?q=Big+Kahuna+Atlanta",
         ),
       ],
@@ -361,6 +361,7 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Centennial+Olympic+Park+Atlanta",
         note: "Official FIFA Fan Festival location. (FIFA World Cup 26 Atlanta™)",
+      image: "/images/screening/Centennial%20Olympic%20Park.webp",
       },
       {
         name: "The Home Depot Backyard",
@@ -412,7 +413,7 @@ export const CITIES: City[] = [
           0.2,
           "232 Patriot Pl, Foxborough, MA 02035, USA",
           undefined,
-          "/images/restaurants/boston-bar-louie-patriot-place.webp",
+          "/images/restaurants/bar%20louie%20patriot%20place.webp",
           "https://maps.google.com/?q=Bar+Louie+Patriot+Place+Foxborough",
         ),
         place(
@@ -421,7 +422,7 @@ export const CITIES: City[] = [
           0.2,
           "200 Patriot Pl, Foxborough, MA 02035, USA",
           undefined,
-          "/images/restaurants/boston-cbs-sporting-club.webp",
+          "/images/restaurants/CBS%20sporting%20club.webp",
           "https://maps.google.com/?q=CBS+Sporting+Club+Foxborough",
         ),
         place(
@@ -430,7 +431,7 @@ export const CITIES: City[] = [
           0.2,
           "236 Patriot Pl, Foxborough, MA 02035, USA",
           undefined,
-          "/images/restaurants/boston-davio-s-northern-italian-steakhouse.webp",
+          "/images/restaurants/davios%20northern%20italian%20steakhouse.webp",
           "https://maps.google.com/?q=Davios+Foxborough",
         ),
         place(
@@ -439,17 +440,8 @@ export const CITIES: City[] = [
           0.3,
           "275 Patriot Pl, Foxborough, MA 02035, USA",
           undefined,
-          "/images/restaurants/boston-six-string-grill-and-stage.webp",
+          "/images/restaurants/six%20string%20grill%20%26%20stage.webp",
           "https://maps.google.com/?q=Six+String+Grill+Foxborough",
-        ),
-        place(
-          "Tavolino",
-          "Boston",
-          0.3,
-          "274 Patriot Pl, Foxborough, MA 02035, USA",
-          undefined,
-          "/images/restaurants/boston-tavolino.webp",
-          "https://maps.google.com/?q=Tavolino+Foxborough",
         ),
       ],
     },
@@ -606,6 +598,7 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Boston+City+Hall+Plaza",
         note: "Official FIFA Fan Festival. (World Cup Boston)",
+      image: "/images/screening/City%20Hall%20Plaza.webp",
       },
       {
         name: "Faneuil Hall Marketplace",
@@ -617,6 +610,7 @@ export const CITIES: City[] = [
         name: "Christopher Columbus Waterfront Park",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Christopher+Columbus+Waterfront+Park+Boston",
+      image: "/images/screening/Christopher%20Columbus%20Waterfront%20Park.webp",
       },
       {
         name: "Boston Common",
@@ -656,7 +650,7 @@ export const CITIES: City[] = [
           0.8,
           "1650 E Randol Mill Rd, Arlington, TX 76011, USA",
           undefined,
-          "/images/restaurants/dallas-texas-live.webp",
+          "/images/restaurants/texas%20live.webp",
           "https://maps.google.com/?q=Texas+Live+Arlington",
         ),
         place(
@@ -665,7 +659,7 @@ export const CITIES: City[] = [
           0.8,
           "1650 E Randol Mill Rd, Arlington, TX 76011, USA",
           undefined,
-          "/images/restaurants/dallas-lockhart-smokehouse-arlington.webp",
+          "/images/restaurants/lockhart%20smokehouse%20-%20Arlington.webp",
           "https://maps.google.com/?q=Lockhart+Smokehouse+Arlington",
         ),
         place(
@@ -674,7 +668,7 @@ export const CITIES: City[] = [
           0.9,
           "1600 E Randol Mill Rd, Arlington, TX 76011, USA",
           undefined,
-          "/images/restaurants/dallas-cut-and-bourbon.webp",
+          "/images/restaurants/cut%20%26%20bourbon.webp",
           "https://maps.google.com/?q=Cut+and+Bourbon+Arlington",
         ),
         place(
@@ -683,7 +677,7 @@ export const CITIES: City[] = [
           1.3,
           "301 E Front St, Arlington, TX 76011, USA",
           undefined,
-          "/images/restaurants/dallas-the-tipsy-oak.webp",
+          "/images/restaurants/The%20Tipsy%20Oak.webp",
           "https://maps.google.com/?q=The+Tipsy+Oak+Arlington",
         ),
       ],
@@ -893,7 +887,7 @@ export const CITIES: City[] = [
           1,
           "2536 S Loop W, Houston, TX 77054, USA",
           undefined,
-          "/images/restaurants/houston-pappasito-s-cantina.webp",
+          "/images/restaurants/Pappasito's%20Cantina.webp",
           "https://maps.google.com/?q=Pappasitos+Cantina+Houston",
         ),
         place(
@@ -902,7 +896,7 @@ export const CITIES: City[] = [
           1.7,
           "2410 Richmond Ave, Houston, TX 77098, USA",
           undefined,
-          "/images/restaurants/houston-pappadeaux-seafood-kitchen.webp",
+          "/images/restaurants/Pappadeaux%20Seafood%20Kitchen.webp",
           "https://maps.google.com/?q=Pappadeaux+Seafood+Kitchen+Houston",
         ),
         place(
@@ -911,7 +905,7 @@ export const CITIES: City[] = [
           1.9,
           "4712 Richmond Ave, Houston, TX 77027, USA",
           undefined,
-          "/images/restaurants/houston-bayou-city-seafood-and-pasta.webp",
+          "/images/restaurants/Bayou%20City%20Seafood%20%26%20Pasta.webp",
           "https://maps.google.com/?q=Bayou+City+Seafood+Houston",
         ),
         place(
@@ -920,7 +914,7 @@ export const CITIES: City[] = [
           1.8,
           "7006 I-45 S, Houston, TX 77087, USA",
           undefined,
-          "/images/restaurants/houston-dot-coffee-shop.webp",
+          "/images/restaurants/Dot%20Coffee%20Shop.webp",
           "https://maps.google.com/?q=Dot+Coffee+Shop+Houston",
         ),
       ],
@@ -1087,6 +1081,7 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=EaDo+Houston",
         note: "Official FIFA Fan Festival. (FIFA 2026 Houston)",
+      image: "/images/screening/East%20Downtown%20EaDo.webp",
       },
       {
         name: "Discovery Green",
@@ -1104,11 +1099,13 @@ export const CITIES: City[] = [
         name: "Avenida Houston",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Avenida+Houston",
+      image: "/images/screening/Avenida%20Houston.webp",
       },
       {
         name: "POST Houston",
         type: "public_viewing",
         url: "https://maps.google.com/?q=POST+Houston",
+      image: "/images/screening/POST%20Houston.webp",
       },
     ],
     seo: seo("Houston", "NRG Stadium"),
@@ -1136,7 +1133,7 @@ export const CITIES: City[] = [
           1.6,
           "9105 E US Hwy 40, Independence, MO 64055, USA",
           undefined,
-          "/images/restaurants/kansas-city-dixon-s-chili-parlor.webp",
+          "/images/restaurants/Dixon's%20Famous%20Chili%20Parlor.webp",
           "https://maps.google.com/?q=Dixons+Chili+Parlor+Independence",
         ),
         place(
@@ -1145,7 +1142,7 @@ export const CITIES: City[] = [
           1.4,
           "1901 Blue Ridge Cutoff, Kansas City, MO 64126, USA",
           undefined,
-          "/images/restaurants/kansas-city-taco-bell-cantina.webp",
+          "/images/restaurants/Taco%20Bell%20Cantina.webp",
           "https://maps.google.com/?q=Taco+Bell+Cantina+Kansas+City",
         ),
         place(
@@ -1154,7 +1151,7 @@ export const CITIES: City[] = [
           1.5,
           "4040 Blue Ridge Cutoff, Kansas City, MO 64133, USA",
           undefined,
-          "/images/restaurants/kansas-city-denny-s.webp",
+          "/images/restaurants/Denny's.webp",
           "https://maps.google.com/?q=Dennys+Blue+Ridge+Cutoff+Kansas+City",
         ),
         place(
@@ -1163,7 +1160,7 @@ export const CITIES: City[] = [
           1.7,
           "4117 Blue Ridge Cutoff, Kansas City, MO 64133, USA",
           undefined,
-          "/images/restaurants/kansas-city-big-t-s-bar-b-q.webp",
+          "/images/restaurants/Big-T's%20Bar-B-Q.webp",
           "https://maps.google.com/?q=Big+Ts+BarBQ+Kansas+City",
         ),
         place(
@@ -1172,7 +1169,7 @@ export const CITIES: City[] = [
           1.8,
           "4042 Blue Ridge Blvd, Kansas City, MO 64133, USA",
           undefined,
-          "/images/restaurants/kansas-city-la-fuente-mexican-restaurant.webp",
+          "/images/restaurants/La%20Fuente%20Mexican%20Restaurant.webp",
           "https://maps.google.com/?q=La+Fuente+Mexican+Restaurant+Kansas+City",
         ),
       ],
@@ -1336,6 +1333,7 @@ export const CITIES: City[] = [
         name: "Power & Light District",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Kansas+City+Power+and+Light+District",
+      image: "/images/screening/Power%20Light%20District.webp",
       },
       {
         name: "Union Station",
@@ -1381,7 +1379,7 @@ export const CITIES: City[] = [
           0.5,
           "3900 W Century Blvd, Inglewood, CA 90303, USA",
           undefined,
-          "/images/restaurants/los-angeles-cork-and-batter.webp",
+          "/images/restaurants/Cork%20%26%20Batter.webp",
           "https://maps.google.com/?q=Cork+and+Batter+Inglewood",
         ),
         place(
@@ -1390,7 +1388,7 @@ export const CITIES: City[] = [
           1.1,
           "1122 Centinela Ave, Inglewood, CA 90302, USA",
           undefined,
-          "/images/restaurants/los-angeles-sunday-gravy.webp",
+          "/images/restaurants/Sunday%20Gravy.webp",
           "https://maps.google.com/?q=Sunday+Gravy+Inglewood",
         ),
         place(
@@ -1399,7 +1397,7 @@ export const CITIES: City[] = [
           1.5,
           "301 N Prairie Ave, Inglewood, CA 90301, USA",
           undefined,
-          "/images/restaurants/los-angeles-fiesta-martin-mexican-grill.webp",
+          "/images/restaurants/Fiesta%20Martin%20Mexican%20Grill.webp",
           "https://maps.google.com/?q=Fiesta+Martin+Mexican+Grill+Inglewood",
         ),
         place(
@@ -1408,7 +1406,7 @@ export const CITIES: City[] = [
           1.7,
           "310 E Manchester Blvd, Inglewood, CA 90301, USA",
           undefined,
-          "/images/restaurants/los-angeles-maria-s-ricos-tacos.webp",
+          "/images/restaurants/Maria's%20Ricos%20Tacos.webp",
           "https://maps.google.com/?q=Marias+Ricos+Tacos+Inglewood",
         ),
         place(
@@ -1417,7 +1415,7 @@ export const CITIES: City[] = [
           1.9,
           "3544 W Imperial Hwy, Inglewood, CA 90303, USA",
           undefined,
-          "/images/restaurants/los-angeles-coni-seafood.webp",
+          "/images/restaurants/Coni's%20Seafood.webp",
           "https://maps.google.com/?q=Coni+Seafood+Inglewood",
         ),
       ],
@@ -1636,7 +1634,7 @@ export const CITIES: City[] = [
           1.2,
           "17630 NW 2nd Ave, Miami Gardens, FL 33169, USA",
           undefined,
-          "/images/restaurants/miami-lorna-s-caribbean-and-american-grill.webp",
+          "/images/restaurants/Lorna's%20Caribbean%20%26%20American%20Grill.webp",
           "https://maps.google.com/?q=Lornas+Caribbean+Miami+Gardens",
         ),
         place(
@@ -1645,7 +1643,7 @@ export const CITIES: City[] = [
           1.5,
           "267 NW 177th St, Miami Gardens, FL 33169, USA",
           undefined,
-          "/images/restaurants/miami-sunday-s-eatery.webp",
+          "/images/restaurants/Sunday's%20Eatery.webp",
           "https://maps.google.com/?q=Sundays+Eatery+Miami+Gardens",
         ),
         place(
@@ -1654,7 +1652,7 @@ export const CITIES: City[] = [
           1.8,
           "19501 NW 2nd Ave, Miami Gardens, FL 33169, USA",
           undefined,
-          "/images/restaurants/miami-jamaica-house-grill.webp",
+          "/images/restaurants/Jamaica%20House%20Grill.webp",
           "https://maps.google.com/?q=Jamaica+House+Grill+Miami+Gardens",
         ),
         place(
@@ -1663,7 +1661,7 @@ export const CITIES: City[] = [
           1.7,
           "19800 NW 2nd Ave, Miami Gardens, FL 33169, USA",
           undefined,
-          "/images/restaurants/miami-pollo-tropical.webp",
+          "/images/restaurants/Pollo%20Tropical.webp",
           "https://maps.google.com/?q=Pollo+Tropical+Miami+Gardens",
         ),
         place(
@@ -1672,7 +1670,7 @@ export const CITIES: City[] = [
           1.9,
           "18350 NW 2nd Ave, Miami Gardens, FL 33169, USA",
           undefined,
-          "/images/restaurants/miami-kfc.webp",
+          "/images/restaurants/KFC.webp",
           "https://maps.google.com/?q=KFC+Miami+Gardens",
         ),
       ],
@@ -1845,6 +1843,7 @@ export const CITIES: City[] = [
         name: "Bayside Marketplace",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Bayside+Marketplace+Miami",
+      image: "/images/screening/Bayside%20Marketplace.webp",
       },
       {
         name: "Brickell City Centre",
@@ -1856,6 +1855,7 @@ export const CITIES: City[] = [
         name: "Wynwood Marketplace",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Wynwood+Marketplace",
+      image: "/images/screening/Wynwood%20Marketplace.webp",
       },
       {
         name: "South Beach Lummus Park",
@@ -1889,7 +1889,7 @@ export const CITIES: City[] = [
           0.8,
           "317 Washington Ave, Carlstadt, NJ 07072, USA",
           undefined,
-          "/images/restaurants/new-york-new-jersey-redd-s-restaurant-and-bar.webp",
+          "/images/restaurants/Redd's%20Restaurant%20%26%20Bar.webp",
           "https://maps.google.com/?q=Redds+Restaurant+Carlstadt",
         ),
         place(
@@ -1898,7 +1898,7 @@ export const CITIES: City[] = [
           0.7,
           "1 American Dream Way, East Rutherford, NJ 07073, USA",
           undefined,
-          "/images/restaurants/new-york-new-jersey-yard-house.webp",
+          "/images/restaurants/Yard%20House.webp",
           "https://maps.google.com/?q=Yard+House+American+Dream",
         ),
         place(
@@ -1907,7 +1907,7 @@ export const CITIES: City[] = [
           0.8,
           "1 American Dream Way, East Rutherford, NJ 07073, USA",
           undefined,
-          "/images/restaurants/new-york-new-jersey-carpaccio.webp",
+          "/images/restaurants/Carpaccio.webp",
           "https://maps.google.com/?q=Carpaccio+American+Dream",
         ),
         place(
@@ -1916,7 +1916,7 @@ export const CITIES: City[] = [
           0.8,
           "1 American Dream Way, East Rutherford, NJ 07073, USA",
           undefined,
-          "/images/restaurants/new-york-new-jersey-mrbeast-burger.webp",
+          "/images/restaurants/MrBeast%20Burger.webp",
           "https://maps.google.com/?q=MrBeast+Burger+American+Dream",
         ),
         place(
@@ -1925,7 +1925,7 @@ export const CITIES: City[] = [
           0.8,
           "1 American Dream Way, East Rutherford, NJ 07073, USA",
           undefined,
-          "/images/restaurants/new-york-new-jersey-gumbo-bros.webp",
+          "/images/restaurants/The%20Gumbo%20Bros.webp",
           "https://maps.google.com/?q=Gumbo+Bros+American+Dream",
         ),
       ],
@@ -2143,7 +2143,7 @@ export const CITIES: City[] = [
           0.4,
           "1100 Pattison Ave, Philadelphia, PA 19148, USA",
           undefined,
-          "/images/restaurants/philadelphia-xfinity-live-philadelphia.webp",
+          "/images/restaurants/Xfinity%20Live.webp",
           "https://maps.google.com/?q=Xfinity+Live+Philadelphia",
         ),
         place(
@@ -2152,7 +2152,7 @@ export const CITIES: City[] = [
           1.1,
           "1526 Packer Ave, Philadelphia, PA 19145, USA",
           undefined,
-          "/images/restaurants/philadelphia-chickie-s-and-pete-s.webp",
+          "/images/restaurants/Chickie's%20%26%20Pete's.webp",
           "https://maps.google.com/?q=Chickies+and+Petes+Packer+Ave",
         ),
         place(
@@ -2161,7 +2161,7 @@ export const CITIES: City[] = [
           1,
           "1631 Packer Ave, Philadelphia, PA 19145, USA",
           undefined,
-          "/images/restaurants/philadelphia-philadium-tavern.webp",
+          "/images/restaurants/Philadium%20Tavern.webp",
           "https://maps.google.com/?q=Philadium+Tavern+Philadelphia",
         ),
         place(
@@ -2170,7 +2170,7 @@ export const CITIES: City[] = [
           1.5,
           "2535 S 13th St, Philadelphia, PA 19148, USA",
           undefined,
-          "/images/restaurants/philadelphia-southhouse.webp",
+          "/images/restaurants/SouthHouse.webp",
           "https://maps.google.com/?q=SouthHouse+Philadelphia",
         ),
         place(
@@ -2179,7 +2179,7 @@ export const CITIES: City[] = [
           1.6,
           "1939 W Passyunk Ave, Philadelphia, PA 19145, USA",
           undefined,
-          "/images/restaurants/philadelphia-oregon-steaks.webp",
+          "/images/restaurants/Oregon%20Steaks.webp",
           "https://maps.google.com/?q=Oregon+Steaks+Philadelphia",
         ),
       ],
@@ -2392,13 +2392,13 @@ export const CITIES: City[] = [
     restaurants: {
       "2mi": [
         place(
-          "Bourbon Pub",
+          "Bourbon Steak Santa Clara",
           "San Francisco",
           0.3,
           "3970 Freedom Cir, Santa Clara, CA 95054, USA",
           undefined,
-          "/images/restaurants/san-francisco-bay-area-bourbon-pub.webp",
-          "https://maps.google.com/?q=Bourbon+Pub+Santa+Clara",
+          "/images/restaurants/Bourbon%20Steak%20Santa%20Clara.webp",
+          "https://maps.google.com/?q=Bourbon+Steak+Santa+Clara",
         ),
         place(
           "The Grill on the Alley",
@@ -2406,7 +2406,7 @@ export const CITIES: City[] = [
           1.7,
           "1725 N First St, San Jose, CA 95112, USA",
           undefined,
-          "/images/restaurants/san-francisco-bay-area-the-grill-on-the-alley.webp",
+          "/images/restaurants/The%20Grill%20On%20The%20Alley.webp",
           "https://maps.google.com/?q=The+Grill+on+the+Alley+Santa+Clara",
         ),
         place(
@@ -2415,7 +2415,7 @@ export const CITIES: City[] = [
           0.4,
           "3935 Freedom Cir, Santa Clara, CA 95054, USA",
           undefined,
-          "/images/restaurants/san-francisco-bay-area-pedro-s-restaurant-and-cantina.webp",
+          "/images/restaurants/Pedro's%20Restaurant%20%26%20Cantina.webp",
           "https://maps.google.com/?q=Pedros+Restaurant+Santa+Clara",
         ),
         place(
@@ -2424,16 +2424,16 @@ export const CITIES: City[] = [
           0.5,
           "3955 Freedom Cir, Santa Clara, CA 95054, USA",
           undefined,
-          "/images/restaurants/san-francisco-bay-area-birk-s-restaurant.webp",
+          "/images/restaurants/Birk's%20Restaurant.webp",
           "https://maps.google.com/?q=Birks+Restaurant+Santa+Clara",
         ),
         place(
-          "Taco Bell Cantina",
+          "Taco Bell Cantina Santa Clara",
           "San Francisco",
           1.9,
           "3535 Monroe St, Santa Clara, CA 95051, USA",
           undefined,
-          "/images/restaurants/san-francisco-bay-area-taco-bell-cantina.webp",
+          "/images/restaurants/Taco%20Bell%20Cantina%20Santa%20Clara.webp",
           "https://maps.google.com/?q=Taco+Bell+Cantina+Santa+Clara",
         ),
       ],
@@ -2651,17 +2651,8 @@ export const CITIES: City[] = [
           0.3,
           "255 S King St, Seattle, WA 98104, USA",
           undefined,
-          "/images/restaurants/seattle-13-coins-seattle.webp",
+          "/images/restaurants/13%20Coins%20Seattle.webp",
           "https://maps.google.com/?q=13+Coins+Seattle",
-        ),
-        place(
-          "Pyramid Alehouse Restaurant",
-          "Seattle",
-          0.2,
-          "1201 1st Ave S, Seattle, WA 98134, USA",
-          undefined,
-          "/images/restaurants/seattle-pyramid-alehouse-restaurant.webp",
-          "https://maps.google.com/?q=Pyramid+Alehouse+Seattle",
         ),
         place(
           "Elysian Fields",
@@ -2669,7 +2660,7 @@ export const CITIES: City[] = [
           0.4,
           "542 1st Ave S, Seattle, WA 98104, USA",
           undefined,
-          "/images/restaurants/seattle-elysian-fields.webp",
+          "/images/restaurants/Elysian%20Fields.webp",
           "https://maps.google.com/?q=Elysian+Fields+Seattle",
         ),
         place(
@@ -2678,7 +2669,7 @@ export const CITIES: City[] = [
           0.4,
           "419 Occidental Ave S, Seattle, WA 98104, USA",
           undefined,
-          "/images/restaurants/seattle-fx-mcrory-s-steak-chop-and-oyster-house.webp",
+          "/images/restaurants/FX%20McRory's%20Steak%20Chop%20%26%20Oyster%20House.webp",
           "https://maps.google.com/?q=FX+McRorys+Seattle",
         ),
         place(
@@ -2687,7 +2678,7 @@ export const CITIES: City[] = [
           0.7,
           "1721 1st Ave S, Seattle, WA 98134, USA",
           undefined,
-          "/images/restaurants/seattle-hooverville-bar-and-grill.webp",
+          "/images/restaurants/Hooverville%20Bar.webp",
           "https://maps.google.com/?q=Hooverville+Bar+and+Grill+Seattle",
         ),
       ],
@@ -2900,21 +2891,12 @@ export const CITIES: City[] = [
     restaurants: {
       "2mi": [
         place(
-          "Liberty Commons at Big Rock Brewery",
-          "Toronto",
-          0.8,
-          "42 Liberty St, Toronto, ON M6K 3P1, Canada",
-          undefined,
-          "/images/restaurants/toronto-liberty-commons-at-big-rock-brewery.webp",
-          "https://maps.google.com/?q=Liberty+Commons+Toronto",
-        ),
-        place(
           "LOCAL Public Eatery Liberty Village",
           "Toronto",
           0.9,
           "171 E Liberty St, Toronto, ON M6K 3P6, Canada",
           undefined,
-          "/images/restaurants/toronto-local-public-eatery-liberty-village.webp",
+          "/images/restaurants/LOCAL%20Public%20Eatery%20Liberty%20Village.webp",
           "https://maps.google.com/?q=LOCAL+Public+Eatery+Toronto",
         ),
         place(
@@ -2923,7 +2905,7 @@ export const CITIES: City[] = [
           0.9,
           "165 E Liberty St, Toronto, ON M6K 3K4, Canada",
           undefined,
-          "/images/restaurants/toronto-brazen-head-irish-pub.webp",
+          "/images/restaurants/Brazen%20Head%20Irish%20Pub.webp",
           "https://maps.google.com/?q=Brazen+Head+Toronto",
         ),
         place(
@@ -2932,7 +2914,7 @@ export const CITIES: City[] = [
           1,
           "70 Fraser Ave, Toronto, ON M6K 3E1, Canada",
           undefined,
-          "/images/restaurants/toronto-school-restaurant.webp",
+          "/images/restaurants/SCHOOL%20Restaurant.webp",
           "https://maps.google.com/?q=School+Restaurant+Toronto",
         ),
         place(
@@ -2941,7 +2923,7 @@ export const CITIES: City[] = [
           1.1,
           "85 Hanna Ave #104, Toronto, ON M6K 3S3, Canada",
           undefined,
-          "/images/restaurants/toronto-mildred-s-temple-kitchen.webp",
+          "/images/restaurants/Mildred's%20Temple%20Kitchen.webp",
           "https://maps.google.com/?q=Mildreds+Temple+Kitchen+Toronto",
         ),
       ],
@@ -3149,7 +3131,7 @@ export const CITIES: City[] = [
           0.3,
           "590 W Georgia St, Vancouver, BC V6B 2A1, Canada",
           undefined,
-          "/images/restaurants/vancouver-glowbal.webp",
+          "/images/restaurants/Glowbal.webp",
           "https://maps.google.com/?q=Glowbal+Vancouver",
         ),
         place(
@@ -3158,7 +3140,7 @@ export const CITIES: City[] = [
           0.8,
           "1032 Alberni St, Vancouver, BC V6E 1A3, Canada",
           undefined,
-          "/images/restaurants/vancouver-black-blue.webp",
+          "/images/restaurants/Black%2BBlue%20Vancouver.webp",
           "https://maps.google.com/?q=Black+and+Blue+Vancouver",
         ),
         place(
@@ -3167,7 +3149,7 @@ export const CITIES: City[] = [
           0.2,
           "898 Homer St, Vancouver, BC V6B 2W5, Canada",
           undefined,
-          "/images/restaurants/vancouver-homer-st-cafe-and-bar.webp",
+          "/images/restaurants/Homer%20St.%20Cafe%20and%20Bar.webp",
           "https://maps.google.com/?q=Homer+St+Cafe+Vancouver",
         ),
         place(
@@ -3176,7 +3158,7 @@ export const CITIES: City[] = [
           0.3,
           "762 Cambie St, Vancouver, BC V6B 2P2, Canada",
           undefined,
-          "/images/restaurants/vancouver-fanny-bay-oyster-bar.webp",
+          "/images/restaurants/Fanny%20Bay%20Oyster%20Bar%20%26%20Shellfish%20Market.webp",
           "https://maps.google.com/?q=Fanny+Bay+Oyster+Bar+Vancouver",
         ),
         place(
@@ -3185,7 +3167,7 @@ export const CITIES: City[] = [
           0.1,
           "180 W Georgia St, Vancouver, BC V6B 4P4, Canada",
           undefined,
-          "/images/restaurants/vancouver-shark-club-sports-bar-and-grill.webp",
+          "/images/restaurants/Shark%20Club%20Sports%20Bar%20%26%20Grill.webp",
           "https://maps.google.com/?q=Shark+Club+Vancouver",
         ),
       ],
@@ -3348,6 +3330,7 @@ export const CITIES: City[] = [
         name: "Canada Place",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Canada+Place+Vancouver",
+      image: "/images/screening/Canada%20Place.webp",
       },
       {
         name: "Jack Poole Plaza",
@@ -3365,6 +3348,7 @@ export const CITIES: City[] = [
         name: "Robson Square",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Robson+Square+Vancouver",
+      image: "/images/screening/Robson%20Square.webp",
       },
     ],
     seo: seo("Vancouver", "BC Place"),
@@ -3387,21 +3371,12 @@ export const CITIES: City[] = [
     restaurants: {
       "2mi": [
         place(
-          "El Arroyo de los Culhuacanes",
-          "Mexico City",
-          0.8,
-          "Calzada de Tlalpan 4305, Tlalpan, Ciudad de México, Mexico",
-          undefined,
-          "/images/restaurants/mexico-city-el-arroyo-de-los-culhuacanes.webp",
-          "https://maps.google.com/?q=El+Arroyo+de+los+Culhuacanes+Mexico+City",
-        ),
-        place(
           "Los Bisquets Bisquets Obregón",
           "Mexico City",
           0.6,
           "Calzada de Tlalpan 4348, Tlalpan, Ciudad de México, Mexico",
           undefined,
-          "/images/restaurants/mexico-city-los-bisquets-bisquets-obregon.webp",
+          "/images/restaurants/Los%20Bisquets%20de%20Obreg%C3%B3n.webp",
           "https://maps.google.com/?q=Bisquets+Obregon+Tlalpan",
         ),
         place(
@@ -3410,7 +3385,7 @@ export const CITIES: City[] = [
           1.3,
           "Av. Insurgentes Sur 4003, Tlalpan, Ciudad de México, Mexico",
           undefined,
-          "/images/restaurants/mexico-city-restaurante-arroyo.webp",
+          "/images/restaurants/Restaurante%20Arroyo.webp",
           "https://maps.google.com/?q=Restaurante+Arroyo+Mexico+City",
         ),
         place(
@@ -3419,7 +3394,7 @@ export const CITIES: City[] = [
           1.7,
           "Calzada Acoxpa 430, Tlalpan, Ciudad de México, Mexico",
           undefined,
-          "/images/restaurants/mexico-city-el-bajio-acoxpa.webp",
+          "/images/restaurants/El%20Baj%C3%ADo.webp",
           "https://maps.google.com/?q=El+Bajio+Acoxpa",
         ),
         place(
@@ -3428,7 +3403,7 @@ export const CITIES: City[] = [
           1.8,
           "Calzada Acoxpa 610, Tlalpan, Ciudad de México, Mexico",
           undefined,
-          "/images/restaurants/mexico-city-vips-acoxpa.webp",
+          "/images/restaurants/Vips%20Acoxpa.webp",
           "https://maps.google.com/?q=Vips+Acoxpa+Mexico+City",
         ),
       ],
@@ -3594,16 +3569,19 @@ export const CITIES: City[] = [
         name: "FIFA Fan Festival – Zócalo",
         type: "fan_festival",
         url: "https://maps.google.com/?q=Zocalo+Mexico+City",
+      image: "/images/screening/Zocalo.webp",
       },
       {
         name: "Monumento a la Revolución",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Monumento+a+la+Revolucion+Mexico+City",
+      image: "/images/screening/Monumento%20a%20la%20Revolucion.webp",
       },
       {
         name: "Alameda Central",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Alameda+Central+Mexico+City",
+      image: "/images/screening/Alameda%20Central.webp",
       },
       {
         name: "Parque Bicentenario",
@@ -3638,21 +3616,12 @@ export const CITIES: City[] = [
     restaurants: {
       "2mi": [
         place(
-          "La Tequila Cocina de México",
-          "Guadalajara",
-          1.5,
-          "Av. Patria 1000, Zapopan, Jalisco, Mexico",
-          undefined,
-          "/images/restaurants/guadalajara-la-tequila-cocina-de-mexico.webp",
-          "https://maps.google.com/?q=La+Tequila+Zapopan",
-        ),
-        place(
           "Los Chilaquiles",
           "Guadalajara",
           1.8,
           "Av. Tepeyac 1501, Zapopan, Jalisco, Mexico",
           undefined,
-          "/images/restaurants/guadalajara-los-chilaquiles.webp",
+          "/images/restaurants/Los%20Chilaquiles.webp",
           "https://maps.google.com/?q=Los+Chilaquiles+Zapopan",
         ),
         place(
@@ -3661,26 +3630,8 @@ export const CITIES: City[] = [
           1.4,
           "Av. Vallarta 6503, Zapopan, Jalisco, Mexico",
           undefined,
-          "/images/restaurants/guadalajara-save-restaurante.webp",
+          "/images/restaurants/Save%20Restaurante.webp",
           "https://maps.google.com/?q=Save+Restaurante+Zapopan",
-        ),
-        place(
-          "Sushi Central",
-          "Guadalajara",
-          1.6,
-          "Av. Vallarta 6325, Zapopan, Jalisco, Mexico",
-          undefined,
-          "/images/restaurants/guadalajara-sushi-central.webp",
-          "https://maps.google.com/?q=Sushi+Central+Zapopan",
-        ),
-        place(
-          "El Abajeño",
-          "Guadalajara",
-          1.9,
-          "Av. Vallarta 5295, Zapopan, Jalisco, Mexico",
-          undefined,
-          "/images/restaurants/guadalajara-el-abajeno.webp",
-          "https://maps.google.com/?q=El+Abajeno+Zapopan",
         ),
       ],
     },
@@ -3874,21 +3825,12 @@ export const CITIES: City[] = [
     restaurants: {
       "2mi": [
         place(
-          "El Papalote Taco & Grill",
-          "Monterrey",
-          0.9,
-          "Av. Pablo Livas 7701, Guadalupe, Nuevo León, Mexico",
-          undefined,
-          "/images/restaurants/monterrey-el-papalote-taco-and-grill.webp",
-          "https://maps.google.com/?q=El+Papalote+Guadalupe",
-        ),
-        place(
           "La Nacional Restaurante",
           "Monterrey",
           1.3,
           "Av. Benito Juárez 500, Guadalupe, Nuevo León, Mexico",
           undefined,
-          "/images/restaurants/monterrey-la-nacional-restaurante.webp",
+          "/images/restaurants/La%20Nacional%20Restaurante.webp",
           "https://maps.google.com/?q=La+Nacional+Guadalupe",
         ),
         place(
@@ -3897,7 +3839,7 @@ export const CITIES: City[] = [
           1.1,
           "Av. Pablo Livas, Guadalupe, Nuevo León, Mexico",
           undefined,
-          "/images/restaurants/monterrey-tacos-pipe.webp",
+          "/images/restaurants/Tacos%20Pipe%20Suc.%20Guadalupe.webp",
           "https://maps.google.com/?q=Tacos+Pipe+Guadalupe",
         ),
         place(
@@ -3906,7 +3848,7 @@ export const CITIES: City[] = [
           1.7,
           "Av. Eloy Cavazos 7700, Guadalupe, Nuevo León, Mexico",
           undefined,
-          "/images/restaurants/monterrey-los-generales.webp",
+          "/images/restaurants/Los%20Generales%20Buffets%20Lindavista.webp",
           "https://maps.google.com/?q=Los+Generales+Guadalupe",
         ),
         place(
@@ -3915,7 +3857,7 @@ export const CITIES: City[] = [
           1.9,
           "Av. Miguel Alemán 6060, Guadalupe, Nuevo León, Mexico",
           undefined,
-          "/images/restaurants/monterrey-sierra-madre-brewing-co.webp",
+          "/images/restaurants/Sierra%20Madre%20Brewing%20Co.webp",
           "https://maps.google.com/?q=Sierra+Madre+Brewing+Guadalupe",
         ),
       ],
@@ -4081,16 +4023,19 @@ export const CITIES: City[] = [
         name: "FIFA Fan Festival – Fundidora Park",
         type: "fan_festival",
         url: "https://maps.google.com/?q=Parque+Fundidora+Monterrey",
+      image: "/images/screening/Fundidora%20Park.webp",
       },
       {
         name: "Macroplaza",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Macroplaza+Monterrey",
+      image: "/images/screening/Macroplaza.webp",
       },
       {
         name: "Explanada de los Héroes",
         type: "public_viewing",
         url: "https://maps.google.com/?q=Explanada+de+los+Heroes+Monterrey",
+      image: "/images/screening/Explanada%20de%20los%20Heroes.webp",
       },
       {
         name: "Paseo Santa Lucía",
