@@ -12,7 +12,8 @@ const officialTickets = (cityName: string) => [
     label: `Official FIFA tickets — ${cityName}`,
     url: FIFA_TICKETS_URL,
     official: true,
-    image: "https://loremflickr.com/600/400/soccer,ticket,stadium?lock=304",
+    image:
+      "https://worldcup2026.jp/wp-content/uploads/2025/11/Gemini_Generated_Image_ys2nvoys2nvoys2n-2-2048x1117.jpg.webp",
   },
 ];
 
