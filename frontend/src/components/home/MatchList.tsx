@@ -63,7 +63,7 @@ function MatchCard({ m }: { m: Match }) {
                 : "bg-accent-soft text-accent-strong",
           )}
         >
-          {finished ? "Full time" : live ? "● Live" : localTime(m.kickoffUtc)}
+          {finished ? `${localTime(m.kickoffUtc)} • Completed` : live ? "● Live" : localTime(m.kickoffUtc)}
         </span>
       </div>
 
@@ -112,8 +112,8 @@ export function MatchList() {
     let next = "";
     let nextLabel = "Tomorrow";
     for (let offset = 1; offset <= 60; offset++) {
-      const d = new Date(now);
-      d.setDate(now.getDate() + offset);
+      // Add exactly 24 hours per offset to avoid browser local date boundary issues
+      const d = new Date(now.getTime() + offset * 86400000);
       const candidate = ymd(d);
       if (matchesOn(candidate).length > 0) {
         next = candidate;

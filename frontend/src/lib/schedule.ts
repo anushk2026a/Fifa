@@ -1,11 +1,23 @@
 import { MATCHES } from "@/data/matches";
 import type { Match } from "@/data/types";
 
-/** Local date as YYYY-MM-DD in the visitor's browser timezone. */
+const TIMEZONE = "America/Chicago";
+
+/** Local date as YYYY-MM-DD in Texas (Central Time). */
 export function ymd(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
-    d.getDate(),
-  ).padStart(2, "0")}`;
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  const parts = formatter.formatToParts(d);
+  const year = parts.find((p) => p.type === "year")?.value;
+  const month = parts.find((p) => p.type === "month")?.value;
+  const day = parts.find((p) => p.type === "day")?.value;
+
+  return `${year}-${month}-${day}`;
 }
 
 /** All matches on a given local date (visitor's timezone), sorted by kickoff. */
@@ -25,11 +37,13 @@ export function prettyDate(date: string): string {
   });
 }
 
-/** Kickoff time in the visitor's browser timezone, e.g. "22:30". */
+/** Kickoff time in Texas (Central Time), e.g. "22:30 CDT". */
 export function localTime(kickoffUtc: string): string {
-  return new Date(kickoffUtc).toLocaleTimeString([], {
-    hour: "2-digit",
+  return new Date(kickoffUtc).toLocaleTimeString("en-US", {
+    timeZone: TIMEZONE,
+    hour: "numeric",
     minute: "2-digit",
-    hour12: false,
+    hour12: true,
+    timeZoneName: "short",
   });
 }
