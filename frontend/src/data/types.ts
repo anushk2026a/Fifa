@@ -67,8 +67,7 @@ export type City = {
 };
 
 export type Match = {
-  date: string; // YYYY-MM-DD, venue-local
-  kickoff: string; // HH:mm, venue-local
+  kickoffUtc: string; // ISO 8601 UTC, e.g. "2026-06-18T19:00:00Z"
   citySlug: string;
   stadium: string;
   home: { name: string; code: string; score?: number };

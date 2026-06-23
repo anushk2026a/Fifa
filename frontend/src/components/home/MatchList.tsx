@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Match } from "@/data/types";
-import { matchesOn, prettyDate, ymd } from "@/lib/schedule";
+import { localTime, matchesOn, prettyDate, ymd } from "@/lib/schedule";
 import { getCity } from "@/data/cities";
 import { teamFlagIso } from "@/lib/flags";
 import { Flag } from "@/components/common/Flag";
@@ -63,7 +63,7 @@ function MatchCard({ m }: { m: Match }) {
                 : "bg-accent-soft text-accent-strong",
           )}
         >
-          {finished ? "Full time" : live ? "● Live" : m.kickoff}
+          {finished ? "Full time" : live ? "● Live" : localTime(m.kickoffUtc)}
         </span>
       </div>
 
@@ -101,13 +101,28 @@ function DayBlock({ label, date }: { label: string; date: string }) {
 }
 
 export function MatchList() {
-  // Compute on the client so "today/tomorrow" follow the visitor's date.
-  const [dates, setDates] = useState<{ today: string; tomorrow: string } | null>(null);
+  const [dates, setDates] = useState<{ today: string; next: string; nextLabel: string } | null>(null);
+
   useEffect(() => {
     const now = new Date();
-    const tmr = new Date(now);
-    tmr.setDate(now.getDate() + 1);
-    setDates({ today: ymd(now), tomorrow: ymd(tmr) });
+    const today = ymd(now);
+
+    // Find the next day with matches (skip empty days — happens when US kickoffs
+    // fall on the following calendar day in the visitor's local timezone).
+    let next = "";
+    let nextLabel = "Tomorrow";
+    for (let offset = 1; offset <= 60; offset++) {
+      const d = new Date(now);
+      d.setDate(now.getDate() + offset);
+      const candidate = ymd(d);
+      if (matchesOn(candidate).length > 0) {
+        next = candidate;
+        nextLabel = offset === 1 ? "Tomorrow" : prettyDate(candidate);
+        break;
+      }
+    }
+
+    setDates({ today, next, nextLabel });
   }, []);
 
   if (!dates) {
@@ -122,7 +137,7 @@ export function MatchList() {
   return (
     <div className="space-y-8">
       <DayBlock label="Today" date={dates.today} />
-      <DayBlock label="Tomorrow" date={dates.tomorrow} />
+      {dates.next && <DayBlock label={dates.nextLabel} date={dates.next} />}
     </div>
   );
 }
