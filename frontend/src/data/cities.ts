@@ -54,7 +54,7 @@ function transport(
       image: "/images/transport/rideshare.webp",
       links: [
         { label: "Request an Uber", url: uberLink(`${stadium}, ${city}`) },
-        { label: "Taxis nearby", url: mapsSearch(`taxi near ${stadium}, ${city}`) },
+        { label: "Taxis nearby", url: mapsSearch(`taxi near ${stadium}, ${city}`) }
       ],
     },
     {
@@ -75,7 +75,7 @@ function transport(
       url: FIFA_TOURNAMENT_URL,
       video,
       image: "/images/transport/stadium.webp",
-    },
+    }
   ];
 }
 
@@ -103,7 +103,7 @@ function fanFest(city: string, note?: string, image?: string): ScreeningZone[] {
       url: mapsSearch(`sports bars showing soccer, ${city}`),
       note: "Catch every match with fellow fans at nearby sports bars and pubs.",
       image: "https://loremflickr.com/600/400/sportsbar,pub?lock=307",
-    },
+    }
   ];
 }
 
@@ -176,7 +176,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/big%20kahuna%20atlanta.webp",
           "https://maps.google.com/?q=Big+Kahuna+Atlanta",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Staplehouse",
+          "Atlanta",
+          2.1,
+          "541 Edgewood Ave SE, Atlanta, GA 30312, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNp_Y1tIqkV5fAUBFpgW_qkpvN3xQk3fCaYq9dQ",
+          "https://maps.google.com/?q=Staplehouse+Atlanta",
         ),
+        place(
+          "Bacchanalia",
+          "Atlanta",
+          2.5,
+          "1460 Ellsworth Industrial Blvd NW, Atlanta, GA 30318, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMqYlhMJkj1E4UerWXnvX_H_Rn1TIiVxT4bqPiE",
+          "https://maps.google.com/?q=Bacchanalia+Atlanta",
+        ),
+        place(
+          "Watershed on Peachtree",
+          "Atlanta",
+          3.0,
+          "1820 Peachtree Rd NW, Atlanta, GA 30309, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipO5F5V0Yns9r2W0CkJJNKRrT7rGy3E08zFSBlKg",
+          "https://maps.google.com/?q=Watershed+on+Peachtree+Atlanta",
+        ),
+        place(
+          "Miller Union",
+          "Atlanta",
+          2.3,
+          "999 Brady Ave NW, Atlanta, GA 30318, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipO3wEzjP48pMJzMY1VhC8LG7_T3kIYkuRQH3Jq8",
+          "https://maps.google.com/?q=Miller+Union+Atlanta",
+        ),
+        place(
+          "The Optimist",
+          "Atlanta",
+          2.4,
+          "914 Howell Mill Rd NW, Atlanta, GA 30318, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNdz7kOCN4uFm0YHsN7n2L5sTe7Z_rz3-FdpQus",
+          "https://maps.google.com/?q=The+Optimist+Atlanta",
+        )
       ],
     },
     hotels: {
@@ -216,7 +264,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Glenn%20Hotel%2C%20Autograph%20Collection.webp",
           "https://maps.app.goo.gl/2FGCrexKVJkYJKot9",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -254,7 +302,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Atlanta%20Marriott%20Marquis.webp",
           "https://www.google.com/maps/search/?api=1&query=265+Peachtree+Center+Ave+NE+Atlanta+GA+30303",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -292,7 +340,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Four%20Seasons%20Hotel%20Atlanta.webp",
           "https://maps.app.goo.gl/Mo5iuMYd7ynQz6Vh6",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -321,7 +369,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/JW%20Marriott%20Atlanta%20Buckhead.webp",
           "https://maps.app.goo.gl/2AqDRYkYHZ9CQXhg7",
-        ),
+        )
       ],
     },
     transportation: [
@@ -333,7 +381,7 @@ export const CITIES: City[] = [
         image: "/images/transport/rideshare.webp",
         links: [
           { label: "Request an Uber", url: uberLink("Mercedes-Benz Stadium, Atlanta") },
-          { label: "Taxis nearby", url: mapsSearch("taxi near Mercedes-Benz Stadium, Atlanta") },
+          { label: "Taxis nearby", url: mapsSearch("taxi near Mercedes-Benz Stadium, Atlanta") }
         ],
       },
       {
@@ -343,7 +391,7 @@ export const CITIES: City[] = [
         note: "Both stations are a short walk to the stadium; ~20 min from the airport.",
         image: "/images/transport/metro.webp",
         video: "https://www.youtube.com/embed/qqWZKanP_Tc",
-      },
+      }
     ],
 
     tickets: [
@@ -353,7 +401,7 @@ export const CITIES: City[] = [
         image:
           "https://worldcup2026.jp/wp-content/uploads/2025/11/Gemini_Generated_Image_ys2nvoys2nvoys2n-2-2048x1117.jpg.webp",
         official: true,
-      },
+      }
     ],
 
     screeningZones: [
@@ -392,7 +440,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Colony+Square+Atlanta",
         address: "1197 Peachtree St NE, Atlanta, GA 30361, United States",
         image: "/images/screening/colony%20square.webp",
-      },
+      }
     ],
     seo: seo("Atlanta", "Mercedes-Benz Stadium"),
   },
@@ -449,6 +497,63 @@ export const CITIES: City[] = [
           "/images/restaurants/six%20string%20grill%20%26%20stage.webp",
           "https://maps.google.com/?q=Six+String+Grill+Foxborough",
         ),
+        place(
+          "Wahlburgers – Patriot Place",
+          "Boston",
+          0.2,
+          "253 Patriot Pl, Foxborough, MA 02035, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMzWQZwLH5JWUI7zYYLbMo1hnK6NKoHh1WKQM4",
+          "https://maps.google.com/?q=Wahlburgers+Patriot+Place+Foxborough",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Foxboro Grille",
+          "Boston",
+          2.5,
+          "4 Chestnut St, Foxborough, MA 02035, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipP4N2jm8S5VFBkwi5tIdqTq8bqGYpDiT4Z_ygcq",
+          "https://maps.google.com/?q=Foxboro+Grille+Foxborough+MA",
+        ),
+        place(
+          "Hopkinton Bar & Grille",
+          "Boston",
+          4.1,
+          "98 Main St, Hopkinton, MA 01748, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPJTNpxhVdyAMeFY3vZFtA0DGLEWzSF-yP3H0sK",
+          "https://maps.google.com/?q=Hopkinton+Bar+and+Grille+MA",
+        ),
+        place(
+          "Franklin Pub",
+          "Boston",
+          3.2,
+          "186 E Central St, Franklin, MA 02038, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNGtUoRQ4YXv2jvdqq_7TfQ7WtS-3XO0mYBWmGY",
+          "https://maps.google.com/?q=Franklin+Pub+Franklin+MA",
+        ),
+        place(
+          "Raso's Bar & Grille",
+          "Boston",
+          4.0,
+          "36 Dean St, Mansfield, MA 02048, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipN7m8YdLmXYp8KJBH3VvGq7wYsP3DfkHGZLkqYA",
+          "https://maps.google.com/?q=Rasos+Bar+Grille+Mansfield+MA",
+        ),
+        place(
+          "Gillette Pub & Grille",
+          "Boston",
+          4.5,
+          "200 Patriot Pl, Foxborough, MA 02035, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNiqfHgstf5FoJ8v9C1fBj1vO4NV7JnL9HLMDQ4",
+          "https://maps.google.com/?q=Restaurant+Foxborough+MA+near+Gillette+Stadium",
+        )
       ],
     },
     hotels: {
@@ -488,7 +593,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Red%20Fox%20Motel.webp",
           "https://www.google.com/maps/search/?api=1&query=Redfox+Motel+Foxborough",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -517,7 +622,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Sonesta%20Select%20Boston%20Foxborough%20Mansfield.webp",
           "https://www.google.com/maps/search/?api=1&query=Sonesta+Select+Foxborough+Mansfield",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -555,7 +660,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Fairfield%20by%20Marriott%20Inn%20%26%20Suites%20Mansfield.webp",
           "https://www.google.com/maps/search/?api=1&query=Fairfield+Inn+and+Suites+Mansfield+MA",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -584,7 +689,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Four%20Points%20by%20Sheraton%20Norwood.webp",
           "https://www.google.com/maps/search/?api=1&query=Four+Points+by+Sheraton+Norwood",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -634,7 +739,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Seaport+Common+Boston",
         address: "85 Northern Ave, Boston, MA 02210, United States",
         image: "/images/screening/seaport%20common.webp",
-      },
+      }
     ],
     seo: seo("Boston", "Gillette Stadium"),
   },
@@ -691,6 +796,63 @@ export const CITIES: City[] = [
           "/images/restaurants/The%20Tipsy%20Oak.webp",
           "https://maps.google.com/?q=The+Tipsy+Oak+Arlington",
         ),
+        place(
+          "Texas Live! Arlington",
+          "Dallas",
+          0.3,
+          "1650 E Randol Mill Rd, Arlington, TX 76011, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNRp7SHW1s3Pj8y4z3t5JBRbGYMXkDSVJhE3LiI",
+          "https://maps.google.com/?q=Texas+Live+Arlington+TX",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Pecan Lodge",
+          "Dallas",
+          4.2,
+          "2702 Main St, Dallas, TX 75226, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNJdMGLEJGBJJpHD-z_LXZC1q0ADKMTKhCaHJIw",
+          "https://maps.google.com/?q=Pecan+Lodge+Dallas",
+        ),
+        place(
+          "Terry Black's Barbecue",
+          "Dallas",
+          4.5,
+          "3025 Main St, Dallas, TX 75226, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNqcj5gLiTeSsLblsVTPT2mM_qUJCcWrHCKBGx-",
+          "https://maps.google.com/?q=Terry+Blacks+Barbecue+Dallas",
+        ),
+        place(
+          "Nick & Sam's Steakhouse",
+          "Dallas",
+          4.8,
+          "3008 Maple Ave, Dallas, TX 75201, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMlRqEAYf3xgCDmxuuZ_8YNn6BrVQBerGZbFcVE",
+          "https://maps.google.com/?q=Nick+and+Sams+Steakhouse+Dallas",
+        ),
+        place(
+          "El Fenix Mexican Restaurant",
+          "Dallas",
+          3.8,
+          "1601 McKinney Ave, Dallas, TX 75202, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMu8OcV97Kv8JJy5aJ2kj49VMHY0KG1VThblq0Y",
+          "https://maps.google.com/?q=El+Fenix+Dallas",
+        ),
+        place(
+          "Stephan Pyles Flora Street Cafe",
+          "Dallas",
+          4.9,
+          "1820 N Market St, Dallas, TX 75202, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMy6I19Nt0lFkVMFQmXvDy5eMQkxuKyZg7MPBSE",
+          "https://maps.google.com/?q=Stephan+Pyles+Flora+Street+Cafe+Dallas",
+        )
       ],
     },
     hotels: {
@@ -721,7 +883,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Howard%20Johnson%20by%20Wyndham%20Arlington%20Ballpark.webp",
           "https://www.google.com/maps/search/?api=1&query=Howard+Johnson+by+Wyndham+Arlington+Ballpark",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -759,7 +921,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Crowne%20Plaza%20Suites%20Arlington.webp",
           "https://www.google.com/maps/search/?api=1&query=Crowne+Plaza+Suites+Arlington",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -797,7 +959,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Fairfield%20by%20Marriott%20Inn%20%26%20Suites%20Arlington%20Near%20Six%20Flags.webp",
           "https://www.google.com/maps/search/?api=1&query=Fairfield+Inn+and+Suites+Arlington+Near+Six+Flags",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -826,7 +988,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/The%20Westin%20Dallas%20Fort%20Worth%20Airport.webp",
           "https://www.google.com/maps/search/?api=1&query=The+Westin+Dallas+Fort+Worth+Airport",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -876,7 +1038,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Sundance+Square+Fort+Worth",
         address: "420 Main St, Fort Worth, TX 76102, United States",
         image: "/images/screening/sundance%20square.webp",
-      },
+      }
     ],
     seo: seo("Dallas", "AT&T Stadium"),
   },
@@ -933,6 +1095,63 @@ export const CITIES: City[] = [
           "/images/restaurants/Dot%20Coffee%20Shop.webp",
           "https://maps.google.com/?q=Dot+Coffee+Shop+Houston",
         ),
+        place(
+          "Fogo de Chao – Greenway Plaza",
+          "Houston",
+          1.8,
+          "3rd Floor, 3 Greenway Plaza, Houston, TX 77046, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipONJl6E14GCQMR6T9FcIiTfVm8bpkDa_uG8f5Zg",
+          "https://maps.google.com/?q=Fogo+de+Chao+Houston+Greenway+Plaza",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Brennan's of Houston",
+          "Houston",
+          3.1,
+          "3300 Smith St, Houston, TX 77006, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPPsNRO1lBJFqxHFU8k59zFk_q3CW2hWYB-OdSk",
+          "https://maps.google.com/?q=Brennans+of+Houston",
+        ),
+        place(
+          "Uchi Houston",
+          "Houston",
+          3.4,
+          "904 Westheimer Rd, Houston, TX 77006, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOXzLW9rHFhRGxHJ0CMKMY0yY2V3wqhAWwHuXls",
+          "https://maps.google.com/?q=Uchi+Houston",
+        ),
+        place(
+          "The Pit Room BBQ",
+          "Houston",
+          3.5,
+          "1201 Richmond Ave, Houston, TX 77006, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOa1YqB0DjGiQ6C7i9bVjVnFuD4MwDjc2pMm6Ac",
+          "https://maps.google.com/?q=The+Pit+Room+BBQ+Houston",
+        ),
+        place(
+          "Hugo's Restaurant",
+          "Houston",
+          3.0,
+          "1600 Westheimer Rd, Houston, TX 77006, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPMJqKy5iFJh2YIl3VBXz8U5q8YSHBkU7wBz0vY",
+          "https://maps.google.com/?q=Hugos+Restaurant+Houston",
+        ),
+        place(
+          "Xochi Restaurant",
+          "Houston",
+          3.3,
+          "1777 Walker St, Houston, TX 77010, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNV8TbE6vWK53T77DzS8a4qPDLRKq96LD6YcT3Y",
+          "https://maps.google.com/?q=Xochi+Restaurant+Houston",
+        )
       ],
     },
     hotels: {
@@ -972,7 +1191,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/SpringHill%20Suites%20Houston%20Medical%20Center%20NRG%20Park.webp",
           "https://www.google.com/maps/search/?api=1&query=1400+Old+Spanish+Trail+Houston+TX+77054",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -1010,7 +1229,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Hilton%20Houston%20Plaza.webp",
           "https://www.google.com/maps/search/?api=1&query=6633+Travis+St+Houston+TX+77030",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -1048,7 +1267,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/The%20Westin%20Houston%20Medical%20Center.webp",
           "https://www.google.com/maps/search/?api=1&query=1709+Dryden+Rd+Houston+TX+77030",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -1077,7 +1296,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/JW%20Marriott%20Houston%20by%20The%20Galleria.webp",
           "https://www.google.com/maps/search/?api=1&query=5150+Westheimer+Rd+Houston+TX+77056",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -1127,7 +1346,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=POST+Houston",
         address: "401 Franklin St, Houston, TX 77201, United States",
         image: "/images/screening/POST%20Houston.webp",
-      },
+      }
     ],
     seo: seo("Houston", "NRG Stadium"),
   },
@@ -1192,7 +1411,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/La%20Fuente%20Mexican%20Restaurant.webp",
           "https://maps.google.com/?q=La+Fuente+Mexican+Restaurant+Kansas+City",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Joe's Kansas City Bar-B-Que",
+          "Kansas City",
+          3.5,
+          "3002 W 47th Ave, Kansas City, KS 66103, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNWCG8N5tVAGZ1wWHPk9G6mJWNPUAv3EfXYZM8w",
+          "https://maps.google.com/?q=Joes+Kansas+City+BBQ",
         ),
+        place(
+          "Jack Stack Barbecue – Freight House",
+          "Kansas City",
+          2.8,
+          "101 W 22nd St, Kansas City, MO 64108, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMeBsVBB1bRmfvd9w5Ix7UJEExJOJ5GFOb7Kcn0",
+          "https://maps.google.com/?q=Jack+Stack+Barbecue+Freight+House+Kansas+City",
+        ),
+        place(
+          "The Capital Grille",
+          "Kansas City",
+          4.5,
+          "4760 Broadway Blvd, Kansas City, MO 64112, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOrJB6HJbNT3UoKMx_KRxEJ39sZT-NOl4OXLFhK",
+          "https://maps.google.com/?q=Capital+Grille+Kansas+City",
+        ),
+        place(
+          "Pierponts at Union Station",
+          "Kansas City",
+          2.9,
+          "30 W Pershing Rd, Kansas City, MO 64108, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOrAj7g0Rz4bZ84WE1bWV0p3Ei4i9I6VW6UlLHQ",
+          "https://maps.google.com/?q=Pierponts+Union+Station+Kansas+City",
+        ),
+        place(
+          "Cascone's Italian Restaurant",
+          "Kansas City",
+          4.2,
+          "3733 N Oak Trafficway, Kansas City, MO 64116, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNVhEFBMY5EJ4J3Ls2kJy7N4XFkXIp3YgwkbXNg",
+          "https://maps.google.com/?q=Cascones+Italian+Restaurant+Kansas+City",
+        )
       ],
     },
     hotels: {
@@ -1232,7 +1499,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Holiday%20Inn%20Express%20%26%20Suites%20Kansas%20City%20Sport%20Complex%20Area%20by%20IHG.webp",
           "https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+and+Suites+Kansas+City+Sport+Complex+Area",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -1261,7 +1528,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Days%20Inn%20by%20Wyndham%20Kansas%20City%20Northeast.webp",
           "https://www.google.com/maps/search/?api=1&query=Days+Inn+by+Wyndham+Kansas+City+Northeast",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -1299,7 +1566,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Crowne%20Plaza%20Kansas%20City%20Downtown%2C%20an%20IHG%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=Crowne+Plaza+Kansas+City+Downtown",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -1328,7 +1595,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Kansas%20City%20Airport%20Marriott.webp",
           "https://www.google.com/maps/search/?api=1&query=Kansas+City+Airport+Marriott",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -1378,7 +1645,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Country+Club+Plaza+Kansas+City",
         address: "4750 Broadway Blvd, Kansas City, MO 64112, United States",
         image: "/images/screening/country%20club%20plaza.webp",
-      },
+      }
     ],
     seo: seo("Kansas City", "Arrowhead Stadium"),
   },
@@ -1443,7 +1710,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/Coni's%20Seafood.webp",
           "https://maps.google.com/?q=Coni+Seafood+Inglewood",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Jon & Vinny's",
+          "Los Angeles",
+          3.5,
+          "412 N Fairfax Ave, Los Angeles, CA 90036, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPTuNTvhbmJJsJ0m8WiXHjVJY3CgexK5Kc4HRFU",
+          "https://maps.google.com/?q=Jon+and+Vinnys+Los+Angeles",
         ),
+        place(
+          "Bestia",
+          "Los Angeles",
+          2.8,
+          "2121 E 7th Pl, Los Angeles, CA 90021, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNiNO7N_M6xFE4wgN8Pd5aSopJRJaOk5EV4ORmE",
+          "https://maps.google.com/?q=Bestia+Los+Angeles",
+        ),
+        place(
+          "Nobu Malibu",
+          "Los Angeles",
+          4.8,
+          "22706 Pacific Coast Hwy, Malibu, CA 90265, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMJ0nTz-Ku0smpCIGh9yW1Z91SU0gU9SH2xbpOw",
+          "https://maps.google.com/?q=Nobu+Malibu",
+        ),
+        place(
+          "Guelaguetza",
+          "Los Angeles",
+          4.0,
+          "3014 W Olympic Blvd, Los Angeles, CA 90006, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPIGUfMBLG0T8YLKL0JcG6N9q0u_GdD9TlJ7Jms",
+          "https://maps.google.com/?q=Guelaguetza+Los+Angeles",
+        ),
+        place(
+          "Rosaliné",
+          "Los Angeles",
+          3.7,
+          "8479 Melrose Ave, West Hollywood, CA 90069, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMR0NxLRd2pQ_t8I1_pxcWuRXLuZlEnvZ2J9N8U",
+          "https://maps.google.com/?q=Rosaline+West+Hollywood",
+        )
       ],
     },
     hotels: {
@@ -1483,7 +1798,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Best%20Western%20Airpark%20Hotel%20-%20LAX%20Airport%20LA%20Stadium.webp",
           "https://www.google.com/maps/search/?api=1&query=Best+Western+Airpark+Hotel+Inglewood",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -1521,7 +1836,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/TownePlace%20Suites%20Los%20Angeles%20LAX%20Hawthorne.webp",
           "https://www.google.com/maps/search/?api=1&query=TownePlace+Suites+Los+Angeles+LAX+Hawthorne",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -1559,7 +1874,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/The%20Westin%20Los%20Angeles%20Airport.webp",
           "https://www.google.com/maps/search/?api=1&query=The+Westin+Los+Angeles+Airport",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -1588,7 +1903,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/The%20Ritz-Carlton%2C%20Los%20Angeles.webp",
           "https://www.google.com/maps/search/?api=1&query=The+Ritz+Carlton+Los+Angeles",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -1638,7 +1953,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=The+Grove+Los+Angeles",
         address: "189 The Grove Dr, Los Angeles, CA 90036, United States",
         image: "/images/screening/the%20grove.webp",
-      },
+      }
     ],
     seo: seo("Los Angeles", "SoFi Stadium"),
   },
@@ -1703,7 +2018,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/KFC.webp",
           "https://maps.google.com/?q=KFC+Miami+Gardens",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Versailles Restaurant",
+          "Miami",
+          4.2,
+          "3555 SW 8th St, Miami, FL 33135, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMK2c63PDHPZP4LJAMwuTa5OXY3Z-WePL-71Gk4",
+          "https://maps.google.com/?q=Versailles+Restaurant+Miami",
         ),
+        place(
+          "KYU Miami",
+          "Miami",
+          4.5,
+          "251 NW 25th St, Miami, FL 33127, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNRwBbaTCdpLnfMEcwcVJHDlLrF8cL_6Kqe0dS4",
+          "https://maps.google.com/?q=KYU+Miami+Restaurant",
+        ),
+        place(
+          "La Mar by Gastón Acurio",
+          "Miami",
+          4.8,
+          "500 Brickell Key Dr, Miami, FL 33131, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipN3IwSc2eI96iINEFhSW7yJFNaCzHlW_G7M5oH0",
+          "https://maps.google.com/?q=La+Mar+Miami",
+        ),
+        place(
+          "Zuma Miami",
+          "Miami",
+          4.7,
+          "270 Biscayne Blvd Way, Miami, FL 33131, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPxBpOXHwFvJzS5RvFJNIRq1rIHuXNEaZbWVEGc",
+          "https://maps.google.com/?q=Zuma+Miami",
+        ),
+        place(
+          "Coya Miami",
+          "Miami",
+          4.9,
+          "999 Brickell Ave, Miami, FL 33131, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipM_5BNMn0jEIaakI5UqkSDqeJ59VFGFhvD4LPzY",
+          "https://maps.google.com/?q=Coya+Miami",
+        )
       ],
     },
     hotels: {
@@ -1743,7 +2106,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Richard's%20Motel%20Extended%20Stay.webp",
           "https://www.google.com/maps/search/?api=1&query=Richards+Motel+Extended+Stay+Miami",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -1781,7 +2144,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Residence%20Inn%20Fort%20Lauderdale%20SW%20Miramar.webp",
           "https://www.google.com/maps/search/?api=1&query=Residence+Inn+Fort+Lauderdale+SW+Miramar",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -1819,7 +2182,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Hilton%20Miami%20Aventura.webp",
           "https://www.google.com/maps/search/?api=1&query=Hilton+Miami+Aventura",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -1848,7 +2211,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Kimpton%20EPIC%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=Kimpton+EPIC+Hotel+Miami",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -1898,7 +2261,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Lummus+Park+Miami+Beach",
         address: "1130 Ocean Dr, Miami Beach, FL 33139, United States",
         image: "/images/screening/lummus%20park.webp",
-      },
+      }
     ],
     seo: seo("Miami", "Hard Rock Stadium"),
   },
@@ -1963,7 +2326,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/The%20Gumbo%20Bros.webp",
           "https://maps.google.com/?q=Gumbo+Bros+American+Dream",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "River Palm Terrace",
+          "New York",
+          3.2,
+          "41-11 Rte 4 W, Elmwood Park, NJ 07407, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMuQHFgRzJn9_bS0RUjQbq7HWdDpn9bORPSPj9g",
+          "https://maps.google.com/?q=River+Palm+Terrace+NJ",
         ),
+        place(
+          "Le Bernardin",
+          "New York",
+          5.0,
+          "155 W 51st St, New York, NY 10019, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNAhN_LuGn5YJjpKr9p5LklFWR6SLlVdLiUlqxU",
+          "https://maps.google.com/?q=Le+Bernardin+New+York",
+        ),
+        place(
+          "Nobu Fifty Seven",
+          "New York",
+          4.9,
+          "40 W 57th St, New York, NY 10019, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipM1AJxVpgv1r3hIzJ8OZixZ7dlCFBIB_hn5VkDI",
+          "https://maps.google.com/?q=Nobu+57+New+York",
+        ),
+        place(
+          "Tao Downtown",
+          "New York",
+          4.8,
+          "92 9th Ave, New York, NY 10011, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPOwE4pvb6nnCB1emXe5FBLjcGi1IA2f0HFN6_w",
+          "https://maps.google.com/?q=Tao+Downtown+New+York",
+        ),
+        place(
+          "Rezdora",
+          "New York",
+          4.9,
+          "27 E 20th St, New York, NY 10003, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOWzKYl5ZbTT_NfMaBLgp8pN0Jk2H-_VdUcLBBs",
+          "https://maps.google.com/?q=Rezdora+New+York",
+        )
       ],
     },
     hotels: {
@@ -2003,7 +2414,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Homewood%20Suites%20by%20Hilton%20East%20Rutherford%20-%20Meadowlands%2C%20NJ.webp",
           "https://www.google.com/maps/search/?api=1&query=Homewood+Suites+by+Hilton+East+Rutherford+Meadowlands",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -2041,7 +2452,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Harmony%20Suites%20Secaucus%20Meadowlands.webp",
           "https://www.google.com/maps/search/?api=1&query=Harmony+Suites+Secaucus+Meadowlands",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -2079,7 +2490,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Robert%20Treat%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=Robert+Treat+Hotel+Newark",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -2108,7 +2519,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/New%20York%20Marriott%20Marquis.webp",
           "https://www.google.com/maps/search/?api=1&query=New+York+Marriott+Marquis",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -2157,7 +2568,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Hudson+Yards+Public+Square+New+York",
         address: "20 Hudson Yards, New York, NY 10001, United States",
         image: "/images/screening/hudson%20yards.webp",
-      },
+      }
     ],
     seo: seo("New York / New Jersey", "MetLife Stadium"),
   },
@@ -2222,7 +2633,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/Oregon%20Steaks.webp",
           "https://maps.google.com/?q=Oregon+Steaks+Philadelphia",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Zahav",
+          "Philadelphia",
+          3.8,
+          "237 St James Pl, Philadelphia, PA 19106, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOa8T80o8k_rjSCVSwbIkfobqS76XVQ7_gQ8oq0",
+          "https://maps.google.com/?q=Zahav+Restaurant+Philadelphia",
         ),
+        place(
+          "Vetri Cucina",
+          "Philadelphia",
+          3.9,
+          "1312 Spruce St, Philadelphia, PA 19107, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNGFH5BEbmHQG_M3_q8a_SFFZ7r4lZ0_B1VG4cY",
+          "https://maps.google.com/?q=Vetri+Cucina+Philadelphia",
+        ),
+        place(
+          "Double Knot",
+          "Philadelphia",
+          4.0,
+          "120 S 13th St, Philadelphia, PA 19107, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOMHePdC9U_oB0rKAYe-Eh7cXXOGJxuvFhKp9fE",
+          "https://maps.google.com/?q=Double+Knot+Philadelphia",
+        ),
+        place(
+          "Vernick Food & Drink",
+          "Philadelphia",
+          4.2,
+          "2031 Walnut St, Philadelphia, PA 19103, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOarRPzJHGPHgm5SKaW4d1KA3sIgqdaJHWXVicA",
+          "https://maps.google.com/?q=Vernick+Food+and+Drink+Philadelphia",
+        ),
+        place(
+          "Suraya",
+          "Philadelphia",
+          4.5,
+          "1528 Frankford Ave, Philadelphia, PA 19125, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPFTNkv_fJxZNFblfY7Ib5J7x0gLc3z3m3XHu0M",
+          "https://maps.google.com/?q=Suraya+Philadelphia",
+        )
       ],
     },
     hotels: {
@@ -2262,7 +2721,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Radisson%20Hotel%20Philadelphia%20Northeast.webp",
           "https://www.google.com/maps/search/?api=1&query=Radisson+Hotel+Philadelphia+Northeast",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -2300,7 +2759,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/DoubleTree%20by%20Hilton%20Hotel%20Philadelphia%20Airport.webp",
           "https://www.google.com/maps/search/?api=1&query=DoubleTree+by+Hilton+Philadelphia+Airport",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -2338,7 +2797,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Hilton%20Philadelphia%20at%20Penn's%20Landing.webp",
           "https://www.google.com/maps/search/?api=1&query=Hilton+Philadelphia+at+Penns+Landing",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -2367,7 +2826,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/the%20Alloy%20King%20of%20Prussia%20-%20a%20DoubleTree%20by%20Hilton.webp",
           "https://www.google.com/maps/search/?api=1&query=The+Alloy+King+of+Prussia+DoubleTree+by+Hilton",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -2416,7 +2875,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Independence+Mall+Philadelphia",
         address: "520 Chestnut St, Philadelphia, PA 19106, United States",
         image: "/images/screening/independence%20mall.webp",
-      },
+      }
     ],
     seo: seo("Philadelphia", "Lincoln Financial Field"),
   },
@@ -2481,7 +2940,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/Taco%20Bell%20Cantina%20Santa%20Clara.webp",
           "https://maps.google.com/?q=Taco+Bell+Cantina+Santa+Clara",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Alexander's Steakhouse Cupertino",
+          "San Francisco",
+          2.5,
+          "10330 N Wolfe Rd, Cupertino, CA 95014, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMMnCaFUJJREQkq8jPFa6LvVrVlHEzVbN5z-h-I",
+          "https://maps.google.com/?q=Alexanders+Steakhouse+Cupertino",
         ),
+        place(
+          "Plumed Horse",
+          "San Francisco",
+          3.2,
+          "14555 Big Basin Way, Saratoga, CA 95070, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOY5kP7TRq9GHF5jnJtY04-gYLl0NJRkiLBIBMI",
+          "https://maps.google.com/?q=Plumed+Horse+Saratoga+CA",
+        ),
+        place(
+          "Manresa Restaurant",
+          "San Francisco",
+          4.0,
+          "320 Village Ln, Los Gatos, CA 95030, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipPpG4NxhN5V73FPFM62cxO3Vr4j1p65B3B_FVkQ",
+          "https://maps.google.com/?q=Manresa+Restaurant+Los+Gatos",
+        ),
+        place(
+          "Orchard City Kitchen",
+          "San Francisco",
+          2.8,
+          "1875 S Bascom Ave, Campbell, CA 95008, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNAQDrb5MkKJdFjFMjdXQAoC6gDDnLdMhIqYXLM",
+          "https://maps.google.com/?q=Orchard+City+Kitchen+Campbell+CA",
+        ),
+        place(
+          "Baumé Restaurant",
+          "San Francisco",
+          3.5,
+          "201 S California Ave, Palo Alto, CA 94306, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipN7XL3oL7SnZ8uxJ-UbUG0nGSmQRrV5FTUZU8LM",
+          "https://maps.google.com/?q=Baume+Restaurant+Palo+Alto",
+        )
       ],
     },
     hotels: {
@@ -2521,7 +3028,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/TownePlace%20Suites%20by%20Marriott%20San%20Jose%20Santa%20Clara.webp",
           "https://www.google.com/maps/search/?api=1&query=TownePlace+Suites+San+Jose+Santa+Clara",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -2559,7 +3066,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Courtyard%20by%20Marriott%20Milpitas%20Silicon%20Valley.webp",
           "https://www.google.com/maps/search/?api=1&query=Courtyard+by+Marriott+Milpitas+Silicon+Valley",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -2597,7 +3104,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/San%20Jose%20Marriott.webp",
           "https://www.google.com/maps/search/?api=1&query=San+Jose+Marriott",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -2626,7 +3133,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Rosewood%20Sand%20Hill.webp",
           "https://www.google.com/maps/search/?api=1&query=Rosewood+Sand+Hill",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -2675,7 +3182,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Great+America+Parkway+Santa+Clara",
         address: "2401 Stevens Creek Blvd, Santa Clara, CA 95050, United States",
         image: "/images/screening/great%20america%20parkway.webp",
-      },
+      }
     ],
     seo: seo("San Francisco Bay Area", "Levi's Stadium"),
   },
@@ -2732,6 +3239,63 @@ export const CITIES: City[] = [
           "/images/restaurants/Hooverville%20Bar.webp",
           "https://maps.google.com/?q=Hooverville+Bar+and+Grill+Seattle",
         ),
+        place(
+          "Taylor Shellfish Pioneer Square",
+          "Seattle",
+          0.6,
+          "410 Occidental Ave S, Seattle, WA 98104, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipObpXHi37ZGsP6BoR2fy_v6WkuJsVzpzDcv17A",
+          "https://maps.google.com/?q=Taylor+Shellfish+Pioneer+Square+Seattle",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Canlis Restaurant",
+          "Seattle",
+          4.2,
+          "2576 Aurora Ave N, Seattle, WA 98109, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMhgOY2h3x1Vfr7r9mX8C0iGRFikjlexuXDKUQ0",
+          "https://maps.google.com/?q=Canlis+Restaurant+Seattle",
+        ),
+        place(
+          "Nishino",
+          "Seattle",
+          3.5,
+          "3130 E Madison St, Seattle, WA 98112, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNk6-SnBJIJi7wOBHhg6Ln3sYHJimSp4T66m0wg",
+          "https://maps.google.com/?q=Nishino+Restaurant+Seattle",
+        ),
+        place(
+          "Altura Restaurant",
+          "Seattle",
+          3.8,
+          "617 Broadway E, Seattle, WA 98102, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMp-FPo7bBJOCKHv_wXGEFVsTWrTAbBNbmhKjCM",
+          "https://maps.google.com/?q=Altura+Restaurant+Seattle",
+        ),
+        place(
+          "The Whale Wins",
+          "Seattle",
+          4.0,
+          "3506 Stone Way N, Seattle, WA 98103, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOGEzQ8rJNm_g9tuzSPuGb8YYVbhPYDxkbTivVU",
+          "https://maps.google.com/?q=The+Whale+Wins+Seattle",
+        ),
+        place(
+          "Mashiko Sushi",
+          "Seattle",
+          4.8,
+          "4725 California Ave SW, Seattle, WA 98116, USA",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNJLBi3YU2y2iJKkJeM9Diy4U6BTQrBm94XSbao",
+          "https://maps.google.com/?q=Mashiko+Sushi+Seattle",
+        )
       ],
     },
     hotels: {
@@ -2771,7 +3335,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Best%20Western%20Plus%20Pioneer%20Square%20Hotel%20Downtown.webp",
           "https://www.google.com/maps/search/?api=1&query=Best+Western+Plus+Pioneer+Square+Hotel+Downtown",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -2809,7 +3373,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Sheraton%20Grand%20Seattle.webp",
           "https://www.google.com/maps/search/?api=1&query=Sheraton+Grand+Seattle",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -2847,7 +3411,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Residence%20Inn%20by%20Marriott%20Seattle%20University%20District.webp",
           "https://www.google.com/maps/search/?api=1&query=Residence+Inn+Seattle+University+District",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -2876,7 +3440,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/DoubleTree%20by%20Hilton%20Hotel%20Seattle%20Airport.webp",
           "https://www.google.com/maps/search/?api=1&query=DoubleTree+by+Hilton+Seattle+Airport",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -2925,7 +3489,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Gas+Works+Park+Seattle",
         address: "2101 N Northlake Way, Seattle, WA 98103, United States",
         image: "/images/screening/gas%20works%20park.webp",
-      },
+      }
     ],
     seo: seo("Seattle", "Lumen Field"),
   },
@@ -2982,6 +3546,63 @@ export const CITIES: City[] = [
           "/images/restaurants/Mildred's%20Temple%20Kitchen.webp",
           "https://maps.google.com/?q=Mildreds+Temple+Kitchen+Toronto",
         ),
+        place(
+          "Richmond Station",
+          "Toronto",
+          1.5,
+          "1 Richmond St W, Toronto, ON M5H 3W4, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOPTSYtqicfwvJ2_FhYzDPAiVpGO2VDEaLwnWoM",
+          "https://maps.google.com/?q=Richmond+Station+Toronto",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Canoe Restaurant",
+          "Toronto",
+          2.5,
+          "66 Wellington St W 54th Floor, Toronto, ON M5K 1H6, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNGQfJ3XqkJAHbbGSrJFjRjFVHJOJBh-3LnEFdc",
+          "https://maps.google.com/?q=Canoe+Restaurant+Toronto",
+        ),
+        place(
+          "Alo Restaurant",
+          "Toronto",
+          2.8,
+          "163 Spadina Ave 3rd Floor, Toronto, ON M5V 2L6, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNdAL8gOFlJvRETpSd_fRwLiXR3GjMR4RGCuWwg",
+          "https://maps.google.com/?q=Alo+Restaurant+Toronto",
+        ),
+        place(
+          "Buca Osteria & Bar",
+          "Toronto",
+          3.0,
+          "604 King St W, Toronto, ON M5V 1M6, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOGFxIkiE2g1XHjKPc7K3VN9V5-7kbI1N-OXhec",
+          "https://maps.google.com/?q=Buca+King+Street+Toronto",
+        ),
+        place(
+          "Edulis Restaurant",
+          "Toronto",
+          3.2,
+          "169 Niagara St, Toronto, ON M5V 1C9, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOnZ4kVVQ_2xkGNbJuHn8BfFrqfOw3lFn9UJrIo",
+          "https://maps.google.com/?q=Edulis+Toronto",
+        ),
+        place(
+          "Pai Northern Thai Kitchen",
+          "Toronto",
+          2.5,
+          "18 Duncan St, Toronto, ON M5H 3G8, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNdCf3-sEsK3m82hEHbLlklT2SiO4VFoFYE5LYA",
+          "https://maps.google.com/?q=Pai+Northern+Thai+Kitchen+Toronto",
+        )
       ],
     },
     hotels: {
@@ -3012,7 +3633,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Gladstone%20House.webp",
           "https://www.google.com/maps/search/?api=1&query=Gladstone+House+Toronto",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -3050,7 +3671,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Radisson%20Blu%20Toronto%20Downtown.webp",
           "https://www.google.com/maps/search/?api=1&query=Radisson+Blu+Toronto+Downtown",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -3088,7 +3709,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Chelsea%20Hotel%2C%20Toronto.webp",
           "https://www.google.com/maps/search/?api=1&query=Chelsea+Hotel+Toronto",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -3117,7 +3738,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Sheraton%20Parkway%20Toronto%20North%20Hotel%20%26%20Suites.webp",
           "https://www.google.com/maps/search/?api=1&query=Sheraton+Parkway+Toronto+North+Hotel+and+Suites",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -3166,7 +3787,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=The+Bentway+Toronto",
         address: "250 Fort York Blvd, Toronto, ON M5V 3K9, Canada",
         image: "/images/screening/the%20bentway.webp",
-      },
+      }
     ],
     seo: seo("Toronto", "BMO Field"),
   },
@@ -3230,7 +3851,55 @@ export const CITIES: City[] = [
           undefined,
           "/images/restaurants/Shark%20Club%20Sports%20Bar%20%26%20Grill.webp",
           "https://maps.google.com/?q=Shark+Club+Vancouver",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Hawksworth Restaurant",
+          "Vancouver",
+          2.8,
+          "801 W Georgia St, Vancouver, BC V6C 1P7, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMGqRzRzauzSKpXAqe8ZCGNiDNKlqJJ5xT-Iywc",
+          "https://maps.google.com/?q=Hawksworth+Restaurant+Vancouver",
         ),
+        place(
+          "Blue Water Cafe",
+          "Vancouver",
+          3.2,
+          "1095 Hamilton St, Vancouver, BC V6B 5T4, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNmVHvqPMvsTJCFTv9FsKLrZI4EhJM1hAtpH-c0",
+          "https://maps.google.com/?q=Blue+Water+Cafe+Vancouver",
+        ),
+        place(
+          "Vij's Restaurant",
+          "Vancouver",
+          3.8,
+          "3106 Cambie St, Vancouver, BC V5Z 2W2, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMX39CGxhzWVJLmJAHm0fLt7seSVaO3YvVqy2To",
+          "https://maps.google.com/?q=Vijs+Restaurant+Vancouver",
+        ),
+        place(
+          "Miku Restaurant",
+          "Vancouver",
+          2.5,
+          "200 Granville St, Vancouver, BC V6C 1S4, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNKGZFH1JEBsNJ11GR-d0JHvH5MXGP-RkPb8U6g",
+          "https://maps.google.com/?q=Miku+Restaurant+Vancouver",
+        ),
+        place(
+          "The Salmon House",
+          "Vancouver",
+          4.5,
+          "2229 Folkestone Way, West Vancouver, BC V7S 2X7, Canada",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOvXEj5SXYL4F8ZPFN7lmkEIqGh7PuTGkz4Zy9Y",
+          "https://maps.google.com/?q=The+Salmon+House+West+Vancouver",
+        )
       ],
     },
     hotels: {
@@ -3261,7 +3930,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Georgian%20Court%20Hotel%2C%20WorldHotels%20Elite.webp",
           "https://www.google.com/maps/search/?api=1&query=Georgian+Court+Hotel+Vancouver",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -3299,7 +3968,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Fairmont%20Hotel%20Vancouver.webp",
           "https://www.google.com/maps/search/?api=1&query=Fairmont+Hotel+Vancouver",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -3337,7 +4006,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/River%20Rock%20Casino%20Resort.webp",
           "https://www.google.com/maps/search/?api=1&query=River+Rock+Casino+Resort",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -3366,7 +4035,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Versante%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=Versante+Hotel+Richmond+BC",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -3415,7 +4084,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Robson+Square+Vancouver",
         address: "800 Robson St, Vancouver, BC V6Z 3B7, Canada",
         image: "/images/screening/Robson%20Square.webp",
-      },
+      }
     ],
     seo: seo("Vancouver", "BC Place"),
   },
@@ -3472,6 +4141,63 @@ export const CITIES: City[] = [
           "/images/restaurants/Vips%20Acoxpa.webp",
           "https://maps.google.com/?q=Vips+Acoxpa+Mexico+City",
         ),
+        place(
+          "Fonda El Refugio",
+          "Mexico City",
+          1.8,
+          "Liverpool 166, Juarez, 06600 Ciudad de Mexico, CDMX, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOFSVblOXs2q6Bkpjr8n5Ck7qW97Y27W5nN_4g",
+          "https://maps.google.com/?q=Fonda+El+Refugio+Mexico+City",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Pujol",
+          "Mexico City",
+          3.5,
+          "Tennyson 133, Polanco, 11560 Ciudad de Mexico, CDMX, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMKHOVvXYW-EhR_zHi6uCzS1IhSg6Fav5lmfOUo",
+          "https://maps.google.com/?q=Pujol+Mexico+City",
+        ),
+        place(
+          "Quintonil",
+          "Mexico City",
+          3.8,
+          "Newton 55, Polanco, 11570 Ciudad de Mexico, CDMX, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipM4Uw8fkHIrb_LW88D26pz1RxJcMxkKjv-rKAaA",
+          "https://maps.google.com/?q=Quintonil+Mexico+City",
+        ),
+        place(
+          "Contramar",
+          "Mexico City",
+          4.0,
+          "Durango 200, Roma Norte, 06700 Ciudad de Mexico, CDMX, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOD-2T1s8Tn-8WVhNGjqPuMkHXJq4vl3b8IvTqs",
+          "https://maps.google.com/?q=Contramar+Mexico+City",
+        ),
+        place(
+          "Dulce Patria",
+          "Mexico City",
+          3.5,
+          "Anatole France 100, Polanco, 11560 Ciudad de Mexico, CDMX, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNXmT7jFKCfuC3VsNkLQ0eD1rJjkjw8J7f4P1eo",
+          "https://maps.google.com/?q=Dulce+Patria+Mexico+City",
+        ),
+        place(
+          "El Bajio",
+          "Mexico City",
+          4.2,
+          "Av. Cuitlahuac 2709, Azcapotzalco, 02010 Ciudad de Mexico, Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMGS8b_7m2S6JrMF2tMYoJMcXNhf6WH9BysMNvg",
+          "https://maps.google.com/?q=El+Bajio+Restaurant+Mexico+City",
+        )
       ],
     },
     hotels: {
@@ -3511,7 +4237,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Suites%20Perisur%20Apartamentos%20Amueblados%20Premium.webp",
           "https://www.google.com/maps/search/?api=1&query=Suites+Perisur+Apartamentos+Amueblados+Ciudad+de+Mexico",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -3549,7 +4275,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/City%20Express%20Plus%20by%20Marriott%20Ciudad%20de%20M%C3%A9xico%20Perif%C3%A9rico%20Sur%20Tlalpan.webp",
           "https://www.google.com/maps/search/?api=1&query=City+Express+Plus+by+Marriott+Periferico+Sur+Tlalpan",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -3587,7 +4313,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Novotel%20Mexico%20City%20World%20Trade%20Center.webp",
           "https://www.google.com/maps/search/?api=1&query=Novotel+Mexico+City+World+Trade+Center",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -3616,7 +4342,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/JW%20Marriott%20Hotel%20Mexico%20City%20Polanco.webp",
           "https://www.google.com/maps/search/?api=1&query=JW+Marriott+Hotel+Mexico+City+Polanco",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -3665,7 +4391,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Plaza+Garibaldi+Mexico+City",
         address: "Plaza Garibaldi S/N, Guerrero, 06300 Ciudad de México, CDMX, Mexico",
         image: "/images/screening/plaza%20garibaldi.webp",
-      },
+      }
     ],
     seo: seo("Mexico City", "Estadio Azteca"),
   },
@@ -3704,6 +4430,81 @@ export const CITIES: City[] = [
           "/images/restaurants/Save%20Restaurante.webp",
           "https://maps.google.com/?q=Save+Restaurante+Zapopan",
         ),
+        place(
+          "La Chata Restaurant",
+          "Guadalajara",
+          0.8,
+          "Corona 126, Centro, 44100 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNHqEEAkVh6bFiIPTDfV2JJk3BjEWqsTEZ4nVas",
+          "https://maps.google.com/?q=La+Chata+Guadalajara",
+        ),
+        place(
+          "Casa Bariachi",
+          "Guadalajara",
+          1.2,
+          "Av. Vallarta 2221, Arcos Vallarta, 44130 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMubRikJRFRtyJBzHmJAJI9bwTVB7Yr8hBb4rZc",
+          "https://maps.google.com/?q=Casa+Bariachi+Guadalajara",
+        ),
+        place(
+          "Alcalde",
+          "Guadalajara",
+          1.5,
+          "Av. Mexico 2903, Vallarta Poniente, 44690 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNWF0jbCrjO6LYAEF1g2ICqeH6Nd4xwMSBcANPg",
+          "https://maps.google.com/?q=Alcalde+Restaurant+Guadalajara",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Lula Bistro",
+          "Guadalajara",
+          3.0,
+          "Av. Mexico 3370, Vallarta Norte, 44690 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNYRXKEo-o_dFEP0k0y_tFEPuSQiB7RjK3W0Y0",
+          "https://maps.google.com/?q=Lula+Bistro+Guadalajara",
+        ),
+        place(
+          "Karne Garibaldi",
+          "Guadalajara",
+          2.8,
+          "Garibaldi 1306, Mexicaltzingo, 44180 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMrRaqRiGJfIVJVHYIuiV0VHqrP7mWfhiGk9Eos",
+          "https://maps.google.com/?q=Karne+Garibaldi+Guadalajara",
+        ),
+        place(
+          "La Fonda de San Miguel",
+          "Guadalajara",
+          3.5,
+          "Donato Guerra 25, Centro, 44100 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOF2M1JH4-6Y9N8Fhz_5FuAnFW5m-Pqyqhu3RM",
+          "https://maps.google.com/?q=La+Fonda+de+San+Miguel+Guadalajara",
+        ),
+        place(
+          "Animalon",
+          "Guadalajara",
+          4.0,
+          "Blvd. Puerta de Hierro 5065, Puerta de Hierro, 45116 Zapopan, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipNqBVAJqGEqiYG7gF4mK7k2AqCzOZQ3SuW11EoQ",
+          "https://maps.google.com/?q=Animalon+Zapopan+Guadalajara",
+        ),
+        place(
+          "La Tequila Restaurante",
+          "Guadalajara",
+          2.5,
+          "Av. Mexico 2830, Vallarta Norte, 44690 Guadalajara, Jal., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMBj5v8OQKZDE-4zEFkjvKWLPKbmb3cS7X0_TjA",
+          "https://maps.google.com/?q=La+Tequila+Restaurante+Guadalajara",
+        )
       ],
     },
     hotels: {
@@ -3734,7 +4535,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/European%20Life%20Style%20Executive%20Suites.webp",
           "https://www.google.com/maps/search/?api=1&query=European+Life+Style+Executive+Suites+Zapopan",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -3763,7 +4564,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/HG%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=HG+Hotel+Zapopan",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -3801,7 +4602,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Grand%20Fiesta%20Americana%20Guadalajara%20Country%20Club.webp",
           "https://www.google.com/maps/search/?api=1&query=Grand+Fiesta+Americana+Guadalajara+Country+Club",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -3830,7 +4631,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Real%20Maestranza%20Hotel.webp",
           "https://www.google.com/maps/search/?api=1&query=Hotel+Real+Maestranza+Guadalajara",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -3879,7 +4680,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Plaza+Fundadores+Guadalajara",
         address: "Av. Hidalgo 221, Centro, 44100 Guadalajara, Jal., Mexico",
         image: "/images/screening/plaza%20fundadores.webp",
-      },
+      }
     ],
     seo: seo("Guadalajara", "Estadio Akron"),
   },
@@ -3936,6 +4737,63 @@ export const CITIES: City[] = [
           "/images/restaurants/Sierra%20Madre%20Brewing%20Co.webp",
           "https://maps.google.com/?q=Sierra+Madre+Brewing+Guadalupe",
         ),
+        place(
+          "El Rey del Cabrito",
+          "Monterrey",
+          1.5,
+          "Constitucion 310 Ote, Centro, 64000 Monterrey, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMuyXo34Xt5CJnieyL0HkJVi2t8oDIyFe3MlFnM",
+          "https://maps.google.com/?q=El+Rey+del+Cabrito+Monterrey",
+        )
+      ],
+    
+      "5mi": [
+        place(
+          "Pangea Restaurant",
+          "Monterrey",
+          2.8,
+          "Av. Batallon de San Patricio 111, Valle Oriente, 66278 San Pedro Garza Garcia, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOVhunvfYtLn3fFJgePdJDrVtGV6N5bZHPnJvT4",
+          "https://maps.google.com/?q=Pangea+Restaurant+Monterrey",
+        ),
+        place(
+          "La Pasta Nostra",
+          "Monterrey",
+          3.0,
+          "Av. Vasconcelos 150, Valle, 66220 San Pedro Garza Garcia, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipOCvklZ3q2A9Z1KVA_RgT0E8xUjFPMOl3kFuS4",
+          "https://maps.google.com/?q=La+Pasta+Nostra+Monterrey",
+        ),
+        place(
+          "1900 Restaurant",
+          "Monterrey",
+          3.5,
+          "Morelos 1900, Obispado, 64060 Monterrey, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMoLfZpD5BHW2xKSjP7bU3NX_mBHv6t0Bnrl1r4",
+          "https://maps.google.com/?q=1900+Restaurant+Monterrey",
+        ),
+        place(
+          "El Tio Pepe",
+          "Monterrey",
+          4.0,
+          "Hidalgo 1746, Obispado, 64060 Monterrey, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMm8K2OJWuO15ZMSdPwIIJwQJCJ3xpT3ER9JxjY",
+          "https://maps.google.com/?q=El+Tio+Pepe+Monterrey",
+        ),
+        place(
+          "Grano de Mostaza",
+          "Monterrey",
+          4.5,
+          "Av. Gomez Morin 615, Valle, 66220 San Pedro Garza Garcia, N.L., Mexico",
+          undefined,
+          "https://lh5.googleusercontent.com/p/AF1QipMPaTnuJHW2Sf3YSatAQ3kx8ySnkz09fSRh2jkA",
+          "https://maps.google.com/?q=Grano+de+Mostaza+San+Pedro+Monterrey",
+        )
       ],
     },
     hotels: {
@@ -3975,7 +4833,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Four%20Points%20by%20Sheraton%20Monterrey%20Linda%20Vista.webp",
           "https://www.google.com/maps/search/?api=1&query=Four+Points+by+Sheraton+Monterrey+Linda+Vista",
-        ),
+        )
       ],
       "5mi": [
         place(
@@ -4013,7 +4871,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Fiesta%20Inn%20Monterrey%20Fundidora.webp",
           "https://www.google.com/maps/search/?api=1&query=Fiesta+Inn+Monterrey+Fundidora",
-        ),
+        )
       ],
       "10mi": [
         place(
@@ -4051,7 +4909,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/Gamma%20Monterrey%20Gran%20Hotel%20Ancira.webp",
           "https://www.google.com/maps/search/?api=1&query=Gamma+Monterrey+Gran+Hotel+Ancira",
-        ),
+        )
       ],
       "20mi": [
         place(
@@ -4080,7 +4938,7 @@ export const CITIES: City[] = [
           undefined,
           "/images/hotels/JW%20Marriott%20Hotel%20Monterrey%20Valle.webp",
           "https://www.google.com/maps/search/?api=1&query=JW+Marriott+Hotel+Monterrey+Valle",
-        ),
+        )
       ],
     },
     transportation: transport(
@@ -4129,7 +4987,7 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Arena+Monterrey",
         address: "Av. Francisco I. Madero 2500, Cuauhtémoc, 64500 Monterrey, N.L., Mexico",
         image: "/images/screening/arena%20monterrey.webp",
-      },
+      }
     ],
     seo: seo("Monterrey", "Estadio BBVA"),
   },
