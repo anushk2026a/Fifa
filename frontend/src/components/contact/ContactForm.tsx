@@ -135,7 +135,7 @@ export function ContactForm() {
                     icon={<Globe size={18} />}
                     name="country"
                     label="Country"
-                    placeholder="Select your country"
+                    placeholder="Your country"
                     required
                   />
 
@@ -280,13 +280,13 @@ function InputField({
   return (
     <div>
       {label && (
-        <label className="mb-2 block text-sm font-semibold text-slate-700">
+        <div className="mb-2 block text-sm font-semibold text-slate-700">
           {label}
           {required && <span className="ml-0.5 text-red-500">*</span>}
-        </label>
+        </div>
       )}
 
-      <div className="flex h-14 items-center gap-3 rounded-xl border border-slate-300 px-5 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100">
+      <label className="flex h-12 cursor-text items-center gap-3 rounded-xl border border-slate-300 px-4 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100">
         <span className="text-slate-500 shrink-0">{icon}</span>
 
         <input
@@ -294,10 +294,10 @@ function InputField({
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full bg-transparent pl-2 pr-3 outline-none"
+          className="w-full bg-transparent p-0 !outline-none focus:!outline-none !border-none focus:!border-none !ring-0 focus:!ring-0 !shadow-none focus:!shadow-none"
           {...rest}
         />
-      </div>
+      </label>
     </div>
   );
 }

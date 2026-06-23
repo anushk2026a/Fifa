@@ -187,19 +187,20 @@ export default async function CityPage({
                   <p className="text-xs font-semibold uppercase tracking-wide text-faint">
                     {TRANSPORT_LABELS[t.category] ?? t.category}
                   </p>
-                  <p className="mt-1 text-base text-ink">
-                    <OutboundLink href={t.url}>{t.title}</OutboundLink>
-                  </p>
-                  {t.note && <p className="mt-0.5 text-sm text-muted">{t.note}</p>}
-                  {t.links && t.links.length > 0 && (
-                    <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                  {t.links && t.links.length > 0 ? (
+                    <p className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-base text-ink">
                       {t.links.map((l) => (
                         <OutboundLink key={l.label} href={l.url}>
                           {l.label}
                         </OutboundLink>
                       ))}
                     </p>
+                  ) : (
+                    <p className="mt-1 text-base text-ink">
+                      {t.url ? <OutboundLink href={t.url}>{t.title}</OutboundLink> : t.title}
+                    </p>
                   )}
+                  {t.note && <p className="mt-1.5 text-sm text-muted">{t.note}</p>}
                   {t.video && youtubeEmbed(t.video) && (
                     <div className="mt-3 max-w-xl">
                       <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-faint">
@@ -295,14 +296,14 @@ export default async function CityPage({
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
+                    {z.note && (
+                      <p className="mb-1 text-sm text-faint">{z.note}</p>
+                    )}
                     <p className="text-base font-medium text-ink">
                       <OutboundLink href={z.url}>{z.name}</OutboundLink>
                     </p>
                     {z.address && (
                       <p className="mt-0.5 text-sm text-muted">{z.address}</p>
-                    )}
-                    {z.note && (
-                      <p className="mt-0.5 text-sm text-faint">{z.note}</p>
                     )}
                   </div>
                   {z.image && (
