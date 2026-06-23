@@ -136,8 +136,8 @@ export function MatchList() {
 
   return (
     <div className="space-y-8">
-      <DayBlock label="Today" date={dates.today} />
-      {dates.next &&  <DayBlock label="Tomorrow" date={dates.next} />}
+      <DayBlock label="Today's Match" date={dates.today} />
+      {dates.next && <DayBlock label="Next Match" date={dates.next} />}
     </div>
   );
 }

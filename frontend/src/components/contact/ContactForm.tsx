@@ -86,6 +86,12 @@ export function ContactForm() {
                   title="Share Your Moments"
                   text="Share your stories and make every moments unforgettable. Your stories will be featured on fifaonepoint.com"
                 />
+
+                <Feature
+                  icon={<User size={20} />}
+                  title="Fans Helping Fans"
+                  text="Provide useful info related to hotels, restaurants, transports, and more — from fans, for fans."
+                />
               </div>
             </div>
 
@@ -93,7 +99,7 @@ export function ContactForm() {
 
             <div className="p-8 lg:p-12">
               <h2 className="text-5xl font-bold text-[#012A6B]">
-                Share Experiences
+                Share Your Experiences
               </h2>
 
               <div className="mt-3 mb-10 h-1 w-16 rounded bg-blue-600"></div>
@@ -146,8 +152,15 @@ export function ContactForm() {
                   <InputField
                     icon={<Phone size={18} />}
                     name="phone"
+                    type="tel"
                     label="Phone"
                     placeholder="Your phone number"
+                    inputMode="numeric"
+                    pattern="[0-9+\-\s()]*"
+                    onInput={(e) => {
+                      const el = e.currentTarget as HTMLInputElement;
+                      el.value = el.value.replace(/[^0-9+\-\s()]/g, "");
+                    }}
                   />
 
                   <InputField
@@ -169,7 +182,7 @@ export function ContactForm() {
                       icon={<Link2 size={18} />}
                       name="socialUrl"
                       type="url"
-                      placeholder="https://instagram.com/yourprofile"
+                      placeholder="Enter Your Social Profile URL"
                     />
                   </div>
                 </div>
@@ -255,6 +268,7 @@ function InputField({
   name,
   type = "text",
   required = false,
+  ...rest
 }: {
   icon: React.ReactNode;
   label?: string;
@@ -262,7 +276,7 @@ function InputField({
   name: string;
   type?: string;
   required?: boolean;
-}) {
+} & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
       {label && (
@@ -272,15 +286,16 @@ function InputField({
         </label>
       )}
 
-      <div className="flex h-14 items-center gap-3 rounded-xl border border-slate-300 px-4 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100">
-        <span className="text-slate-500">{icon}</span>
+      <div className="flex h-14 items-center gap-3 rounded-xl border border-slate-300 px-5 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100">
+        <span className="text-slate-500 shrink-0">{icon}</span>
 
         <input
           name={name}
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full bg-transparent outline-none"
+          className="w-full bg-transparent pl-2 pr-3 outline-none"
+          {...rest}
         />
       </div>
     </div>

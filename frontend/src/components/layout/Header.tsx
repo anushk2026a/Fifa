@@ -18,17 +18,16 @@ export function Header() {
 
   const navLink = (href: string) =>
     `relative  text-sm font-medium transition-colors duration-200
-    ${
-      isActive(href)
-        ? "text-accent border-b-2 border-accent"
-        : "text-ink hover:text-accent"
+    ${isActive(href)
+      ? "text-accent border-b-2 border-accent"
+      : "text-ink hover:text-accent"
     }`;
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur ">
       <Container className="relative flex items-center justify-between py-2">
         <Link href="/" className="flex items-center">
-          <div className="h-6 w-20 md:h-10 md:w-28">
+          <div className="h-6 w-20 md:h-12 md:w-28">
             <Image
               src={logo}
               alt="FIFA One Point Logo"

@@ -6,7 +6,7 @@ import {
   MdHotel,
   MdDirectionsTransit,
   MdConfirmationNumber,
-  MdCelebration,
+  MdLiveTv,
 } from "react-icons/md";
 
 const categories = [
@@ -14,7 +14,7 @@ const categories = [
   { icon: MdHotel, label: "Hotels" },
   { icon: MdDirectionsTransit, label: "Transport" },
   { icon: MdConfirmationNumber, label: "Tickets" },
-  { icon: MdCelebration, label: "Fan zones" },
+  { icon: MdLiveTv, label: "Match Screening Zone" },
 ];
 
 function StadiumArcSVG() {

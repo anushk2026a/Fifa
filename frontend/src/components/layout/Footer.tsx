@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="mt-16 border-t border-line bg-surface">
       <Container className="grid grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Image src={logo} alt="FIFA 2026" width={100} height={100} />
+          <Image src={logo} alt="FIFA 2026" width={110} height={100} />
           <p className="mt-2 max-w-xs text-sm text-muted">{SITE.tagline}</p>
           <p className="mt-3 text-xs text-faint">
             Always buy tickets only from official FIFA sources.

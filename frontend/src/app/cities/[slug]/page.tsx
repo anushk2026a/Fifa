@@ -62,7 +62,7 @@ const ANCHORS = [
   { id: "hotels", label: "Hotels" },
   { id: "transportation", label: "Transport" },
   { id: "tickets", label: "Tickets" },
-  { id: "screening", label: "Watch" },
+  { id: "screening", label: "Match Screening" },
 ];
 
 export default async function CityPage({
