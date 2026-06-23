@@ -23,14 +23,29 @@ export function MobileMenu() {
       >
         <span className="sr-only">Menu</span>
         <div className="space-y-1.5">
-          <span className={cn("block h-0.5 w-5 bg-ink transition", open && "translate-y-2 rotate-45")} />
-          <span className={cn("block h-0.5 w-5 bg-ink transition", open && "opacity-0")} />
-          <span className={cn("block h-0.5 w-5 bg-ink transition", open && "-translate-y-2 -rotate-45")} />
+          <span
+            className={cn(
+              "block h-0.5 w-5 bg-ink transition",
+              open && "translate-y-2 rotate-45",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-0.5 w-5 bg-ink transition",
+              open && "opacity-0",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-0.5 w-5 bg-ink transition",
+              open && "-translate-y-2 -rotate-45",
+            )}
+          />
         </div>
       </button>
 
       {open && (
-        <div className="absolute inset-x-0 top-full z-50 border-b border-line bg-surface">
+        <div className="absolute inset-x-0 top-full z-50 border-b border-line bg-surface pb-2 h-[calc(100vh-100px)] overflow-y-auto">
           <nav className="px-4 py-3" aria-label="Mobile">
             <ul className="divide-y divide-line">
               {NAV_LINKS.map((link) =>
@@ -40,20 +55,34 @@ export function MobileMenu() {
                       type="button"
                       aria-expanded={citiesOpen}
                       onClick={() => setCitiesOpen((v) => !v)}
-                      className="flex w-full items-center justify-between py-2 text-left text-base font-medium text-ink"
+                      className="relative inline-flex items-center gap-1.5  text-sm !font-medium transition-colors duration-200 text-accent"
                     >
                       Locations
-                      <span aria-hidden className={cn("text-xs transition-transform", citiesOpen && "rotate-180")}>▾</span>
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "text-xs transition-transform",
+                          citiesOpen && "rotate-180",
+                        )}
+                      >
+                        ▾
+                      </span>
                     </button>
                     {citiesOpen && (
                       <div className="pb-2">
                         {COUNTRY_ORDER.map((country) => (
                           <div key={country} className="mb-2">
-                            <p className="px-1 py-1 text-xs font-semibold uppercase tracking-wide text-faint">{country}</p>
+                            <p className="px-1 py-1 text-xs font-semibold uppercase tracking-wide text-faint">
+                              {country}
+                            </p>
                             <ul>
                               {grouped[country].map((c) => (
                                 <li key={c.slug}>
-                                  <Link href={`/cities/${c.slug}`} onClick={close} className="block px-2 py-1.5 text-sm text-ink">
+                                  <Link
+                                    href={`/cities/${c.slug}`}
+                                    onClick={close}
+                                    className="block px-2 py-1.5 text-sm text-ink"
+                                  >
                                     {c.name}
                                   </Link>
                                 </li>
@@ -61,7 +90,11 @@ export function MobileMenu() {
                             </ul>
                           </div>
                         ))}
-                        <Link href="/locations" onClick={close} className="block px-2 py-1.5 text-sm font-medium text-accent">
+                        <Link
+                          href="/locations"
+                          onClick={close}
+                          className="block px-2 py-1.5 text-sm font-medium text-accent"
+                        >
                           View all locations →
                         </Link>
                       </div>
@@ -69,7 +102,11 @@ export function MobileMenu() {
                   </li>
                 ) : (
                   <li key={link.href}>
-                    <Link href={link.href} onClick={close} className="block py-3 text-base font-medium text-ink">
+                    <Link
+                      href={link.href}
+                      onClick={close}
+                      className="block py-3 text-base font-medium text-ink"
+                    >
                       {link.label}
                     </Link>
                   </li>
