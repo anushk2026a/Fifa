@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
+import { ConditionalHeader } from "@/components/layout/ConditionalHeader";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
 import { SITE } from "@/data/site";
 
@@ -54,7 +54,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Header />
+        <ConditionalHeader />
         <main id="main">{children}</main>
         <ConditionalFooter />
       </body>

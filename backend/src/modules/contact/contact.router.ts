@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { validateBody } from "../../shared/http/validate";
-import { createContactSchema, type CreateContactInput } from "./contact.validation";
-import { createContact, listContacts, deleteContact, approveContact, listApprovedContacts } from "./contact.service";
+import { createContactSchema, updateContactSchema, type CreateContactInput } from "./contact.validation";
+import { createContact, listContacts, deleteContact, approveContact, listApprovedContacts, updateContact } from "./contact.service";
 import { requireAdmin } from "../auth";
 
 export const contactRouter = Router();
@@ -29,6 +29,17 @@ contactRouter.get("/", requireAdmin, async (_req, res, next) => {
 contactRouter.get("/approved", async (_req, res, next) => {
   try {
     res.json({ ok: true, stories: await listApprovedContacts() });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Admin only — update a submission
+contactRouter.patch("/:id", requireAdmin, validateBody(updateContactSchema), async (req, res, next) => {
+  try {
+    const updated = await updateContact(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ ok: false, error: "NOT_FOUND" });
+    res.json({ ok: true, contact: updated });
   } catch (err) {
     next(err);
   }

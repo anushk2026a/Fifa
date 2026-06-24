@@ -8,6 +8,7 @@ export interface ContactStore {
   list(): Promise<WithId<ContactSubmission>[]>;
   listApproved(): Promise<WithId<ContactSubmission>[]>;
   create(doc: ContactSubmission): Promise<WithId<ContactSubmission>>;
+  update(id: string, updates: Partial<ContactSubmission>): Promise<WithId<ContactSubmission> | null>;
   remove(id: string): Promise<boolean>;
   approve(id: string, approved: boolean): Promise<WithId<ContactSubmission> | null>;
   count(): Promise<number>;
@@ -22,6 +23,10 @@ class JsonContactStore implements ContactStore {
   async list() { return this.col.all(); }
   async listApproved() { return this.col.all().filter((r) => r.approved === true); }
   async create(doc: ContactSubmission) { return this.col.insert(doc); }
+  async update(id: string, updates: Partial<ContactSubmission>) {
+    const result = this.col.updateById(id, updates);
+    return result ?? null;
+  }
   async remove(id: string) { return this.col.deleteById(id); }
   async approve(id: string, approved: boolean) {
     const result = this.col.updateById(id, { approved } as Partial<ContactSubmission>);
@@ -53,6 +58,14 @@ class MongoContactStore implements ContactStore {
     const row = stamp(doc);
     await this.col.insertOne({ ...row });
     return row;
+  }
+  async update(id: string, updates: Partial<ContactSubmission>) {
+    const res = await this.col.findOneAndUpdate(
+      { id },
+      { $set: updates },
+      { returnDocument: "after", projection: { _id: 0 } },
+    );
+    return (res as WithId<ContactSubmission> | null);
   }
   async remove(id: string) {
     const res = await this.col.deleteOne({ id });

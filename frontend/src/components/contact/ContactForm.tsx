@@ -71,8 +71,6 @@ export function ContactForm() {
                   text="Your experience can reach football fans across the globe."
                 />
 
-
-
                 {/* <Feature
                   icon={<Users size={20} />}
                   title="Join The Community"
@@ -88,7 +86,14 @@ export function ContactForm() {
                 <Feature
                   icon={<User size={20} />}
                   title="Fans Helping Fans"
-                  text="Provide useful info related to hotels, restaurants, transports, and more — from fans, for fans."
+                  text={
+                    <>
+                      Provide useful info related to hotels, restaurants,
+                      transports, and more.
+                      <br />
+                      FROM FANS, FOR FANS.
+                    </>
+                  }
                 />
               </div>
             </div>
@@ -239,7 +244,7 @@ function Feature({
 }: {
   icon: React.ReactNode;
   title: string;
-  text: string;
+  text: React.ReactNode;
 }) {
   return (
     <div className="border-b border-white/20 pb-6">

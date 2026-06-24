@@ -21,4 +21,10 @@ export const createContactSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+export const updateContactSchema = z.object({
+  message: z.string().trim().min(1, "Message is required").optional(),
+  approved: z.boolean().optional(),
+});
+
 export type CreateContactInput = z.infer<typeof createContactSchema>;
+export type UpdateContactInput = z.infer<typeof updateContactSchema>;
