@@ -10,7 +10,8 @@ import { upsertAdmin } from "../modules/auth";
 import { getNewsStore, type News } from "../modules/news";
 import { closeDb } from "../shared/db/mongo";
 
-const FIFA = "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026";
+const FIFA =
+  "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026";
 
 // Illustrative FIFA World Cup 2026 items in the site's curated style.
 // (The source site codingofworld.in/sports renders its articles client-side
@@ -33,7 +34,8 @@ const SEED_NEWS: News[] = [
       "A four-goal display at SoFi Stadium gives the Swiss early momentum as the Western region heats up.",
     url: FIFA,
     source: "FIFA",
-    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Atlanta kicks off as Czechia and South Africa share the points",
@@ -42,7 +44,8 @@ const SEED_NEWS: News[] = [
       "Mercedes-Benz Stadium hosted a tense opener, with MARTA carrying thousands of fans from downtown to the gates.",
     url: FIFA,
     source: "FIFA",
-    image: "https://images.unsplash.com/photo-1508344928928-7165b67de128?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1508344928928-7165b67de128?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Mexico City roars as Estadio Azteca makes World Cup history",
@@ -51,7 +54,8 @@ const SEED_NEWS: News[] = [
       "Estadio Azteca becomes the first stadium to host matches across three different World Cups, with a record crowd for the opener.",
     url: FIFA,
     source: "FIFA One Point",
-    image: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Record ticket demand across all 16 host cities",
@@ -60,7 +64,8 @@ const SEED_NEWS: News[] = [
       "FIFA confirms the 2026 edition has drawn the highest ticket demand in tournament history as the expanded 48-team format gets under way.",
     url: `${FIFA}/tickets`,
     source: "FIFA",
-    image: "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Dallas readies AT&T Stadium for a marquee run of fixtures",
@@ -69,7 +74,8 @@ const SEED_NEWS: News[] = [
       "Arlington gears up for one of the busiest match schedules of the tournament, with DART shuttles and fan zones across the metroplex.",
     url: FIFA,
     source: "FIFA One Point",
-    image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "New York / New Jersey to host the 2026 Final at MetLife Stadium",
@@ -78,16 +84,8 @@ const SEED_NEWS: News[] = [
       "The Meadowlands prepares for the showpiece on July 19, with NJ Transit running expanded match-day service from Manhattan.",
     url: FIFA,
     source: "FIFA",
-    image: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Seattle's Lumen Field turns up the noise for the group stage",
-    date: "2026-06-11",
-    summary:
-      "Famous for its atmosphere, Lumen Field welcomes fans straight off Link light rail for a packed slate of Western-region matches.",
-    url: FIFA,
-    source: "FIFA One Point",
-    image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
@@ -101,9 +99,13 @@ async function main() {
   const existing = await store.count();
   if (forceNews || existing === 0) {
     const rows = await store.replaceAll(SEED_NEWS);
-    console.log(`[seed] news seeded → ${rows.length} items${forceNews ? " (forced)" : ""}`);
+    console.log(
+      `[seed] news seeded → ${rows.length} items${forceNews ? " (forced)" : ""}`,
+    );
   } else {
-    console.log(`[seed] news left as-is → ${existing} existing items (use --force-news to overwrite)`);
+    console.log(
+      `[seed] news left as-is → ${existing} existing items (use --force-news to overwrite)`,
+    );
   }
 
   console.log(`[seed] storage → ${env.MONGODB_URI ? "MongoDB" : "JSON file"}`);

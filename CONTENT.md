@@ -152,8 +152,6 @@ by page and section. Edit any wording here; we'll copy your changes back into th
    "Arlington gears up for one of the busiest match schedules of the tournament, with DART shuttles and fan zones across the metroplex."
 7. **"New York / New Jersey to host the 2026 Final at MetLife Stadium"** — _2026-06-12 · FIFA_
    "The Meadowlands prepares for the showpiece on July 19, with NJ Transit running expanded match-day service from Manhattan."
-8. **"Seattle's Lumen Field turns up the noise for the group stage"** — _2026-06-11 · SportsOnePoint_
-   "Famous for its atmosphere, Lumen Field welcomes fans straight off Link light rail for a packed slate of Western-region matches."
 
 ---
 

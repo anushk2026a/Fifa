@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Globe,
-  Trophy,
   Camera,
   User,
   Mail,
@@ -13,8 +12,7 @@ import {
   Send,
   Link2,
 } from "lucide-react";
-
-const API_URL = "/api/contact";
+import { apiUrl } from "@/lib/api";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
@@ -30,7 +28,7 @@ export function ContactForm() {
     setStatus("sending");
 
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(apiUrl("/contact"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

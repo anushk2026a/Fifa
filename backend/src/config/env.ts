@@ -19,7 +19,7 @@ const schema = z.object({
   // MONGO_URI is accepted as an alias for convenience.
   MONGODB_URI: z.string().optional(),
   MONGO_URI: z.string().optional(),
-  MONGODB_DB: z.string().default("SportsOnePoint"),
+  MONGODB_DB: z.string().default("fifaonepoint"),
 
   // SMTP — contact form email delivery via Gmail
   SMTP_HOST: z.string().default("smtp.gmail.com"),
@@ -37,5 +37,4 @@ export const env = {
   MONGODB_URI: parsed.MONGODB_URI ?? parsed.MONGO_URI,
 };
 
-export const corsOrigins =
-  env.CORS_ORIGIN === "*" ? "*" : env.CORS_ORIGIN.split(",").map((s) => s.trim());
+export const corsOrigins = env.CORS_ORIGIN.split(",").map((s) => s.trim());

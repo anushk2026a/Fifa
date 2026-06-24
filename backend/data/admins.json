@@ -1,10 +1,10 @@
 [
   {
     "email": "adminfifa@gmail.com",
-    "passwordHash": "$2b$10$NVBlfX0oIMFX6QC9yEt2leqGvDSgYhuTLRm/gqZrhD/1qXSYgwTQu",
+    "passwordHash": "$2b$10$4NVEeAEM1jlWBcQ.F6C.SuQFE20YtDMuLWWOQVr5Dvhit43B38jju",
     "name": "Site Admin",
     "role": "admin",
-    "id": "4f77f0a0-b487-4024-acdf-167eeb31c76c",
-    "createdAt": "2026-06-20T06:27:35.946Z"
+    "id": "a774d60e-b9d8-4b0b-8436-9d6f28ee0ef0",
+    "createdAt": "2026-06-24T15:29:59.949Z"
   }
 ]
