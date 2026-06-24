@@ -10,7 +10,7 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
 
-  if (pathname === "/admin/login") {
+  if (pathname.replace(/\/$/, "") === "/admin/login") {
     return <div className="min-h-screen bg-paper">{children}</div>;
   }
 
