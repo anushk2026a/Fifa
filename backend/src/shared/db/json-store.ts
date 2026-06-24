@@ -14,7 +14,20 @@ import { env } from "../../config/env";
  */
 export type WithId<T> = T & { id: string; createdAt: string };
 
-const DATA_DIR = path.resolve(process.cwd(), env.DATA_DIR);
+// On read-only hosts (e.g. Vercel serverless), fall back to /tmp which is always writable.
+function resolveDataDir(): string {
+  const preferred = path.resolve(process.cwd(), env.DATA_DIR);
+  try {
+    fs.mkdirSync(preferred, { recursive: true });
+    fs.accessSync(preferred, fs.constants.W_OK);
+    return preferred;
+  } catch {
+    console.warn(`[json-store] ${preferred} is not writable, using /tmp`);
+    return "/tmp";
+  }
+}
+
+const DATA_DIR = resolveDataDir();
 
 function filePath(name: string): string {
   return path.join(DATA_DIR, `${name}.json`);
@@ -33,7 +46,6 @@ export class JsonCollection<T extends Record<string, unknown>> {
   }
 
   private writeRaw(rows: WithId<T>[]): void {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
     fs.writeFileSync(filePath(this.name), JSON.stringify(rows, null, 2), "utf8");
   }
 
