@@ -11,13 +11,17 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-authRouter.post("/login", validateBody(loginSchema), (req, res) => {
-  const { email, password } = req.body as z.infer<typeof loginSchema>;
-  const result = login(email, password);
-  if (!result) {
-    return res.status(401).json({ ok: false, error: "INVALID_CREDENTIALS" });
+authRouter.post("/login", validateBody(loginSchema), async (req, res, next) => {
+  try {
+    const { email, password } = req.body as z.infer<typeof loginSchema>;
+    const result = await login(email, password);
+    if (!result) {
+      return res.status(401).json({ ok: false, error: "INVALID_CREDENTIALS" });
+    }
+    res.json({ ok: true, ...result });
+  } catch (err) {
+    next(err);
   }
-  res.json({ ok: true, ...result });
 });
 
 // Lets the dashboard confirm a stored token is still valid.

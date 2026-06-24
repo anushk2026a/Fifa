@@ -92,7 +92,7 @@ const SEED_NEWS: News[] = [
 async function main() {
   const forceNews = process.argv.includes("--force-news");
 
-  const admin = upsertAdmin(env.ADMIN_EMAIL, env.ADMIN_PASSWORD);
+  const admin = await upsertAdmin(env.ADMIN_EMAIL, env.ADMIN_PASSWORD);
   console.log(`[seed] admin ready → ${admin.email}`);
 
   const store = await getNewsStore();
