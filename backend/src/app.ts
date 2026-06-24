@@ -1,12 +1,20 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { corsOrigins } from "./config/env";
 import { healthRouter } from "./modules/health";
 import { authRouter } from "./modules/auth";
 import { newsRouter } from "./modules/news";
 import { contactRouter } from "./modules/contact";
 import { errorHandler, notFound } from "./shared/middleware/error-handler";
+
+const corsOptions: cors.CorsOptions = {
+  origin: [
+    "https://fifaonepoint.com",
+    "https://www.fifaonepoint.com",
+    "http://localhost:3000",
+  ],
+  credentials: true,
+};
 
 export function createApp() {
   const app = express();
@@ -14,7 +22,8 @@ export function createApp() {
   app.disable("x-powered-by");
   app.set("trust proxy", 1); // accurate client IPs behind Render/Railway proxies
   app.use(helmet());
-  app.use(cors({ origin: corsOrigins }));
+  app.options("*", cors(corsOptions));
+  app.use(cors(corsOptions));
   app.use(express.json({ limit: "100kb" }));
 
   // Feature modules (modular monolith — each owns its routes).
