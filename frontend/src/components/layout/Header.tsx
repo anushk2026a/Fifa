@@ -17,10 +17,10 @@ export function Header() {
   };
 
   const navLink = (href: string) =>
-    `relative  text-sm font-medium transition-colors duration-200
+    `relative inline-flex items-center text-sm font-medium transition-colors duration-200 border-b-2 h-8
     ${isActive(href)
-      ? "text-accent border-b-2 border-accent"
-      : "text-ink hover:text-accent"
+      ? "text-accent border-accent"
+      : "text-ink hover:text-accent border-transparent"
     }`;
 
   return (
@@ -41,11 +41,7 @@ export function Header() {
           <Link href="/" className={navLink("/")}>
             FIFA
           </Link>
-
-          <div className="mb-.5">
-            {" "}
-            <LocationsDropdown />
-          </div>
+          <LocationsDropdown />
 
           <Link href="/news" className={navLink("/news")}>
             News

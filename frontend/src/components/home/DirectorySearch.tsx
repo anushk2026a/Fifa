@@ -9,7 +9,7 @@ const SERVICES = [
   { id: "hotels", label: "Hotels & Stays" },
   { id: "transportation", label: "Transportation" },
   { id: "tickets", label: "Match Tickets" },
-  { id: "screening", label: "Watch & Fan Zones" },
+  { id: "screening", label: "Match Screening" },
 ];
 
 export function DirectorySearch() {

@@ -61,7 +61,7 @@ export function ContactForm() {
                 Share Your FIFA Experiences
               </h2>
 
-              <p className="mb-10 text-lg text-[#F5F7FA] font-medium">
+              <p className="mb-10 text-lg !text-white/70 font-medium">
                 Your story. Your memories. Inspire millions of football fans
                 around the world.
               </p>
@@ -125,7 +125,7 @@ export function ContactForm() {
                     name="email"
                     type="email"
                     label="Email"
-                    placeholder="you@example.com"
+                    placeholder="You@example.com"
                     required
                   />
                 </div>
@@ -167,7 +167,7 @@ export function ContactForm() {
                     icon={<MapPin size={18} />}
                     name="stadium"
                     label="Match Location"
-                    placeholder="1 AMB Dr NW, Atlanta, GA 30313, United States"
+                    placeholder="1 AMB Dr NW, Atlanta, GA 30313, U.S."
                   />
                 </div>
 
@@ -197,7 +197,7 @@ export function ContactForm() {
                     name="message"
                     rows={3}
                     required
-                    placeholder="Share your FIFA  experiences 50 words"
+                    placeholder="Share your FIFA experiences 50 words"
                     className="w-full rounded-xl border border-slate-300 p-4 outline-none transition-all focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                   />
                 </div>

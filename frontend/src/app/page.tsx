@@ -63,21 +63,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 2 — About */}
-      <section className="border-b border-line">
-        <Container className="py-10">
-          <p className="text-xs font-semibold uppercase tracking-wide text-faint">
-            About Us
-          </p>
-          <p className="mt-2 max-w-3xl text-lg text-ink">
-            One Point. Everything You Need - From hotels and restaurants to
-            transportation, stadium access, tickets, and fan zones, FIFA One
-            Point gathers official resources and local insights from all 16 host
-            cities, trying to make your match-day experience simple, convenient,
-            and unforgettable. .
-          </p>
-        </Container>
-      </section>
+
 
       {/* 3 — Matches */}
       <section className="border-b border-line">
@@ -129,11 +115,14 @@ export default function HomePage() {
         </Container>
       </section>
 
+
       {/* 6 — FAQ */}
       <section>
         <JsonLd data={faqJsonLd()} />
         <Container className="py-12">
-          <SectionHeading title="FIFA World Cup 2026 — Frequently Asked Questions" />
+          <h2 className="mb-6 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            FAQ
+          </h2>
           <Faq />
         </Container>
       </section>

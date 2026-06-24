@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import { citiesByCountry, COUNTRY_ORDER } from "@/data/cities";
 import { countryFlagIso } from "@/lib/flags";
 import { Flag } from "@/components/common/Flag";
@@ -43,19 +44,16 @@ export function LocationsDropdown() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "relative inline-flex items-center gap-1.5  text-sm !font-medium transition-colors duration-200",
+          "relative inline-flex items-center gap-1 text-sm !font-medium transition-colors duration-200 border-b-2 p-0 h-8",
           isActive
-            ? "text-accent border-b-2 border-accent"
-            : "text-accent hover:text-accent-strong",
+            ? "text-accent border-accent"
+            : "text-accent hover:text-accent-strong border-transparent",
         )}
       >
         <span>Locations</span>
-        <span
-          aria-hidden
-          className={cn("transition-transform", open && "rotate-180")}
-        >
-          ▾
-        </span>
+        <ChevronDown
+          className={cn("h-3.5 w-3.5 transition-transform duration-200", open && "rotate-180")}
+        />
       </button>
 
       {open && (

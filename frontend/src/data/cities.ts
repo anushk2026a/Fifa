@@ -421,7 +421,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Centennial+Olympic+Park+Atlanta",
         address: "265 Park Ave W NW, Atlanta, GA 30313, United States",
-        note: "Official FIFA Fan Festival location. (FIFA World Cup 26 Atlanta)",
         image: "/images/screening/Centennial%20Olympic%20Park.webp",
       },
       {
@@ -720,7 +719,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Boston+City+Hall+Plaza",
         address: "1 City Hall Square, Boston, MA 02201, United States",
-        note: "Official FIFA Fan Festival. (World Cup Boston)",
         image: "/images/screening/City%20Hall%20Plaza.webp",
       },
       {
@@ -1021,7 +1019,6 @@ export const CITIES: City[] = [
         url: "https://maps.google.com/?q=Fair+Park+Dallas",
         address:
           "3921 Martin Luther King Jr Blvd, Dallas, TX 75210, United States",
-        note: "Official FIFA Fan Festival. (Dallas World Cup 26)",
         image: "/images/screening/fair%20park%20dallas.webp",
       },
       {
@@ -1329,7 +1326,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=EaDo+Houston",
         address: "2200 Polk St, Houston, TX 77003, United States",
-        note: "Official FIFA Fan Festival. (FIFA 2026 Houston)",
         image: "/images/screening/East%20Downtown%20EaDo.webp",
       },
       {
@@ -1629,7 +1625,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=National+WWI+Museum+and+Memorial",
         address: "2 Memorial Dr, Kansas City, MO 64108, United States",
-        note: "Official FIFA Fan Festival. (FIFA World Cup 26 Kansas City)",
         image: "/images/screening/national%20wwi.webp",
       },
       {
@@ -1937,7 +1932,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Los+Angeles+Memorial+Coliseum",
         address: "3911 S Figueroa St, Los Angeles, CA 90037, United States",
-        note: "Official FIFA Fan Festival. (losangelesfwc26.com)",
         image: "/images/screening/la%20memorial.webp",
       },
       {
@@ -2245,7 +2239,6 @@ export const CITIES: City[] = [
         type: "fan_festival",
         url: "https://maps.google.com/?q=Bayfront+Park+Miami",
         address: "301 Biscayne Blvd, Miami, FL 33132, United States",
-        note: "Official FIFA Fan Festival. (FIFA 2026 Miami Host Committee)",
         image: "/images/screening/Bayfront%20park.webp",
       },
       {

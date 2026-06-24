@@ -113,11 +113,15 @@ function ArrowSVG({ className }: { className?: string }) {
   );
 }
 
-export function CityCard({ city }: { city: City }) {
+export function CityCard({ city, index }: { city: City; index?: number }) {
+  const delay = (index ?? 0) * 120;
   return (
     <Link
       href={`/cities/${city.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-200 hover:border-accent hover:shadow-lg hover:-translate-y-0.5"
+      data-aos="fade-up"
+      data-aos-delay={String(delay)}
+      data-aos-duration="650"
     >
       {/* Image / Banner */}
       <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-accent/30 to-accent/10">

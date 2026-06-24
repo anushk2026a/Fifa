@@ -6,9 +6,15 @@ import { RiNewspaperLine } from "react-icons/ri";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { TbSourceCode } from "react-icons/tb";
 
-export function NewsCard({ item }: { item: NewsItem }) {
+export function NewsCard({ item, index }: { item: NewsItem; index?: number }) {
+  const delay = (index ?? 0) * 120;
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-black/5">
+    <article
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-black/5"
+      data-aos="fade-up"
+      data-aos-delay={String(delay)}
+      data-aos-duration="650"
+    >
       {/* Image */}
       {item.image ? (
         <div className="relative h-48 overflow-hidden">
