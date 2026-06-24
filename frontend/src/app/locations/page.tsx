@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 export default function LocationsPage() {
   const grouped = citiesByCountry();
   return (
+
     <>
       <AosInit />
       <section className="bg-gradient-to-b from-[#012A6B] to-[#001B44] text-white">
