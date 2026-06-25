@@ -17,10 +17,8 @@ export async function createContact(input: CreateContactInput): Promise<WithId<C
     phone: input.phone?.trim(),
     country: input.country?.trim(),
     city: input.city?.trim(),
-    youtube: input.youtube?.trim(),
-    facebook: input.facebook?.trim(),
-    instagram: input.instagram?.trim(),
-    x: input.x?.trim(),
+    stadium: input.stadium?.trim(),
+    socialUrl: input.socialUrl?.trim(),
     message: input.message.trim(),
   };
   const saved = await store.create(doc);

@@ -14,10 +14,6 @@ export const createContactSchema = z.object({
   city: z.string().min(1, "City is required"),
   stadium: emptyToUndefined,
   socialUrl: urlOrEmpty,
-  youtube: urlOrEmpty,
-  facebook: urlOrEmpty,
-  instagram: urlOrEmpty,
-  x: urlOrEmpty,
   message: z.string().min(1, "Message is required"),
 });
 
