@@ -3,19 +3,14 @@
 import { useEffect, useState } from "react";
 import { Container } from "@/components/common/Container";
 import { AosInit } from "@/components/common/AosInit";
-import {
-  MapPin,
-  ExternalLink,
-  Users,
-  ChevronLeft,
-  ChevronRight,
-  Calendar,
-  MessageCircle,
-  Share2,
-  Upload,
-} from "lucide-react";
 import { apiUrl } from "@/lib/api";
 import Link from "next/link";
+import { Calendar, ChevronRight, ExternalLink, MapPin, Users } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { Share2 } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+
+
 
 type Story = {
   id: string;
