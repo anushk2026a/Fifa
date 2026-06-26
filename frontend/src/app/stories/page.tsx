@@ -439,7 +439,7 @@ export default function StoriesPage() {
                         onClick={goToPrev}
                         className="flex items-center justify-center rounded-full border border-line bg-surface p-2 shadow-sm hover:bg-slate-50"
                       >
-                        <ChevronLeft className="h-5 w-5 text-ink" />
+                        <FiChevronLeft className="h-5 w-5 text-ink" />
                       </button>
                       <div className="flex items-center gap-2">
                         {Array.from({ length: totalSlides }).map((_, i) => (
@@ -460,7 +460,7 @@ export default function StoriesPage() {
                         onClick={goToNext}
                         className="flex items-center justify-center rounded-full border border-line bg-surface p-2 shadow-sm hover:bg-slate-50"
                       >
-                        <ChevronRight className="h-5 w-5 text-ink" />
+                        <FiChevronRight className="h-5 w-5 text-ink" />
                       </button>
                     </div>
                   )}
