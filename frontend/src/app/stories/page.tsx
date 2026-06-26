@@ -206,22 +206,22 @@ function FeaturedStoryCard({
 
 // ---- Regular Story Card -------------------------------------------------
 
-function StoryCard({ s, index }: { s: Story; index: number }) {
-  const delay = index * 120;
-  const initials = s.name.trim().charAt(0).toUpperCase();
-  const social = socialLink(s);
-  const location = [s.city, s.country].filter(Boolean).join(", ") || "—";
-  const dateStr = new Date(s.createdAt).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+// function StoryCard({ s, index }: { s: Story; index: number }) {
+//   const delay = index * 120;
+//   const initials = s.name.trim().charAt(0).toUpperCase();
+//   const social = socialLink(s);
+//   const location = [s.city, s.country].filter(Boolean).join(", ") || "—";
+//   const dateStr = new Date(s.createdAt).toLocaleDateString("en-US", {
+//     month: "short",
+//     day: "numeric",
+//     year: "numeric",
+//   });
 
 
  
 
 
-}
+// }
 
 // ---- Skeletons -------------------------------------------------
 
@@ -426,11 +426,11 @@ export default function StoriesPage() {
               {/* Remaining stories grid + slider controls */}
               {sliderStories.length > 0 && (
                 <div className="relative">
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {/* <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {getVisibleStories().map((s, i) => (
                       <StoryCard key={s.id} s={s} index={i} />
                     ))}
-                  </div>
+                  </div> */}
 
                   {totalSlides > 1 && (
                     <div className="mt-6 flex items-center justify-center gap-3">
