@@ -5,11 +5,8 @@ import { Container } from "@/components/common/Container";
 import { AosInit } from "@/components/common/AosInit";
 import { apiUrl } from "@/lib/api";
 import Link from "next/link";
-import { Calendar, ChevronRight, ExternalLink, MapPin, Users } from "lucide-react";
-import { MessageCircle } from "lucide-react";
-import { Share2 } from "lucide-react";
-import { ChevronLeft } from "lucide-react";
-
+import { FiCalendar, FiChevronLeft, FiChevronRight, FiExternalLink, FiMapPin, FiMessageSquare, FiShare2 } from "react-icons/fi";
+import { Users } from "lucide-react";
 
 
 type Story = {
@@ -100,7 +97,7 @@ function FeaturedStoryCard({
             </div>
             <h3 className="text-lg font-semibold">{s.name}</h3>
             <div className="flex items-center gap-1 text-sm text-white">
-              <MapPin className="h-3.5 w-3.5" />
+              <FiMapPin className="h-3.5 w-3.5" />
               <span>{location}</span>
             </div>
             <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold tracking-wide">
@@ -129,7 +126,7 @@ function FeaturedStoryCard({
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3">
               <div className="flex items-center gap-4 text-sm text-muted">
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="h-4 w-4" />
+                  <FiCalendar className="h-4 w-4" />
                   {dateStr}
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -137,11 +134,11 @@ function FeaturedStoryCard({
                   {245}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <MessageCircle className="h-4 w-4" />
+                  <FiMessageSquare className="h-4 w-4" />
                   {18}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Share2 className="h-4 w-4" />
+                  <FiShare2 className="h-4 w-4" />
                   {32}
                 </span>
               </div>
@@ -156,7 +153,7 @@ function FeaturedStoryCard({
                       className="inline-flex items-center gap-2 rounded-xl bg-[#FFD700] px-5 py-2.5 text-sm font-semibold text-black "
                     >
                       {link.label}
-                      <ExternalLink className="h-4 w-4" />
+                      <FiExternalLink className="h-4 w-4" />
                     </a>
                   ))
                 ) : (
@@ -176,14 +173,14 @@ function FeaturedStoryCard({
             onClick={onPrev}
             className="absolute -left-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2  hover:bg-slate-50 sm:flex"
           >
-            <ChevronLeft className="h-5 w-5 text-ink" />
+            <FiChevronLeft className="h-5 w-5 text-ink" />
           </button>
           <button
             aria-label="Next featured story"
             onClick={onNext}
             className="absolute -right-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex"
           >
-            <ChevronRight className="h-5 w-5 text-ink" />
+            <FiChevronRight className="h-5 w-5 text-ink" />
           </button>
         </>
       )}
