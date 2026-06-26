@@ -111,9 +111,18 @@ function FeaturedStoryCard({
               The Magic of the FIFA World Cup
             </h2>
 
-            <p className="mt-2 text-base leading-relaxed text-muted">
-              {s.message}
-            </p>
+           <p
+  className="mt-2 overflow-hidden text-base leading-relaxed text-muted"
+  style={{
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: 4,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  }}
+>
+  {s.message}
+</p>
 
             <div className="mt-2 flex flex-wrap gap-1.5">
               {FEATURED_HASHTAGS.map((tag) => (
@@ -426,11 +435,7 @@ export default function StoriesPage() {
               {/* Remaining stories grid + slider controls */}
               {sliderStories.length > 0 && (
                 <div className="relative">
-                  {/* <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {getVisibleStories().map((s, i) => (
-                      <StoryCard key={s.id} s={s} index={i} />
-                    ))}
-                  </div> */}
+                
 
                   {totalSlides > 1 && (
                     <div className="mt-6 flex items-center justify-center gap-3">
