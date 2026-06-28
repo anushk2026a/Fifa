@@ -5,7 +5,12 @@ import type { Match } from "@/data/types";
 import { Search, Plus, X, Pencil, Check, Trash2 } from "lucide-react";
 import { teamFlagIso, findTeamCode } from "@/lib/flags";
 import { Flag } from "@/components/common/Flag";
-import { fetchMatchesApi, createMatchApi, updateMatchApi, deleteMatchApi } from "@/lib/matches-store";
+import {
+  fetchMatchesApi,
+  createMatchApi,
+  updateMatchApi,
+  deleteMatchApi,
+} from "@/lib/matches-store";
 
 type DraftMatch = {
   home: string;
@@ -28,8 +33,14 @@ const fieldCls =
   "w-full rounded border border-line bg-paper px-2.5 py-1.5 text-sm text-ink outline-none focus:border-accent transition-colors";
 
 const EMPTY_DRAFT: DraftMatch = {
-  home: "", homeCode: "", away: "", awayCode: "",
-  stadium: "", citySlug: "", kickoffUtc: "", status: "scheduled",
+  home: "",
+  homeCode: "",
+  away: "",
+  awayCode: "",
+  stadium: "",
+  citySlug: "",
+  kickoffUtc: "",
+  status: "scheduled",
 };
 
 function toDatetimeLocal(isoStr: string): string {
@@ -45,7 +56,9 @@ function toDatetimeLocal(isoStr: string): string {
 }
 
 export default function MatchesPage() {
-  const [matchesList, setMatchesList] = useState<(Match & { id?: string })[]>([]);
+  const [matchesList, setMatchesList] = useState<(Match & { id?: string })[]>(
+    [],
+  );
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | Match["status"]>("all");
@@ -128,8 +141,14 @@ export default function MatchesPage() {
 
     setSaving(true);
     try {
-      const homeCode = addDraft.homeCode.trim().toUpperCase() || findTeamCode(addDraft.home) || addDraft.home.trim().slice(0, 3).toUpperCase();
-      const awayCode = addDraft.awayCode.trim().toUpperCase() || findTeamCode(addDraft.away) || addDraft.away.trim().slice(0, 3).toUpperCase();
+      const homeCode =
+        addDraft.homeCode.trim().toUpperCase() ||
+        findTeamCode(addDraft.home) ||
+        addDraft.home.trim().slice(0, 3).toUpperCase();
+      const awayCode =
+        addDraft.awayCode.trim().toUpperCase() ||
+        findTeamCode(addDraft.away) ||
+        addDraft.away.trim().slice(0, 3).toUpperCase();
 
       const newMatch: Match = {
         home: {
@@ -141,8 +160,12 @@ export default function MatchesPage() {
           code: awayCode,
         },
         stadium: addDraft.stadium.trim(),
-        citySlug: addDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") || "general",
-        kickoffUtc: addDraft.kickoffUtc ? new Date(addDraft.kickoffUtc).toISOString() : new Date().toISOString(),
+        citySlug:
+          addDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") ||
+          "general",
+        kickoffUtc: addDraft.kickoffUtc
+          ? new Date(addDraft.kickoffUtc).toISOString()
+          : new Date().toISOString(),
         status: addDraft.status,
       };
 
@@ -159,14 +182,20 @@ export default function MatchesPage() {
   function startEdit(idx: number, m: Match) {
     setEditIdx(idx);
     setEditDraft({
-      home: m.home.name, homeCode: m.home.code,
-      away: m.away.name, awayCode: m.away.code,
-      stadium: m.stadium, citySlug: m.citySlug,
-      kickoffUtc: toDatetimeLocal(m.kickoffUtc), status: m.status,
+      home: m.home.name,
+      homeCode: m.home.code,
+      away: m.away.name,
+      awayCode: m.away.code,
+      stadium: m.stadium,
+      citySlug: m.citySlug,
+      kickoffUtc: toDatetimeLocal(m.kickoffUtc),
+      status: m.status,
     });
   }
 
-  function cancelEdit() { setEditIdx(null); }
+  function cancelEdit() {
+    setEditIdx(null);
+  }
 
   async function saveEdit(idx: number, item: Match & { id?: string }) {
     if (!item.id) return;
@@ -175,15 +204,25 @@ export default function MatchesPage() {
       const updatedData: Partial<Match> = {
         home: {
           name: editDraft.home.trim(),
-          code: editDraft.homeCode.trim().toUpperCase() || findTeamCode(editDraft.home) || editDraft.home.trim().slice(0, 3).toUpperCase(),
+          code:
+            editDraft.homeCode.trim().toUpperCase() ||
+            findTeamCode(editDraft.home) ||
+            editDraft.home.trim().slice(0, 3).toUpperCase(),
         },
         away: {
           name: editDraft.away.trim(),
-          code: editDraft.awayCode.trim().toUpperCase() || findTeamCode(editDraft.away) || editDraft.away.trim().slice(0, 3).toUpperCase(),
+          code:
+            editDraft.awayCode.trim().toUpperCase() ||
+            findTeamCode(editDraft.away) ||
+            editDraft.away.trim().slice(0, 3).toUpperCase(),
         },
         stadium: editDraft.stadium.trim(),
-        citySlug: editDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") || "general",
-        kickoffUtc: editDraft.kickoffUtc ? new Date(editDraft.kickoffUtc).toISOString() : item.kickoffUtc,
+        citySlug:
+          editDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") ||
+          "general",
+        kickoffUtc: editDraft.kickoffUtc
+          ? new Date(editDraft.kickoffUtc).toISOString()
+          : item.kickoffUtc,
         status: editDraft.status,
       };
 
@@ -191,7 +230,15 @@ export default function MatchesPage() {
       await load();
       setSaved((prev) => new Set(prev).add(idx));
       setEditIdx(null);
-      setTimeout(() => setSaved((prev) => { const s = new Set(prev); s.delete(idx); return s; }), 2500);
+      setTimeout(
+        () =>
+          setSaved((prev) => {
+            const s = new Set(prev);
+            s.delete(idx);
+            return s;
+          }),
+        2500,
+      );
     } finally {
       setSaving(false);
     }
@@ -242,12 +289,22 @@ export default function MatchesPage() {
             />
           </div>
           <button
-            onClick={() => { setShowAdd((v) => !v); setAddDraft(EMPTY_DRAFT); setAddError(null); }}
+            onClick={() => {
+              setShowAdd((v) => !v);
+              setAddDraft(EMPTY_DRAFT);
+              setAddError(null);
+            }}
             className={`flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
-              showAdd ? "bg-paper border border-line text-ink" : "bg-accent text-white hover:bg-accent-strong"
+              showAdd
+                ? "bg-paper border border-line text-ink"
+                : "bg-accent text-white hover:bg-accent-strong"
             }`}
           >
-            {showAdd ? <X className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+            {showAdd ? (
+              <X className="h-3.5 w-3.5" />
+            ) : (
+              <Plus className="h-3.5 w-3.5" />
+            )}
             {showAdd ? "Cancel" : "Add match"}
           </button>
         </div>
@@ -255,46 +312,138 @@ export default function MatchesPage() {
 
       {/* Add form */}
       {showAdd && (
-        <form onSubmit={handleAddMatch} className="rounded-lg border border-line bg-surface p-4">
-          <p className="mb-3 text-xs font-semibold text-muted uppercase tracking-wider">New Match</p>
+        <form
+          onSubmit={handleAddMatch}
+          className="rounded-lg border border-line bg-surface p-4"
+        >
+          <p className="mb-3 text-xs font-semibold text-muted uppercase tracking-wider">
+            New Match
+          </p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Home team *</label>
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Home team *
+              </label>
               <div className="flex items-center gap-2">
-                <Flag iso2={teamFlagIso(addDraft.homeCode || addDraft.home)} label={addDraft.home || "Home"} />
-                <input required className={fieldCls} placeholder="Brazil" value={addDraft.home} onChange={(e) => handleHomeNameChange(e.target.value)} />
+                <Flag
+                  iso2={teamFlagIso(addDraft.homeCode || addDraft.home)}
+                  label={addDraft.home || "Home"}
+                />
+                <input
+                  required
+                  className={fieldCls}
+                  placeholder="Brazil"
+                  value={addDraft.home}
+                  onChange={(e) => handleHomeNameChange(e.target.value)}
+                />
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-              <input className={fieldCls} placeholder="BRA" maxLength={3} value={addDraft.homeCode} onChange={(e) => setAddDraft({ ...addDraft, homeCode: e.target.value.toUpperCase() })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Code
+              </label>
+              <input
+                className={fieldCls}
+                placeholder="BRA"
+                maxLength={3}
+                value={addDraft.homeCode}
+                onChange={(e) =>
+                  setAddDraft({
+                    ...addDraft,
+                    homeCode: e.target.value.toUpperCase(),
+                  })
+                }
+              />
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Away team *</label>
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Away team *
+              </label>
               <div className="flex items-center gap-2">
-                <Flag iso2={teamFlagIso(addDraft.awayCode || addDraft.away)} label={addDraft.away || "Away"} />
-                <input required className={fieldCls} placeholder="Argentina" value={addDraft.away} onChange={(e) => handleAwayNameChange(e.target.value)} />
+                <Flag
+                  iso2={teamFlagIso(addDraft.awayCode || addDraft.away)}
+                  label={addDraft.away || "Away"}
+                />
+                <input
+                  required
+                  className={fieldCls}
+                  placeholder="Argentina"
+                  value={addDraft.away}
+                  onChange={(e) => handleAwayNameChange(e.target.value)}
+                />
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-              <input className={fieldCls} placeholder="ARG" maxLength={3} value={addDraft.awayCode} onChange={(e) => setAddDraft({ ...addDraft, awayCode: e.target.value.toUpperCase() })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Code
+              </label>
+              <input
+                className={fieldCls}
+                placeholder="ARG"
+                maxLength={3}
+                value={addDraft.awayCode}
+                onChange={(e) =>
+                  setAddDraft({
+                    ...addDraft,
+                    awayCode: e.target.value.toUpperCase(),
+                  })
+                }
+              />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Stadium *</label>
-              <input required className={fieldCls} placeholder="MetLife Stadium" value={addDraft.stadium} onChange={(e) => setAddDraft({ ...addDraft, stadium: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Stadium *
+              </label>
+              <input
+                required
+                className={fieldCls}
+                placeholder="MetLife Stadium"
+                value={addDraft.stadium}
+                onChange={(e) =>
+                  setAddDraft({ ...addDraft, stadium: e.target.value })
+                }
+              />
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">City slug</label>
-              <input className={fieldCls} placeholder="new-york" value={addDraft.citySlug} onChange={(e) => setAddDraft({ ...addDraft, citySlug: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                City slug
+              </label>
+              <input
+                className={fieldCls}
+                placeholder="new-york"
+                value={addDraft.citySlug}
+                onChange={(e) =>
+                  setAddDraft({ ...addDraft, citySlug: e.target.value })
+                }
+              />
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Kickoff (Date & Time)</label>
-              <input type="datetime-local" className={fieldCls} value={addDraft.kickoffUtc} onChange={(e) => setAddDraft({ ...addDraft, kickoffUtc: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Kickoff (Date & Time)
+              </label>
+              <input
+                type="datetime-local"
+                className={fieldCls}
+                value={addDraft.kickoffUtc}
+                onChange={(e) =>
+                  setAddDraft({ ...addDraft, kickoffUtc: e.target.value })
+                }
+              />
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Status</label>
-              <select className={fieldCls} value={addDraft.status} onChange={(e) => setAddDraft({ ...addDraft, status: e.target.value as Match["status"] })}>
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                Status
+              </label>
+              <select
+                className={fieldCls}
+                value={addDraft.status}
+                onChange={(e) =>
+                  setAddDraft({
+                    ...addDraft,
+                    status: e.target.value as Match["status"],
+                  })
+                }
+              >
                 <option value="scheduled">Scheduled</option>
                 <option value="live">Live</option>
                 <option value="finished">Finished</option>
@@ -307,7 +456,10 @@ export default function MatchesPage() {
           <div className="mt-4 flex items-center gap-2">
             <button
               type="button"
-              onClick={() => { setShowAdd(false); setAddError(null); }}
+              onClick={() => {
+                setShowAdd(false);
+                setAddError(null);
+              }}
               className="rounded border border-line px-3 py-1.5 text-xs font-medium text-muted hover:bg-paper cursor-pointer"
             >
               Cancel
@@ -334,7 +486,7 @@ export default function MatchesPage() {
             <thead>
               <tr className="border-b border-line bg-paper text-left text-[11px] font-semibold uppercase tracking-wider text-muted">
                 <th className="px-4 py-2.5">Match</th>
-                <th className="px-4 py-2.5">Score</th>
+                {/* <th className="px-4 py-2.5">Score</th> */}
                 <th className="px-4 py-2.5">Venue</th>
                 <th className="px-4 py-2.5">Kickoff</th>
                 <th className="px-4 py-2.5">Status</th>
@@ -353,34 +505,57 @@ export default function MatchesPage() {
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-2.5">
                           <div className="flex items-center gap-1">
-                            <Flag iso2={teamFlagIso(m.home.code || m.home.name)} label={m.home.name} />
-                            <span className="text-xs font-bold text-faint">vs</span>
-                            <Flag iso2={teamFlagIso(m.away.code || m.away.name)} label={m.away.name} />
+                            <Flag
+                              iso2={teamFlagIso(m.home.code || m.home.name)}
+                              label={m.home.name}
+                            />
+                            <span className="text-xs font-bold text-faint">
+                              vs
+                            </span>
+                            <Flag
+                              iso2={teamFlagIso(m.away.code || m.away.name)}
+                              label={m.away.name}
+                            />
                           </div>
                           <div>
                             <p className="font-medium text-ink">
-                              {m.home.name} <span className="text-muted font-normal">vs</span> {m.away.name}
+                              {m.home.name}{" "}
+                              <span className="text-muted font-normal">vs</span>{" "}
+                              {m.away.name}
                             </p>
-                            <p className="text-[11px] text-faint">{m.home.code || "—"} · {m.away.code || "—"}</p>
+                            <p className="text-[11px] text-faint">
+                              {m.home.code || "—"} · {m.away.code || "—"}
+                            </p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap font-mono text-sm text-ink">
+                      {/* <td className="px-4 py-3 whitespace-nowrap font-mono text-sm text-ink">
                         {raw.home.score !== undefined && raw.away.score !== undefined
                           ? `${raw.home.score} – ${raw.away.score}`
                           : <span className="text-faint">—</span>}
-                      </td>
+                      </td> */}
                       <td className="px-4 py-3">
                         <p className="text-xs text-ink">{m.stadium}</p>
-                        <p className="text-[11px] text-faint capitalize">{m.citySlug.replace(/-/g, " ")}</p>
+                        <p className="text-[11px] text-faint capitalize">
+                          {m.citySlug.replace(/-/g, " ")}
+                        </p>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-xs text-muted">
-                        {new Date(m.kickoffUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                        {new Date(m.kickoffUtc).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
-                          <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_PILL[m.status]}`}>
-                            {m.status === "live" && <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />}
+                          <span
+                            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold capitalize ${STATUS_PILL[m.status]}`}
+                          >
+                            {m.status === "live" && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                            )}
                             {m.status}
                           </span>
                           {isSaved && (
@@ -393,17 +568,27 @@ export default function MatchesPage() {
                       <td className="px-4 py-3 whitespace-nowrap text-right">
                         <div className="flex items-center justify-end gap-1">
                           <button
-                            onClick={() => isEditing ? cancelEdit() : startEdit(raw.idx, raw)}
+                            onClick={() =>
+                              isEditing ? cancelEdit() : startEdit(raw.idx, raw)
+                            }
                             className="flex items-center gap-1 rounded px-2 py-1 text-[11px] font-medium text-muted hover:bg-paper hover:text-ink transition cursor-pointer border border-transparent hover:border-line"
                           >
-                            {isEditing ? <X className="h-3 w-3" /> : <Pencil className="h-3 w-3" />}
+                            {isEditing ? (
+                              <X className="h-3 w-3" />
+                            ) : (
+                              <Pencil className="h-3 w-3" />
+                            )}
                             {isEditing ? "Cancel" : "Edit"}
                           </button>
                           <button
                             onClick={() => handleDeleteMatch(raw)}
                             disabled={!raw.id}
                             className="rounded p-1.5 text-faint hover:text-red-600 hover:bg-red-50 transition cursor-pointer disabled:opacity-30"
-                            title={raw.id ? "Delete match" : "Static match — cannot delete"}
+                            title={
+                              raw.id
+                                ? "Delete match"
+                                : "Static match — cannot delete"
+                            }
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -413,46 +598,146 @@ export default function MatchesPage() {
 
                     {isEditing && (
                       <tr>
-                        <td colSpan={6} className="border-l-2 border-accent bg-accent-soft/30 px-4 py-4">
-                          <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-accent">Editing match</p>
+                        <td
+                          colSpan={6}
+                          className="border-l-2 border-accent bg-accent-soft/30 px-4 py-4"
+                        >
+                          <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-accent">
+                            Editing match
+                          </p>
                           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Home team</label>
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Home team
+                              </label>
                               <div className="flex items-center gap-2">
-                                <Flag iso2={teamFlagIso(editDraft.homeCode || editDraft.home)} label={editDraft.home || "Home"} />
-                                <input className={fieldCls} value={editDraft.home} onChange={(e) => handleHomeNameChange(e.target.value, true)} />
+                                <Flag
+                                  iso2={teamFlagIso(
+                                    editDraft.homeCode || editDraft.home,
+                                  )}
+                                  label={editDraft.home || "Home"}
+                                />
+                                <input
+                                  className={fieldCls}
+                                  value={editDraft.home}
+                                  onChange={(e) =>
+                                    handleHomeNameChange(e.target.value, true)
+                                  }
+                                />
                               </div>
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-                              <input className={fieldCls} maxLength={3} value={editDraft.homeCode} onChange={(e) => setEditDraft({ ...editDraft, homeCode: e.target.value.toUpperCase() })} />
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Code
+                              </label>
+                              <input
+                                className={fieldCls}
+                                maxLength={3}
+                                value={editDraft.homeCode}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    homeCode: e.target.value.toUpperCase(),
+                                  })
+                                }
+                              />
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Away team</label>
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Away team
+                              </label>
                               <div className="flex items-center gap-2">
-                                <Flag iso2={teamFlagIso(editDraft.awayCode || editDraft.away)} label={editDraft.away || "Away"} />
-                                <input className={fieldCls} value={editDraft.away} onChange={(e) => handleAwayNameChange(e.target.value, true)} />
+                                <Flag
+                                  iso2={teamFlagIso(
+                                    editDraft.awayCode || editDraft.away,
+                                  )}
+                                  label={editDraft.away || "Away"}
+                                />
+                                <input
+                                  className={fieldCls}
+                                  value={editDraft.away}
+                                  onChange={(e) =>
+                                    handleAwayNameChange(e.target.value, true)
+                                  }
+                                />
                               </div>
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-                              <input className={fieldCls} maxLength={3} value={editDraft.awayCode} onChange={(e) => setEditDraft({ ...editDraft, awayCode: e.target.value.toUpperCase() })} />
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Code
+                              </label>
+                              <input
+                                className={fieldCls}
+                                maxLength={3}
+                                value={editDraft.awayCode}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    awayCode: e.target.value.toUpperCase(),
+                                  })
+                                }
+                              />
                             </div>
                             <div className="sm:col-span-2">
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Stadium</label>
-                              <input className={fieldCls} value={editDraft.stadium} onChange={(e) => setEditDraft({ ...editDraft, stadium: e.target.value })} />
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Stadium
+                              </label>
+                              <input
+                                className={fieldCls}
+                                value={editDraft.stadium}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    stadium: e.target.value,
+                                  })
+                                }
+                              />
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">City slug</label>
-                              <input className={fieldCls} value={editDraft.citySlug} onChange={(e) => setEditDraft({ ...editDraft, citySlug: e.target.value })} />
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                City slug
+                              </label>
+                              <input
+                                className={fieldCls}
+                                value={editDraft.citySlug}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    citySlug: e.target.value,
+                                  })
+                                }
+                              />
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Kickoff (Date & Time)</label>
-                              <input type="datetime-local" className={fieldCls} value={editDraft.kickoffUtc} onChange={(e) => setEditDraft({ ...editDraft, kickoffUtc: e.target.value })} />
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Kickoff (Date & Time)
+                              </label>
+                              <input
+                                type="datetime-local"
+                                className={fieldCls}
+                                value={editDraft.kickoffUtc}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    kickoffUtc: e.target.value,
+                                  })
+                                }
+                              />
                             </div>
                             <div>
-                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Status</label>
-                              <select className={fieldCls} value={editDraft.status} onChange={(e) => setEditDraft({ ...editDraft, status: e.target.value as Match["status"] })}>
+                              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">
+                                Status
+                              </label>
+                              <select
+                                className={fieldCls}
+                                value={editDraft.status}
+                                onChange={(e) =>
+                                  setEditDraft({
+                                    ...editDraft,
+                                    status: e.target.value as Match["status"],
+                                  })
+                                }
+                              >
                                 <option value="scheduled">Scheduled</option>
                                 <option value="live">Live</option>
                                 <option value="finished">Finished</option>
@@ -460,7 +745,12 @@ export default function MatchesPage() {
                             </div>
                           </div>
                           <div className="mt-3 flex items-center gap-2">
-                            <button onClick={cancelEdit} className="rounded border border-line px-3 py-1.5 text-xs font-medium text-muted hover:bg-paper cursor-pointer">Cancel</button>
+                            <button
+                              onClick={cancelEdit}
+                              className="rounded border border-line px-3 py-1.5 text-xs font-medium text-muted hover:bg-paper cursor-pointer"
+                            >
+                              Cancel
+                            </button>
                             <button
                               onClick={() => saveEdit(raw.idx, raw)}
                               disabled={saving}
@@ -478,7 +768,9 @@ export default function MatchesPage() {
             </tbody>
           </table>
           {displayed.length === 0 && (
-            <p className="py-12 text-center text-sm text-faint">No matches found.</p>
+            <p className="py-12 text-center text-sm text-faint">
+              No matches found.
+            </p>
           )}
         </div>
       )}

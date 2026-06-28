@@ -18,9 +18,10 @@ export function Header() {
 
   const navLink = (href: string) =>
     `relative inline-flex items-center text-sm font-medium transition-colors duration-200 border-b-2 h-8
-    ${isActive(href)
-      ? "text-accent border-accent"
-      : "text-ink hover:text-accent border-transparent"
+    ${
+      isActive(href)
+        ? "text-accent border-accent"
+        : "text-ink hover:text-accent border-transparent"
     }`;
 
   return (
