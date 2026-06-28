@@ -30,20 +30,11 @@ type Story = {
   approved?: boolean;
 };
 
-function socialLink(
-  s: Story,
-): { url: string; label: string; color: string } | null {
-  if (s.socialUrl)
-    return { url: s.socialUrl, label: "Social", color: "#0057B8" };
-  return null;
-}
-
 function allSocialLinks(s: Story): { url: string; label: string }[] {
   if (s.socialUrl) return [{ url: s.socialUrl, label: "Social" }];
   return [];
 }
 
-// Derives a short country-code-style badge from the country name (e.g. "India" -> "IND").
 function countryBadge(country?: string): string {
   if (!country) return "INT";
   const trimmed = country.trim();
@@ -51,7 +42,7 @@ function countryBadge(country?: string): string {
   return trimmed.slice(0, 3).toUpperCase();
 }
 
-// ---- Featured Story Carousel -------------------------------------------------
+// ── Featured story slide ──────────────────────────────────────────────────────
 
 const FEATURED_HASHTAGS = [
   "#FIFA",
@@ -62,20 +53,7 @@ const FEATURED_HASHTAGS = [
   "#Sports",
 ];
 
-function FeaturedStoryCard({
-  pool,
-  index,
-  onPrev,
-  onNext,
-  onSelect,
-}: {
-  pool: Story[];
-  index: number;
-  onPrev: () => void;
-  onNext: () => void;
-  onSelect: (i: number) => void;
-}) {
-  const s = pool[index];
+function FeaturedStoryCard({ s }: { s: Story }) {
   const location =
     [s.city, s.country].filter(Boolean).join(", ") || "Unknown location";
   const initials = s.name.trim().charAt(0).toUpperCase();
@@ -86,139 +64,161 @@ function FeaturedStoryCard({
   });
 
   return (
-    <div className="relative">
-      <div className="overflow-hidden rounded-2xl border border-blue-900">
-        <div className="grid md:grid-cols-[280px_1fr]">
-          {/* Left avatar panel — real stadium background image with dark overlay for contrast */}
-          <div
-            className="relative flex flex-col items-center justify-center gap-2  text-white"
-            style={{
-              backgroundImage:
-                "linear-gradient(to bottom, rgba(1,42,107,0.85), rgba(0,27,68,0.92)), url('/banner/fifabanner.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full ring-4 ring-[#FFD700]/80">
-              <span className="text-2xl font-bold text-white">{initials}</span>
-            </div>
-            <h3 className="text-lg font-semibold">{s.name}</h3>
-            <div className="flex items-center gap-1 text-sm text-white">
-              <FiMapPin className="h-3.5 w-3.5" />
-              <span>{location}</span>
-            </div>
-            <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold tracking-wide">
-              {countryBadge(s.country)}
+    <div className="grid md:grid-cols-[280px_1fr] w-full flex-shrink-0">
+      <div
+        className="relative flex flex-col items-center justify-center gap-2 text-white py-8"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(1,42,107,0.85), rgba(0,27,68,0.92)), url('/banner/fifabanner.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full ring-4 ring-[#FFD700]/80">
+          <span className="text-2xl font-bold text-white">{initials}</span>
+        </div>
+        <h3 className="text-lg font-semibold">{s.name}</h3>
+        <div className="flex items-center gap-1 text-sm text-white">
+          <FiMapPin className="h-3.5 w-3.5" />
+          <span>{location}</span>
+        </div>
+        <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold tracking-wide">
+          {countryBadge(s.country)}
+        </span>
+      </div>
+
+      <div className="p-3 bg-surface sm:p-6">
+        <h2 className="mt-1 text-xl font-bold text-ink">
+          Tell the World Your FIFA Experience
+        </h2>
+        <p
+          className="mt-2 overflow-hidden text-base leading-relaxed text-muted"
+          style={{
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 4,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {s.message}
+        </p>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {FEATURED_HASHTAGS.map((tag) => (
+            <span key={tag} className="text-sm text-[#0057B8]">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3">
+          <div className="flex items-center gap-4 text-sm text-muted">
+            <span className="flex items-center gap-1.5">
+              <FiCalendar className="h-4 w-4" />
+              {dateStr}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Users className="h-4 w-4" />
+              {245}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <FiMessageSquare className="h-4 w-4" />
+              {18}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <FiShare2 className="h-4 w-4" />
+              {32}
             </span>
           </div>
-
-          {/* Right content panel */}
-          <div className="p-3 bg-surface sm:p-6">
-            <h2 className="mt-1 text-xl font-bold text-ink">
-              Tell the World Your FIFA Experience
-            </h2>
-
-            <p
-              className="mt-2 overflow-hidden text-base leading-relaxed text-muted"
-              style={{
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 4,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {s.message}
-            </p>
-
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {FEATURED_HASHTAGS.map((tag) => (
-                <span key={tag} className="text-sm text-[#0057B8]">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3">
-              <div className="flex items-center gap-4 text-sm text-muted">
-                <span className="flex items-center gap-1.5">
-                  <FiCalendar className="h-4 w-4" />
-                  {dateStr}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4" />
-                  {245}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <FiMessageSquare className="h-4 w-4" />
-                  {18}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <FiShare2 className="h-4 w-4" />
-                  {32}
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {allSocialLinks(s).length > 0 ? (
-                  allSocialLinks(s).map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-[#FFD700] px-5 py-2.5 text-sm font-semibold text-black "
-                    >
-                      {link.label}
-                      <FiExternalLink className="h-4 w-4" />
-                    </a>
-                  ))
-                ) : (
-                  <span className="text-sm text-muted">No social link</span>
-                )}
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-2">
+            {allSocialLinks(s).length > 0 ? (
+              allSocialLinks(s).map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#FFD700] px-5 py-2.5 text-sm font-semibold text-black"
+                >
+                  {link.label}
+                  <FiExternalLink className="h-4 w-4" />
+                </a>
+              ))
+            ) : (
+              <span className="text-sm text-muted">No social link</span>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Carousel nav arrows */}
-      {pool.length > 1 && (
-        <>
-          <button
-            aria-label="Previous featured story"
-            onClick={onPrev}
-            className="absolute -left-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2  hover:bg-slate-50 sm:flex"
-          >
-            <FiChevronLeft className="h-5 w-5 text-ink" />
-          </button>
-          <button
-            aria-label="Next featured story"
-            onClick={onNext}
-            className="absolute -right-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex"
-          >
-            <FiChevronRight className="h-5 w-5 text-ink" />
-          </button>
-        </>
-      )}
-
-      {/* Dots */}
-      {pool.length > 1 && (
-        <div className="mt-4 flex items-center justify-center gap-2">
-          {pool.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Go to featured story ${i + 1}`}
-              onClick={() => onSelect(i)}
-              className={`h-2.5 w-2.5 rounded-full transition-all ${
-                i === index ? "w-6 bg-[#e1b309]" : "bg-line hover:bg-muted"
-              }`}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 }
+
+// ── Story card (bottom slider) ─────────────────────────────────────────────────
+
+function StoryCard({ s }: { s: Story }) {
+  const location =
+    [s.city, s.country].filter(Boolean).join(", ") || "Unknown location";
+  const initials = s.name.trim().charAt(0).toUpperCase();
+  const dateStr = new Date(s.createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const link = allSocialLinks(s)[0];
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm h-full flex flex-col">
+      <div className="h-1.5 bg-gradient-to-r from-[#012A6B] via-[#0057B8] to-[#FFD700]" />
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#0057B8] to-[#012A6B] flex-shrink-0">
+            <span className="text-base font-bold text-white">{initials}</span>
+          </div>
+          <div className="min-w-0">
+            <p className="truncate font-semibold text-ink">{s.name}</p>
+            <p className="flex items-center gap-1 truncate text-xs text-muted">
+              <FiMapPin className="h-3 w-3 flex-shrink-0" />
+              {location}
+            </p>
+          </div>
+          <span className="ml-auto flex-shrink-0 rounded-full border border-line px-2 py-0.5 text-[10px] font-bold uppercase text-muted">
+            {countryBadge(s.country)}
+          </span>
+        </div>
+        <p
+          className="mt-4 flex-1 text-sm leading-relaxed text-muted"
+          style={{
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 4,
+            overflow: "hidden",
+          }}
+        >
+          {s.message}
+        </p>
+        <div className="mt-4 flex items-center justify-between border-t border-line pt-3">
+          <span className="flex items-center gap-1.5 text-xs text-muted">
+            <FiCalendar className="h-3.5 w-3.5" />
+            {dateStr}
+          </span>
+          {link ? (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#FFD700] px-4 py-1.5 text-xs font-semibold text-black"
+            >
+              View Profile
+              <FiExternalLink className="h-3 w-3" />
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Skeletons ─────────────────────────────────────────────────────────────────
 
 function SkeletonFeaturedCard() {
   return (
@@ -254,7 +254,7 @@ function SkeletonFeaturedCard() {
 function SkeletonCard() {
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
-      <div className="h-1.5 bg-linear-to-r from-[#012A6B] via-[#0057B8] to-[#FFD700]" />
+      <div className="h-1.5 bg-gradient-to-r from-slate-200 to-slate-100" />
       <div className="p-5">
         <div className="flex items-center gap-3">
           <div className="h-11 w-11 rounded-full bg-slate-100 animate-pulse" />
@@ -263,7 +263,6 @@ function SkeletonCard() {
             <div className="h-3 w-1/3 rounded bg-slate-100 animate-pulse" />
           </div>
         </div>
-        <div className="mt-4 h-8 w-32 rounded-full bg-slate-100 animate-pulse" />
         <div className="mt-4 space-y-2">
           <div className="h-3 w-full rounded bg-slate-100 animate-pulse" />
           <div className="h-3 w-4/5 rounded bg-slate-100 animate-pulse" />
@@ -274,18 +273,24 @@ function SkeletonCard() {
   );
 }
 
-// ---- Page -------------------------------------------------
+// ── Page ──────────────────────────────────────────────────────────────────────
 
-const FEATURED_POOL_SIZE = 3;
+const FEATURED_POOL_SIZE = 5;
 
 export default function StoriesPage() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Featured slider state
   const [featuredIndex, setFeaturedIndex] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(3);
+  const [featuredAnimating, setFeaturedAnimating] = useState(false);
   const featuredPausedRef = useRef(false);
-  const sliderPausedRef = useRef(false);
+
+  // Card slider state
+  const [cardIndex, setCardIndex] = useState(0);
+  const [cardAnimating, setCardAnimating] = useState(false);
+  const [itemsPerView, setItemsPerView] = useState(3);
+  const cardPausedRef = useRef(false);
 
   useEffect(() => {
     fetch(apiUrl("/contact/approved"), { cache: "no-store" })
@@ -308,53 +313,55 @@ export default function StoriesPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // First N stories rotate through the featured carousel; the rest fill the grid below.
   const featuredPool = stories.slice(0, FEATURED_POOL_SIZE);
-  const sliderStories = stories.slice(FEATURED_POOL_SIZE);
+  const cardStories = stories.slice(FEATURED_POOL_SIZE);
+  const totalCardSlides = Math.max(1, Math.ceil(cardStories.length / itemsPerView));
+  const maxCardIndex = totalCardSlides - 1;
 
-  const totalSlides = Math.ceil(sliderStories.length / itemsPerView);
-  const maxIndex = Math.max(0, totalSlides - 1);
-
-  const goToPrevFeatured = () => {
-    setFeaturedIndex((prev) => (prev > 0 ? prev - 1 : featuredPool.length - 1));
+  // Slide helpers (debounce mid-animation)
+  const slideFeatured = (next: number) => {
+    if (featuredAnimating) return;
+    setFeaturedAnimating(true);
+    setFeaturedIndex(next);
+    setTimeout(() => setFeaturedAnimating(false), 560);
   };
 
-  const goToNextFeatured = () => {
-    setFeaturedIndex((prev) => (prev < featuredPool.length - 1 ? prev + 1 : 0));
+  const slideCards = (next: number) => {
+    if (cardAnimating) return;
+    setCardAnimating(true);
+    setCardIndex(next);
+    setTimeout(() => setCardAnimating(false), 560);
   };
 
-  const goToPrev = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
-  };
+  const goToPrevFeatured = () =>
+    slideFeatured(featuredIndex > 0 ? featuredIndex - 1 : featuredPool.length - 1);
+  const goToNextFeatured = () =>
+    slideFeatured(featuredIndex < featuredPool.length - 1 ? featuredIndex + 1 : 0);
 
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
-  };
+  const goToPrevCard = () =>
+    slideCards(cardIndex > 0 ? cardIndex - 1 : maxCardIndex);
+  const goToNextCard = () =>
+    slideCards(cardIndex < maxCardIndex ? cardIndex + 1 : 0);
 
+  // Auto-advance featured
   useEffect(() => {
     if (featuredPool.length <= 1) return;
     const id = setInterval(() => {
       if (!featuredPausedRef.current)
-        setFeaturedIndex((prev) =>
-          prev < featuredPool.length - 1 ? prev + 1 : 0,
-        );
-    }, 10000);
+        setFeaturedIndex((p) => (p < featuredPool.length - 1 ? p + 1 : 0));
+    }, 7000);
     return () => clearInterval(id);
   }, [featuredPool.length]);
 
+  // Auto-advance card slider
   useEffect(() => {
-    if (totalSlides <= 1) return;
+    if (totalCardSlides <= 1) return;
     const id = setInterval(() => {
-      if (!sliderPausedRef.current)
-        setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
-    }, 10000);
+      if (!cardPausedRef.current)
+        setCardIndex((p) => (p < maxCardIndex ? p + 1 : 0));
+    }, 7000);
     return () => clearInterval(id);
-  }, [totalSlides, maxIndex]);
-
-  const getVisibleStories = () => {
-    const start = currentIndex * itemsPerView;
-    return sliderStories.slice(start, start + itemsPerView);
-  };
+  }, [totalCardSlides, maxCardIndex]);
 
   return (
     <>
@@ -381,16 +388,14 @@ export default function StoriesPage() {
           backgroundPosition: "center",
         }}
       >
+        {/* Hero heading */}
         <Container className="py-8 sm:py-10">
           <div
             className="flex flex-col items-center justify-center text-center gap-3"
             data-aos="fade-up"
             data-aos-duration="700"
           >
-            <div>
-              <h2 className="text-lg font-bold">Fan Stories</h2>
-            </div>
-
+            <h2 className="text-lg font-bold">Fan Stories</h2>
             <span
               className="max-w-xl text-base leading-6 text-white"
               data-aos="fade-up"
@@ -404,7 +409,7 @@ export default function StoriesPage() {
           </div>
         </Container>
 
-        <Container className="">
+        <Container>
           {loading ? (
             <div className="space-y-8">
               <SkeletonFeaturedCard />
@@ -415,7 +420,7 @@ export default function StoriesPage() {
               </div>
             </div>
           ) : stories.length === 0 ? (
-            <div className="rounded-2xl border  border-line bg-surface px-6 py-16 text-center">
+            <div className="rounded-2xl border border-line bg-surface px-6 py-16 text-center">
               <p className="text-lg font-semibold text-ink">
                 No stories published yet.
               </p>
@@ -425,28 +430,79 @@ export default function StoriesPage() {
             </div>
           ) : (
             <div className="space-y-7">
-              {/* Featured Story Carousel */}
+
+              {/* ── Featured soft-slide carousel ──────────────────────────── */}
               {featuredPool.length > 0 && (
                 <div
                   data-aos="fade-up"
                   data-aos-duration="700"
-                  onMouseEnter={() => {
-                    featuredPausedRef.current = true;
-                  }}
-                  onMouseLeave={() => {
-                    featuredPausedRef.current = false;
-                  }}
+                  className="relative"
+                  onMouseEnter={() => { featuredPausedRef.current = true; }}
+                  onMouseLeave={() => { featuredPausedRef.current = false; }}
                 >
-                  <FeaturedStoryCard
-                    pool={featuredPool}
-                    index={featuredIndex}
-                    onPrev={goToPrevFeatured}
-                    onNext={goToNextFeatured}
-                    onSelect={setFeaturedIndex}
-                  />
+                  {/* Clipping wrapper */}
+                  <div className="overflow-hidden rounded-2xl border border-blue-900">
+                    {/* Sliding track — all slides side-by-side */}
+                    <div
+                      className="flex"
+                      style={{
+                        transform: `translateX(-${featuredIndex * 100}%)`,
+                        transition: "transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+                        willChange: "transform",
+                      }}
+                    >
+                      {featuredPool.map((story) => (
+                        <div key={story.id} style={{ width: "100%", flexShrink: 0 }}>
+                          <FeaturedStoryCard s={story} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Arrow buttons */}
+                  {featuredPool.length > 1 && (
+                    <>
+                      <button
+                        aria-label="Previous featured story"
+                        onClick={goToPrevFeatured}
+                        className="absolute -left-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex transition-all duration-200 hover:scale-110"
+                      >
+                        <FiChevronLeft className="h-5 w-5 text-ink" />
+                      </button>
+                      <button
+                        aria-label="Next featured story"
+                        onClick={goToNextFeatured}
+                        className="absolute -right-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex transition-all duration-200 hover:scale-110"
+                      >
+                        <FiChevronRight className="h-5 w-5 text-ink" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Animated dots */}
+                  {featuredPool.length > 1 && (
+                    <div className="mt-4 flex items-center justify-center gap-2">
+                      {featuredPool.map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Go to featured story ${i + 1}`}
+                          onClick={() => slideFeatured(i)}
+                          className="h-2.5 rounded-full transition-all duration-300"
+                          style={{
+                            width: i === featuredIndex ? "24px" : "10px",
+                            backgroundColor:
+                              i === featuredIndex
+                                ? "#e1b309"
+                                : "rgba(255,255,255,0.4)",
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
-              {/* Share Your Story CTA */}
+
+              {/* ── Share CTA ─────────────────────────────────────────────── */}
               <div className="flex items-center gap-4 mb-5 rounded-2xl bg-[#033d9a] px-5 py-4 sm:px-6 sm:py-5">
                 <div className="min-w-0 flex-1">
                   <span className="text-sm font-semibold text-white sm:text-base">
@@ -466,6 +522,92 @@ export default function StoriesPage() {
                   Share Your Story
                 </Link>
               </div>
+
+              {/* ── Card soft-slide carousel ──────────────────────────────── */}
+              {cardStories.length > 0 && (
+                <div
+                  className="relative pb-8"
+                  onMouseEnter={() => { cardPausedRef.current = true; }}
+                  onMouseLeave={() => { cardPausedRef.current = false; }}
+                >
+                  {/* Clipping wrapper */}
+                  <div className="overflow-hidden">
+                    {/* Sliding track — each "slide" is a grid of itemsPerView cards */}
+                    <div
+                      className="flex"
+                      style={{
+                        transform: `translateX(-${cardIndex * 100}%)`,
+                        transition: "transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+                        willChange: "transform",
+                      }}
+                    >
+                      {Array.from({ length: totalCardSlides }).map((_, slideIdx) => {
+                        const slideItems = cardStories.slice(
+                          slideIdx * itemsPerView,
+                          slideIdx * itemsPerView + itemsPerView,
+                        );
+                        return (
+                          <div
+                            key={slideIdx}
+                            style={{
+                              width: "100%",
+                              flexShrink: 0,
+                              display: "grid",
+                              gridTemplateColumns: `repeat(${itemsPerView}, 1fr)`,
+                              gap: "20px",
+                            }}
+                          >
+                            {slideItems.map((story) => (
+                              <StoryCard key={story.id} s={story} />
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Arrow buttons */}
+                  {totalCardSlides > 1 && (
+                    <>
+                      <button
+                        aria-label="Previous stories"
+                        onClick={goToPrevCard}
+                        className="absolute -left-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex transition-all duration-200 hover:scale-110"
+                      >
+                        <FiChevronLeft className="h-5 w-5 text-ink" />
+                      </button>
+                      <button
+                        aria-label="Next stories"
+                        onClick={goToNextCard}
+                        className="absolute -right-12 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface p-2 shadow-md hover:bg-slate-50 sm:flex transition-all duration-200 hover:scale-110"
+                      >
+                        <FiChevronRight className="h-5 w-5 text-ink" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Animated dots */}
+                  {totalCardSlides > 1 && (
+                    <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-2">
+                      {Array.from({ length: totalCardSlides }).map((_, i) => (
+                        <button
+                          key={i}
+                          aria-label={`Go to slide ${i + 1}`}
+                          onClick={() => slideCards(i)}
+                          className="h-2.5 rounded-full transition-all duration-300"
+                          style={{
+                            width: i === cardIndex ? "24px" : "10px",
+                            backgroundColor:
+                              i === cardIndex
+                                ? "#e1b309"
+                                : "rgba(255,255,255,0.35)",
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </Container>

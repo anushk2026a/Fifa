@@ -11,6 +11,7 @@ import {
   updateMatchApi,
   deleteMatchApi,
 } from "@/lib/matches-store";
+import { utcToEtDatetimeLocal, parseEtToUtc, localTime } from "@/lib/schedule";
 
 type DraftMatch = {
   home: string;
@@ -43,17 +44,6 @@ const EMPTY_DRAFT: DraftMatch = {
   status: "scheduled",
 };
 
-function toDatetimeLocal(isoStr: string): string {
-  if (!isoStr) return "";
-  try {
-    const d = new Date(isoStr);
-    if (isNaN(d.getTime())) return "";
-    const pad = (n: number) => String(n).padStart(2, "0");
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-  } catch {
-    return "";
-  }
-}
 
 export default function MatchesPage() {
   const [matchesList, setMatchesList] = useState<(Match & { id?: string })[]>(
@@ -164,7 +154,7 @@ export default function MatchesPage() {
           addDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") ||
           "general",
         kickoffUtc: addDraft.kickoffUtc
-          ? new Date(addDraft.kickoffUtc).toISOString()
+          ? parseEtToUtc(addDraft.kickoffUtc)
           : new Date().toISOString(),
         status: addDraft.status,
       };
@@ -188,7 +178,7 @@ export default function MatchesPage() {
       awayCode: m.away.code,
       stadium: m.stadium,
       citySlug: m.citySlug,
-      kickoffUtc: toDatetimeLocal(m.kickoffUtc),
+      kickoffUtc: utcToEtDatetimeLocal(m.kickoffUtc),
       status: m.status,
     });
   }
@@ -221,7 +211,7 @@ export default function MatchesPage() {
           editDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") ||
           "general",
         kickoffUtc: editDraft.kickoffUtc
-          ? new Date(editDraft.kickoffUtc).toISOString()
+          ? parseEtToUtc(editDraft.kickoffUtc)
           : item.kickoffUtc,
         status: editDraft.status,
       };
@@ -529,11 +519,7 @@ export default function MatchesPage() {
                           </div>
                         </div>
                       </td>
-                      {/* <td className="px-4 py-3 whitespace-nowrap font-mono text-sm text-ink">
-                        {raw.home.score !== undefined && raw.away.score !== undefined
-                          ? `${raw.home.score} – ${raw.away.score}`
-                          : <span className="text-faint">—</span>}
-                      </td> */}
+
                       <td className="px-4 py-3">
                         <p className="text-xs text-ink">{m.stadium}</p>
                         <p className="text-[11px] text-faint capitalize">
@@ -542,11 +528,12 @@ export default function MatchesPage() {
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-xs text-muted">
                         {new Date(m.kickoffUtc).toLocaleDateString("en-US", {
+                          timeZone: "America/New_York",
                           month: "short",
                           day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
                         })}
+                        {" • "}
+                        {localTime(m.kickoffUtc)}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
