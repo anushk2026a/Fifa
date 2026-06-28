@@ -5,6 +5,7 @@ import { healthRouter } from "./modules/health";
 import { authRouter } from "./modules/auth";
 import { newsRouter } from "./modules/news";
 import { contactRouter } from "./modules/contact";
+import { matchesRouter } from "./modules/matches";
 import { errorHandler, notFound } from "./shared/middleware/error-handler";
 
 const corsOptions: cors.CorsOptions = {
@@ -31,6 +32,7 @@ export function createApp() {
   app.use("/auth", authRouter);
   app.use("/news", newsRouter);
   app.use("/contact", contactRouter);
+  app.use("/matches", matchesRouter);
 
   app.use(notFound);
   app.use(errorHandler);

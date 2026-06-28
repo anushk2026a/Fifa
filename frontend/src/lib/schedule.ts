@@ -21,8 +21,8 @@ export function ymd(d: Date): string {
 }
 
 /** All matches on a given local date (visitor's timezone), sorted by kickoff. */
-export function matchesOn(date: string): Match[] {
-  return MATCHES.filter((m) => ymd(new Date(m.kickoffUtc)) === date).sort((a, b) =>
+export function matchesOn(date: string, list: Match[] = MATCHES): Match[] {
+  return list.filter((m) => ymd(new Date(m.kickoffUtc)) === date).sort((a, b) =>
     a.kickoffUtc.localeCompare(b.kickoffUtc),
   );
 }

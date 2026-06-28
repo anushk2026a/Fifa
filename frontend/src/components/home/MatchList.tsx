@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import type { Match } from "@/data/types";
 import { localTime, matchesOn, prettyDate, ymd } from "@/lib/schedule";
@@ -8,6 +8,7 @@ import { getCity } from "@/data/cities";
 import { teamFlagIso } from "@/lib/flags";
 import { Flag } from "@/components/common/Flag";
 import { cn } from "@/lib/utils";
+import { fetchMatchesApi } from "@/lib/matches-store";
 
 function TeamRow({
   team,
@@ -77,8 +78,8 @@ function MatchCard({ m }: { m: Match }) {
   );
 }
 
-function DayBlock({ label, date }: { label: string; date: string }) {
-  const matches = matchesOn(date);
+function DayBlock({ label, date, allMatches }: { label: string; date: string; allMatches: Match[] }) {
+  const matches = matchesOn(date, allMatches);
   return (
     <div>
       <div className="mb-3 flex items-baseline gap-3">
@@ -101,21 +102,22 @@ function DayBlock({ label, date }: { label: string; date: string }) {
 }
 
 export function MatchList() {
+  const [allMatches, setAllMatches] = useState<Match[]>([]);
   const [dates, setDates] = useState<{ today: string; next: string; nextLabel: string } | null>(null);
 
-  useEffect(() => {
+  const loadMatches = useCallback(async () => {
+    const data = await fetchMatchesApi();
+    setAllMatches(data);
+
     const now = new Date();
     const today = ymd(now);
 
-    // Find the next day with matches (skip empty days — happens when US kickoffs
-    // fall on the following calendar day in the visitor's local timezone).
     let next = "";
     let nextLabel = "Tomorrow";
     for (let offset = 1; offset <= 60; offset++) {
-      // Add exactly 24 hours per offset to avoid browser local date boundary issues
       const d = new Date(now.getTime() + offset * 86400000);
       const candidate = ymd(d);
-      if (matchesOn(candidate).length > 0) {
+      if (matchesOn(candidate, data).length > 0) {
         next = candidate;
         nextLabel = offset === 1 ? "Tomorrow" : prettyDate(candidate);
         break;
@@ -124,6 +126,12 @@ export function MatchList() {
 
     setDates({ today, next, nextLabel });
   }, []);
+
+  useEffect(() => {
+    loadMatches();
+    window.addEventListener("matches_updated", loadMatches);
+    return () => window.removeEventListener("matches_updated", loadMatches);
+  }, [loadMatches]);
 
   if (!dates) {
     return (
@@ -136,8 +144,8 @@ export function MatchList() {
 
   return (
     <div className="space-y-8">
-      <DayBlock label="Today's Match" date={dates.today} />
-      {dates.next && <DayBlock label="Next Match" date={dates.next} />}
+      <DayBlock label="Today's Match" date={dates.today} allMatches={allMatches} />
+      {dates.next && <DayBlock label="Next Match" date={dates.next} allMatches={allMatches} />}
     </div>
   );
 }
