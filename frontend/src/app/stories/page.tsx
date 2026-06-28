@@ -1,13 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/common/Container";
 import { AosInit } from "@/components/common/AosInit";
 import { apiUrl } from "@/lib/api";
 import Link from "next/link";
-import { FiCalendar, FiChevronLeft, FiChevronRight, FiExternalLink, FiMapPin, FiMessageSquare, FiShare2 } from "react-icons/fi";
+import {
+  FiCalendar,
+  FiChevronLeft,
+  FiChevronRight,
+  FiExternalLink,
+  FiMapPin,
+  FiMessageSquare,
+  FiShare2,
+} from "react-icons/fi";
 import { Users } from "lucide-react";
-
 
 type Story = {
   id: string;
@@ -108,21 +115,21 @@ function FeaturedStoryCard({
           {/* Right content panel */}
           <div className="p-3 bg-surface sm:p-6">
             <h2 className="mt-1 text-xl font-bold text-ink">
-              The Magic of the FIFA World Cup
+              Tell the World Your FIFA Experience
             </h2>
 
-           <p
-  className="mt-2 overflow-hidden text-base leading-relaxed text-muted"
-  style={{
-    display: "-webkit-box",
-    WebkitBoxOrient: "vertical",
-    WebkitLineClamp: 4,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  }}
->
-  {s.message}
-</p>
+            <p
+              className="mt-2 overflow-hidden text-base leading-relaxed text-muted"
+              style={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 4,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {s.message}
+            </p>
 
             <div className="mt-2 flex flex-wrap gap-1.5">
               {FEATURED_HASHTAGS.map((tag) => (
@@ -213,27 +220,6 @@ function FeaturedStoryCard({
   );
 }
 
-// ---- Regular Story Card -------------------------------------------------
-
-// function StoryCard({ s, index }: { s: Story; index: number }) {
-//   const delay = index * 120;
-//   const initials = s.name.trim().charAt(0).toUpperCase();
-//   const social = socialLink(s);
-//   const location = [s.city, s.country].filter(Boolean).join(", ") || "—";
-//   const dateStr = new Date(s.createdAt).toLocaleDateString("en-US", {
-//     month: "short",
-//     day: "numeric",
-//     year: "numeric",
-//   });
-
-
- 
-
-
-// }
-
-// ---- Skeletons -------------------------------------------------
-
 function SkeletonFeaturedCard() {
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-surface">
@@ -298,6 +284,8 @@ export default function StoriesPage() {
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
+  const featuredPausedRef = useRef(false);
+  const sliderPausedRef = useRef(false);
 
   useEffect(() => {
     fetch(apiUrl("/contact/approved"), { cache: "no-store" })
@@ -343,6 +331,26 @@ export default function StoriesPage() {
     setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
   };
 
+  useEffect(() => {
+    if (featuredPool.length <= 1) return;
+    const id = setInterval(() => {
+      if (!featuredPausedRef.current)
+        setFeaturedIndex((prev) =>
+          prev < featuredPool.length - 1 ? prev + 1 : 0,
+        );
+    }, 10000);
+    return () => clearInterval(id);
+  }, [featuredPool.length]);
+
+  useEffect(() => {
+    if (totalSlides <= 1) return;
+    const id = setInterval(() => {
+      if (!sliderPausedRef.current)
+        setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
+    }, 10000);
+    return () => clearInterval(id);
+  }, [totalSlides, maxIndex]);
+
   const getVisibleStories = () => {
     const start = currentIndex * itemsPerView;
     return sliderStories.slice(start, start + itemsPerView);
@@ -375,27 +383,25 @@ export default function StoriesPage() {
       >
         <Container className="py-8 sm:py-10">
           <div
-            className="flex items-center gap-3"
-            data-aos="fade-right"
+            className="flex flex-col items-center justify-center text-center gap-3"
+            data-aos="fade-up"
             data-aos-duration="700"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-              <Users className="h-5 w-5 text-[#FFD700]" />
-            </div>
             <div>
               <h2 className="text-lg font-bold">Fan Stories</h2>
             </div>
+
+            <span
+              className="max-w-xl text-base leading-6 text-white"
+              data-aos="fade-up"
+              data-aos-delay="120"
+              data-aos-duration="700"
+            >
+              Real experiences from football fans around the world at FIFA 2026.
+              <br />
+              Click any card to visit their social profile.
+            </span>
           </div>
-          <span
-            className=" max-w-xl pt-1.5 text-base leading-4 text-white"
-            data-aos="fade-right"
-            data-aos-delay="120"
-            data-aos-duration="700"
-          >
-            Real experiences from football fans around the world at FIFA 2026.
-            <br />
-            Click any card to visit their social profile.
-          </span>
         </Container>
 
         <Container className="">
@@ -421,7 +427,16 @@ export default function StoriesPage() {
             <div className="space-y-7">
               {/* Featured Story Carousel */}
               {featuredPool.length > 0 && (
-                <div data-aos="fade-up" data-aos-duration="700">
+                <div
+                  data-aos="fade-up"
+                  data-aos-duration="700"
+                  onMouseEnter={() => {
+                    featuredPausedRef.current = true;
+                  }}
+                  onMouseLeave={() => {
+                    featuredPausedRef.current = false;
+                  }}
+                >
                   <FeaturedStoryCard
                     pool={featuredPool}
                     index={featuredIndex}
@@ -431,47 +446,6 @@ export default function StoriesPage() {
                   />
                 </div>
               )}
-
-              {/* Remaining stories grid + slider controls */}
-              {sliderStories.length > 0 && (
-                <div className="relative">
-                
-
-                  {totalSlides > 1 && (
-                    <div className="mt-6 flex items-center justify-center gap-3">
-                      <button
-                        aria-label="Previous stories"
-                        onClick={goToPrev}
-                        className="flex items-center justify-center rounded-full border border-line bg-surface p-2 shadow-sm hover:bg-slate-50"
-                      >
-                        <FiChevronLeft className="h-5 w-5 text-ink" />
-                      </button>
-                      <div className="flex items-center gap-2">
-                        {Array.from({ length: totalSlides }).map((_, i) => (
-                          <button
-                            key={i}
-                            aria-label={`Go to slide ${i + 1}`}
-                            onClick={() => setCurrentIndex(i)}
-                            className={`h-2.5 w-2.5 rounded-full transition-all ${
-                              i === currentIndex
-                                ? "w-6 bg-[#012A6B]"
-                                : "bg-line hover:bg-muted"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <button
-                        aria-label="Next stories"
-                        onClick={goToNext}
-                        className="flex items-center justify-center rounded-full border border-line bg-surface p-2 shadow-sm hover:bg-slate-50"
-                      >
-                        <FiChevronRight className="h-5 w-5 text-ink" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-
               {/* Share Your Story CTA */}
               <div className="flex items-center gap-4 mb-5 rounded-2xl bg-[#033d9a] px-5 py-4 sm:px-6 sm:py-5">
                 <div className="min-w-0 flex-1">

@@ -4,16 +4,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard, Trophy, Newspaper, Users, LogOut, PanelLeft, X,
+  LayoutDashboard,
+  Trophy,
+  Newspaper,
+  Users,
+  LogOut,
+  PanelLeft,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import logo from "../../../public/logo/fifalogo.png";
 
 const NAV = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
-  // { label: "Matches", href: "/admin/matches", icon: Trophy, exact: true },
+  { label: "Matches", href: "/admin/matches", icon: Trophy, exact: true },
   { label: "News", href: "/admin/news", icon: Newspaper, exact: false },
-  { label: "Experiences", href: "/admin/experiences", icon: Users, exact: false },
+  {
+    label: "Experiences",
+    href: "/admin/experiences",
+    icon: Users,
+    exact: false,
+  },
 ];
 
 interface Props {
@@ -23,7 +34,12 @@ interface Props {
   pendingCount?: number;
 }
 
-export function AdminSidebar({ mobileOpen, onMobileClose, onLogout, pendingCount = 0 }: Props) {
+export function AdminSidebar({
+  mobileOpen,
+  onMobileClose,
+  onLogout,
+  pendingCount = 0,
+}: Props) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -56,7 +72,9 @@ export function AdminSidebar({ mobileOpen, onMobileClose, onLogout, pendingCount
           className="hidden lg:flex h-7 w-7 items-center justify-center rounded text-faint hover:text-ink transition-colors cursor-pointer"
           title={collapsed ? "Expand" : "Collapse"}
         >
-          <PanelLeft className={`h-4 w-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`} />
+          <PanelLeft
+            className={`h-4 w-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`}
+          />
         </button>
         <button
           onClick={onMobileClose}
@@ -71,7 +89,8 @@ export function AdminSidebar({ mobileOpen, onMobileClose, onLogout, pendingCount
         {NAV.map((item) => {
           const Icon = item.icon;
           const active = isActive(item);
-          const showBadge = item.href === "/admin/experiences" && pendingCount > 0;
+          const showBadge =
+            item.href === "/admin/experiences" && pendingCount > 0;
 
           return (
             <Link

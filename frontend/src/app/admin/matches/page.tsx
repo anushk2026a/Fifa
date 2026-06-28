@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { MATCHES } from "@/data/matches";
 import type { Match } from "@/data/types";
-import { Search, Plus, X, Pencil, Check, Trophy } from "lucide-react";
+import { Search, Plus, X, Pencil, Check } from "lucide-react";
+import { teamFlagIso, findTeamCode } from "@/lib/flags";
+import { Flag } from "@/components/common/Flag";
 
 type DraftMatch = {
   home: string;
@@ -33,16 +35,18 @@ const EMPTY_DRAFT: DraftMatch = {
 type PendingEntry = DraftMatch & { idx: number };
 
 export default function MatchesPage() {
+  const [matchesList, setMatchesList] = useState<Match[]>(MATCHES);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | Match["status"]>("all");
   const [showAdd, setShowAdd] = useState(false);
   const [addDraft, setAddDraft] = useState<DraftMatch>(EMPTY_DRAFT);
+  const [addError, setAddError] = useState<string | null>(null);
   const [editIdx, setEditIdx] = useState<number | null>(null);
   const [editDraft, setEditDraft] = useState<DraftMatch>(EMPTY_DRAFT);
   const [pendingEdits, setPendingEdits] = useState<Map<number, PendingEntry>>(new Map());
   const [saved, setSaved] = useState<Set<number>>(new Set());
 
-  const baseList = MATCHES.map((m, i) => ({ ...m, idx: i }));
+  const baseList = matchesList.map((m, i) => ({ ...m, idx: i }));
 
   const displayed = baseList.filter((m) => {
     const q = search.toLowerCase();
@@ -54,6 +58,75 @@ export default function MatchesPage() {
     const matchF = filter === "all" || m.status === filter;
     return matchQ && matchF;
   });
+
+  function handleHomeNameChange(name: string, isEdit = false) {
+    const autoCode = findTeamCode(name);
+    if (isEdit) {
+      setEditDraft((prev) => ({
+        ...prev,
+        home: name,
+        homeCode: autoCode || prev.homeCode,
+      }));
+    } else {
+      setAddDraft((prev) => ({
+        ...prev,
+        home: name,
+        homeCode: autoCode || prev.homeCode,
+      }));
+    }
+  }
+
+  function handleAwayNameChange(name: string, isEdit = false) {
+    const autoCode = findTeamCode(name);
+    if (isEdit) {
+      setEditDraft((prev) => ({
+        ...prev,
+        away: name,
+        awayCode: autoCode || prev.awayCode,
+      }));
+    } else {
+      setAddDraft((prev) => ({
+        ...prev,
+        away: name,
+        awayCode: autoCode || prev.awayCode,
+      }));
+    }
+  }
+
+  function handleAddMatch(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    if (!addDraft.home.trim() || !addDraft.away.trim()) {
+      setAddError("Home and Away team names are required.");
+      return;
+    }
+    if (!addDraft.stadium.trim()) {
+      setAddError("Stadium name is required.");
+      return;
+    }
+
+    const homeCode = addDraft.homeCode.trim().toUpperCase() || findTeamCode(addDraft.home) || addDraft.home.trim().slice(0, 3).toUpperCase();
+    const awayCode = addDraft.awayCode.trim().toUpperCase() || findTeamCode(addDraft.away) || addDraft.away.trim().slice(0, 3).toUpperCase();
+
+    const newMatch: Match = {
+      home: {
+        name: addDraft.home.trim(),
+        code: homeCode,
+      },
+      away: {
+        name: addDraft.away.trim(),
+        code: awayCode,
+      },
+      stadium: addDraft.stadium.trim(),
+      citySlug: addDraft.citySlug.trim().toLowerCase().replace(/\s+/g, "-") || "general",
+      kickoffUtc: addDraft.kickoffUtc ? new Date(addDraft.kickoffUtc).toISOString() : new Date().toISOString(),
+      status: addDraft.status,
+    };
+
+    setMatchesList((prev) => [newMatch, ...prev]);
+    setAddDraft(EMPTY_DRAFT);
+    setAddError(null);
+    setShowAdd(false);
+  }
 
   function startEdit(idx: number, m: Match) {
     setEditIdx(idx);
@@ -75,6 +148,25 @@ export default function MatchesPage() {
   }
 
   function approvePending(idx: number) {
+    const pending = pendingEdits.get(idx);
+    if (pending) {
+      setMatchesList((prev) =>
+        prev.map((m, i) => {
+          if (i === idx) {
+            return {
+              ...m,
+              home: { name: pending.home, code: pending.homeCode },
+              away: { name: pending.away, code: pending.awayCode },
+              stadium: pending.stadium,
+              citySlug: pending.citySlug,
+              kickoffUtc: pending.kickoffUtc,
+              status: pending.status,
+            };
+          }
+          return m;
+        })
+      );
+    }
     setPendingEdits((prev) => { const m = new Map(prev); m.delete(idx); return m; });
   }
 
@@ -93,10 +185,10 @@ export default function MatchesPage() {
   }
 
   const counts: Record<string, number> = {
-    all: MATCHES.length,
-    live: MATCHES.filter((m) => m.status === "live").length,
-    scheduled: MATCHES.filter((m) => m.status === "scheduled").length,
-    finished: MATCHES.filter((m) => m.status === "finished").length,
+    all: matchesList.length,
+    live: matchesList.filter((m) => m.status === "live").length,
+    scheduled: matchesList.filter((m) => m.status === "scheduled").length,
+    finished: matchesList.filter((m) => m.status === "finished").length,
   };
 
   return (
@@ -130,7 +222,7 @@ export default function MatchesPage() {
             />
           </div>
           <button
-            onClick={() => { setShowAdd((v) => !v); setAddDraft(EMPTY_DRAFT); }}
+            onClick={() => { setShowAdd((v) => !v); setAddDraft(EMPTY_DRAFT); setAddError(null); }}
             className={`flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
               showAdd ? "bg-paper border border-line text-ink" : "bg-accent text-white hover:bg-accent-strong"
             }`}
@@ -143,32 +235,42 @@ export default function MatchesPage() {
 
       {/* Add form */}
       {showAdd && (
-        <div className="rounded-lg border border-line bg-surface p-4">
+        <form onSubmit={handleAddMatch} className="rounded-lg border border-line bg-surface p-4">
           <p className="mb-3 text-xs font-semibold text-muted uppercase tracking-wider">New Match</p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Home team</label>
-              <input className={fieldCls} placeholder="Brazil" value={addDraft.home} onChange={(e) => setAddDraft({ ...addDraft, home: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Home team *</label>
+              <div className="flex items-center gap-2">
+                <Flag iso2={teamFlagIso(addDraft.homeCode || addDraft.home)} label={addDraft.home || "Home"} />
+                <input required className={fieldCls} placeholder="Brazil" value={addDraft.home} onChange={(e) => handleHomeNameChange(e.target.value)} />
+              </div>
             </div>
             <div>
               <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-              <input className={fieldCls} placeholder="BRA" maxLength={3} value={addDraft.homeCode} onChange={(e) => setAddDraft({ ...addDraft, homeCode: e.target.value })} />
+              <input className={fieldCls} placeholder="BRA" maxLength={3} value={addDraft.homeCode} onChange={(e) => setAddDraft({ ...addDraft, homeCode: e.target.value.toUpperCase() })} />
             </div>
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Away team</label>
-              <input className={fieldCls} placeholder="Argentina" value={addDraft.away} onChange={(e) => setAddDraft({ ...addDraft, away: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Away team *</label>
+              <div className="flex items-center gap-2">
+                <Flag iso2={teamFlagIso(addDraft.awayCode || addDraft.away)} label={addDraft.away || "Away"} />
+                <input required className={fieldCls} placeholder="Argentina" value={addDraft.away} onChange={(e) => handleAwayNameChange(e.target.value)} />
+              </div>
             </div>
             <div>
               <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-              <input className={fieldCls} placeholder="ARG" maxLength={3} value={addDraft.awayCode} onChange={(e) => setAddDraft({ ...addDraft, awayCode: e.target.value })} />
+              <input className={fieldCls} placeholder="ARG" maxLength={3} value={addDraft.awayCode} onChange={(e) => setAddDraft({ ...addDraft, awayCode: e.target.value.toUpperCase() })} />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Stadium</label>
-              <input className={fieldCls} placeholder="MetLife Stadium" value={addDraft.stadium} onChange={(e) => setAddDraft({ ...addDraft, stadium: e.target.value })} />
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Stadium *</label>
+              <input required className={fieldCls} placeholder="MetLife Stadium" value={addDraft.stadium} onChange={(e) => setAddDraft({ ...addDraft, stadium: e.target.value })} />
             </div>
             <div>
               <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">City slug</label>
               <input className={fieldCls} placeholder="new-york" value={addDraft.citySlug} onChange={(e) => setAddDraft({ ...addDraft, citySlug: e.target.value })} />
+            </div>
+            <div>
+              <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Kickoff (Date & Time)</label>
+              <input type="datetime-local" className={fieldCls} value={addDraft.kickoffUtc} onChange={(e) => setAddDraft({ ...addDraft, kickoffUtc: e.target.value })} />
             </div>
             <div>
               <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Status</label>
@@ -179,18 +281,25 @@ export default function MatchesPage() {
               </select>
             </div>
           </div>
-          <div className="mt-3 flex items-center gap-2">
+          {addError && (
+            <p className="mt-2 text-xs font-medium text-red-600">{addError}</p>
+          )}
+          <div className="mt-4 flex items-center gap-2">
             <button
-              onClick={() => setShowAdd(false)}
+              type="button"
+              onClick={() => { setShowAdd(false); setAddError(null); }}
               className="rounded border border-line px-3 py-1.5 text-xs font-medium text-muted hover:bg-paper cursor-pointer"
             >
               Cancel
             </button>
-            <div className="rounded border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs text-amber-700">
-              Match data is static — dynamic save requires a backend Matches API.
-            </div>
+            <button
+              type="submit"
+              className="rounded bg-accent px-4 py-1.5 text-xs font-semibold text-white hover:bg-accent-strong transition cursor-pointer"
+            >
+              Save Match
+            </button>
           </div>
-        </div>
+        </form>
       )}
 
       {/* Table */}
@@ -213,16 +322,20 @@ export default function MatchesPage() {
               const isSaved = saved.has(raw.idx);
 
               return (
-                <>
-                  <tr key={raw.idx} className={`transition-colors ${m.isPending ? "bg-amber-50/60" : "hover:bg-paper"}`}>
+                <div key={raw.idx} className="contents">
+                  <tr className={`transition-colors ${m.isPending ? "bg-amber-50/60" : "hover:bg-paper"}`}>
                     <td className="px-4 py-3 whitespace-nowrap">
-                      <div className="flex items-center gap-2">
-                        <Trophy className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-1">
+                          <Flag iso2={teamFlagIso(m.home.code || m.home.name)} label={m.home.name} />
+                          <span className="text-xs font-bold text-faint">vs</span>
+                          <Flag iso2={teamFlagIso(m.away.code || m.away.name)} label={m.away.name} />
+                        </div>
                         <div>
                           <p className="font-medium text-ink">
                             {m.home.name} <span className="text-muted font-normal">vs</span> {m.away.name}
                           </p>
-                          <p className="text-[11px] text-faint">{m.home.code} · {m.away.code}</p>
+                          <p className="text-[11px] text-faint">{m.home.code || "—"} · {m.away.code || "—"}</p>
                         </div>
                       </div>
                     </td>
@@ -278,25 +391,31 @@ export default function MatchesPage() {
                   </tr>
 
                   {isEditing && (
-                    <tr key={`edit-${raw.idx}`}>
+                    <tr>
                       <td colSpan={6} className="border-l-2 border-accent bg-accent-soft/30 px-4 py-4">
                         <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-accent">Editing match</p>
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                           <div>
                             <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Home team</label>
-                            <input className={fieldCls} value={editDraft.home} onChange={(e) => setEditDraft({ ...editDraft, home: e.target.value })} />
+                            <div className="flex items-center gap-2">
+                              <Flag iso2={teamFlagIso(editDraft.homeCode || editDraft.home)} label={editDraft.home || "Home"} />
+                              <input className={fieldCls} value={editDraft.home} onChange={(e) => handleHomeNameChange(e.target.value, true)} />
+                            </div>
                           </div>
                           <div>
                             <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-                            <input className={fieldCls} maxLength={3} value={editDraft.homeCode} onChange={(e) => setEditDraft({ ...editDraft, homeCode: e.target.value })} />
+                            <input className={fieldCls} maxLength={3} value={editDraft.homeCode} onChange={(e) => setEditDraft({ ...editDraft, homeCode: e.target.value.toUpperCase() })} />
                           </div>
                           <div>
                             <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Away team</label>
-                            <input className={fieldCls} value={editDraft.away} onChange={(e) => setEditDraft({ ...editDraft, away: e.target.value })} />
+                            <div className="flex items-center gap-2">
+                              <Flag iso2={teamFlagIso(editDraft.awayCode || editDraft.away)} label={editDraft.away || "Away"} />
+                              <input className={fieldCls} value={editDraft.away} onChange={(e) => handleAwayNameChange(e.target.value, true)} />
+                            </div>
                           </div>
                           <div>
                             <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Code</label>
-                            <input className={fieldCls} maxLength={3} value={editDraft.awayCode} onChange={(e) => setEditDraft({ ...editDraft, awayCode: e.target.value })} />
+                            <input className={fieldCls} maxLength={3} value={editDraft.awayCode} onChange={(e) => setEditDraft({ ...editDraft, awayCode: e.target.value.toUpperCase() })} />
                           </div>
                           <div className="sm:col-span-2">
                             <label className="mb-1 block text-[11px] font-semibold text-muted uppercase">Stadium</label>
@@ -327,7 +446,7 @@ export default function MatchesPage() {
                       </td>
                     </tr>
                   )}
-                </>
+                </div>
               );
             })}
           </tbody>
@@ -338,7 +457,7 @@ export default function MatchesPage() {
       </div>
 
       <p className="text-right text-[11px] text-faint">
-        {displayed.length} of {MATCHES.length} matches · Static fixture data
+        {displayed.length} of {matchesList.length} matches
       </p>
     </div>
   );

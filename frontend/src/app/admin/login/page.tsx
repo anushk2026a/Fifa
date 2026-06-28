@@ -49,9 +49,8 @@ export default function AdminLoginPage() {
 
   return (
     <Container className="py-16">
-      <div className="mx-auto max-w-sm rounded-[var(--radius-card)] border border-line bg-surface p-6">
-        <h1 className="text-xl font-semibold text-ink">Admin sign in</h1>
-        <p className="mt-1 text-sm text-muted">Manage the News section.</p>
+      <div className="mx-auto max-w-xl rounded-[var(--radius-card)] border border-line bg-surface p-6">
+        <h1 className="text-xl font-semibold text-ink">FIFA OnePoint Admin</h1>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
