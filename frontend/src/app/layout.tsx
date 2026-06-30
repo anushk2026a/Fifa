@@ -17,18 +17,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  
   title: {
-    default: `${SITE.name} — FIFA World Cup 2026`,
+    default: `${SITE.name} — FIFA OnePoint`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
+
+  verification: {
+    google: "google-site-verification: google9251eeb4ba7ce17a.html",
+  },
+
   openGraph: {
     siteName: SITE.name,
     type: "website",
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
