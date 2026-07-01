@@ -2,48 +2,55 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Container } from "@/components/common/Container";
 import { apiUrl } from "@/lib/api";
-import { setToken } from "@/lib/admin-auth";
+
+const loginSchema = z.object({
+  email: z.email("Enter a valid email").max(254),
+  password: z.string().min(1, "Password is required").max(128),
+});
+
+type LoginFields = z.infer<typeof loginSchema>;
 
 const fieldClass =
   "w-full rounded-[var(--radius-card)] border border-line bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
-  const [error, setError] = useState("");
+  const [serverError, setServerError] = useState("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("sending");
-    setError("");
-    const form = e.currentTarget;
-    const body = {
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      password: (form.elements.namedItem("password") as HTMLInputElement).value,
-    };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFields>({ resolver: zodResolver(loginSchema) });
+
+  async function onSubmit(values: LoginFields) {
+    setServerError("");
     try {
       const res = await fetch(apiUrl("/auth/login"), {
         method: "POST",
+        // credentials: "include" lets the browser receive and store the HttpOnly
+        // accessToken + refreshToken cookies set by the server.
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ email: values.email, password: values.password }),
       });
       const data = await res.json();
-      if (res.ok && data.ok && data.token) {
-        setToken(data.token);
+      if (res.ok && data.ok) {
         router.push("/admin");
       } else {
-        setStatus("error");
-        setError(
+        setServerError(
           data.error === "INVALID_CREDENTIALS"
             ? "Wrong email or password."
-            : "Login failed.",
+            : "Login failed — please try again.",
         );
       }
     } catch {
-      setStatus("error");
-      setError("Could not reach the server. Is the backend running?");
+      setServerError("Could not reach the server. Is the backend running?");
     }
   }
 
@@ -52,50 +59,47 @@ export default function AdminLoginPage() {
       <div className="mx-auto max-w-xl rounded-[var(--radius-card)] border border-line bg-surface p-6">
         <h1 className="text-xl font-semibold text-ink">FIFA OnePoint Admin</h1>
 
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
           <div>
-            <label
-              htmlFor="email"
-              className="mb-1 block text-sm font-medium text-ink"
-            >
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-ink">
               Email
             </label>
             <input
               id="email"
-              name="email"
               type="email"
-              required
               autoComplete="username"
               className={fieldClass}
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+            )}
           </div>
+
           <div>
-            <label
-              htmlFor="password"
-              className="mb-1 block text-sm font-medium text-ink"
-            >
+            <label htmlFor="password" className="mb-1 block text-sm font-medium text-ink">
               Password
             </label>
             <input
               id="password"
-              name="password"
               type="password"
-              required
               autoComplete="current-password"
               className={fieldClass}
+              {...register("password")}
             />
+            {errors.password && (
+              <p className="mt-1 text-xs text-red-600">{errors.password.message}</p>
+            )}
           </div>
 
-          {status === "error" && (
-            <p className="text-sm text-red-700">{error}</p>
-          )}
+          {serverError && <p className="text-sm text-red-700">{serverError}</p>}
 
           <button
             type="submit"
-            disabled={status === "sending"}
+            disabled={isSubmitting}
             className="w-full rounded border border-accent bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-60 transition-colors"
           >
-            {status === "sending" ? "Signing in…" : "Sign in"}
+            {isSubmitting ? "Signing in…" : "Sign in"}
           </button>
         </form>
       </div>

@@ -71,7 +71,10 @@ export default function MatchesPage() {
     load();
   }, [load]);
 
-  const baseList = matchesList.map((m, i) => ({ ...m, idx: i }));
+  const sortedMatches = [...matchesList].sort(
+    (a, b) => new Date(b.kickoffUtc).getTime() - new Date(a.kickoffUtc).getTime(),
+  );
+  const baseList = sortedMatches.map((m, i) => ({ ...m, idx: i }));
 
   const displayed = baseList.filter((m) => {
     const q = search.toLowerCase();

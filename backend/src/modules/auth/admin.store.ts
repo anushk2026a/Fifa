@@ -1,10 +1,12 @@
 import { randomUUID } from "node:crypto";
 import { getDb } from "../../shared/db/mongo";
 import { JsonCollection, type WithId } from "../../shared/db/json-store";
+import { logger } from "../../shared/logger";
 import type { Admin } from "./admin.repo";
 
 export interface AdminStore {
   findByEmail(email: string): Promise<WithId<Admin> | undefined>;
+  findById(id: string): Promise<WithId<Admin> | undefined>;
   upsert(email: string, data: Admin): Promise<WithId<Admin>>;
   count(): Promise<number>;
 }
@@ -14,6 +16,10 @@ class JsonAdminStore implements AdminStore {
 
   async findByEmail(email: string) {
     return this.col.findOne((a) => a.email === email);
+  }
+
+  async findById(id: string) {
+    return this.col.findById(id);
   }
 
   async upsert(email: string, data: Admin) {
@@ -36,6 +42,11 @@ class MongoAdminStore implements AdminStore {
 
   async findByEmail(email: string) {
     const doc = await this.col.findOne({ email }, { projection: { _id: 0 } });
+    return doc ?? undefined;
+  }
+
+  async findById(id: string) {
+    const doc = await this.col.findOne({ id }, { projection: { _id: 0 } });
     return doc ?? undefined;
   }
 
@@ -63,7 +74,9 @@ export async function getAdminStore(): Promise<AdminStore> {
     const db = await getDb();
     cached = db ? new MongoAdminStore(db) : new JsonAdminStore();
   } catch (err) {
-    console.warn("[auth] MongoDB unavailable, falling back to JSON store:", (err as Error).message);
+    logger.warn("[auth] MongoDB unavailable, falling back to JSON store", {
+      reason: (err as Error).message,
+    });
     cached = new JsonAdminStore();
   }
   return cached;

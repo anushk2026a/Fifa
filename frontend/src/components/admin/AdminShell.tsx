@@ -4,8 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdminSidebar } from "./AdminSidebar";
 import { AdminTopBar } from "./AdminTopBar";
-import { getToken, clearToken, authHeaders } from "@/lib/admin-auth";
-import { apiUrl } from "@/lib/api";
+import { authFetch, logout } from "@/lib/admin-auth";
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -15,7 +14,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   const loadPending = useCallback(async () => {
     try {
-      const res = await fetch(apiUrl("/contact"), { headers: authHeaders(), cache: "no-store" });
+      const res = await authFetch("/contact", { cache: "no-store" });
       if (!res.ok) return;
       const data = await res.json();
       if (data.ok) {
@@ -27,16 +26,24 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!getToken()) { router.replace("/admin/login"); return; }
-    fetch(apiUrl("/auth/me"), { headers: authHeaders() })
+    // Validate the session by calling /auth/me with the HttpOnly cookie.
+    // The browser sends the cookie automatically — no localStorage needed.
+    authFetch("/auth/me")
       .then((res) => {
-        if (!res.ok) { clearToken(); router.replace("/admin/login"); }
-        else { setReady(true); loadPending(); }
+        if (!res.ok) {
+          router.replace("/admin/login");
+        } else {
+          setReady(true);
+          loadPending();
+        }
       })
       .catch(() => setReady(true));
   }, [router, loadPending]);
 
-  function logout() { clearToken(); router.replace("/admin/login"); }
+  async function handleLogout() {
+    await logout();
+    router.replace("/admin/login");
+  }
 
   if (!ready) {
     return (
@@ -49,16 +56,22 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen overflow-hidden bg-paper">
       {mobileOpen && (
-        <div className="fixed inset-0 z-20 bg-black/40 lg:hidden" onClick={() => setMobileOpen(false)} />
+        <div
+          className="fixed inset-0 z-20 bg-black/40 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
       )}
       <AdminSidebar
         mobileOpen={mobileOpen}
         onMobileClose={() => setMobileOpen(false)}
-        onLogout={logout}
+        onLogout={handleLogout}
         pendingCount={pendingCount}
       />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <AdminTopBar onMobileMenuToggle={() => setMobileOpen((o) => !o)} onLogout={logout} />
+        <AdminTopBar
+          onMobileMenuToggle={() => setMobileOpen((o) => !o)}
+          onLogout={handleLogout}
+        />
         <main className="flex-1 overflow-y-auto p-5">{children}</main>
       </div>
     </div>

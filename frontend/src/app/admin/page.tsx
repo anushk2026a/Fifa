@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authHeaders, clearToken } from "@/lib/admin-auth";
+import { authFetch } from "@/lib/admin-auth";
 import { apiUrl } from "@/lib/api";
 import { MATCHES } from "@/data/matches";
 import type { NewsItem } from "@/data/types";
@@ -39,9 +39,9 @@ export default function AdminDashboardPage() {
     try {
       const [nr, cr] = await Promise.all([
         fetch(apiUrl("/news"), { cache: "no-store" }),
-        fetch(apiUrl("/contact"), { headers: authHeaders(), cache: "no-store" }),
+        authFetch("/contact", { cache: "no-store" }),
       ]);
-      if (cr.status === 401) { clearToken(); router.replace("/admin/login"); return; }
+      if (cr.status === 401) { router.replace("/admin/login"); return; }
       const nd = await nr.json();
       const cd = await cr.json();
       if (nd.ok) setNews(nd.news);

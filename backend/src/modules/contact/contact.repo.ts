@@ -8,6 +8,7 @@ export type ContactSubmission = {
   city?: string;
   stadium?: string;
   socialUrl?: string;
+  imageUrl?: string;
   message: string;
   approved?: boolean;
 };

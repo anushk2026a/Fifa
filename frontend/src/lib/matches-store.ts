@@ -1,9 +1,9 @@
 import { MATCHES } from "@/data/matches";
 import type { Match } from "@/data/types";
 import { apiUrl } from "@/lib/api";
-import { authHeaders } from "@/lib/admin-auth";
+import { authFetch } from "@/lib/admin-auth";
 
-/** Retrieve all matches from backend API (falling back to static MATCHES on network error) */
+/** Retrieve all matches from backend API, falling back to static data on error. */
 export async function fetchMatchesApi(): Promise<(Match & { id?: string })[]> {
   try {
     const res = await fetch(apiUrl("/matches"), { cache: "no-store" });
@@ -18,12 +18,11 @@ export async function fetchMatchesApi(): Promise<(Match & { id?: string })[]> {
   }
 }
 
-/** Create a new match via backend API */
+/** Create a new match via backend API. */
 export async function createMatchApi(match: Match): Promise<(Match & { id?: string }) | null> {
   try {
-    const res = await fetch(apiUrl("/matches"), {
+    const res = await authFetch("/matches", {
       method: "POST",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify(match),
     });
     const data = await res.json();
@@ -37,12 +36,14 @@ export async function createMatchApi(match: Match): Promise<(Match & { id?: stri
   }
 }
 
-/** Update an existing match via backend API */
-export async function updateMatchApi(id: string, match: Partial<Match>): Promise<(Match & { id?: string }) | null> {
+/** Update an existing match via backend API. */
+export async function updateMatchApi(
+  id: string,
+  match: Partial<Match>,
+): Promise<(Match & { id?: string }) | null> {
   try {
-    const res = await fetch(apiUrl(`/matches/${id}`), {
+    const res = await authFetch(`/matches/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify(match),
     });
     const data = await res.json();
@@ -56,13 +57,10 @@ export async function updateMatchApi(id: string, match: Partial<Match>): Promise
   }
 }
 
-/** Delete a match via backend API */
+/** Delete a match via backend API. */
 export async function deleteMatchApi(id: string): Promise<boolean> {
   try {
-    const res = await fetch(apiUrl(`/matches/${id}`), {
-      method: "DELETE",
-      headers: authHeaders(),
-    });
+    const res = await authFetch(`/matches/${id}`, { method: "DELETE" });
     const data = await res.json();
     if (res.ok && data.ok) {
       window.dispatchEvent(new Event("matches_updated"));

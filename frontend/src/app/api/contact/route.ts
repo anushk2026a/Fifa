@@ -3,19 +3,19 @@ import nodemailer from "nodemailer";
 import { z } from "zod";
 
 const contactSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  country: z.string().optional(),
-  city: z.string().optional(),
-  stadium: z.string().optional(),
-  socialUrl: z.string().optional(),
-  youtube: z.string().optional(),
-  facebook: z.string().optional(),
-  instagram: z.string().optional(),
-  x: z.string().optional(),
-  message: z.string().min(1),
-  company: z.string().optional(), // honeypot
+  name:      z.string().min(1).max(100),
+  email:     z.string().max(254).email(),
+  phone:     z.string().max(20).optional(),
+  country:   z.string().max(100).optional(),
+  city:      z.string().max(100).optional(),
+  stadium:   z.string().max(150).optional(),
+  socialUrl: z.string().url().max(500).optional().or(z.literal("")),
+  youtube:   z.string().url().max(500).optional().or(z.literal("")),
+  facebook:  z.string().url().max(500).optional().or(z.literal("")),
+  instagram: z.string().url().max(500).optional().or(z.literal("")),
+  x:         z.string().url().max(500).optional().or(z.literal("")),
+  message:   z.string().min(1).max(2000),
+  company:   z.string().max(100).optional(), // honeypot — bots fill this, humans don't
 });
 
 function getTransporter() {

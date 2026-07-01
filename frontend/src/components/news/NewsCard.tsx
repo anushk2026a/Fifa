@@ -1,6 +1,7 @@
 import { OutboundLink } from "@/components/common/OutboundLink";
 import type { NewsItem } from "@/data/types";
 import { prettyDate } from "@/lib/schedule";
+import { API_BASE } from "@/lib/api";
 import { MdOpenInNew } from "react-icons/md";
 import { RiNewspaperLine } from "react-icons/ri";
 import { HiOutlineCalendar } from "react-icons/hi";
@@ -19,7 +20,7 @@ export function NewsCard({ item, index }: { item: NewsItem; index?: number }) {
       {item.image ? (
         <div className="relative h-48 overflow-hidden">
           <img
-            src={item.image}
+            src={item.image.startsWith("/uploads/") ? `${API_BASE}${item.image}` : item.image}
             alt={item.title}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"

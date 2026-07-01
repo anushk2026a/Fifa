@@ -9,10 +9,14 @@ import { DirectorySearch } from "@/components/home/DirectorySearch";
 import { NewsCard } from "@/components/news/NewsCard";
 import { JsonLd } from "@/components/common/JsonLd";
 import { siteJsonLd, faqJsonLd } from "@/lib/seo";
-import { NEWS } from "@/data/news";
+import { getNews } from "@/lib/news";
 import { SITE } from "@/data/site";
 
-export default function HomePage() {
+// Always render fresh news (admin-managed, served by the backend).
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const news = await getNews();
   return (
     <>
       <JsonLd data={siteJsonLd()} />
@@ -108,7 +112,7 @@ export default function HomePage() {
             }
           />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {NEWS.slice(0, 3).map((item) => (
+            {news.slice(0, 3).map((item) => (
               <NewsCard key={item.title} item={item} />
             ))}
           </div>

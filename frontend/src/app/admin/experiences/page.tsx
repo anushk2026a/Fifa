@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { authHeaders, clearToken } from "@/lib/admin-auth";
-import { apiUrl } from "@/lib/api";
+import { authFetch } from "@/lib/admin-auth";
 import {
   Search, Pencil, Trash2, ChevronDown, ChevronUp,
   Mail, Phone, Globe, MapPin, ExternalLink, X, Check,
@@ -21,6 +20,8 @@ export type ContactSubmission = {
   facebook?: string;
   instagram?: string;
   x?: string;
+  socialUrl?: string;
+  imageUrl?: string;
   message: string;
   createdAt: string;
   approved?: boolean;
@@ -45,8 +46,8 @@ export default function ExperiencesPage() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const res = await fetch(apiUrl("/contact"), { headers: authHeaders(), cache: "no-store" });
-    if (res.status === 401) { clearToken(); router.replace("/admin/login"); return; }
+    const res = await authFetch("/contact", { cache: "no-store" });
+    if (res.status === 401) { router.replace("/admin/login"); return; }
     const data = await res.json();
     if (data.ok) setContacts(data.contacts as ContactSubmission[]);
     setLoading(false);
@@ -55,12 +56,11 @@ export default function ExperiencesPage() {
   useEffect(() => { load(); }, [load]);
 
   async function onApprove(id: string, approved: boolean) {
-    const res = await fetch(apiUrl(`/contact/${id}/approve`), {
+    const res = await authFetch(`/contact/${id}/approve`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify({ approved }),
     });
-    if (res.status === 401) { clearToken(); router.replace("/admin/login"); return; }
+    if (res.status === 401) { router.replace("/admin/login"); return; }
     if (res.ok) {
       setFlash(id);
       setTimeout(() => setFlash(null), 2000);
@@ -70,8 +70,8 @@ export default function ExperiencesPage() {
 
   async function onDelete(id: string) {
     if (!confirm("Delete this submission permanently?")) return;
-    const res = await fetch(apiUrl(`/contact/${id}`), { method: "DELETE", headers: authHeaders() });
-    if (res.status === 401) { clearToken(); router.replace("/admin/login"); return; }
+    const res = await authFetch(`/contact/${id}`, { method: "DELETE" });
+    if (res.status === 401) { router.replace("/admin/login"); return; }
     if (res.ok) {
       if (expandedId === id) setExpandedId(null);
       if (editId === id) setEditId(null);
@@ -82,12 +82,11 @@ export default function ExperiencesPage() {
   async function onSaveEdit(id: string) {
     setSaving(true);
     try {
-      const res = await fetch(apiUrl(`/contact/${id}`), {
+      const res = await authFetch(`/contact/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", ...authHeaders() },
         body: JSON.stringify({ message: editMsg.trim(), approved: false }),
       });
-      if (res.status === 401) { clearToken(); router.replace("/admin/login"); return; }
+      if (res.status === 401) { router.replace("/admin/login"); return; }
       if (res.ok) {
         setFlash(id);
         setTimeout(() => setFlash(null), 2000);
@@ -347,6 +346,17 @@ export default function ExperiencesPage() {
                               <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted">Message</p>
                               <p className="text-sm text-ink leading-relaxed whitespace-pre-wrap">{c.message}</p>
                             </div>
+                            {c.imageUrl && (
+                              <div>
+                                <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted">Photo</p>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}${c.imageUrl}`}
+                                  alt="Experience photo"
+                                  className="h-48 w-auto rounded border border-line object-cover"
+                                />
+                              </div>
+                            )}
                             {(c.youtube || c.facebook || c.instagram || c.x) && (
                               <div className="flex flex-wrap gap-2">
                                 {c.youtube && (

@@ -9,7 +9,8 @@ export const createNewsSchema = z.object({
   summary: z.string().min(1).max(2000),
   url: z.string().url(),
   source: z.string().max(100).optional(),
-  image: z.string().url().optional().or(z.literal("")),
+  // Accepts a full URL — either an external link or a Cloudinary secure URL.
+  image: z.string().max(500).optional().or(z.literal("")),
 });
 
 export type CreateNewsInput = z.infer<typeof createNewsSchema>;
