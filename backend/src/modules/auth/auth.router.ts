@@ -21,10 +21,13 @@ const loginSchema = z.object({
 
 const isProd = env.NODE_ENV === "production";
 
+// Frontend and backend live on different domains, so auth cookies are
+// cross-site — SameSite=None (which requires Secure) is required for the
+// browser to send them back on subsequent requests.
 const COOKIE_BASE = {
   httpOnly: true,
   secure: isProd,
-  sameSite: "strict" as const,
+  sameSite: (isProd ? "none" : "lax") as "none" | "lax",
 } as const;
 
 // POST /auth/login
