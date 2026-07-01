@@ -42,8 +42,12 @@ authRouter.post("/login", authRateLimit, validateBody(loginSchema), async (req, 
     }
 
     // Access token: short-lived, available site-wide.
+    // path must be explicit — without it, Express scopes the cookie to the
+    // directory of this route ("/auth"), so it never reaches "/contact",
+    // "/news", etc. and every non-/auth request looks unauthenticated.
     res.cookie("accessToken", result.accessToken, {
       ...COOKIE_BASE,
+      path: "/",
       maxAge: 15 * 60 * 1_000,
     });
     // Refresh token: long-lived but scoped to /auth/refresh only.
@@ -75,6 +79,7 @@ authRouter.post("/refresh", authRateLimit, async (req, res, next) => {
 
     res.cookie("accessToken", result.accessToken, {
       ...COOKIE_BASE,
+      path: "/",
       maxAge: 15 * 60 * 1_000,
     });
     res.json({ ok: true, admin: result.admin });
@@ -88,7 +93,7 @@ authRouter.post("/logout", async (req, res, next) => {
   try {
     const raw = req.cookies?.refreshToken as string | undefined;
     if (raw) await revokeRefreshToken(raw);
-    res.clearCookie("accessToken", { ...COOKIE_BASE });
+    res.clearCookie("accessToken", { ...COOKIE_BASE, path: "/" });
     res.clearCookie("refreshToken", { ...COOKIE_BASE, path: "/auth/refresh" });
     res.json({ ok: true });
   } catch (err) {
@@ -100,7 +105,7 @@ authRouter.post("/logout", async (req, res, next) => {
 authRouter.post("/logout-all", requireAdmin, async (req: AuthedRequest, res, next) => {
   try {
     await revokeAllRefreshTokens(req.admin!.sub);
-    res.clearCookie("accessToken", { ...COOKIE_BASE });
+    res.clearCookie("accessToken", { ...COOKIE_BASE, path: "/" });
     res.clearCookie("refreshToken", { ...COOKIE_BASE, path: "/auth/refresh" });
     res.json({ ok: true });
   } catch (err) {
