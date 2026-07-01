@@ -201,7 +201,7 @@ export default async function CityPage({
                     </p>
                   )}
                   {t.note && <p className="mt-1.5 text-sm text-muted">{t.note}</p>}
-                  {t.video && youtubeEmbed(t.video) && (
+                  {/* {t.video && youtubeEmbed(t.video) && (
                     <div className="mt-3 max-w-xl">
                       <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-faint">
                         Travel guide
@@ -217,7 +217,7 @@ export default async function CityPage({
                         />
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
                 {t.image && (
                   <a
