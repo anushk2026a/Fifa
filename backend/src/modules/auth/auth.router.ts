@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, type Request } from "express";
 import { z } from "zod";
 import { validateBody } from "../../shared/http/validate";
 import { authRateLimit } from "../../shared/middleware/rate-limit";
@@ -19,16 +19,18 @@ const loginSchema = z.object({
   password: z.string().min(1).max(128),
 });
 
-const isProd = env.NODE_ENV === "production";
-
 // Frontend and backend live on different domains, so auth cookies are
 // cross-site — SameSite=None (which requires Secure) is required for the
-// browser to send them back on subsequent requests.
-const COOKIE_BASE = {
-  httpOnly: true,
-  secure: isProd,
-  sameSite: (isProd ? "none" : "lax") as "none" | "lax",
-} as const;
+// browser to send them back on subsequent requests. Derived from the actual
+// request protocol (via "trust proxy") rather than NODE_ENV, so a misconfigured
+// env var can't silently downgrade cookies to same-site-only Lax in production.
+function cookieBase(req: Request) {
+  return {
+    httpOnly: true,
+    secure: req.secure,
+    sameSite: (req.secure ? "none" : "lax") as "none" | "lax",
+  } as const;
+}
 
 // POST /auth/login
 authRouter.post("/login", authRateLimit, validateBody(loginSchema), async (req, res, next) => {
@@ -46,13 +48,13 @@ authRouter.post("/login", authRateLimit, validateBody(loginSchema), async (req, 
     // directory of this route ("/auth"), so it never reaches "/contact",
     // "/news", etc. and every non-/auth request looks unauthenticated.
     res.cookie("accessToken", result.accessToken, {
-      ...COOKIE_BASE,
+      ...cookieBase(req),
       path: "/",
       maxAge: 15 * 60 * 1_000,
     });
     // Refresh token: long-lived but scoped to /auth/refresh only.
     res.cookie("refreshToken", result.refreshToken, {
-      ...COOKIE_BASE,
+      ...cookieBase(req),
       maxAge: env.REFRESH_TOKEN_EXPIRES_IN_MS,
       path: "/auth/refresh",
     });
@@ -78,7 +80,7 @@ authRouter.post("/refresh", authRateLimit, async (req, res, next) => {
     }
 
     res.cookie("accessToken", result.accessToken, {
-      ...COOKIE_BASE,
+      ...cookieBase(req),
       path: "/",
       maxAge: 15 * 60 * 1_000,
     });
@@ -93,8 +95,8 @@ authRouter.post("/logout", async (req, res, next) => {
   try {
     const raw = req.cookies?.refreshToken as string | undefined;
     if (raw) await revokeRefreshToken(raw);
-    res.clearCookie("accessToken", { ...COOKIE_BASE, path: "/" });
-    res.clearCookie("refreshToken", { ...COOKIE_BASE, path: "/auth/refresh" });
+    res.clearCookie("accessToken", { ...cookieBase(req), path: "/" });
+    res.clearCookie("refreshToken", { ...cookieBase(req), path: "/auth/refresh" });
     res.json({ ok: true });
   } catch (err) {
     next(err);
@@ -105,8 +107,8 @@ authRouter.post("/logout", async (req, res, next) => {
 authRouter.post("/logout-all", requireAdmin, async (req: AuthedRequest, res, next) => {
   try {
     await revokeAllRefreshTokens(req.admin!.sub);
-    res.clearCookie("accessToken", { ...COOKIE_BASE, path: "/" });
-    res.clearCookie("refreshToken", { ...COOKIE_BASE, path: "/auth/refresh" });
+    res.clearCookie("accessToken", { ...cookieBase(req), path: "/" });
+    res.clearCookie("refreshToken", { ...cookieBase(req), path: "/auth/refresh" });
     res.json({ ok: true });
   } catch (err) {
     next(err);
