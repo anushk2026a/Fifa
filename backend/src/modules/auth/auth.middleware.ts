@@ -8,7 +8,7 @@ export interface AuthedRequest extends Request {
 function extractToken(req: Request): string {
   // 1. HttpOnly cookie — preferred, immune to XSS token theft.
   if (req.cookies?.accessToken) return req.cookies.accessToken as string;
-  // 2. Authorization: Bearer <token> — supported for API clients / transition period.
+
   const header = req.headers.authorization ?? "";
   return header.startsWith("Bearer ") ? header.slice(7) : "";
 }
